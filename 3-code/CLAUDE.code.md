@@ -14,6 +14,7 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 |----|-------|---------|
 | [DEC-001](../2-design/decisions/DEC-001-api-contract.md) | API Contract Design | When creating or modifying an endpoint handler, service return type, API client call, or consumer component |
 | [DEC-002](../2-design/decisions/DEC-002-nodejs-version-management.md) | Node.js Version Management | When running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a directory with a `.nvmrc` file |
+| [DEC-003](../2-design/decisions/DEC-003-typescript-verification.md) | TypeScript Verification | After writing or modifying any TypeScript (`.ts`, `.tsx`) file |
 
 ---
 
@@ -58,16 +59,6 @@ When invoking any command, also apply any active decisions that affect tooling (
 ---
 
 ## AI Guidelines for This Phase
-
-### TypeScript Verification (if applicable)
-
-**Always run BOTH lint AND typecheck after writing TypeScript code:**
-
-ESLint and TypeScript compiler check different things:
-- **`npm run lint`** -> code style, unused imports, problematic patterns
-- **`npm run typecheck`** -> type compatibility, assignment errors, structural types
-
-Running only `lint` will miss TypeScript compiler errors. Always run both.
 
 ### Code Quality Standards
 - Write clear, self-documenting code
