@@ -17,34 +17,7 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 
 ---
 
-## Decisions
-
-All project decisions live in `decisions/`. Each decision has two files linked by a shared name stem:
-
-- **`DEC-NNN-short-name.md`** — active record: current state of the decision and enforcement rules. Read during normal task execution when trigger conditions are met.
-- **`DEC-NNN-short-name.history.md`** — decision trail: alternatives considered, reasoning, human involvement, and changelog. Read only when evaluating whether a decision is still valid or when proposing a change.
-
-**Naming convention**: `NNN` is a three-digit sequential number (`001`, `002`, ...); `short-name` is a kebab-case summary (`api-contract`, `error-format`).
-
-**Templates**: use `decisions/_template.md` and `decisions/_template.history.md` as starting points for new decisions.
-
-### Agent navigation rules
-
-- **During normal task execution**: consult the phase-specific decisions index below → read only the `DEC-NNN.md` files for relevant decisions → apply enforcement.
-- **When evaluating or changing a decision**: read `DEC-NNN.md` first, then `DEC-NNN.history.md` → propose changes → update both files → append to the changelog with involvement type.
-- **Never modify** `*.history.md` files except to append to the changelog or to add alternatives when proposing a supersession.
-
-### Human involvement vocabulary
-
-| Value | Meaning |
-|-------|---------|
-| `human-decided` | Human made the decision; AI had no significant role |
-| `human-argued` | Human proposed and argued the rationale explicitly |
-| `collaborative` | Human and AI jointly reasoned through options |
-| `ai-proposed/human-approved` | AI proposed; human explicitly approved |
-| `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
-
-### Decisions relevant to the design phase
+## Decisions relevant to This Phase
 
 | ID | Title | Trigger |
 |----|-------|---------|
@@ -76,12 +49,7 @@ All project decisions live in `decisions/`. Each decision has two files linked b
 - Apply any decisions from the index above whose trigger conditions match
 
 ### When Recording Decisions
-When a significant decision is made during the design phase:
-
-1. Copy [`decisions/_template.md`](decisions/_template.md) → `decisions/DEC-NNN-short-name.md` and fill in all fields.
-2. Copy [`decisions/_template.history.md`](decisions/_template.history.md) → `decisions/DEC-NNN-short-name.history.md` and fill in all fields.
-3. If the decision has enforcement implications for the **design phase**, add it to the index above.
-4. If the decision has enforcement implications for the **code or deploy phase**, also add it to the indexes in [`3-code/CLAUDE.code.md`](../3-code/CLAUDE.code.md) and/or [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md).
+When a significant decision is made during this phase, record it as explained in [CLAUDE.md — Decisions](../CLAUDE.md#decisions).
 
 ---
 

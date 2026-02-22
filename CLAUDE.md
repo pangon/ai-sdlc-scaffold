@@ -129,12 +129,38 @@ All project decisions — architecture choices, design conventions, coding patte
 
 Each decision consists of two files linked by naming convention:
 
-- **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules written for AI agents. Read this during normal task execution.
+- **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules written for AI agents. Read this during normal task execution when trigger conditions are met.
 - **`DEC-NNN-short-name.history.md`** — the trail: alternatives considered, reasoning, human involvement classification, and changelog. Read this only when evaluating a decision or proposing a change.
 
-Phase-specific decision indexes (with trigger conditions) are maintained in `2-design/CLAUDE.design.md`, `3-code/CLAUDE.code.md`, and `4-deploy/CLAUDE.deploy.md`. A decision may appear in multiple indexes if it affects multiple phases — with phase-specific phrasing for trigger conditions.
+**Naming convention**: `NNN` is a three-digit sequential number (`001`, `002`, ...); `short-name` is a kebab-case summary (`api-contract`, `error-format`).
 
-For the full format specification, templates, and agent navigation rules, see [`2-design/CLAUDE.design.md`](2-design/CLAUDE.design.md).
+**Templates**: use [`2-design/decisions/_template.md`](2-design/decisions/_template.md) and [`2-design/decisions/_template.history.md`](2-design/decisions/_template.history.md) as starting points for new decisions.
+
+Phase-specific decision indexes (with trigger conditions) are maintained in each phase's `CLAUDE.<phase>.md`. A decision may appear in multiple indexes if it affects multiple phases — with phase-specific phrasing for trigger conditions.
+
+### Agent navigation rules
+
+- **During normal task execution**: consult the decisions index in the current phase's `CLAUDE.<phase>.md` → read only the `DEC-NNN.md` files for relevant decisions → apply enforcement.
+- **When evaluating or changing a decision**: read `DEC-NNN.md` first, then `DEC-NNN.history.md` → propose changes → update both files → append to the changelog with involvement type.
+- **Never modify** `*.history.md` files except to append to the changelog or to add alternatives when proposing a supersession.
+
+### Human involvement vocabulary
+
+| Value | Meaning |
+|-------|---------|
+| `human-decided` | Human made the decision; AI had no significant role |
+| `human-argued` | Human proposed and argued the rationale explicitly |
+| `collaborative` | Human and AI jointly reasoned through options |
+| `ai-proposed/human-approved` | AI proposed; human explicitly approved |
+| `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
+
+### When Recording Decisions
+
+When a significant decision, pattern, or constraint emerges in any phase:
+
+1. Copy [`2-design/decisions/_template.md`](2-design/decisions/_template.md) → `2-design/decisions/DEC-NNN-short-name.md` and fill in all fields.
+2. Copy [`2-design/decisions/_template.history.md`](2-design/decisions/_template.history.md) → `2-design/decisions/DEC-NNN-short-name.history.md` and fill in all fields.
+3. Add an entry to the decisions index of every phase whose trigger conditions are met (`2-design/CLAUDE.design.md`, `3-code/CLAUDE.code.md`, `4-deploy/CLAUDE.deploy.md`).
 
 ---
 

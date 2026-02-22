@@ -8,34 +8,7 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ---
 
-## Decisions
-
-All project decisions live in [`2-design/decisions/`](../2-design/decisions/). Each decision has two files linked by a shared name stem:
-
-- **`DEC-NNN-short-name.md`** — active record: current state of the decision and enforcement rules. Read during normal task execution when trigger conditions are met.
-- **`DEC-NNN-short-name.history.md`** — decision trail: alternatives considered, reasoning, human involvement, and changelog. Read only when evaluating whether a decision is still valid or when proposing a change.
-
-**Naming convention**: `NNN` is a three-digit sequential number (`001`, `002`, ...); `short-name` is a kebab-case summary (`api-contract`, `error-format`).
-
-**Templates**: use [`2-design/decisions/_template.md`](../2-design/decisions/_template.md) and [`2-design/decisions/_template.history.md`](../2-design/decisions/_template.history.md) as starting points for new decisions.
-
-### Agent navigation rules
-
-- **During normal task execution**: consult the phase-specific decisions index below → read only the `DEC-NNN.md` files for relevant decisions → apply enforcement.
-- **When evaluating or changing a decision**: read `DEC-NNN.md` first, then `DEC-NNN.history.md` → propose changes → update both files → append to the changelog with involvement type.
-- **Never modify** `*.history.md` files except to append to the changelog or to add alternatives when proposing a supersession.
-
-### Human involvement vocabulary
-
-| Value | Meaning |
-|-------|---------|
-| `human-decided` | Human made the decision; AI had no significant role |
-| `human-argued` | Human proposed and argued the rationale explicitly |
-| `collaborative` | Human and AI jointly reasoned through options |
-| `ai-proposed/human-approved` | AI proposed; human explicitly approved |
-| `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
-
-### Decisions relevant to the code phase
+## Decisions relevant to This Phase
 
 | ID | Title | Trigger |
 |----|-------|---------|
@@ -149,15 +122,9 @@ A change that affects system behavior, public contracts, scope, or requires work
    - If the deviation is accepted as-is: record it as a decision in `2-design/decisions/` following the procedure below.
 
 ### When Recording Decisions
+When a significant decision is made during this phase, record it as explained in [CLAUDE.md — Decisions](../CLAUDE.md#decisions).
 
-When a significant pattern or constraint emerges during implementation:
-
-1. Copy [`2-design/decisions/_template.md`](../2-design/decisions/_template.md) → `2-design/decisions/DEC-NNN-short-name.md` and fill in all fields.
-2. Copy [`2-design/decisions/_template.history.md`](../2-design/decisions/_template.history.md) → `2-design/decisions/DEC-NNN-short-name.history.md` and fill in all fields.
-3. If the decision has enforcement implications for the **code phase**, add it to the index above.
-4. If the decision has enforcement implications for the **design or deploy phase**, also add it to the indexes in [`2-design/CLAUDE.design.md`](../2-design/CLAUDE.design.md) and/or [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md).
-
-Common triggers for new decisions: error handling patterns, UI interaction patterns, data flow conventions, naming conventions, security patterns.
+Common triggers for new decisions in this phase: error handling patterns, UI interaction patterns, data flow conventions, naming conventions, security patterns.
 
 ### When Fixing Bugs
 1. Write a failing test that reproduces the bug
