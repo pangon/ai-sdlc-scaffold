@@ -19,6 +19,8 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 
 Each directory holds individual files (one per item) plus a `_template.md`. When the human elicits a new entry through conversation, the AI agent must create the file by following the template, then add a row to the appropriate index table below.
 
+**Keeping indexes in sync**: the index tables below duplicate key metadata from individual files. Whenever you **modify** an artifact file (e.g., change its Status, Priority, Summary, or Role), you must update the corresponding index row in the same operation. The individual file is the source of truth; the index must mirror it.
+
 ### Artifact flow
 
 ```
@@ -55,32 +57,32 @@ Work through artifacts in this order to build a coherent, traceable requirements
 - Decompose vague ideas into concrete, measurable outcomes
 - Identify potential conflicts between goals early
 - Use MoSCoW priority consistently across all artifacts
-- After creating a goal file, add a row to the **Goals Index** below
+- After creating a goal file, add a row to the **Goals Index** below; after modifying a goal, update its index row to match
 
 ### When writing user stories
 - Use the standard format: "As a [role], I want [capability], so that [benefit]"
 - The role must be an existing stakeholder ID from the **Stakeholders** table below
 - Acceptance criteria at the story level are high-level — detailed criteria live in requirements
-- After creating a user story, add a row to the **User Stories Index** below
+- After creating a user story, add a row to the **User Stories Index** below; after modifying a user story, update its index row to match
 
 ### When writing requirements
 - Requirements are derived from user stories (or directly from goals if no story layer is used)
 - Use clear, testable language — avoid "should be fast" → use "response time < 200ms at p95"
 - Choose the correct ID prefix (REQ-F, REQ-PERF, REQ-SEC, …) — it signals design impact
 - Set `Status: Draft` when first created; mark `Approved` after stakeholder review
-- After creating a requirement, add a row to the **Requirements Index** below
+- After creating a requirement, add a row to the **Requirements Index** below; after modifying a requirement, update its index row to match
 
 ### When documenting assumptions
 - An assumption is something believed true but not yet verified — distinct from a constraint
 - Always record the risk level: what happens if this assumption is wrong?
 - Provide a verification plan when possible
-- After creating an assumption file, add a row to the **Assumptions Index** below
+- After creating an assumption file, add a row to the **Assumptions Index** below; after modifying an assumption, update its index row to match
 
 ### When documenting constraints
 - Consider technical constraints (platforms, languages, dependencies)
 - Consider business constraints (budget, timeline, team size)
 - Consider operational constraints (hosting, maintenance, compliance)
-- After creating a constraint file, add a row to the **Constraints Index** below
+- After creating a constraint file, add a row to the **Constraints Index** below; after modifying a constraint, update its index row to match
 
 ### When a requirement conflict is detected
 
