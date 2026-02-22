@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in contributing to **AI SDLC Starter**!
+Thanks for your interest in contributing to **AI SDLC Scaffold**!
 
 ## License (inbound = outbound)
 This project is licensed under the Apache License 2.0 (see `LICENSE`).
