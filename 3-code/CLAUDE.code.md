@@ -14,7 +14,7 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 |----|-------|---------|
 | [DEC-001](../2-design/decisions/DEC-001-api-contract.md) | API Contract Design | When creating or modifying an endpoint handler, service return type, API client call, or consumer component |
 | [DEC-002](../2-design/decisions/DEC-002-nodejs-version-management.md) | Node.js Version Management | When running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a directory with a `.nvmrc` file |
-| [DEC-003](../2-design/decisions/DEC-003-typescript-verification.md) | TypeScript Verification | After writing or modifying any TypeScript (`.ts`, `.tsx`) file |
+| [DEC-003](../2-design/decisions/DEC-003-typescript-verification.md) | TypeScript Verification | After writing or modifying any TypeScript (`.ts`, `.tsx`) file in a component that exposes `lint` and `typecheck` scripts |
 
 ---
 
