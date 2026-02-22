@@ -82,6 +82,25 @@ Work through artifacts in this order to build a coherent, traceable requirements
 - Consider operational constraints (hosting, maintenance, compliance)
 - After creating a constraint file, add a row to the **Constraints Index** below
 
+### When a requirement conflict is detected
+
+A conflict exists when two or more requirements cannot both be satisfied as stated — they impose mutually exclusive constraints on behavior, resources, or design.
+
+**Never resolve a conflict silently.** Influence levels are a tiebreaker of last resort, not a substitute for human judgement. Always surface the conflict before taking any action.
+
+1. **Identify** the conflict: note the IDs of the conflicting requirements, their source stakeholders and influence levels, and a one-sentence description of why they are incompatible.
+2. **Stop and ask the user.** Present:
+   - What makes the requirements incompatible
+   - The stakeholder behind each, with their influence level
+   - Two or more concrete resolution options (e.g., relax REQ-A, revise REQ-B, accept a constraint, defer one to a later phase)
+   - A recommended option if one is clearly better, with explicit rationale
+3. **Wait for the user's explicit decision** before modifying any file.
+4. **Apply the resolution:**
+   - Update the affected `REQ-NNN.md` file(s) to reflect the outcome unambiguously; update the Requirements Index.
+   - If dependent user stories or goals are affected, update those too.
+   - If the resolution imposes a design constraint or convention that will recur, record it as a decision in `2-design/decisions/` — follow the procedure in [`2-design/CLAUDE.design.md`](../2-design/CLAUDE.design.md).
+5. **Never leave the artifacts in a conflicting state** — after the user decides, every affected file must reflect the outcome.
+
 ---
 
 ## Linking to Other Phases
@@ -89,7 +108,7 @@ Work through artifacts in this order to build a coherent, traceable requirements
 - Goals, user stories, and requirements are referenced in design documents (`2-design/`)
 - Acceptance criteria from requirements inform test cases (`3-code/<codebase>/tests/`)
 - Constraints and assumptions influence infrastructure decisions (`4-deploy/`)
-- Invalidated assumptions should trigger a review of dependent requirements and design decisions
+- Invalidated assumptions should trigger a review of dependent requirements and design decisions; when this happen, ask the human for direction if there isn't any previusly defined procedure to follow
 
 ---
 
@@ -102,7 +121,7 @@ Everyone with a stake in the system: those who use it, fund it, maintain it, or 
 - **Medium** — consulted during requirements review; their concerns are addressed but may be overruled
 - **Low** — informed of decisions; their needs are considered but not blocking
 
-When a priority conflict arises between requirements, resolve it by checking influence levels and which stakeholders are the source of each conflicting requirement.
+When a conflict arises between requirements, follow the **[conflict resolution procedure](#when-a-requirement-conflict-is-detected)** in the AI Guidelines above. Influence levels inform the options presented to the user but do not replace human decision-making.
 
 | ID | Role | Description | Interests | Influence |
 |----|------|-------------|-----------|-----------|
