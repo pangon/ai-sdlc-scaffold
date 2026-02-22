@@ -34,13 +34,13 @@ project/
 ├── CLAUDE.md                 # Main AI instructions (this file)
 ├── README.md                 # Project overview and quick start
 │
-├── 01-objectives/            # High-level goals and requirements
+├── 1-objectives/            # High-level goals and requirements
 │   ├── CLAUDE.objectives.md  # Phase-specific AI instructions
 │   ├── goals.md              # Project goals and success criteria
 │   ├── requirements.md       # Functional and non-functional requirements
 │   └── constraints.md        # Technical and business constraints
 │
-├── 02-design/                # Architecture and design decisions
+├── 2-design/                # Architecture and design decisions
 │   ├── CLAUDE.design.md      # Phase-specific AI instructions
 │   ├── architecture.md       # System architecture overview
 │   ├── data-model.md         # Data structures and schemas
@@ -48,14 +48,14 @@ project/
 │   ├── decisions.md          # Decision format, templates, and agent navigation rules
 │   └── decisions/            # Decision Records (DEC-NNN)
 │
-├── 03-code/                  # Implementation
+├── 3-code/                  # Implementation
 │   ├── CLAUDE.code.md        # Phase-specific AI instructions
 │   ├── tasks.md              # Development task tracker
 │   └── <codebase>/           # One or more named codebases (e.g. frontend, cli, backend)
 │       ├── src/              # Source code for this codebase
 │       └── tests/            # Test suites for this codebase
 │
-└── 04-deploy/                # Deployment and operations
+└── 4-deploy/                # Deployment and operations
     ├── CLAUDE.deploy.md      # Phase-specific AI instructions
     ├── infrastructure/       # IaC configurations
     ├── scripts/              # Deployment scripts
@@ -75,10 +75,10 @@ Each phase directory contains a `CLAUDE.<phase>.md` file with detailed instructi
 
 | Phase | Directory | Focus |
 |-------|-----------|-------|
-| **Objectives** | `01-objectives/` | Define what to build and why |
-| **Design** | `02-design/` | Define how to build it |
-| **Code** | `03-code/` | Build it |
-| **Deploy** | `04-deploy/` | Ship and operate it |
+| **Objectives** | `1-objectives/` | Define what to build and why |
+| **Design** | `2-design/` | Define how to build it |
+| **Code** | `3-code/` | Build it |
+| **Deploy** | `4-deploy/` | Ship and operate it |
 
 Claude should help users navigate between phases and ensure work is placed in the correct location.
 
@@ -124,16 +124,16 @@ Claude should proactively suggest these updates when relevant.
 
 ## Decisions
 
-All project decisions — architecture choices, design conventions, coding patterns, process rules — live in a single location: `02-design/decisions/`.
+All project decisions — architecture choices, design conventions, coding patterns, process rules — live in a single location: `2-design/decisions/`.
 
 Each decision consists of two files linked by naming convention:
 
 - **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules written for AI agents. Read this during normal task execution.
 - **`DEC-NNN-short-name.history.md`** — the trail: alternatives considered, reasoning, human involvement classification, and changelog. Read this only when evaluating a decision or proposing a change.
 
-Phase-specific decision indexes (with trigger conditions) are maintained in `02-design/CLAUDE.design.md` and `03-code/CLAUDE.code.md`. A decision may appear in both if it affects both phases — with phase-specific phrasing for trigger conditions.
+Phase-specific decision indexes (with trigger conditions) are maintained in `2-design/CLAUDE.design.md` and `3-code/CLAUDE.code.md`. A decision may appear in both if it affects both phases — with phase-specific phrasing for trigger conditions.
 
-For the full format specification, templates, and agent navigation rules, see [`02-design/decisions.md`](02-design/decisions.md).
+For the full format specification, templates, and agent navigation rules, see [`2-design/decisions.md`](2-design/decisions.md).
 
 ---
 

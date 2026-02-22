@@ -9,7 +9,7 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 ## Directory Structure
 
 ```
-04-deploy/
+4-deploy/
 ├── CLAUDE.deploy.md  # This file
 ├── infrastructure/   # Infrastructure as Code (IaC)
 ├── scripts/          # Deployment and utility scripts
@@ -84,6 +84,6 @@ Document environment-specific configurations:
 
 ## Linking to Other Phases
 
-- Infrastructure design comes from `02-design/`
-- Deploys build artifacts from `03-code/`
-- Operational requirements may come from `01-objectives/`
+- Infrastructure design comes from `2-design/`
+- Deploys build artifacts from `3-code/`
+- Operational requirements may come from `1-objectives/`

@@ -36,7 +36,7 @@ When specifying or modifying an API endpoint or response shape:
 2. Confirm the response type excludes internal fields (e.g. hashed passwords, internal IDs not surfaced to clients).
 3. Confirm the response envelope is consistent with existing endpoints.
 4. Confirm list endpoints use named fields.
-5. Update `02-design/api-design.md` to reflect the change.
+5. Update `2-design/api-design.md` to reflect the change.
 
 ### Required checks — code phase
 
@@ -49,7 +49,7 @@ When creating or modifying an endpoint handler, service return type, API client 
 5. Update the frontend API client (endpoint path, HTTP method, request body, return type).
 6. Search for consumers of the modified type; verify they access correct fields.
 7. Run typecheck on both sides.
-8. If the API surface changed, update `02-design/api-design.md`.
+8. If the API surface changed, update `2-design/api-design.md`.
 
 ### Prohibited patterns
 

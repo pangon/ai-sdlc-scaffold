@@ -35,7 +35,7 @@ All project decisions live in `decisions/`. Each decision has two files: `DEC-NN
 - Consider scalability, maintainability, and simplicity
 - Document component responsibilities and interactions
 - Use diagrams where helpful (Mermaid syntax is preferred)
-- Reference requirements from `01-objectives/`
+- Reference requirements from `1-objectives/`
 
 ### When Modeling Data
 - Define clear schemas with types and constraints
@@ -57,7 +57,7 @@ When a significant decision is made during the design phase:
 1. Create `decisions/DEC-NNN-short-name.md` using the active record template in [`decisions/README.md`](decisions/README.md).
 2. Create `decisions/DEC-NNN-short-name.history.md` using the trail template.
 3. If the decision has enforcement implications for the **design phase**, add it to the index above.
-4. If the decision has enforcement implications for the **code phase**, also add it to the index in `03-code/CLAUDE.code.md`.
+4. If the decision has enforcement implications for the **code phase**, also add it to the index in `3-code/CLAUDE.code.md`.
 
 ---
 
@@ -73,6 +73,6 @@ graph TD
 
 ## Linking to Other Phases
 
-- Reference requirements from `01-objectives/` to justify design choices
-- Design documents guide implementation in `03-code/`
-- Infrastructure design informs deployment in `04-deploy/`
+- Reference requirements from `1-objectives/` to justify design choices
+- Design documents guide implementation in `3-code/`
+- Infrastructure design informs deployment in `4-deploy/`
