@@ -108,7 +108,7 @@ A conflict exists when two or more requirements cannot both be satisfied as stat
 - Goals, user stories, and requirements are referenced in design documents (`2-design/`)
 - Acceptance criteria from requirements inform test cases (`3-code/<codebase>/tests/`)
 - Constraints and assumptions influence infrastructure decisions (`4-deploy/`)
-- Invalidated assumptions should trigger a review of dependent requirements and design decisions; when this happen, ask the human for direction if there isn't any previusly defined procedure to follow
+- Invalidated assumptions should trigger a review of dependent requirements and design decisions; when this happen, ask the human for direction if there isn't any previously defined procedure to follow
 
 ---
 
@@ -176,8 +176,8 @@ When a conflict arises between requirements, follow the **[conflict resolution p
 
 > **Agent navigation**: scan this table to identify which constraint files are relevant to your task. The Category column distinguishes technical, business, and operational entries.
 
-| File | ID | Category | Summary |
-|------|----|----------|---------|
-| [CON-001-technical.md](constraints/CON-001-technical.md) | CON-001 | Technical | Placeholder technical constraint |
-| [CON-002-business.md](constraints/CON-002-business.md) | CON-002 | Business | Placeholder business constraint |
-| [CON-003-operational.md](constraints/CON-003-operational.md) | CON-003 | Operational | Placeholder operational constraint |
+| File | ID | Category | Status | Summary |
+|------|----|----------|--------|---------|
+| [CON-001-technical.md](constraints/CON-001-technical.md) | CON-001 | Technical | Active | Placeholder technical constraint |
+| [CON-002-business.md](constraints/CON-002-business.md) | CON-002 | Business | Active | Placeholder business constraint |
+| [CON-003-operational.md](constraints/CON-003-operational.md) | CON-003 | Operational | Active | Placeholder operational constraint |

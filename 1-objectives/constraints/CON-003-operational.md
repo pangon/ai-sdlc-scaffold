@@ -4,6 +4,7 @@
 <!-- Update the Constraints Index in CLAUDE.objectives.md after saving this file. -->
 
 **Category**: Operational
+**Status**: Active
 
 **Description**: What limitation or requirement this imposes
 

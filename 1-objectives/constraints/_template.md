@@ -4,6 +4,7 @@
 <!-- Add a row to the Constraints Index in CLAUDE.objectives.md after saving. -->
 
 **Category**: Technical / Business / Operational
+**Status**: Active | Lifted
 
 **Description**: What limitation or requirement this imposes
 
