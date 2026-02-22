@@ -132,7 +132,7 @@ Each decision consists of two files linked by naming convention:
 - **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules written for AI agents. Read this during normal task execution.
 - **`DEC-NNN-short-name.history.md`** — the trail: alternatives considered, reasoning, human involvement classification, and changelog. Read this only when evaluating a decision or proposing a change.
 
-Phase-specific decision indexes (with trigger conditions) are maintained in `2-design/CLAUDE.design.md` and `3-code/CLAUDE.code.md`. A decision may appear in both if it affects both phases — with phase-specific phrasing for trigger conditions.
+Phase-specific decision indexes (with trigger conditions) are maintained in `2-design/CLAUDE.design.md`, `3-code/CLAUDE.code.md`, and `4-deploy/CLAUDE.deploy.md`. A decision may appear in multiple indexes if it affects multiple phases — with phase-specific phrasing for trigger conditions.
 
 For the full format specification, templates, and agent navigation rules, see [`2-design/CLAUDE.design.md`](2-design/CLAUDE.design.md).
 

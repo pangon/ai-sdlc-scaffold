@@ -32,3 +32,4 @@ Option B was chosen because it is reliable across all shell types without requir
 | Date | Change | Involvement |
 |------|--------|-------------|
 | 2026-02-22 | Initial decision (extracted from CLAUDE.md inline instructions) | `human-argued` |
+| 2026-02-22 | Extended scope to deploy phase: added deploy trigger condition and added entry to decisions index in `4-deploy/CLAUDE.deploy.md` | `ai-proposed/human-approved` |

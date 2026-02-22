@@ -130,7 +130,7 @@ When a significant pattern or constraint emerges during implementation:
 1. Copy [`2-design/decisions/_template.md`](../2-design/decisions/_template.md) → `2-design/decisions/DEC-NNN-short-name.md` and fill in all fields.
 2. Copy [`2-design/decisions/_template.history.md`](../2-design/decisions/_template.history.md) → `2-design/decisions/DEC-NNN-short-name.history.md` and fill in all fields.
 3. If the decision has enforcement implications for the **code phase**, add it to the index above.
-4. If the decision has enforcement implications for the **design phase**, also add it to the index in [`2-design/CLAUDE.design.md`](../2-design/CLAUDE.design.md).
+4. If the decision has enforcement implications for the **design or deploy phase**, also add it to the indexes in [`2-design/CLAUDE.design.md`](../2-design/CLAUDE.design.md) and/or [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md).
 
 Common triggers for new decisions: error handling patterns, UI interaction patterns, data flow conventions, naming conventions, security patterns.
 

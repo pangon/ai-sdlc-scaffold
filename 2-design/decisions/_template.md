@@ -29,8 +29,9 @@ list one trigger per phase:
 
 - **Design phase**: when ...
 - **Code phase**: when ...
+- **Deploy phase**: when ...
 
-These are the authoritative triggers. Phase indexes (`CLAUDE.design.md`, `CLAUDE.code.md`)
+These are the authoritative triggers. Phase indexes (`CLAUDE.design.md`, `CLAUDE.code.md`, `CLAUDE.deploy.md`)
 reference them, possibly rephrased to fit the phase context, but this file is the source
 of truth.
 

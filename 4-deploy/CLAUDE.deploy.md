@@ -16,30 +16,84 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 └── runbooks/         # Operational procedures
 ```
 
+---
+
+## Decisions
+
+All project decisions live in [`2-design/decisions/`](../2-design/decisions/). Each decision has two files linked by a shared name stem:
+
+- **`DEC-NNN-short-name.md`** — active record: current state of the decision and enforcement rules. Read during normal task execution when trigger conditions are met.
+- **`DEC-NNN-short-name.history.md`** — decision trail: alternatives considered, reasoning, human involvement, and changelog. Read only when evaluating whether a decision is still valid or when proposing a change.
+
+**Naming convention**: `NNN` is a three-digit sequential number (`001`, `002`, ...); `short-name` is a kebab-case summary (`api-contract`, `error-format`).
+
+**Templates**: use [`2-design/decisions/_template.md`](../2-design/decisions/_template.md) and [`2-design/decisions/_template.history.md`](../2-design/decisions/_template.history.md) as starting points for new decisions.
+
+### Agent navigation rules
+
+- **During normal task execution**: consult the phase-specific decisions index below → read only the `DEC-NNN.md` files for relevant decisions → apply enforcement.
+- **When evaluating or changing a decision**: read `DEC-NNN.md` first, then `DEC-NNN.history.md` → propose changes → update both files → append to the changelog with involvement type.
+- **Never modify** `*.history.md` files except to append to the changelog or to add alternatives when proposing a supersession.
+
+### Human involvement vocabulary
+
+| Value | Meaning |
+|-------|---------|
+| `human-decided` | Human made the decision; AI had no significant role |
+| `human-argued` | Human proposed and argued the rationale explicitly |
+| `collaborative` | Human and AI jointly reasoned through options |
+| `ai-proposed/human-approved` | AI proposed; human explicitly approved |
+| `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
+
+### Decisions relevant to the deploy phase
+
+| ID | Title | Trigger |
+|----|-------|---------|
+| [DEC-002](../2-design/decisions/DEC-002-nodejs-version-management.md) | Node.js Version Management | When running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a deploy script or CI configuration in a directory with a `.nvmrc` file |
+
+---
+
 ## AI Guidelines for This Phase
 
-### Infrastructure as Code
-- All infrastructure should be defined in code
-- Use declarative configurations where possible
-- Document resource dependencies
-- Consider cost implications
+### When Writing Infrastructure as Code
 
-### Deployment Scripts
-- Make scripts idempotent (safe to run multiple times)
-- Include proper error handling
-- Log actions for debugging
-- Support rollback procedures
+1. Check requirements in `1-objectives/` for operational and compliance constraints (REQ-REL, REQ-SEC, REQ-COMP).
+2. Check `2-design/` for infrastructure decisions referenced in the architecture or design docs.
+3. Apply all decisions from the index above whose trigger conditions match.
+4. Write declarative configurations where possible; prefer idempotent resources.
+5. Document resource dependencies in comments or in `infrastructure/README.md`.
+6. Consider cost implications; flag non-obvious cost drivers to the user.
+7. Never hardcode secrets — use environment variables or a secret manager.
 
-### Runbooks
-- Document step-by-step procedures for common operations
-- Include troubleshooting guides
-- Keep procedures up to date with system changes
+### When Writing Deployment Scripts
 
-### Security Considerations
-- Never commit secrets or credentials
-- Use environment variables or secret management
-- Document required permissions and access
-- Follow principle of least privilege
+1. Check the decisions index above before composing any tooling commands.
+2. Make every script idempotent (safe to run multiple times without side effects).
+3. Include error handling: exit on failure, log the failed step, and emit a clear error message.
+4. Log every significant action with a timestamp so failures are diagnosable.
+5. Provide a rollback path or document explicitly why one is not possible.
+6. After writing the script, verify it references the correct artifact paths from `3-code/`.
+
+### When Writing Runbooks
+
+1. Use the runbook template below — do not skip any section.
+2. Reference the specific deployment scripts and infrastructure resources the runbook covers.
+3. Link back to requirements where relevant (e.g., availability targets from REQ-REL).
+4. After writing a runbook, cross-check the procedure against the actual scripts and infrastructure to confirm the steps are accurate.
+5. Keep procedures short — move detailed background into a separate document if needed.
+
+### When Recording Decisions
+
+When a significant pattern or constraint emerges during deployment work:
+
+1. Copy [`2-design/decisions/_template.md`](../2-design/decisions/_template.md) → `2-design/decisions/DEC-NNN-short-name.md` and fill in all fields.
+2. Copy [`2-design/decisions/_template.history.md`](../2-design/decisions/_template.history.md) → `2-design/decisions/DEC-NNN-short-name.history.md` and fill in all fields.
+3. If the decision has enforcement implications for the **deploy phase**, add it to the index above.
+4. If the decision has enforcement implications for the **design or code phase**, also add it to the indexes in [`2-design/CLAUDE.design.md`](../2-design/CLAUDE.design.md) and/or [`3-code/CLAUDE.code.md`](../3-code/CLAUDE.code.md).
+
+Common triggers for new decisions: secret management strategy, environment promotion rules, rollback procedures, IaC tooling choices, CI/CD pipeline conventions.
+
+---
 
 ## Runbook Template
 
@@ -57,9 +111,9 @@ Brief description of what this runbook covers.
 ## Procedure
 
 ### Step 1: [Action]
-\`\`\`bash
+```bash
 # command to run
-\`\`\`
+```
 Expected outcome: ...
 
 ### Step 2: [Action]
@@ -72,6 +126,8 @@ Steps to undo if something goes wrong.
 Common issues and their solutions.
 ```
 
+---
+
 ## Environment Configuration
 
 Document environment-specific configurations:
@@ -82,8 +138,10 @@ Document environment-specific configurations:
 | Staging | Pre-production testing | - |
 | Production | Live system | - |
 
+---
+
 ## Linking to Other Phases
 
 - Infrastructure design comes from `2-design/`
 - Deploys build artifacts from `3-code/`
-- Operational requirements may come from `1-objectives/`
+- Operational requirements (availability, compliance) come from `1-objectives/`

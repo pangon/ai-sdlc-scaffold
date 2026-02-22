@@ -3,7 +3,7 @@
 **Status**: Active
 **Category**: Convention
 **Scope**: system-wide
-**Last updated**: 2026-02-22
+**Last updated**: 2026-02-22 (scope extended to deploy phase)
 
 ## Context
 
@@ -22,6 +22,7 @@ source ~/.nvm/nvm.sh && nvm use &&
 ### Trigger conditions
 
 - **Code phase**: when running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a directory with a `.nvmrc` file.
+- **Deploy phase**: when running any Node.js tooling command in a deploy script or CI configuration in a directory with a `.nvmrc` file.
 
 ### Required patterns
 

@@ -81,7 +81,7 @@ When a significant decision is made during the design phase:
 1. Copy [`decisions/_template.md`](decisions/_template.md) → `decisions/DEC-NNN-short-name.md` and fill in all fields.
 2. Copy [`decisions/_template.history.md`](decisions/_template.history.md) → `decisions/DEC-NNN-short-name.history.md` and fill in all fields.
 3. If the decision has enforcement implications for the **design phase**, add it to the index above.
-4. If the decision has enforcement implications for the **code phase**, also add it to the index in `3-code/CLAUDE.code.md`.
+4. If the decision has enforcement implications for the **code or deploy phase**, also add it to the indexes in [`3-code/CLAUDE.code.md`](../3-code/CLAUDE.code.md) and/or [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md).
 
 ---
 
