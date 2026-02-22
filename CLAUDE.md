@@ -35,10 +35,12 @@ project/
 ├── README.md                 # Project overview and quick start
 │
 ├── 1-objectives/             # High-level goals and requirements
-│   ├── CLAUDE.objectives.md  # Phase-specific AI instructions
-│   ├── goals.md              # Project goals and success criteria
-│   ├── requirements.md       # Functional and non-functional requirements
-│   └── constraints.md        # Technical and business constraints
+│   ├── CLAUDE.objectives.md  # Phase-specific AI instructions, indexes, and stakeholder list
+│   ├── goals/                # Goal files (GOAL-NNN-name.md) + _template.md
+│   ├── user-stories/         # User story files (US-NNN-name.md) + _template.md
+│   ├── requirements/         # Requirement files (REQ-NNN-name.md) + _template.md
+│   ├── assumptions/          # Assumption files (ASM-NNN-name.md) + _template.md
+│   └── constraints/          # Constraint files (CON-NNN-name.md) + _template.md
 │
 ├── 2-design/                 # Architecture and design decisions
 │   ├── CLAUDE.design.md      # Phase-specific AI instructions
