@@ -116,12 +116,13 @@ Running only `lint` will miss TypeScript compiler errors. Always run both.
 - Document public APIs and interfaces
 
 ### When Implementing Features
-1. Review relevant design docs in `2-design/`
-2. Check requirements in `1-objectives/`
-3. Update `tasks.md` to track progress
+1. Locate the task in `tasks.md`; read every `REQ-NNN` listed in its `Req` column before writing any code
+2. Review relevant design docs in `2-design/`
+3. Update status to `In Progress` in `tasks.md`
 4. Implement with tests
 5. **Apply relevant decisions** from the index above — run the full enforcement procedure for any decision triggered by this feature
 6. Update design docs if implementation differs
+7. Update status to `Done` and move the row to Completed Tasks
 
 ### When Recording Decisions
 
@@ -146,15 +147,7 @@ Common triggers for new decisions: error handling patterns, UI interaction patte
 
 ## Task Tracking
 
-All development tasks are tracked in [tasks.md](tasks.md). Before starting work:
-
-1. Check `tasks.md` for current task status
-2. Pick the highest-priority unblocked task
-3. Update status to `In Progress`
-4. Complete the task
-5. Update status to `Done`
-
-See [tasks.md](tasks.md) for the complete task list and tracking format.
+All development tasks are tracked in [tasks.md](tasks.md).
 
 ---
 

@@ -26,12 +26,13 @@ This document tracks all development tasks for the project. Update this file as 
 ## Open Tasks
 
 <!-- Organize tasks by domain or component -->
+<!-- Req column: list all REQ-NNN IDs this task implements, comma-separated. Use "-" if the task has no direct requirement (e.g. tooling, scaffolding). -->
 
 ### Setup & Infrastructure
 
-| ID | Task | Priority | Status | Dependencies | Notes |
-|----|------|----------|--------|--------------|-------|
-| TASK-001 | Initial project setup | P0 | Todo | - | - |
+| ID | Task | Priority | Status | Req | Dependencies | Notes |
+|----|------|----------|--------|-----|--------------|-------|
+| TASK-001 | Initial project setup | P0 | Todo | - | - | - |
 
 <!-- ### Backend -->
 <!-- ### Frontend -->
@@ -44,9 +45,9 @@ This document tracks all development tasks for the project. Update this file as 
 
 <!-- Move completed tasks here with completion date -->
 
-| ID | Task | Completed Date | Notes |
-|----|------|----------------|-------|
-| - | - | - | - |
+| ID | Task | Req | Completed Date | Notes |
+|----|------|-----|----------------|-------|
+| - | - | - | - | - |
 
 ---
 
@@ -76,9 +77,14 @@ The following is the recommended order for executing tasks, respecting all depen
 ## Notes
 
 ### How to Update This Document
+When creating a task:
+1. Assign the next sequential `TASK-NNN` ID
+2. Fill in the `Req` column with all `REQ-NNN` IDs this task implements (comma-separated); use `-` only if no requirement applies
+3. Set status to `Todo`
+
 When starting a task:
 1. Change status from `Todo` to `In Progress`
-2. Add any relevant notes
+2. Read all requirements listed in the `Req` column before writing any code
 
 When completing a task:
 1. Change status to `Done`
