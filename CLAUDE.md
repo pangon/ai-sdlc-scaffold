@@ -34,13 +34,13 @@ project/
 ├── CLAUDE.md                 # Main AI instructions (this file)
 ├── README.md                 # Project overview and quick start
 │
-├── 1-objectives/            # High-level goals and requirements
+├── 1-objectives/             # High-level goals and requirements
 │   ├── CLAUDE.objectives.md  # Phase-specific AI instructions
 │   ├── goals.md              # Project goals and success criteria
 │   ├── requirements.md       # Functional and non-functional requirements
 │   └── constraints.md        # Technical and business constraints
 │
-├── 2-design/                # Architecture and design decisions
+├── 2-design/                 # Architecture and design decisions
 │   ├── CLAUDE.design.md      # Phase-specific AI instructions
 │   ├── architecture.md       # System architecture overview
 │   ├── data-model.md         # Data structures and schemas
@@ -48,14 +48,14 @@ project/
 │   ├── decisions.md          # Decision format, templates, and agent navigation rules
 │   └── decisions/            # Decision Records (DEC-NNN)
 │
-├── 3-code/                  # Implementation
+├── 3-code/                   # Implementation
 │   ├── CLAUDE.code.md        # Phase-specific AI instructions
 │   ├── tasks.md              # Development task tracker
 │   └── <codebase>/           # One or more named codebases (e.g. frontend, cli, backend)
 │       ├── src/              # Source code for this codebase
 │       └── tests/            # Test suites for this codebase
 │
-└── 4-deploy/                # Deployment and operations
+└── 4-deploy/                 # Deployment and operations
     ├── CLAUDE.deploy.md      # Phase-specific AI instructions
     ├── infrastructure/       # IaC configurations
     ├── scripts/              # Deployment scripts

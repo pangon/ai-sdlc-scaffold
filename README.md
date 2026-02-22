@@ -20,24 +20,24 @@ This scaffold provides a structured approach to building software projects with 
 ```
 ├── CLAUDE.md                     # Root AI instructions (start here)
 │
-├── 1-objectives/                # WHAT and WHY
+├── 1-objectives/                 # WHAT and WHY
 │   ├── CLAUDE.objectives.md      # AI instructions for this phase
 │   ├── goals.md                  # Project goals (template)
 │   ├── requirements.md           # Requirements (template)
 │   └── constraints.md            # Constraints (template)
 │
-├── 2-design/                    # HOW
+├── 2-design/                     # HOW
 │   ├── CLAUDE.design.md          # AI instructions for this phase
 │   └── decisions/                # Architecture Decision Records
 │       └── README.md             # ADR template and conventions
 │
-├── 3-code/                      # BUILD
+├── 3-code/                       # BUILD
 │   ├── CLAUDE.code.md            # AI instructions for this phase
 │   ├── tasks.md                  # Development task tracker
 │   └── decisions/                # Development decisions (impl patterns)
 │       └── README.md             # DEC template and conventions
 │
-├── 4-deploy/                    # SHIP
+├── 4-deploy/                     # SHIP
 │   └── CLAUDE.deploy.md          # AI instructions for this phase
 │
 └── .claude/
