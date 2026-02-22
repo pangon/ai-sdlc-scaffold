@@ -47,8 +47,7 @@ project/
 │   ├── architecture.md       # System architecture overview
 │   ├── data-model.md         # Data structures and schemas
 │   ├── api-design.md         # API specifications
-│   ├── decisions.md          # Decision format, templates, and agent navigation rules
-│   └── decisions/            # Decision Records (DEC-NNN)
+│   └── decisions/            # Decision Records (DEC-NNN) + _template.md/_template.history.md
 │
 ├── 3-code/                   # Implementation
 │   ├── CLAUDE.code.md        # Phase-specific AI instructions
@@ -135,7 +134,7 @@ Each decision consists of two files linked by naming convention:
 
 Phase-specific decision indexes (with trigger conditions) are maintained in `2-design/CLAUDE.design.md` and `3-code/CLAUDE.code.md`. A decision may appear in both if it affects both phases — with phase-specific phrasing for trigger conditions.
 
-For the full format specification, templates, and agent navigation rules, see [`2-design/decisions.md`](2-design/decisions.md).
+For the full format specification, templates, and agent navigation rules, see [`2-design/CLAUDE.design.md`](2-design/CLAUDE.design.md).
 
 ---
 
