@@ -34,7 +34,7 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 ## Linking to Other Phases
 
 - Goals and requirements should be referenced in design documents (`02-design/`)
-- Acceptance criteria from requirements inform test cases (`03-code/tests/`)
+- Acceptance criteria from requirements inform test cases (`03-code/<codebase>/tests/`)
 - Constraints influence infrastructure decisions (`04-deploy/`)
 
 ## Templates

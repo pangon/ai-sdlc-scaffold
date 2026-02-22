@@ -18,7 +18,10 @@ The user may write prompts in any language, but Claude must always respond and p
 ## Project Overview
 
 <!-- TODO: Describe your project here -->
-This project follows a phase-based development lifecycle with dedicated directories for each phase, designed for AI-assisted software development with Claude Code.
+
+This repository is a **scaffold template** for projects that want to adopt a structured, AI-assisted software development lifecycle. Clone or copy it to bootstrap any new project with the same approach.
+
+The central paradigm is **everything-in-repo**: objectives, requirements, architecture, decisions, and development task tracking all live alongside the source code — versioned, searchable, and always in sync with the implementation. This makes the full history of *why* the software is built the way it is available to both humans and AI assistants at all times.
 
 ---
 
@@ -42,14 +45,15 @@ project/
 │   ├── architecture.md       # System architecture overview
 │   ├── data-model.md         # Data structures and schemas
 │   ├── api-design.md         # API specifications
-│   └── decisions/            # Architecture Decision Records (ADRs)
+│   ├── decisions.md          # Decision format, templates, and agent navigation rules
+│   └── decisions/            # Decision Records (DEC-NNN)
 │
 ├── 03-code/                  # Implementation
 │   ├── CLAUDE.code.md        # Phase-specific AI instructions
 │   ├── tasks.md              # Development task tracker
-│   ├── decisions/            # Development decisions (implementation patterns)
-│   ├── src/                  # Source code
-│   └── tests/                # Test suites
+│   └── <codebase>/           # One or more named codebases (e.g. frontend, cli, backend)
+│       ├── src/              # Source code for this codebase
+│       └── tests/            # Test suites for this codebase
 │
 └── 04-deploy/                # Deployment and operations
     ├── CLAUDE.deploy.md      # Phase-specific AI instructions
@@ -66,7 +70,6 @@ Each phase directory contains a `CLAUDE.<phase>.md` file with detailed instructi
 
 1. **Check for phase-specific instructions** when working in a phase directory
 2. **Follow the hierarchy**: phase-specific instructions extend (not override) this file
-3. **Create phase files** when they don't exist and the user starts working on that phase
 
 ### Phase Workflow
 
@@ -92,7 +95,6 @@ Claude should help users navigate between phases and ensure work is placed in th
 
 ### During Development
 
-- Keep documentation close to the code it describes
 - Update relevant phase documents when making changes
 - Cross-reference between phases when appropriate (e.g., link design docs from code)
 - **Ask before deciding**: When you spot a related issue, potential improvement, or ambiguous situation during a task, **ask the user explicitly** instead of silently deciding to act or not act. Never assume the user's intent — always surface the decision. Example: "I noticed the same problem exists in file X — should I fix it too?"
@@ -114,83 +116,24 @@ Claude should evaluate whether to:
 3. **Create new instruction files** if:
    - A subtask becomes complex enough to warrant dedicated guidance
    - A new phase or sub-phase emerges
-   - Team-specific workflows need documentation
+   - A workflow becomes complex enough to need documentation
 
 Claude should proactively suggest these updates when relevant.
 
 ---
 
-## Shell Environment
+## Decisions
 
-<!-- TODO: Customize for your project's runtime environment -->
-<!-- Example for nvm-based Node.js projects: -->
-<!--
-### Node.js Version Management (nvm)
+All project decisions — architecture choices, design conventions, coding patterns, process rules — live in a single location: `02-design/decisions/`.
 
-This project uses **nvm** with `.nvmrc` files to pin Node.js versions per sub-project. Because nvm does not auto-load in non-interactive shells, **every Bash command that involves Node.js tooling** (npm, npx, node, tsc, etc.) must be prefixed with:
+Each decision consists of two files linked by naming convention:
 
-```bash
-source ~/.nvm/nvm.sh && nvm use &&
-```
--->
+- **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules written for AI agents. Read this during normal task execution.
+- **`DEC-NNN-short-name.history.md`** — the trail: alternatives considered, reasoning, human involvement classification, and changelog. Read this only when evaluating a decision or proposing a change.
 
----
+Phase-specific decision indexes (with trigger conditions) are maintained in `02-design/CLAUDE.design.md` and `03-code/CLAUDE.code.md`. A decision may appear in both if it affects both phases — with phase-specific phrasing for trigger conditions.
 
-## API Contract (Frontend-Backend)
-
-<!-- TODO: Remove this section if your project has no frontend-backend boundary, or customize it -->
-
-If the project has separate frontend and backend codebases, they maintain **separate type definitions** that must stay in sync. Any code change that touches one side of the API boundary **must** verify and update the other side.
-
-### Contract Principles
-
-- **Response types must be explicit**: Every endpoint must have a named response type, derived from internal entity types. Never return raw internal entities over the wire.
-- **Mapper functions**: Convert internal entities to response types, stripping internal fields and adding computed fields.
-- **Frontend types mirror backend response types**: Field names, types, optionality, and enum values must match exactly.
-- **Response envelope**: Standardize on a consistent response wrapper (e.g., `{ success: true, data: {...} }`).
-- **List endpoints use named fields**: Return `{ users: [...] }`, `{ products: [...] }`, not generic `{ items: [...] }`.
-
-### Mandatory Rule
-
-**When producing code that creates or modifies an API endpoint, request/response type, or API client call, Claude must verify that the frontend-backend contract is consistent.** See `CLAUDE.code.md` for the detailed verification procedure.
-
----
-
-## Development Decisions
-
-Implementation-level decisions that ensure consistency across the codebase live in `03-code/decisions/`. These are separate from architecture decisions (ADRs) in `02-design/decisions/`:
-
-- **Architecture decisions** (`02-design/decisions/ADR-*`): High-level technology and design choices
-- **Development decisions** (`03-code/decisions/DEC-*`): Implementation patterns and conventions that all code must follow
-
-### Mandatory Rule
-
-**When executing any coding task, Claude must:**
-1. **Check applicable decisions**: Scan the decisions index in `CLAUDE.code.md` and read any decisions relevant to the task. Apply them during implementation.
-2. **Propose new decisions**: After completing a task, evaluate whether a new implementation pattern emerged that should be documented as a development decision to maintain consistency.
-
----
-
-## Build and Development Commands
-
-*See `CLAUDE.code.md` for detailed build commands per sub-project.*
-
----
-
-## Architecture
-
-*To be documented in `02-design/architecture.md`. This section will contain a summary with links to detailed documentation.*
-
----
-
-## Navigation Help
-
-When asked about the project, Claude should:
-
-- **For "what are we building?"** -> Direct to `01-objectives/`
-- **For "how does it work?"** -> Direct to `02-design/`
-- **For "where is the code for X?"** -> Navigate `03-code/`
-- **For "how do I deploy?"** -> Direct to `04-deploy/`
+For the full format specification, templates, and agent navigation rules, see [`02-design/decisions.md`](02-design/decisions.md).
 
 ---
 

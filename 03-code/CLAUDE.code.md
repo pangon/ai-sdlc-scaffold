@@ -1,3 +1,6 @@
+- Keep documentation close to the code it describes
+
+
 # CLAUDE.code.md
 
 Phase-specific instructions for the **Code** phase. Extends [../CLAUDE.md](../CLAUDE.md).
@@ -8,29 +11,29 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ---
 
-## Development Decisions
+## Decisions
 
-Implementation-level decisions that ensure consistency across the codebase. Each decision is documented in a separate file under [`decisions/`](decisions/). See [`decisions/README.md`](decisions/README.md) for the template and conventions.
+All project decisions live in [`02-design/decisions/`](../02-design/decisions/). Each decision has two files: `DEC-NNN-name.md` (active record) and `DEC-NNN-name.history.md` (trail). See [`02-design/decisions/README.md`](../02-design/decisions/README.md) for the full format specification.
 
-### Decisions Index
+### Decisions relevant to the code phase
 
-| ID | Title | Summary |
+| ID | Title | Trigger |
 |----|-------|---------|
-| *None yet* | | |
+| [DEC-001](../02-design/decisions/DEC-001-api-contract.md) | API Contract Design | When creating or modifying an endpoint handler, service return type, API client call, or consumer component |
+| [DEC-002](../02-design/decisions/DEC-002-nodejs-version-management.md) | Node.js Version Management | When running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a directory with a `.nvmrc` file |
 
-### AI Agent Instructions for Decisions
+### AI Agent Instructions
 
 **Before starting a task**:
 1. Scan the decisions index above
-2. Identify any decisions relevant to the task
-3. Read the full decision file(s) for applicable decisions
-4. Apply the decisions during implementation
+2. Read the `DEC-NNN.md` file for each relevant decision
+3. Apply the enforcement procedures during implementation
 
 **After completing a task**:
-1. Evaluate whether the task introduced a new pattern or convention that should be consistent across the codebase
-2. If a non-obvious implementation choice was made that future code should replicate, propose a new development decision:
-   - Create a new `DEC-NNN-short-name.md` file in `decisions/` following the template
-   - Add the decision to the index table above
+1. Evaluate whether the task introduced a pattern or constraint that should be consistent across the codebase
+2. If yes, propose a new decision:
+   - Create `02-design/decisions/DEC-NNN-short-name.md` and `DEC-NNN-short-name.history.md` following the templates in [`02-design/decisions/README.md`](../02-design/decisions/README.md)
+   - Add it to the relevant phase indexes (`CLAUDE.design.md`, `CLAUDE.code.md`, or both)
 3. Common triggers for new decisions: error handling patterns, UI interaction patterns, data flow conventions, naming conventions, security patterns
 
 ---
@@ -57,7 +60,6 @@ Quick reference for frequently accessed files:
 03-code/
 ├── CLAUDE.code.md        # This file
 ├── tasks.md              # Development tasks tracking
-├── decisions/            # Development decisions (DEC-NNN files)
 │
 ├── src/                  # Source code
 │   ├── ...               # Organize by feature, layer, or domain
@@ -150,56 +152,19 @@ Running only `lint` will miss TypeScript compiler errors. Always run both.
 - Keep inline documentation concise
 - Document public APIs and interfaces
 
-### Backend-Frontend API Contract Enforcement
-
-<!-- TODO: Remove this section if not applicable, or customize for your project -->
-
-The backend and frontend maintain **separate type definitions**. Every code change that touches the API boundary must go through the contract verification procedure below.
-
-#### Contract Architecture
-
-The backend defines **explicit response types** for every endpoint, derived from entity types:
-
-```
-entities (DB schema)  ->  response types (API contract)  ->  frontend types (mirror)
-```
-
-**Key pattern**: Response types strip internal fields and add computed fields. Mapper functions in services perform the conversion.
-
-#### When Backend APIs Are Created or Modified
-
-Any change to a handler, service return type, or response shape **must** trigger these steps:
-
-1. **Define or update backend response types** — Add/update the explicit response type derived from the entity type. Strip internal fields, include computed fields.
-2. **Create or update mapper function** — Ensure handlers use the mapper, never returning raw entities.
-3. **Read frontend types** — Compare against the updated backend response types.
-4. **Sync frontend types** — Update so field names, types, optionality, and enum values match exactly.
-5. **Update frontend API client** — Verify endpoint paths, HTTP methods, request bodies, and return types are consistent.
-6. **Check frontend consumers** — Search for usages of modified types. Verify components access correct fields.
-7. **Run typecheck on both sides**.
-8. **Update API design doc** — If the public API surface changed, update `02-design/api-design.md`.
-
-#### Common Contract Pitfalls to Avoid
-
-- **Returning raw entities**: Handlers must use mapper functions, never return raw internal entities.
-- **List field naming**: Use named fields (`users`, `products`), never generic `items`.
-- **Type precision**: Use union types (`'active' | 'inactive'`) in frontend, not `string`.
-- **Status enum drift**: If backend adds a new status value, frontend must handle it.
-- **Optional vs. required**: Keep optionality in sync between backend and frontend types.
-
 ### When Implementing Features
 1. Review relevant design docs in `02-design/`
 2. Check requirements in `01-objectives/`
 3. Update `tasks.md` to track progress
 4. Implement with tests
-5. **Run the API contract verification procedure** if the feature touches any API boundary
+5. **Apply relevant decisions** from the index above — run the full enforcement procedure for any decision triggered by this feature
 6. Update design docs if implementation differs
 
 ### When Fixing Bugs
 1. Write a failing test that reproduces the bug
 2. Fix the bug
 3. Verify the test passes
-4. **If the bug was a contract mismatch**, run the full contract verification procedure
+4. **Check relevant decisions** in the index above — if the bug indicates a decision violation, apply the full enforcement procedure for that decision
 5. Consider if this reveals a design issue
 6. **Proactively check for the same bug elsewhere** — search the codebase for other locations affected by the same pattern. If found, **ask the user explicitly** whether to fix them too (do not silently skip or silently fix them).
 

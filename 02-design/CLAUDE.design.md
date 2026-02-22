@@ -13,7 +13,21 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 | `architecture.md` | System architecture overview and diagrams |
 | `data-model.md` | Data structures, schemas, and relationships |
 | `api-design.md` | API specifications and contracts |
-| `decisions/` | Architecture Decision Records (ADRs) |
+| `decisions/` | Decision Records (DEC-NNN) |
+
+---
+
+## Decisions
+
+All project decisions live in `decisions/`. Each decision has two files: `DEC-NNN-name.md` (active record, read during task execution) and `DEC-NNN-name.history.md` (trail, read only when evaluating or changing a decision). See [`decisions/README.md`](decisions/README.md) for the full format specification.
+
+### Decisions relevant to the design phase
+
+| ID | Title | Trigger |
+|----|-------|---------|
+| [DEC-001](decisions/DEC-001-api-contract.md) | API Contract Design | When specifying or changing an API endpoint, request/response type, or response envelope |
+
+---
 
 ## AI Guidelines for This Phase
 
@@ -34,48 +48,18 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 - Define request/response formats clearly
 - Document error handling and status codes
 - Consider versioning strategy
-- **API response types must be explicit**: Every endpoint should have a named response type derived from internal entity types. Never return raw internal entities — use mapper functions to strip internal fields and add computed fields.
-- **List endpoints use named fields**: Return `{ users: [...] }`, `{ products: [...] }`, etc. — not generic `{ items: [...] }`.
-- **Response envelope**: Standardize on a consistent wrapper (e.g., `{ success: true, data: {...} }`). The design spec documents the `data` payload only.
+- Apply DEC-001 for all API contract rules (named response types, response envelope, list field naming)
 
-### When Recording Decisions (ADRs)
-- Document the context and problem
-- List options considered with pros/cons
-- Record the decision and rationale
-- Note consequences and trade-offs
+### When Recording Decisions
 
-## ADR Template
+When a significant decision is made during the design phase:
 
-Use this template for Architecture Decision Records in `decisions/`:
+1. Create `decisions/DEC-NNN-short-name.md` using the active record template in [`decisions/README.md`](decisions/README.md).
+2. Create `decisions/DEC-NNN-short-name.history.md` using the trail template.
+3. If the decision has enforcement implications for the **design phase**, add it to the index above.
+4. If the decision has enforcement implications for the **code phase**, also add it to the index in `03-code/CLAUDE.code.md`.
 
-```markdown
-# ADR-[NUMBER]: [Title]
-
-**Date**: YYYY-MM-DD
-**Status**: Proposed / Accepted / Deprecated / Superseded
-
-## Context
-
-What is the issue or question we need to address?
-
-## Options Considered
-
-### Option A: [Name]
-- Pros: ...
-- Cons: ...
-
-### Option B: [Name]
-- Pros: ...
-- Cons: ...
-
-## Decision
-
-What did we decide and why?
-
-## Consequences
-
-What are the implications of this decision?
-```
+---
 
 ## Diagram Guidelines
 
