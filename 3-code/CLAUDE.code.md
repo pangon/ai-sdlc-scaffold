@@ -119,10 +119,34 @@ Running only `lint` will miss TypeScript compiler errors. Always run both.
 1. Locate the task in `tasks.md`; read every `REQ-NNN` listed in its `Req` column before writing any code
 2. Review relevant design docs in `2-design/`
 3. Update status to `In Progress` in `tasks.md`
-4. Implement with tests
-5. **Apply relevant decisions** from the index above — run the full enforcement procedure for any decision triggered by this feature
-6. Update design docs if implementation differs
-7. Update status to `Done` and move the row to Completed Tasks
+4. Before writing code: if you anticipate a significant divergence from the design, **stop and follow the [design gap procedure](#when-a-design-gap-is-discovered-during-implementation)** — do not proceed with coding
+5. Implement with tests
+6. **Apply relevant decisions** from the index above — run the full enforcement procedure for any decision triggered by this feature
+7. After implementing: evaluate whether any divergence from the design occurred — follow the **[design gap procedure](#when-a-design-gap-is-discovered-during-implementation)** to determine whether docs need updating
+8. Update status to `Done` and move the row to Completed Tasks
+
+### When a design gap is discovered during implementation
+
+A design gap is any divergence between what the current design documents specify and what implementation requires or reveals. Evaluate its severity before deciding how to proceed.
+
+**Minor divergence — update docs silently, continue:**
+
+A change that keeps the system's behavior and contracts intact. Examples: a field renamed for clarity, a type made more specific (e.g. `string` → `'active' | 'inactive'`), an optional field added that doesn't affect consumers, an endpoint path adjusted to match a naming convention. For these:
+- Update the relevant section of `2-design/architecture.md`, `data-model.md`, or `api-design.md` to reflect reality.
+- Continue with the task.
+
+**Significant divergence — stop, do not code, ask the user:**
+
+A change that affects system behavior, public contracts, scope, or requires work not covered by the current design. Examples: a new API endpoint or data entity needed that isn't in the design, an architectural assumption that turns out to be invalid, a requirement that cannot be implemented as designed, a missing requirement discovered that changes scope. For these:
+
+1. **Stop** — do not write implementation code.
+2. **Surface the gap** to the user: describe what the design specifies, what implementation would actually require, and why they differ.
+3. **Present options**, for example: update the design first and then implement, simplify the approach to stay within the current design, or accept a constrained implementation and record the deviation as a decision.
+4. **Wait for the user's explicit decision** before proceeding.
+5. **Act on the decision:**
+   - If the design must change: update `2-design/` first, then implement.
+   - If a new or modified requirement is needed: go to `1-objectives/` first, then update design, then implement.
+   - If the deviation is accepted as-is: record it as a decision in `2-design/decisions/` following the procedure below.
 
 ### When Recording Decisions
 
