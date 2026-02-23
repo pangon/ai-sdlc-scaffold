@@ -71,6 +71,16 @@ A conflict exists when two or more requirements cannot both be satisfied as stat
 4. **Apply**: update affected `REQ-NNN.md` files and index rows. Update dependent user stories or goals if affected. Record a design decision if the resolution imposes a recurring constraint.
 5. **Verify**: no artifacts remain in a conflicting state after resolution.
 
+### Assumption invalidation
+
+When an assumption is found to be wrong or no longer holds:
+
+1. **Identify impact**: list all artifacts (requirements, user stories, design decisions) that depend on the invalidated assumption.
+2. **Ask the user**: present the invalidated assumption, the affected artifacts, and proposed adjustments or alternatives.
+3. **Wait for explicit approval** before modifying any file.
+4. **Apply**: change the assumption's Status to `Invalidated`. Update or flag all dependent artifacts as directed.
+5. **Verify**: no artifacts remain based on the invalidated assumption without acknowledgment.
+
 ### Artifact deprecation
 
 When an artifact (user story, requirement, assumption, constraint) is no longer relevant:
@@ -87,7 +97,6 @@ When an artifact (user story, requirement, assumption, constraint) is no longer 
 - Goals, user stories, and requirements are referenced in design documents (`2-design/`)
 - Acceptance criteria inform test cases (`3-code/`)
 - Constraints and assumptions influence infrastructure decisions (`4-deploy/`)
-- Invalidated assumptions should trigger a review of dependent artifacts; ask the human for direction
 
 ---
 
