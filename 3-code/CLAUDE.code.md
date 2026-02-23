@@ -56,6 +56,7 @@ When invoking any command, apply active decisions from the index above whose tri
 - Use strict type checking where available
 - Adopt DRY coding principle
 - Organize into independent modules when possible
+- Prefer splitting code across multiple files over keeping a single large file, when compatible with language/framework conventions
 - Add comments only where logic isn't self-evident
 - Keep inline documentation concise
 
