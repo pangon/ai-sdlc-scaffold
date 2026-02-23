@@ -23,31 +23,22 @@ This document tracks all development tasks for the project. Update this file as 
 
 ---
 
-## Open Tasks
+## Tasks
 
 <!-- Organize tasks by domain or component -->
 <!-- Req column: list all REQ-NNN IDs this task implements, comma-separated. Use "-" if the task has no direct requirement (e.g. tooling, scaffolding). -->
+<!-- Updated column: date of the last status change (YYYY-MM-DD). -->
 
 ### Setup & Infrastructure
 
-| ID | Task | Priority | Status | Req | Dependencies | Notes |
-|----|------|----------|--------|-----|--------------|-------|
-| TASK-001 | Initial project setup | P0 | Todo | - | - | - |
+| ID | Task | Priority | Status | Req | Dependencies | Updated | Notes |
+|----|------|----------|--------|-----|--------------|---------|-------|
+| TASK-001 | Initial project setup | P0 | Todo | - | - | - | - |
 
 <!-- ### Backend -->
 <!-- ### Frontend -->
 <!-- ### Testing -->
 <!-- ### Documentation -->
-
----
-
-## Completed Tasks
-
-<!-- Move completed tasks here with completion date -->
-
-| ID | Task | Req | Completed Date | Notes |
-|----|------|-----|----------------|-------|
-| - | - | - | - | - |
 
 ---
 
@@ -84,14 +75,21 @@ When creating a task:
 
 When starting a task:
 1. Change status from `Todo` to `In Progress`
-2. Read all requirements listed in the `Req` column before writing any code
+2. Set the `Updated` column to today's date
+3. Read all requirements listed in the `Req` column before writing any code
 
 When completing a task:
 1. Change status to `Done`
-2. Move the row to "Completed Tasks" section
-3. Add completion date and any notes
+2. Set the `Updated` column to today's date
+3. Add any relevant notes
+
+When cancelling a task:
+1. Change status to `Cancelled`
+2. Set the `Updated` column to today's date
+3. Add a note explaining why
 
 When blocked:
 1. Change status to `Blocked`
-2. Add note explaining the blocker
-3. Create a new task if needed to resolve the blocker
+2. Set the `Updated` column to today's date
+3. Add note explaining the blocker
+4. Create a new task if needed to resolve the blocker

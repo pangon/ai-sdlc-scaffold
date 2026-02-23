@@ -87,7 +87,7 @@ When invoking any command, also apply any active decisions that affect tooling (
 5. Implement with tests
 6. **Apply relevant decisions** from the index above — run the full enforcement procedure for any decision triggered by this feature
 7. After implementing: evaluate whether any divergence from the design occurred — follow the **[design gap procedure](#when-a-design-gap-is-discovered-during-implementation)** to determine whether docs need updating
-8. Update status to `Done` and move the row to Completed Tasks
+8. Update status to `Done` and set the `Updated` column to today's date in `tasks.md`
 
 ### When a design gap is discovered during implementation
 
