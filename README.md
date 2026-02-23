@@ -6,21 +6,27 @@ A repository template for **AI-first software development** with [Claude Code](h
 
 This scaffold provides a structured approach to building software where AI agents do the development work and a human supervises at a high level. It organizes work into four phases — **Objectives, Design, Code, Deploy** — each with an AI instruction file (`CLAUDE.<phase>.md`) that tells agents what to check, when to check it, and what to do.
 
-The central paradigm is **everything-in-repo**: objectives, requirements, architecture, decisions, and task tracking all live alongside the source code — versioned, searchable, and always accessible to agents without external tools.
+The scaffold is built on four core principles:
+
+1. **AI-first development model** — designed for AI agents doing the work while a human supervises, defines objectives, and steers direction.
+2. **Everything-in-repo** — objectives, requirements, architecture, decisions, and task tracking all live alongside the source code, versioned and always accessible to agents without external tools.
+3. **Context-window efficiency** — hierarchical instructions, two-file decision records, and phase-level indexes minimize how many tokens an agent must load.
+4. **Decision capture, not suppression** — agents decide autonomously within established patterns; all decisions are recorded in the repository for human review and consistency.
+
+For a deeper discussion of the rationale, design choices, and traceability model, see [`RATIONALE.md`](RATIONALE.md).
 
 ## Quick Start
 
 1. **Copy this repository** as the starting point for a new project
 2. **Customize `CLAUDE.md`**: fill in the project overview (look for `<!-- CUSTOMIZE -->` markers)
-3. **Start with objectives**: define stakeholders, goals, and requirements in `1-objectives/`
-4. **Design the system**: document architecture and record decisions in `2-design/`
-5. **Build it**: implement and track tasks in `3-code/`
-6. **Ship it**: deploy and operate from `4-deploy/`
+3. **Follow the phases**: Objectives → Design → Code → Deploy. Each phase has a `CLAUDE.<phase>.md` with instructions and indexes that guide the agent automatically.
+4. **Use Claude skills** *(coming soon)*: dedicated skills will automate each phase — from requirements gathering to coding task execution — so you can navigate the lifecycle without manual prompting.
 
 ## Structure
 
 ```
 ├── CLAUDE.md                         # Root AI instructions (start here)
+├── RATIONALE.md                      # Core principles and design rationale
 │
 ├── 1-objectives/                     # WHAT and WHY
 │   ├── CLAUDE.objectives.md          # Phase instructions and artifact indexes
@@ -63,12 +69,15 @@ The central paradigm is **everything-in-repo**: objectives, requirements, archit
 When starting a new project from this scaffold:
 
 - [ ] Fill in the project overview in `CLAUDE.md` (search for `<!-- CUSTOMIZE -->`)
-- [ ] Define stakeholders in `1-objectives/_stakeholders.md`
-- [ ] Create goals, user stories, requirements, assumptions, and constraints from templates
+- [ ] Define stakeholders in `1-objectives/stakeholders.md`
 - [ ] Customize `3-code/CLAUDE.code.md` with component guidelines and build commands
-- [ ] Set up initial tasks in `3-code/tasks.md`
 - [ ] Review the example decision (`DEC-001`) — adapt or replace it for your project
 - [ ] Review all `CLAUDE.*.md` files for your tech stack
+
+<!-- TODO: once automation skills are available, add a "Skills" section listing
+     each skill (e.g. requirements gathering, task execution) with usage examples. -->
+
+> **Note:** An automation layer of Claude skills is under active development. When ready, it will provide dedicated commands for requirements gathering, task planning, coding execution, and phase-gate navigation — reducing custom prompting to a minimum.
 
 ## License
 

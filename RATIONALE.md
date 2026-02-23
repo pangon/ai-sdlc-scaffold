@@ -1,8 +1,8 @@
-# Project Rationale: ai-sdlc-scaffold
+# Project Rationale: AI SDLC Scaffold
 
 ## What This Project Is
 
-**ai-sdlc-scaffold** is a repository template for AI-first software development. It provides a folder structure, file templates, and AI agent instructions that encode a complete software development lifecycle (SDLC) where all project knowledge lives inside the repository itself.
+**AI SDLC Scaffold** is a repository template for AI-first software development. It provides a folder structure, file templates, and AI agent instructions that encode a complete software development lifecycle (SDLC) where all project knowledge lives inside the repository itself.
 
 It is not a tool, a library, or an application. It is a **starting scaffold** — you clone or copy it, then fill it in as your real project takes shape.
 
