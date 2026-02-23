@@ -162,6 +162,34 @@ When a significant decision, pattern, or constraint emerges in any phase:
 2. Copy [`2-design/decisions/_template.history.md`](2-design/decisions/_template.history.md) → `2-design/decisions/DEC-NNN-short-name.history.md` and fill in all fields.
 3. Add an entry to the decisions index of every phase whose trigger conditions are met (`2-design/CLAUDE.design.md`, `3-code/CLAUDE.code.md`, `4-deploy/CLAUDE.deploy.md`).
 
+### When Deprecating or Superseding a Decision
+
+A decision should be deprecated when it is no longer relevant (e.g., the feature it governed was removed) or superseded when a new decision replaces it.
+
+**Never deprecate or supersede silently.** Always surface the proposal to the user first.
+
+1. **Identify the candidate**: note the DEC-NNN ID and the reason it should be retired (no longer applicable, replaced by a better approach, source requirement changed or was deprecated, etc.).
+2. **Read both files**: `DEC-NNN.md` and `DEC-NNN.history.md` to understand the full context.
+3. **Stop and ask the user.** Present:
+   - Why the decision is no longer valid or should be replaced
+   - Whether any existing code, infrastructure, or process still depends on it
+   - The proposed action: deprecate (retire without replacement) or supersede (replace with a new decision)
+4. **Wait for the user's explicit approval** before modifying any file.
+5. **Apply the retirement:**
+
+   **If deprecating:**
+   - In `DEC-NNN.md`: change `**Status**` to `Deprecated`.
+   - In `DEC-NNN.history.md`: append a changelog entry with the date, the change ("Deprecated — [reason]"), and the involvement type.
+   - Remove the decision from every phase index (`CLAUDE.design.md`, `CLAUDE.code.md`, `CLAUDE.deploy.md`).
+
+   **If superseding:**
+   - Create the replacement decision (`DEC-MMM`) following the [recording procedure](#when-recording-decisions) above.
+   - In the old `DEC-NNN.md`: change `**Status**` to `Superseded by DEC-MMM`.
+   - In the old `DEC-NNN.history.md`: append a changelog entry with the date, the change ("Superseded by DEC-MMM — [reason]"), and the involvement type.
+   - In every phase index: replace the old `DEC-NNN` row with the new `DEC-MMM` row (or remove it if the new decision's triggers no longer apply to that phase).
+
+6. **Verify consistency**: confirm no phase index still references the retired decision as active, and no other decision or document links to it without acknowledging its status.
+
 ---
 
 ## Continuous Improvement
