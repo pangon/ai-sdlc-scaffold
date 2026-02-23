@@ -111,7 +111,33 @@ When a significant decision, pattern, or constraint emerges:
 2. Create `DEC-NNN-short-name.history.md` from [`_template.history.md`](2-design/decisions/_template.history.md) and fill in all fields.
 3. Add an entry to the decisions index of every phase whose trigger conditions are met.
 
-For deprecation and supersession procedures, see [`CLAUDE.design.md`](2-design/CLAUDE.design.md#deprecating-or-superseding-a-decision).
+### Deprecating or Superseding a Decision
+
+A decision should be deprecated when no longer relevant, or superseded when a new decision replaces it.
+
+**Never deprecate or supersede silently.** Always surface the proposal to the user first.
+
+1. **Identify the candidate**: note the DEC-NNN ID and reason for retirement.
+2. **Read both files**: `DEC-NNN.md` and `DEC-NNN.history.md` to understand full context.
+3. **Ask the user.** Present:
+   - Why the decision is no longer valid or should be replaced
+   - Whether existing code, infrastructure, or process still depends on it
+   - The proposed action: deprecate (retire) or supersede (replace with new decision)
+4. **Wait for explicit approval** before modifying any file.
+5. **Apply:**
+
+   **If deprecating:**
+   - In `DEC-NNN.md`: change `**Status**` to `Deprecated`.
+   - In `DEC-NNN.history.md`: append a changelog entry with date, change, and involvement type.
+   - Remove the decision from every phase index.
+
+   **If superseding:**
+   - Create the replacement decision (`DEC-MMM`) following the recording procedure.
+   - In old `DEC-NNN.md`: change `**Status**` to `Superseded by DEC-MMM`.
+   - In old `DEC-NNN.history.md`: append changelog entry.
+   - In every phase index: replace the old row with the new one.
+
+6. **Verify**: no phase index still references the retired decision as active.
 
 ---
 
