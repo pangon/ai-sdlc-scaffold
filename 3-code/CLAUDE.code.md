@@ -8,36 +8,26 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ---
 
-## Decisions relevant to This Phase
+## Decisions Relevant to This Phase
+
+<!-- Add rows as decisions are recorded. -->
 
 | ID | Title | Trigger |
 |----|-------|---------|
-| [DEC-001](../2-design/decisions/DEC-001-api-contract.md) | API Contract Design | When creating or modifying an endpoint handler, service return type, API client call, or consumer component |
-| [DEC-002](../2-design/decisions/DEC-002-nodejs-version-management.md) | Node.js Version Management | When running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a directory with a `.nvmrc` file |
-| [DEC-003](../2-design/decisions/DEC-003-typescript-verification.md) | TypeScript Verification | After writing or modifying any TypeScript (`.ts`, `.tsx`) file in a component that exposes `lint` and `typecheck` scripts |
+| [DEC-001](../2-design/decisions/DEC-001-error-format.md) | Error Response Format | When implementing error handling or returning errors from any component |
 
 ---
 
 ## Component Guidelines
 
-<!-- TODO: Add an entry for each component/codebase in this project -->
+<!-- CUSTOMIZE: Add an entry for each component/codebase. Copy the template block below. -->
 
-Each component in this project must have a living description in this section. The description must:
-
-- **Summarize the component's role** — what it does, what it owns, and how it fits into the overall system
-- **Reflect the current design** — update it whenever the architecture, tech stack, or responsibility boundaries change
-- **Be written for AI agents** — concise enough to be loaded in context, precise enough to guide implementation decisions
-
-If a component's description drifts from the actual implementation, treat it as a bug: correct the description (and the decisions index if needed) before continuing work.
-
-### Template
-
-Copy this block for each component:
+Each component must have a brief description here. Update it when architecture or responsibilities change. If a description drifts from the implementation, correct it before continuing work.
 
 ```
 ### <Component Name>
 
-<One or two sentences describing what this component does and the role it plays in the system.>
+<One or two sentences describing what this component does.>
 
 | Aspect | Details |
 |--------|---------|
@@ -52,89 +42,71 @@ Copy this block for each component:
 
 ## Build Commands
 
-Scripts and commands for running, building, linting, type-checking, and testing each component are documented in that component's own codebase — typically in its `package.json`, `Makefile`, `README.md`, or equivalent. Check there first.
+Scripts and commands for each component are documented in that component's own codebase (package.json, Makefile, README, or equivalent). Check there first.
 
-When invoking any command, also apply any active decisions that affect tooling (e.g., runtime version management — see the decisions index above).
+When invoking any command, apply active decisions from the index above whose trigger conditions match.
 
 ---
 
-## AI Guidelines for This Phase
+## AI Guidelines
 
-### Code Quality Standards
-- Write clear, self-documenting code
-- Follow language/framework conventions
+### Code Quality
+- Write clear, self-documenting code following language/framework conventions
 - Keep functions small and focused
-- Handle errors appropriately
 - Use strict type checking where available
 - Adopt DRY coding principle
-- Organize the functions of the codebase into independent modules when possible
+- Organize into independent modules when possible
+- Add comments only where logic isn't self-evident
+- Keep inline documentation concise
 
-### Testing Standards
+### Testing
 - Write tests for new functionality
 - Maintain test coverage for critical paths
 - Use descriptive test names that explain the scenario
 
-### Documentation in Code
-- Add comments only where logic isn't self-evident
-- Keep inline documentation concise
-- Document public APIs and interfaces
-
-### When Implementing Features
-1. Locate the task in `tasks.md`; read every `REQ-NNN` listed in its `Req` column before writing any code
+### Implementing Features
+1. Locate the task in [`tasks.md`](tasks.md); read every `REQ-NNN` listed in its `Req` column before writing code
 2. Review relevant design docs in `2-design/`
 3. Update status to `In Progress` in `tasks.md`
-4. Before writing code: if you anticipate a significant divergence from the design, **stop and follow the [design gap procedure](#when-a-design-gap-is-discovered-during-implementation)** — do not proceed with coding
-5. Implement with tests
-6. **Apply relevant decisions** from the index above — run the full enforcement procedure for any decision triggered by this feature
-7. After implementing: evaluate whether any divergence from the design occurred — follow the **[design gap procedure](#when-a-design-gap-is-discovered-during-implementation)** to determine whether docs need updating
-8. Update status to `Done` and set the `Updated` column to today's date in `tasks.md`
+4. If you anticipate a significant divergence from the design, **stop and follow the [design gap procedure](#design-gaps)** before coding
+5. Check relevant decisions from the index above
+6. Implement with tests
+7. After implementing: evaluate whether any divergence from the design occurred and follow the design gap procedure if needed
+8. Update status to `Done` in `tasks.md`
 
-### When a design gap is discovered during implementation
+### Design Gaps
 
-A design gap is any divergence between what the current design documents specify and what implementation requires or reveals. Evaluate its severity before deciding how to proceed.
+A design gap is any divergence between design documents and what implementation requires.
 
-**Minor divergence — update docs silently, continue:**
+**Minor divergence** (field renamed, type made more specific, optional field added): update the relevant `2-design/` file silently, continue.
 
-A change that keeps the system's behavior and contracts intact. Examples: a field renamed for clarity, a type made more specific (e.g. `string` → `'active' | 'inactive'`), an optional field added that doesn't affect consumers, an endpoint path adjusted to match a naming convention. For these:
-- Update the relevant section of `2-design/architecture.md`, `data-model.md`, or `api-design.md` to reflect reality.
-- Continue with the task.
-
-**Significant divergence — stop, do not code, ask the user:**
-
-A change that affects system behavior, public contracts, scope, or requires work not covered by the current design. Examples: a new API endpoint or data entity needed that isn't in the design, an architectural assumption that turns out to be invalid, a requirement that cannot be implemented as designed, a missing requirement discovered that changes scope. For these:
+**Significant divergence** (new endpoint/entity, invalid architectural assumption, requirement that cannot be implemented as designed):
 
 1. **Stop** — do not write implementation code.
-2. **Surface the gap** to the user: describe what the design specifies, what implementation would actually require, and why they differ.
-3. **Present options**, for example: update the design first and then implement, simplify the approach to stay within the current design, or accept a constrained implementation and record the deviation as a decision.
-4. **Wait for the user's explicit decision** before proceeding.
-5. **Act on the decision:**
-   - If the design must change: update `2-design/` first, then implement.
-   - If a new or modified requirement is needed: go to `1-objectives/` first, then update design, then implement.
-   - If the deviation is accepted as-is: record it as a decision in `2-design/decisions/` following the procedure below.
+2. **Surface** the gap: what the design says, what implementation needs, why they differ.
+3. **Present options**: update design first, simplify to stay within design, or accept and record deviation as a decision.
+4. **Wait for explicit approval** before proceeding.
+5. **Act**: update `2-design/` or `1-objectives/` as needed, then implement.
 
-### When Recording Decisions
-When a significant decision is made during this phase, record it as explained in [CLAUDE.md — Decisions](../CLAUDE.md#decisions).
-
-Common triggers for new decisions in this phase: error handling patterns, UI interaction patterns, data flow conventions, naming conventions, security patterns.
-
-### When Fixing Bugs
+### Fixing Bugs
 1. Write a failing test that reproduces the bug
-2. Fix the bug
-3. Verify the test passes
-4. **Check relevant decisions** in the index above — if the bug indicates a decision violation, apply the full enforcement procedure for that decision
-5. Consider if this reveals a design issue
-6. **Proactively check for the same bug elsewhere** — search the codebase for other locations affected by the same pattern. If found, **ask the user explicitly** whether to fix them too (do not silently skip or silently fix them).
+2. Fix the bug and verify the test passes
+3. Check relevant decisions — if the bug indicates a violation, apply the full enforcement procedure
+4. Search the codebase for the same pattern elsewhere. If found, **ask the user** whether to fix them too.
+
+### Common Decision Triggers
+When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.md#when-recording-decisions). Common triggers: error handling patterns, data flow conventions, naming conventions, security patterns.
 
 ---
 
 ## Task Tracking
 
-All development tasks are tracked in [tasks.md](tasks.md).
+All development tasks are tracked in [`tasks.md`](tasks.md).
 
 ---
 
 ## Linking to Other Phases
 
-- Implementation should follow designs in `2-design/`
-- Tests should verify requirements from `1-objectives/`
-- Infrastructure code must be placed in `4-deploy/`
+- Implementation follows designs in `2-design/`
+- Tests verify requirements from `1-objectives/`
+- Infrastructure code goes in `4-deploy/`

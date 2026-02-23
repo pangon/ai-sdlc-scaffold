@@ -4,75 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ## Language Policy
 
-**All AI outputs must be in English**, regardless of the language used in user prompts. This applies to:
-- Code and inline comments
-- Documentation (markdown files, README, etc.)
-- Configuration files and their comments
-- Commit messages
-- Response text and explanations
-
-The user may write prompts in any language, but Claude must always respond and produce artifacts in English.
+**All AI outputs must be in English**, regardless of the language used in user prompts. This applies to code, comments, documentation, configuration files, commit messages, and response text.
 
 ---
 
 ## Project Overview
 
-<!-- TODO: Describe your project here -->
+<!-- CUSTOMIZE: Replace this section with a description of your project. -->
 
-This repository is a **scaffold template** for projects that want to adopt a structured, AI-assisted software development lifecycle. Clone or copy it to bootstrap any new project with the same approach.
-
-The central paradigm is **everything-in-repo**: objectives, requirements, architecture, decisions, and development task tracking all live alongside the source code — versioned, searchable, and always in sync with the implementation. This makes the full history of *why* the software is built the way it is available to both humans and AI assistants at all times.
-
----
-
-## Repository Structure
-
-The repository is organized into development phases. Claude should respect this organization and guide users to the appropriate section.
-
-```
-project/
-├── CLAUDE.md                 # Main AI instructions (this file)
-├── README.md                 # Project overview and quick start
-│
-├── 1-objectives/             # High-level goals and requirements
-│   ├── CLAUDE.objectives.md  # Phase-specific AI instructions, indexes, and stakeholder list
-│   ├── goals/                # Goal files (GOAL-NNN-name.md) + _template.md
-│   ├── user-stories/         # User story files (US-NNN-name.md) + _template.md
-│   ├── requirements/         # Requirement files (REQ-NNN-name.md) + _template.md
-│   ├── assumptions/          # Assumption files (ASM-NNN-name.md) + _template.md
-│   └── constraints/          # Constraint files (CON-NNN-name.md) + _template.md
-│
-├── 2-design/                 # Architecture and design decisions
-│   ├── CLAUDE.design.md      # Phase-specific AI instructions
-│   ├── architecture.md       # System architecture overview
-│   ├── data-model.md         # Data structures and schemas
-│   ├── api-design.md         # API specifications
-│   └── decisions/            # Decision Records (DEC-NNN) + _template.md/_template.history.md
-│
-├── 3-code/                   # Implementation
-│   ├── CLAUDE.code.md        # Phase-specific AI instructions
-│   ├── tasks.md              # Development task tracker
-│   └── <codebase>/           # One or more named codebases (e.g. frontend, cli, backend)
-│       ├── src/              # Source code for this codebase
-│       └── tests/            # Test suites for this codebase
-│
-└── 4-deploy/                 # Deployment and operations
-    ├── CLAUDE.deploy.md      # Phase-specific AI instructions
-    ├── infrastructure/       # IaC configurations
-    ├── scripts/              # Deployment scripts
-    └── runbooks/             # Operational procedures
-```
+This repository uses a structured, AI-first development lifecycle. All project knowledge — objectives, design, decisions, tasks — lives alongside the source code. See [README.md](README.md) for the full directory layout.
 
 ---
 
 ## Phase-Specific Instructions
 
-Each phase directory contains a `CLAUDE.<phase>.md` file with detailed instructions for that phase. Claude should:
+Each phase directory contains a `CLAUDE.<phase>.md` file. When working in a phase:
 
-1. **Check for phase-specific instructions** when working in a phase directory
-2. **Follow the hierarchy**: phase-specific instructions extend (not override) this file
-
-### Phase Workflow
+1. Read the phase-specific instructions — they extend (not override) this file
+2. Consult the decisions index in that phase file before starting work
+3. Work within the appropriate phase structure
 
 | Phase | Directory | Focus |
 |-------|-----------|-------|
@@ -81,68 +31,67 @@ Each phase directory contains a `CLAUDE.<phase>.md` file with detailed instructi
 | **Code** | `3-code/` | Build it |
 | **Deploy** | `4-deploy/` | Ship and operate it |
 
-Claude should help users navigate between phases and ensure work is placed in the correct location.
+### Phase Gates
+
+Before creating artifacts in the next phase, check these minimum preconditions. Gates are advisory — warn the user if not met, but proceed if they confirm.
+
+| Transition | Preconditions |
+|------------|---------------|
+| Objectives → Design | At least one goal Approved; at least one requirement Approved; stakeholders defined |
+| Design → Code | `architecture.md` has content; at least one requirement has a corresponding task in `tasks.md` |
+| Code → Deploy | At least one task Done |
 
 ---
 
-## AI Collaboration Guidelines
+## Artifact Status Lifecycle
 
-### When Starting Work
+All artifacts with a Status field (user stories, requirements, assumptions) follow this lifecycle:
 
-1. Identify which phase the task belongs to
-2. Check for phase-specific `CLAUDE.<phase>.md` instructions
-3. Create necessary directories and files if they don't exist
-4. Work within the appropriate phase structure
+```
+Draft --[human approves]--> Approved --[linked task Done]--> Implemented
+  \                            \
+   +--[human decides]---------> Deprecated
+```
 
-### During Development
+**Transition rules:**
+- **Draft → Approved**: only a human can approve (after stakeholder review)
+- **Approved → Implemented**: the agent marks this when all linked tasks reach Done
+- **Any → Deprecated**: only a human can deprecate; the agent proposes and waits for approval
 
-- Update relevant phase documents when making changes
-- Cross-reference between phases when appropriate (e.g., link design docs from code)
-- **Ask before deciding**: When you spot a related issue, potential improvement, or ambiguous situation during a task, **ask the user explicitly** instead of silently deciding to act or not act. Never assume the user's intent — always surface the decision. Example: "I noticed the same problem exists in file X — should I fix it too?"
+---
 
-### After Making Changes
+## Graduated Safeguards
 
-Claude should evaluate whether to:
+AI agents operate autonomously within development tasks. For project-level decisions, the scaffold defines three tiers:
 
-1. **Update this file** (`CLAUDE.md`) if:
-   - New project-wide patterns emerge
-   - Build commands or architecture change significantly
-   - New tools or workflows are introduced
+| Tier | When | Agent behavior |
+|------|------|----------------|
+| **Always ask** | Conflict resolution, design gaps, decision deprecation/supersession, phase gate advancement | Stop, present options, wait for human approval |
+| **Ask first time, then follow precedent** | Naming conventions, error handling patterns, test structure | Ask once, record the decision, apply consistently afterward |
+| **Decide and record** | Routine implementation choices within established patterns | Decide autonomously, record in the appropriate artifact |
 
-2. **Update phase-specific files** (`CLAUDE.<phase>.md`) if:
-   - Phase-specific patterns or conventions are established
-   - New tools specific to that phase are added
-   - Common tasks in that phase should be documented
-
-3. **Create new instruction files** if:
-   - A subtask becomes complex enough to warrant dedicated guidance
-   - A new phase or sub-phase emerges
-   - A workflow becomes complex enough to need documentation
-
-Claude should proactively suggest these updates when relevant.
+When spotting a related issue, potential improvement, or ambiguous situation during a task, **surface it to the user** instead of silently deciding to act or not act.
 
 ---
 
 ## Decisions
 
-All project decisions — architecture choices, design conventions, coding patterns, process rules — live in a single location: `2-design/decisions/`.
+All project decisions live in `2-design/decisions/`. Each decision consists of two files:
 
-Each decision consists of two files linked by naming convention:
+- **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules. Read during normal task execution.
+- **`DEC-NNN-short-name.history.md`** — the trail: alternatives, reasoning, human involvement, changelog. Read only when evaluating or changing a decision.
 
-- **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules written for AI agents. Read this during normal task execution when trigger conditions are met.
-- **`DEC-NNN-short-name.history.md`** — the trail: alternatives considered, reasoning, human involvement classification, and changelog. Read this only when evaluating a decision or proposing a change.
+**Naming**: `NNN` is a three-digit sequential number; `short-name` is kebab-case.
 
-**Naming convention**: `NNN` is a three-digit sequential number (`001`, `002`, ...); `short-name` is a kebab-case summary (`api-contract`, `error-format`).
+**Templates**: [`2-design/decisions/_template.md`](2-design/decisions/_template.md) and [`_template.history.md`](2-design/decisions/_template.history.md).
 
-**Templates**: use [`2-design/decisions/_template.md`](2-design/decisions/_template.md) and [`2-design/decisions/_template.history.md`](2-design/decisions/_template.history.md) as starting points for new decisions.
-
-Phase-specific decision indexes (with trigger conditions) are maintained in each phase's `CLAUDE.<phase>.md`. A decision may appear in multiple indexes if it affects multiple phases — with phase-specific phrasing for trigger conditions.
+Phase-specific decision indexes (with trigger conditions) are in each `CLAUDE.<phase>.md`. A decision may appear in multiple phase indexes.
 
 ### Agent navigation rules
 
-- **During normal task execution**: consult the decisions index in the current phase's `CLAUDE.<phase>.md` → read only the `DEC-NNN.md` files for relevant decisions → apply enforcement.
-- **When evaluating or changing a decision**: read `DEC-NNN.md` first, then `DEC-NNN.history.md` → propose changes → update both files → append to the changelog with involvement type.
-- **Never modify** `*.history.md` files except to append to the changelog or to add alternatives when proposing a supersession.
+- **Normal execution**: consult the decisions index in the current phase → read relevant `DEC-NNN.md` files → apply enforcement.
+- **Evaluating or changing a decision**: read `DEC-NNN.md`, then `DEC-NNN.history.md` → propose changes → update both files → append to changelog.
+- **Never modify** `*.history.md` except to append to the changelog or add alternatives when proposing a supersession.
 
 ### Human involvement vocabulary
 
@@ -156,47 +105,22 @@ Phase-specific decision indexes (with trigger conditions) are maintained in each
 
 ### When Recording Decisions
 
-When a significant decision, pattern, or constraint emerges in any phase:
+When a significant decision, pattern, or constraint emerges:
 
-1. Copy [`2-design/decisions/_template.md`](2-design/decisions/_template.md) → `2-design/decisions/DEC-NNN-short-name.md` and fill in all fields.
-2. Copy [`2-design/decisions/_template.history.md`](2-design/decisions/_template.history.md) → `2-design/decisions/DEC-NNN-short-name.history.md` and fill in all fields.
-3. Add an entry to the decisions index of every phase whose trigger conditions are met (`2-design/CLAUDE.design.md`, `3-code/CLAUDE.code.md`, `4-deploy/CLAUDE.deploy.md`).
+1. Create `DEC-NNN-short-name.md` from [`_template.md`](2-design/decisions/_template.md) and fill in all fields.
+2. Create `DEC-NNN-short-name.history.md` from [`_template.history.md`](2-design/decisions/_template.history.md) and fill in all fields.
+3. Add an entry to the decisions index of every phase whose trigger conditions are met.
 
-### When Deprecating or Superseding a Decision
-
-A decision should be deprecated when it is no longer relevant (e.g., the feature it governed was removed) or superseded when a new decision replaces it.
-
-**Never deprecate or supersede silently.** Always surface the proposal to the user first.
-
-1. **Identify the candidate**: note the DEC-NNN ID and the reason it should be retired (no longer applicable, replaced by a better approach, source requirement changed or was deprecated, etc.).
-2. **Read both files**: `DEC-NNN.md` and `DEC-NNN.history.md` to understand the full context.
-3. **Stop and ask the user.** Present:
-   - Why the decision is no longer valid or should be replaced
-   - Whether any existing code, infrastructure, or process still depends on it
-   - The proposed action: deprecate (retire without replacement) or supersede (replace with a new decision)
-4. **Wait for the user's explicit approval** before modifying any file.
-5. **Apply the retirement:**
-
-   **If deprecating:**
-   - In `DEC-NNN.md`: change `**Status**` to `Deprecated`.
-   - In `DEC-NNN.history.md`: append a changelog entry with the date, the change ("Deprecated — [reason]"), and the involvement type.
-   - Remove the decision from every phase index (`CLAUDE.design.md`, `CLAUDE.code.md`, `CLAUDE.deploy.md`).
-
-   **If superseding:**
-   - Create the replacement decision (`DEC-MMM`) following the [recording procedure](#when-recording-decisions) above.
-   - In the old `DEC-NNN.md`: change `**Status**` to `Superseded by DEC-MMM`.
-   - In the old `DEC-NNN.history.md`: append a changelog entry with the date, the change ("Superseded by DEC-MMM — [reason]"), and the involvement type.
-   - In every phase index: replace the old `DEC-NNN` row with the new `DEC-MMM` row (or remove it if the new decision's triggers no longer apply to that phase).
-
-6. **Verify consistency**: confirm no phase index still references the retired decision as active, and no other decision or document links to it without acknowledging its status.
+For deprecation and supersession procedures, see [`CLAUDE.design.md`](2-design/CLAUDE.design.md#deprecating-or-superseding-a-decision).
 
 ---
 
-## Continuous Improvement
+## After Making Changes
 
-This file and all `CLAUDE.*.md` files are living documents. After significant work sessions, Claude should:
+Evaluate whether to:
 
-1. Review if current instructions are still accurate
-2. Identify patterns that could be documented
-3. Suggest improvements or new instruction files
-4. Keep instructions concise and actionable
+1. **Update this file** if project-wide patterns or architecture change significantly.
+2. **Update phase-specific files** (`CLAUDE.<phase>.md`) if phase-specific patterns or conventions are established.
+3. **Create new instruction files** if a workflow becomes complex enough to need dedicated guidance.
+
+Proactively suggest these updates when relevant.

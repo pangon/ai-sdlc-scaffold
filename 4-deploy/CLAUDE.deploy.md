@@ -6,59 +6,46 @@ Phase-specific instructions for the **Deploy** phase. Extends [../CLAUDE.md](../
 
 This phase handles **deployment and operations**. Focus on reliability, repeatability, and observability.
 
-## Directory Structure
-
-```
-4-deploy/
-├── CLAUDE.deploy.md  # This file
-├── infrastructure/   # Infrastructure as Code (IaC)
-├── scripts/          # Deployment and utility scripts
-└── runbooks/         # Operational procedures
-```
-
 ---
 
-## Decisions relevant to the deploy phase
+## Decisions Relevant to This Phase
+
+<!-- Add rows as decisions are recorded. -->
 
 | ID | Title | Trigger |
 |----|-------|---------|
-| [DEC-002](../2-design/decisions/DEC-002-nodejs-version-management.md) | Node.js Version Management | When running any Node.js tooling command (`npm`, `npx`, `node`, `tsc`, etc.) in a deploy script or CI configuration in a directory with a `.nvmrc` file |
 
 ---
 
-## AI Guidelines for This Phase
+## AI Guidelines
 
-### When Writing Infrastructure as Code
+### Infrastructure as Code
 
-1. Check requirements in `1-objectives/` for operational and compliance constraints (REQ-REL, REQ-SEC, REQ-COMP).
-2. Check `2-design/` for infrastructure decisions referenced in the architecture or design docs.
-3. Apply all decisions from the index above whose trigger conditions match.
-4. Write declarative configurations where possible; prefer idempotent resources.
-5. Document resource dependencies in comments or in `infrastructure/README.md`.
-6. Consider cost implications; flag non-obvious cost drivers to the user.
-7. Never hardcode secrets — use environment variables or a secret manager.
+1. Check `2-design/` for architecture design docs.
+2. Apply all decisions from the index above whose trigger conditions match.
+3. Write declarative, idempotent configurations.
+4. Document resource dependencies in comments or in `infrastructure/README.md`.
+5. Flag non-obvious cost drivers to the user.
+6. Never hardcode secrets — use environment variables or a secret manager.
 
-### When Writing Deployment Scripts
+### Deployment Scripts
 
-1. Check the decisions index above before composing any tooling commands.
-2. Make every script idempotent (safe to run multiple times without side effects).
-3. Include error handling: exit on failure, log the failed step, and emit a clear error message.
-4. Log every significant action with a timestamp so failures are diagnosable.
-5. Provide a rollback path or document explicitly why one is not possible.
-6. After writing the script, verify it references the correct artifact paths from `3-code/`.
+1. Check the decisions index above before composing tooling commands.
+2. Make every script idempotent.
+3. Exit on failure, log the failed step, emit a clear error message.
+4. Log every significant action with a timestamp.
+5. Provide a rollback path or document why one is not possible.
 
-### When Writing Runbooks
+### Runbooks
 
-1. Use the runbook template below — do not skip any section.
-2. Reference the specific deployment scripts and infrastructure resources the runbook covers.
+1. Use the runbook template below.
+2. Reference specific deployment scripts and infrastructure resources.
 3. Link back to requirements where relevant (e.g., availability targets from REQ-REL).
-4. After writing a runbook, cross-check the procedure against the actual scripts and infrastructure to confirm the steps are accurate.
+4. Cross-check procedures against actual scripts and infrastructure.
 5. Keep procedures short — move detailed background into a separate document if needed.
 
-### When Recording Decisions
-When a significant decision is made during this phase, record it as explained in [CLAUDE.md — Decisions](../CLAUDE.md#decisions).
-
-Common triggers for new decisions in this phase: secret management strategy, environment promotion rules, rollback procedures, IaC tooling choices, CI/CD pipeline conventions.
+### Common Decision Triggers
+When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.md#when-recording-decisions). Common triggers: secret management, environment promotion rules, rollback procedures, IaC tooling, CI/CD conventions.
 
 ---
 
@@ -73,7 +60,6 @@ Brief description of what this runbook covers.
 ## Prerequisites
 - Required access/permissions
 - Required tools
-- Required information
 
 ## Procedure
 
@@ -86,18 +72,18 @@ Expected outcome: ...
 ### Step 2: [Action]
 ...
 
-## Rollback Procedure
+## Rollback
 Steps to undo if something goes wrong.
 
 ## Troubleshooting
-Common issues and their solutions.
+Common issues and solutions.
 ```
 
 ---
 
 ## Environment Configuration
 
-Document environment-specific configurations:
+<!-- CUSTOMIZE: Fill in environment-specific details. -->
 
 | Environment | Purpose | Notes |
 |-------------|---------|-------|
@@ -111,4 +97,4 @@ Document environment-specific configurations:
 
 - Infrastructure design comes from `2-design/`
 - Deploys build artifacts from `3-code/`
-- Operational requirements (availability, compliance) come from `1-objectives/`
+- Operational requirements come from `1-objectives/`

@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs (uncomment what applies to your stack)
+# node_modules/
+# dist/
+# __pycache__/
+# target/
+# build/

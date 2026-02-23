@@ -6,180 +6,125 @@ Phase-specific instructions for the **Objectives** phase. Extends [../CLAUDE.md]
 
 This phase defines **what** we're building and **why**. Focus on clarity, measurability, and alignment with stakeholder needs.
 
-## Artifact Overview
+## Artifacts
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
-| Stakeholders | [Stakeholders section below](#stakeholders) | Roles with interests and influence — the authority behind all requirements |
-| Goals | [`goals/`](goals/) | High-level outcomes the project must achieve (GOAL-NNN) |
-| User Stories | [`user-stories/`](user-stories/) | User-facing capabilities, expressed from a stakeholder perspective (US-NNN) |
-| Requirements | [`requirements/`](requirements/) | Formal, testable system requirements derived from user stories (REQ-NNN) |
-| Assumptions | [`assumptions/`](assumptions/) | Beliefs taken as true but not yet verified (ASM-NNN) |
+| Stakeholders | [`_stakeholders.md`](_stakeholders.md) | Roles with interests and influence |
+| Goals | [`goals/`](goals/) | High-level outcomes (GOAL-NNN) |
+| User Stories | [`user-stories/`](user-stories/) | User-facing capabilities (US-NNN) |
+| Requirements | [`requirements/`](requirements/) | Testable system requirements (REQ-NNN) |
+| Assumptions | [`assumptions/`](assumptions/) | Beliefs taken as true but not verified (ASM-NNN) |
 | Constraints | [`constraints/`](constraints/) | Hard limits on design and implementation (CON-NNN) |
 
-Each directory holds individual files (one per item) plus a `_template.md`. When the human elicits a new entry through conversation, the AI agent must create the file by following the template, then add a row to the appropriate index table below.
+Each directory holds individual files (one per item) plus a `_template.md`. When a new entry is elicited, create the file from the template and add a row to the appropriate index below.
 
-**Keeping indexes in sync**: the index tables below duplicate key metadata from individual files. Whenever you **modify** an artifact file (e.g., change its Status, Priority, Summary, or Role), you must update the corresponding index row in the same operation. The individual file is the source of truth; the index must mirror it.
+**Index sync rule**: the index tables below duplicate key metadata from individual files. The individual file is the source of truth. When you modify an artifact, update its index row in the same operation.
 
 ### Artifact flow
 
 ```
-                         ┌── Assumptions  (beliefs held while pursuing the goals)
+                         ┌── Assumptions
 Stakeholders → Goals ────┤
-                         ├── Constraints  (hard limits imposed alongside the goals)
-                         │
+                         ├── Constraints
                          └── User Stories → Requirements → Design (phase 2)
 ```
 
 ---
 
-## AI Guidelines for This Phase
+## AI Guidelines
 
-### Recommended elicitation order
-
-Work through artifacts in this order to build a coherent, traceable requirements baseline:
+### Elicitation order
 
 1. **Stakeholders** — identify all roles before writing anything else
-2. **Goals** — capture high-level outcomes, one per stakeholder concern
-3. **Assumptions** — surface beliefs early, while they are cheap to challenge
+2. **Goals** — high-level outcomes, one per stakeholder concern
+3. **Assumptions** — surface beliefs early, while cheap to challenge
 4. **Constraints** — document hard limits before they surprise you in design
-5. **User Stories** — elicit capabilities from the stakeholder perspective
-6. **Requirements** — derive formal, testable requirements from user stories
+5. **User Stories** — capabilities from the stakeholder perspective
+6. **Requirements** — formal, testable, derived from user stories or goals
 
-### When identifying stakeholders
-- Ask: who uses the system? who funds it? who is affected by it? who operates it?
-- Record influence level honestly — it drives conflict resolution
-- Every requirement should trace to at least one stakeholder
-- Add new stakeholders directly to the **Stakeholders** table below
+### Per-artifact guidance
 
-### When defining goals
-- Ask clarifying questions to understand the user's vision
-- Decompose vague ideas into concrete, measurable outcomes
-- Identify potential conflicts between goals early
-- Use MoSCoW priority consistently across all artifacts
-- After creating a goal file, add a row to the **Goals Index** below; after modifying a goal, update its index row to match
+**Stakeholders**: ask who uses, funds, operates, or is affected by the system. Record influence level honestly — it drives conflict resolution. Add entries to [`_stakeholders.md`](_stakeholders.md).
 
-### When writing user stories
-- Use the standard format: "As a [role], I want [capability], so that [benefit]"
-- The role must be an existing stakeholder ID from the **Stakeholders** table below
-- Acceptance criteria at the story level are high-level — detailed criteria live in requirements
-- After creating a user story, add a row to the **User Stories Index** below; after modifying a user story, update its index row to match
+**Goals**: decompose vague ideas into concrete, measurable outcomes. Use MoSCoW priority consistently.
 
-### When writing requirements
-- Requirements are derived from user stories (or directly from goals if no story layer is used)
-- Use clear, testable language — avoid "should be fast" → use "response time < 200ms at p95"
-- Choose the correct ID prefix (REQ-F, REQ-PERF, REQ-SEC, …) — it signals design impact
-- Set `Status: Draft` when first created; mark `Approved` after stakeholder review
-- After creating a requirement, add a row to the **Requirements Index** below; after modifying a requirement, update its index row to match
+**User Stories**: use "As a [role], I want [capability], so that [benefit]." The role must be an existing stakeholder ID. Acceptance criteria at the story level are high-level; detailed criteria live in requirements.
 
-### When documenting assumptions
-- An assumption is something believed true but not yet verified — distinct from a constraint
-- Always record the risk level: what happens if this assumption is wrong?
-- Provide a verification plan when possible
-- After creating an assumption file, add a row to the **Assumptions Index** below; after modifying an assumption, update its index row to match
+**Requirements**: use clear, testable language (not "should be fast" — use "response time < 200ms at p95"). Choose the correct ID prefix. Set `Status: Draft` when first created; only a human marks `Approved`.
 
-### When documenting constraints
-- Consider technical constraints (platforms, languages, dependencies)
-- Consider business constraints (budget, timeline, team size)
-- Consider operational constraints (hosting, maintenance, compliance)
-- After creating a constraint file, add a row to the **Constraints Index** below; after modifying a constraint, update its index row to match
+**ID prefixes**: `REQ-F` Functional, `REQ-PERF` Performance, `REQ-SEC` Security, `REQ-REL` Reliability, `REQ-USA` Usability, `REQ-MNT` Maintainability, `REQ-PORT` Portability, `REQ-SCA` Scalability, `REQ-COMP` Compliance.
 
-### When a requirement conflict is detected
+**Assumptions**: always record the risk level (what happens if wrong?) and a verification plan when possible.
 
-A conflict exists when two or more requirements cannot both be satisfied as stated — they impose mutually exclusive constraints on behavior, resources, or design.
+**Constraints**: consider technical (platforms, dependencies), business (budget, timeline, team size), and operational (hosting, compliance) categories.
 
-**Never resolve a conflict silently.** Influence levels are a tiebreaker of last resort, not a substitute for human judgement. Always surface the conflict before taking any action.
+### Conflict resolution
 
-1. **Identify** the conflict: note the IDs of the conflicting requirements, their source stakeholders and influence levels, and a one-sentence description of why they are incompatible.
-2. **Stop and ask the user.** Present:
-   - What makes the requirements incompatible
-   - The stakeholder behind each, with their influence level
-   - Two or more concrete resolution options (e.g., relax REQ-A, revise REQ-B, accept a constraint, defer one to a later phase)
-   - A recommended option if one is clearly better, with explicit rationale
-3. **Wait for the user's explicit decision** before modifying any file.
-4. **Apply the resolution:**
-   - Update the affected `REQ-NNN.md` file(s) to reflect the outcome unambiguously; update the Requirements Index.
-   - If dependent user stories or goals are affected, update those too.
-   - If the resolution imposes a design constraint or convention that will recur, record it as a decision in `2-design/decisions/` — follow the procedure in [`2-design/CLAUDE.design.md`](../2-design/CLAUDE.design.md).
-5. **Never leave the artifacts in a conflicting state** — after the user decides, every affected file must reflect the outcome.
+A conflict exists when two or more requirements cannot both be satisfied as stated.
+
+**Never resolve a conflict silently.** Always surface it before acting.
+
+1. **Identify**: note conflicting requirement IDs, source stakeholders, influence levels, and why they are incompatible.
+2. **Ask the user**: present what makes them incompatible, stakeholders and influence levels, two or more resolution options, and a recommended option if one is clearly better.
+3. **Wait for explicit approval** before modifying any file.
+4. **Apply**: update affected `REQ-NNN.md` files and index rows. Update dependent user stories or goals if affected. Record a design decision if the resolution imposes a recurring constraint.
+5. **Verify**: no artifacts remain in a conflicting state after resolution.
+
+### Artifact deprecation
+
+When an artifact (user story, requirement, assumption, constraint) is no longer relevant:
+
+1. Propose deprecation to the user with rationale and downstream impact.
+2. Wait for explicit approval.
+3. Change Status to `Deprecated` in the artifact file. Update its index row.
+4. Check for dependent artifacts — flag any that reference the deprecated item.
 
 ---
 
 ## Linking to Other Phases
 
 - Goals, user stories, and requirements are referenced in design documents (`2-design/`)
-- Acceptance criteria from requirements inform test cases (`3-code/<codebase>/tests/`)
+- Acceptance criteria inform test cases (`3-code/`)
 - Constraints and assumptions influence infrastructure decisions (`4-deploy/`)
-- Invalidated assumptions should trigger a review of dependent requirements and design decisions; when this happen, ask the human for direction if there isn't any previously defined procedure to follow
-
----
-
-## Stakeholders
-
-Everyone with a stake in the system: those who use it, fund it, maintain it, or are affected by it. Stakeholders are the authority behind goals, user stories, and requirements — every requirement should ultimately trace back to a stakeholder need.
-
-**Influence levels**:
-- **High** — can approve or veto decisions; priority conflicts are resolved in their favor
-- **Medium** — consulted during requirements review; their concerns are addressed but may be overruled
-- **Low** — informed of decisions; their needs are considered but not blocking
-
-When a conflict arises between requirements, follow the **[conflict resolution procedure](#when-a-requirement-conflict-is-detected)** in the AI Guidelines above. Influence levels inform the options presented to the user but do not replace human decision-making.
-
-| ID | Role | Description | Interests | Influence |
-|----|------|-------------|-----------|-----------|
-| STK-001 | Placeholder Role | Replace with your first stakeholder role | What they care about | High / Medium / Low |
+- Invalidated assumptions should trigger a review of dependent artifacts; ask the human for direction
 
 ---
 
 ## Goals Index
 
-> **Agent navigation**: scan this table to identify which goal files are relevant to your task. Read only the files you need — do not open all of them.
-
 | File | ID | Priority | Summary |
 |------|----|----------|---------|
-| [GOAL-001-placeholder.md](goals/GOAL-001-placeholder.md) | GOAL-001 | Must-have | Placeholder — replace with your first project goal |
+<!-- Add rows as goals are created -->
 
 ---
 
 ## User Stories Index
 
-> **Agent navigation**: scan this table to identify which user stories are relevant to your task. The Role column helps narrow down stories by stakeholder.
-
-| File | ID | Role | Priority | Summary |
-|------|----|------|----------|---------|
-| [US-001-placeholder.md](user-stories/US-001-placeholder.md) | US-001 | [Role] | Must-have | Placeholder — replace with your first user story |
+| File | ID | Role | Priority | Status | Summary |
+|------|----|------|----------|--------|---------|
+<!-- Add rows as user stories are created -->
 
 ---
 
 ## Requirements Index
 
-> **Agent navigation**: scan this table to identify which requirement files are relevant to your task. The Type column distinguishes functional from non-functional entries and their subcategory.
->
-> **ID prefixes**: `REQ-F` Functional · `REQ-PERF` Performance · `REQ-SEC` Security · `REQ-REL` Reliability · `REQ-USA` Usability · `REQ-MNT` Maintainability · `REQ-PORT` Portability · `REQ-SCA` Scalability · `REQ-COMP` Compliance
-
-| File | ID | Type | Status | Priority | Summary |
-|------|----|------|--------|----------|---------|
-| [REQ-F001-placeholder.md](requirements/REQ-F001-placeholder.md) | REQ-F001 | Functional | Draft | Must-have | Placeholder functional requirement |
-| [REQ-PERF001-placeholder.md](requirements/REQ-PERF001-placeholder.md) | REQ-PERF001 | Performance | Draft | Must-have | Placeholder performance requirement |
+| File | ID | Type | Priority | Status | Summary |
+|------|----|------|----------|--------|---------|
+<!-- Add rows as requirements are created -->
 
 ---
 
 ## Assumptions Index
 
-> **Agent navigation**: scan this table before making design or implementation decisions — an invalidated assumption may change what is possible.
-
 | File | ID | Category | Status | Risk | Summary |
 |------|----|----------|--------|------|---------|
-| [ASM-001-placeholder.md](assumptions/ASM-001-placeholder.md) | ASM-001 | — | Unverified | High | Placeholder — replace with your first assumption |
+<!-- Add rows as assumptions are created -->
 
 ---
 
 ## Constraints Index
 
-> **Agent navigation**: scan this table to identify which constraint files are relevant to your task. The Category column distinguishes technical, business, and operational entries.
-
 | File | ID | Category | Status | Summary |
 |------|----|----------|--------|---------|
-| [CON-001-technical.md](constraints/CON-001-technical.md) | CON-001 | Technical | Active | Placeholder technical constraint |
-| [CON-002-business.md](constraints/CON-002-business.md) | CON-002 | Business | Active | Placeholder business constraint |
-| [CON-003-operational.md](constraints/CON-003-operational.md) | CON-003 | Operational | Active | Placeholder operational constraint |
+<!-- Add rows as constraints are created -->

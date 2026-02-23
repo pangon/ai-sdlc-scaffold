@@ -1,16 +1,21 @@
-# ASM-NNN: [Short Title]
-
-<!-- Copy this file, rename it to ASM-NNN-short-title.md, fill in the fields. -->
-<!-- Add a row to the Assumptions Index in CLAUDE.objectives.md after saving. -->
-
-**Statement**: We assume that [statement of what is believed to be true].
+# ASM-NNN: [Title]
 
 **Category**: User | Environment | Technology | Business | Regulatory
 **Status**: Unverified | Verified | Invalidated
-**Risk if wrong**: High / Medium / Low — [brief description of consequence]
+**Risk if wrong**: High | Medium | Low — [what happens if this assumption is wrong]
 
-**Rationale**: Why we are making this assumption.
+## Statement
 
-**Verification plan**: How and when this assumption will be validated (if applicable).
+[What is being assumed]
 
-**Related artifacts**: [links to requirements, constraints, or decisions that depend on this assumption]
+## Rationale
+
+[Why this is believed to be true]
+
+## Verification Plan
+
+[How and when this will be verified]
+
+## Related Artifacts
+
+- -
