@@ -3,6 +3,7 @@
 **Status**: Active
 **Category**: Convention
 **Scope**: system-wide
+**Source**: n/a
 **Last updated**: 2026-02-22
 
 ## Context
