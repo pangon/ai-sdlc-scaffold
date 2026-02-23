@@ -80,7 +80,7 @@ Artifacts link to each other explicitly:
 Stakeholders → Goals → User Stories → Requirements → Decisions → Tasks → Code → Tests
 ```
 
-Every file has `Source` and `Source stakeholder` fields. Indexes in the phase instruction files provide navigable summaries.
+Artifacts carry `Source` and/or `Source stakeholder` fields where applicable, linking each item back to its origin in the chain. Indexes in the phase instruction files provide navigable summaries.
 
 ### Graduated Safeguards
 
