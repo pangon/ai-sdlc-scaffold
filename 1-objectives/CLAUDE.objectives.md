@@ -10,7 +10,7 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
-| Stakeholders | [`_stakeholders.md`](_stakeholders.md) | Roles with interests and influence |
+| Stakeholders | [`stakeholders.md`](stakeholders.md) | Roles with interests and influence |
 | Goals | [`goals/`](goals/) | High-level outcomes (GOAL-NNN) |
 | User Stories | [`user-stories/`](user-stories/) | User-facing capabilities (US-NNN) |
 | Requirements | [`requirements/`](requirements/) | Testable system requirements (REQ-NNN) |
@@ -45,7 +45,7 @@ Stakeholders → Goals ────┤
 
 ### Per-artifact guidance
 
-**Stakeholders**: ask who uses, funds, operates, or is affected by the system. Record influence level honestly — it drives conflict resolution. Add entries to [`_stakeholders.md`](_stakeholders.md).
+**Stakeholders**: ask who uses, funds, operates, or is affected by the system. Record influence level honestly — it drives conflict resolution. Add entries to [`stakeholders.md`](stakeholders.md).
 
 **Goals**: decompose vague ideas into concrete, measurable outcomes. Use MoSCoW priority consistently.
 

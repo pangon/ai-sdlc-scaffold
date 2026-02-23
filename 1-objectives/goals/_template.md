@@ -2,7 +2,7 @@
 
 **Description**: [What we want to achieve and why it matters]
 **Priority**: Must-have | Should-have | Could-have | Won't-have
-**Source stakeholder**: [STK-NNN](../_stakeholders.md)
+**Source stakeholder**: [STK-NNN](../stakeholders.md)
 
 ## Success Criteria
 

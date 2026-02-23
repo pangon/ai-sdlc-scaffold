@@ -4,7 +4,7 @@
 **Status**: Draft | Approved | Implemented | Deprecated
 **Priority**: Must-have | Should-have | Could-have | Won't-have
 **Source**: [US-NNN](../user-stories/US-NNN-name.md) or [GOAL-NNN](../goals/GOAL-NNN-name.md)
-**Source stakeholder**: [STK-NNN](../_stakeholders.md)
+**Source stakeholder**: [STK-NNN](../stakeholders.md)
 
 ## Description
 

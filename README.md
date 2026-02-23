@@ -24,7 +24,7 @@ The central paradigm is **everything-in-repo**: objectives, requirements, archit
 │
 ├── 1-objectives/                     # WHAT and WHY
 │   ├── CLAUDE.objectives.md          # Phase instructions and artifact indexes
-│   ├── _stakeholders.md              # Stakeholder definitions
+│   ├── stakeholders.md               # Stakeholder definitions
 │   ├── goals/                        # GOAL-NNN-name.md + _template.md
 │   ├── user-stories/                 # US-NNN-name.md + _template.md
 │   ├── requirements/                 # REQ-{PREFIX}NNN-name.md + _template.md

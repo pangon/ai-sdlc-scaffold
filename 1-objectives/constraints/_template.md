@@ -2,7 +2,7 @@
 
 **Category**: Technical | Business | Operational
 **Status**: Active | Lifted
-**Source stakeholder**: [STK-NNN](../_stakeholders.md)
+**Source stakeholder**: [STK-NNN](../stakeholders.md)
 
 ## Description
 

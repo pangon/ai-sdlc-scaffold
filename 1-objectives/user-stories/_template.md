@@ -4,7 +4,7 @@
 
 **Status**: Draft | Approved | Implemented | Deprecated
 **Priority**: Must-have | Should-have | Could-have | Won't-have
-**Source stakeholder**: [STK-NNN](../_stakeholders.md)
+**Source stakeholder**: [STK-NNN](../stakeholders.md)
 **Related goal**: [GOAL-NNN](../goals/GOAL-NNN-name.md)
 
 ## Acceptance Criteria
