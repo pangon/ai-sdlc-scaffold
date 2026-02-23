@@ -48,7 +48,7 @@ The central paradigm is **everything-in-repo**: objectives, requirements, archit
     ├── CLAUDE.deploy.md              # Phase instructions
     ├── infrastructure/               # Infrastructure as Code
     ├── scripts/                      # Deployment scripts
-    └── runbooks/                     # Operational procedures
+    └── runbooks/                     # Operational procedures + _template.md
 ```
 
 ## Key Concepts

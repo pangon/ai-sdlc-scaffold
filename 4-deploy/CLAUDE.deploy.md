@@ -38,7 +38,7 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 
 ### Runbooks
 
-1. Use the runbook template below.
+1. Use the [runbook template](runbooks/_template.md).
 2. Reference specific deployment scripts and infrastructure resources.
 3. Link back to requirements where relevant (e.g., availability targets from REQ-REL).
 4. Cross-check procedures against actual scripts and infrastructure.
@@ -46,38 +46,6 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 
 ### Common Decision Triggers
 When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.md#when-recording-decisions). Common triggers: secret management, environment promotion rules, rollback procedures, IaC tooling, CI/CD conventions.
-
----
-
-## Runbook Template
-
-```markdown
-# Runbook: [Operation Name]
-
-## Overview
-Brief description of what this runbook covers.
-
-## Prerequisites
-- Required access/permissions
-- Required tools
-
-## Procedure
-
-### Step 1: [Action]
-```bash
-# command to run
-```
-Expected outcome: ...
-
-### Step 2: [Action]
-...
-
-## Rollback
-Steps to undo if something goes wrong.
-
-## Troubleshooting
-Common issues and solutions.
-```
 
 ---
 
