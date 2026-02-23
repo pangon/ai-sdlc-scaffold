@@ -68,12 +68,13 @@ When invoking any command, apply active decisions from the index above whose tri
 ### Implementing Features
 1. Locate the task in [`tasks.md`](tasks.md); read every `REQ-NNN` listed in its `Req` column before writing code
 2. Review relevant design docs in `2-design/`
-3. Update status to `In Progress` in `tasks.md`
-4. If you anticipate a significant divergence from the design, **stop and follow the [design gap procedure](#design-gaps)** before coding
-5. Check relevant decisions from the index above
-6. Implement with tests
-7. After implementing: evaluate whether any divergence from the design occurred and follow the design gap procedure if needed
-8. Update status to `Done` in `tasks.md`
+3. If the task touches infrastructure as code (Terraform, CloudFormation, Dockerfiles, CI/CD pipelines, Helm charts, etc.), also read [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md) and follow its instructions alongside these
+4. Update status to `In Progress` in `tasks.md`
+5. If you anticipate a significant divergence from the design, **stop and follow the [design gap procedure](#design-gaps)** before coding
+6. Check relevant decisions from the index above
+7. Implement with tests
+8. After implementing: evaluate whether any divergence from the design occurred and follow the design gap procedure if needed
+9. Update status to `Done` in `tasks.md`
 
 ### Design Gaps
 
@@ -110,4 +111,4 @@ All development tasks are tracked in [`tasks.md`](tasks.md).
 
 - Implementation follows designs in `2-design/`
 - Tests verify requirements from `1-objectives/`
-- Infrastructure code goes in `4-deploy/`
+- Infrastructure code goes in `4-deploy/`; when a coding task modifies IaC, the deploy phase instructions ([`CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md)) apply as well
