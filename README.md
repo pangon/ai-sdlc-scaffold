@@ -112,7 +112,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 
 | Skill | Purpose |
 |-------|---------|
-| `/init` | Guided project initialization — walks through all customization points: project description, stakeholders, components, environments, example decision review, and tech-stack adjustments. |
+| `/init` | Guided project initialization — walks through all customization points: project description, and tech-stack adjustments. |
 
 ### Objectives Phase
 
@@ -125,7 +125,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 
 | Skill | Purpose |
 |-------|---------|
-| `/design` | Draft or update architecture, data model, or API design documents based on approved requirements. References requirements by ID for traceability. |
+| `/design` | Draft or update architecture, data model, or API design documents based on approved requirements. Define components, tech-stack, and environments. References requirements by ID for traceability. |
 | `/decide` | Record, review, deprecate, or supersede design decisions. Creates both `DEC-NNN.md` and `DEC-NNN.history.md`, updates all phase indexes. |
 
 ### Code Phase
@@ -153,12 +153,12 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 ### Typical Workflow
 
 ```
-/init                ← set up project: description, stakeholders, components, environments
+/init                ← set up project: description
 /elicit              ← define stakeholders, goals, requirements (Draft)
 /review-objectives   ← check completeness
                      ← human approves artifacts (Draft → Approved)
 /phase-gate design   ← verify gate
-/design              ← draft architecture, data model, API
+/design              ← draft architecture, components, data model, API, environments
 /decide              ← capture decisions as they emerge
 /phase-gate code     ← verify gate
 /plan-tasks          ← generate task backlog

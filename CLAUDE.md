@@ -14,6 +14,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 This repository uses a structured, AI-first development lifecycle. All project knowledge — objectives, design, decisions, tasks — lives alongside the source code. See [README.md](README.md) for the full directory layout.
 
+### Current State
+
+The project is just the base scaffold, and has not yet been inizialized. The repository contains the AI SDLC framework (phase directories, templates, automation skills) ready to be populated starting from the Objectives phase, after the inizialization has been done.
+
 ---
 
 ## Phase-Specific Instructions
