@@ -17,10 +17,27 @@ For a deeper discussion of the rationale, design choices, and traceability model
 
 ## Quick Start
 
-1. **Copy this repository** as the starting point for a new project
-2. **Run `/init`**: the initialization skill walks you through all customization points — project description, stakeholders, components, environments, and example decision review.
-3. **Follow the phases**: Objectives → Design → Code → Deploy. Each phase has a `CLAUDE.<phase>.md` with instructions and indexes that guide the agent automatically.
-4. **Use Claude skills**: type `/` followed by a skill name to automate each phase — from requirements gathering to coding task execution — without manual prompting. See the [Skills](#skills) section below.
+### Option A — Use `degit` (recommended)
+
+```bash
+npx degit pangon/ai-sdlc-scaffold my-project
+cd my-project
+git init && git add -A && git commit -m "Initial scaffold"
+```
+
+[`degit`](https://github.com/Rich-Harris/degit) copies the repository contents without carrying over git history, giving you a clean starting point. It requires Node.js but does not install any dependency in your project.
+
+### Option B — Manual copy
+
+1. Download or clone this repository.
+2. Copy all files and directories (including hidden ones like `.claude/`) into your new project folder.
+3. Remove the `.git/` directory to start with a fresh history.
+4. Initialize a new repository: `git init && git add -A && git commit -m "Initial scaffold"`.
+
+### Then
+
+1. **Run `/init`** in Claude Code: the initialization skill walks you through all customization points — project description, stakeholders, components, environments, and example decision review.
+2. **Work through the phases** (Objectives → Design → Code → Deploy) using the built-in [skills](#skills) — type `/` followed by a skill name to automate each step, from requirements gathering to deployment. Alternatively, you can use custom prompts: the `CLAUDE.<phase>.md` hierarchy provides all the context the agent needs to operate correctly in each phase.
 
 ## Structure
 
@@ -78,17 +95,14 @@ For a deeper discussion of the rationale, design choices, and traceability model
 - **Two-file decisions**: active record (`DEC-NNN.md`) for enforcement, history file (`DEC-NNN.history.md`) for audit trail. Indexed per phase with trigger conditions.
 - **Context-window efficiency**: hierarchical instructions, phase-level indexes, and the active/history split minimize how many tokens an agent needs to load.
 
-## Customization Checklist
+## Customization
 
-When starting a new project from this scaffold:
+The scaffold is designed to be customized progressively as each phase produces its outputs — not all at once during initialization.
 
-Run `/init` to complete these steps interactively, or do them manually:
-
-- [ ] Fill in the project overview in `CLAUDE.md` (search for `<!-- CUSTOMIZE -->`)
-- [ ] Define stakeholders in `1-objectives/stakeholders.md`
-- [ ] Customize `3-code/CLAUDE.code.md` with component guidelines and build commands
-- [ ] Review the example decision (`DEC-001`) — adapt or replace it for your project
-- [ ] Review all `CLAUDE.*.md` files for your tech stack
+- **At project start** (`/init`): fill in the project overview in `CLAUDE.md`.
+- **During the Objectives phase** (`/elicit`): define stakeholders, goals, requirements, and constraints.
+- **During the Design phase** (`/design`, `/decide`): define architecture, data model, API design, and record stack decisions, and remove the example decision (`DEC-001`).
+- **At the start of the Code phase** (`/plan-tasks`): customize `3-code/CLAUDE.code.md` with component guidelines and build commands (the stack is known by now).
 
 ## Skills
 
