@@ -31,7 +31,7 @@
 | ID | Task | Priority | Status | Req | Dependencies | Updated | Notes |
 |----|------|----------|--------|-----|--------------|---------|-------|
 
-<!-- CUSTOMIZE: Add sections per component: ### Backend, ### Frontend, etc. -->
+<!-- Add sections per component: ### Backend, ### Frontend, etc. -->
 
 ---
 

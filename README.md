@@ -18,9 +18,9 @@ For a deeper discussion of the rationale, design choices, and traceability model
 ## Quick Start
 
 1. **Copy this repository** as the starting point for a new project
-2. **Customize `CLAUDE.md`**: fill in the project overview (look for `<!-- CUSTOMIZE -->` markers)
+2. **Run `/init`**: the initialization skill walks you through all customization points — project description, stakeholders, components, environments, and example decision review.
 3. **Follow the phases**: Objectives → Design → Code → Deploy. Each phase has a `CLAUDE.<phase>.md` with instructions and indexes that guide the agent automatically.
-4. **Use Claude skills** *(coming soon)*: dedicated skills will automate each phase — from requirements gathering to coding task execution — so you can navigate the lifecycle without manual prompting.
+4. **Use Claude skills**: type `/` followed by a skill name to automate each phase — from requirements gathering to coding task execution — without manual prompting. See the [Skills](#skills) section below.
 
 ## Structure
 
@@ -50,11 +50,25 @@ For a deeper discussion of the rationale, design choices, and traceability model
 │   ├── tasks.md                      # Development task tracker
 │   └── <codebase>/                   # One or more named codebases
 │
-└── 4-deploy/                         # SHIP
-    ├── CLAUDE.deploy.md              # Phase instructions
-    ├── infrastructure/               # Infrastructure as Code
-    ├── scripts/                      # Deployment scripts
-    └── runbooks/                     # Operational procedures + _template.md
+├── 4-deploy/                         # SHIP
+│   ├── CLAUDE.deploy.md              # Phase instructions
+│   ├── infrastructure/               # Infrastructure as Code
+│   ├── scripts/                      # Deployment scripts
+│   └── runbooks/                     # Operational procedures + _template.md
+│
+└── .claude/skills/                   # Claude Code skills (automation layer)
+    ├── init.md                       # /init — guided project initialization
+    ├── elicit.md                     # /elicit — requirements elicitation
+    ├── review-objectives.md          # /review-objectives — objectives dashboard
+    ├── design.md                     # /design — design documents
+    ├── decide.md                     # /decide — decision management
+    ├── plan-tasks.md                 # /plan-tasks — task generation
+    ├── implement.md                  # /implement — task execution
+    ├── fix.md                        # /fix — bug-fix workflow
+    ├── deploy.md                     # /deploy — deployment artifacts
+    ├── status.md                     # /status — project dashboard
+    ├── phase-gate.md                 # /phase-gate — gate checks
+    └── trace.md                      # /trace — traceability walker
 ```
 
 ## Key Concepts
@@ -68,16 +82,79 @@ For a deeper discussion of the rationale, design choices, and traceability model
 
 When starting a new project from this scaffold:
 
+Run `/init` to complete these steps interactively, or do them manually:
+
 - [ ] Fill in the project overview in `CLAUDE.md` (search for `<!-- CUSTOMIZE -->`)
 - [ ] Define stakeholders in `1-objectives/stakeholders.md`
 - [ ] Customize `3-code/CLAUDE.code.md` with component guidelines and build commands
 - [ ] Review the example decision (`DEC-001`) — adapt or replace it for your project
 - [ ] Review all `CLAUDE.*.md` files for your tech stack
 
-<!-- TODO: once automation skills are available, add a "Skills" section listing
-     each skill (e.g. requirements gathering, task execution) with usage examples. -->
+## Skills
 
-> **Note:** An automation layer of Claude skills is under active development. When ready, it will provide dedicated commands for requirements gathering, task planning, coding execution, and phase-gate navigation — reducing custom prompting to a minimum.
+Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude Code to invoke them. Each skill reads the root `CLAUDE.md` and the relevant phase instructions before acting.
+
+### Setup
+
+| Skill | Purpose |
+|-------|---------|
+| `/init` | Guided project initialization — walks through all customization points: project description, stakeholders, components, environments, example decision review, and tech-stack adjustments. |
+
+### Objectives Phase
+
+| Skill | Purpose |
+|-------|---------|
+| `/elicit` | Interactive requirements elicitation — guides you through stakeholders, goals, assumptions, constraints, user stories, and requirements in the prescribed order. Creates artifacts from templates, updates indexes. |
+| `/review-objectives` | Read-only dashboard of all objectives artifacts. Shows counts by status, traceability gaps, conflicts, and Objectives→Design gate readiness. |
+
+### Design Phase
+
+| Skill | Purpose |
+|-------|---------|
+| `/design` | Draft or update architecture, data model, or API design documents based on approved requirements. References requirements by ID for traceability. |
+| `/decide` | Record, review, deprecate, or supersede design decisions. Creates both `DEC-NNN.md` and `DEC-NNN.history.md`, updates all phase indexes. |
+
+### Code Phase
+
+| Skill | Purpose |
+|-------|---------|
+| `/plan-tasks` | Generate development tasks from approved requirements and design. Populates `tasks.md` with IDs, priorities, requirement links, and an execution plan. |
+| `/implement` | Execute the next task (or a specified `TASK-NNN`) following the full procedure: read requirements, check decisions, implement with tests, handle design gaps, update status. |
+| `/fix` | Structured bug-fix workflow: write failing test, fix, check for same pattern elsewhere, ask before fixing other occurrences. |
+
+### Deploy Phase
+
+| Skill | Purpose |
+|-------|---------|
+| `/deploy` | Generate or update IaC, deployment scripts, and runbooks. Flags cost drivers, enforces idempotency, links to requirements. |
+
+### Cross-Phase
+
+| Skill | Purpose |
+|-------|---------|
+| `/status` | Project-wide dashboard: artifact counts per phase, task progress, decision summary, and phase-gate readiness for every transition. |
+| `/phase-gate` | Check preconditions for a specific phase transition (e.g., `/phase-gate design`). Reports MET/NOT MET per precondition with evidence. Gates are advisory — warns but proceeds on user confirmation. |
+| `/trace` | Given any artifact ID, walks the traceability chain upstream (why does this exist?) and downstream (what depends on this?). Reports gaps and broken links. |
+
+### Typical Workflow
+
+```
+/init                ← set up project: description, stakeholders, components, environments
+/elicit              ← define stakeholders, goals, requirements (Draft)
+/review-objectives   ← check completeness
+                     ← human approves artifacts (Draft → Approved)
+/phase-gate design   ← verify gate
+/design              ← draft architecture, data model, API
+/decide              ← capture decisions as they emerge
+/phase-gate code     ← verify gate
+/plan-tasks          ← generate task backlog
+/implement           ← execute tasks one by one
+/fix                 ← handle bugs
+/phase-gate deploy   ← verify gate
+/deploy              ← generate deployment artifacts
+/status              ← anytime: full project overview
+/trace REQ-F001      ← anytime: follow dependency chains
+```
 
 ## License
 

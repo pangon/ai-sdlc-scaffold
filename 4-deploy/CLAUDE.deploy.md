@@ -51,7 +51,7 @@ When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.
 
 ## Environment Configuration
 
-<!-- CUSTOMIZE: Fill in environment-specific details. -->
+<!-- Fill in environment-specific details. -->
 
 | Environment | Purpose | Notes |
 |-------------|---------|-------|

@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ## Project Overview
 
-<!-- CUSTOMIZE: Replace this section with a description of your project. -->
+<!-- Replace this section with a description of your project. -->
 
 This repository uses a structured, AI-first development lifecycle. All project knowledge — objectives, design, decisions, tasks — lives alongside the source code. See [README.md](README.md) for the full directory layout.
 

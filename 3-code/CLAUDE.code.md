@@ -20,7 +20,7 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ## Component Guidelines
 
-<!-- CUSTOMIZE: Add an entry for each component/codebase. Copy the template block below. -->
+<!-- Add an entry for each component/codebase. Copy the template block below. -->
 
 Each component must have a brief description here. Update it when architecture or responsibilities change. If a description drifts from the implementation, correct it before continuing work.
 
