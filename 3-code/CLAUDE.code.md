@@ -10,11 +10,9 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ## Decisions Relevant to This Phase
 
-<!-- Add rows as decisions are recorded. -->
-
 | ID | Title | Trigger |
 |----|-------|---------|
-| [DEC-001](../2-design/decisions/DEC-001-error-format.md) | Error Response Format | When implementing error handling or returning errors from any component |
+<!-- Add rows as decisions are recorded. -->
 
 ---
 

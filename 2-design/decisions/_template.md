@@ -1,9 +1,13 @@
 # DEC-NNN: [Title]
 
 **Status**: Active | Deprecated | Superseded by DEC-XXX
+
 **Category**: Architecture | Convention | Process | Data
+
 **Scope**: system-wide | backend | frontend | infra | [codebase-name]
+
 **Source**: [REQ-NNN](../../1-objectives/requirements/REQ-NNN-*.md), [GOAL-NNN](../../1-objectives/goals/GOAL-NNN-*.md), [CON-NNN](../../1-objectives/constraints/CON-NNN-*.md), or n/a
+
 **Last updated**: YYYY-MM-DD
 
 ## Context

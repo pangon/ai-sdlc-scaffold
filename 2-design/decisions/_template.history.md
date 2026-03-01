@@ -22,6 +22,7 @@ Trade-offs explicitly accepted. Conditions that would invalidate this reasoning.
 ## Human involvement
 
 **Type**: [see vocabulary in `CLAUDE.md`](../../CLAUDE.md#human-involvement-vocabulary)
+
 **Notes**: [optional — who was involved, any dissent, caveats]
 
 ## Changelog

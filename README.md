@@ -101,7 +101,7 @@ The scaffold is designed to be customized progressively as each phase produces i
 
 - **At project start** (`/init`): fill in the project overview in `CLAUDE.md`.
 - **During the Objectives phase** (`/elicit`): define stakeholders, goals, requirements, and constraints.
-- **During the Design phase** (`/design`, `/decide`): define architecture, data model, API design, and record stack decisions, and remove the example decision (`DEC-001`).
+- **During the Design phase** (`/design`, `/decide`): define architecture, data model, API design, and record stack decisions.
 - **At the start of the Code phase** (`/plan-tasks`): customize `3-code/CLAUDE.code.md` with component guidelines and build commands (the stack is known by now).
 
 ## Skills

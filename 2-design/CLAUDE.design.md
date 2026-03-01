@@ -19,11 +19,9 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 
 ## Decisions Relevant to This Phase
 
-<!-- Add rows as decisions are recorded. -->
-
 | ID | Title | Trigger |
 |----|-------|---------|
-| [DEC-001](decisions/DEC-001-error-format.md) | Error Response Format | When specifying error responses for any API or interface |
+<!-- Add rows as decisions are recorded. -->
 
 ---
 
