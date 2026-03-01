@@ -1,7 +1,9 @@
 # ASM-NNN: [Title]
 
 **Category**: User | Environment | Technology | Business | Regulatory
+
 **Status**: Unverified | Verified | Invalidated
+
 **Risk if wrong**: High | Medium | Low — [what happens if this assumption is wrong]
 
 ## Statement
@@ -18,4 +20,4 @@
 
 ## Related Artifacts
 
-- -
+- [GOAL-NNN](../goals/GOAL-NNN-name.md), [REQ-NNN](../requirements/REQ-NNN-name.md)

@@ -1,7 +1,9 @@
 # CON-NNN: [Title]
 
 **Category**: Technical | Business | Operational
+
 **Status**: Active | Lifted
+
 **Source stakeholder**: [STK-NNN](../stakeholders.md)
 
 ## Description
