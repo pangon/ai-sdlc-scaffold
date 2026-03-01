@@ -1,6 +1,7 @@
-# Skill: /status
-
-Project-wide status dashboard across all phases.
+---
+name: SDLC-status
+description: Project-wide status dashboard across all SDLC phases. Use when the user wants an overview of the entire project state. Aggregates artifact counts, statuses, and phase gate readiness into a single report.
+---
 
 ## Instructions
 
@@ -59,9 +60,9 @@ You are generating a comprehensive status report for the entire SDLC project.
 
 #### Phase Gates
 For each transition, state whether preconditions are met:
-- [ ] Objectives → Design: at least one goal Approved; at least one requirement Approved; stakeholders defined
-- [ ] Design → Code: `architecture.md` has content; at least one requirement has a corresponding task
-- [ ] Code → Deploy: at least one task Done
+- [ ] Objectives to Design: at least one goal Approved; at least one requirement Approved; stakeholders defined
+- [ ] Design to Code: `architecture.md` has content; at least one requirement has a corresponding task
+- [ ] Code to Deploy: at least one task Done
 
 #### Suggestions
 Based on the current state, suggest the most impactful next actions (e.g., "Approve draft requirements to unblock Design phase", "Create tasks for approved requirements").
