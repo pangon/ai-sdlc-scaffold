@@ -12,6 +12,6 @@ Everyone with a stake in the system: those who use it, fund it, maintain it, or 
 
 | ID | Role | Description | Interests | Influence |
 |----|------|-------------|-----------|-----------|
-| STK-001 | Placeholder Role | Replace with your first stakeholder | What they care about | High / Medium / Low |
+| STK-placeholder | Placeholder Role | Replace with your first stakeholder | What they care about | High / Medium / Low |
 <!-- Replace the placeholder row with your actual stakeholders. -->
-<!-- Add rows as stakeholders are created -->
+<!-- ID format: STK-kebab-name (e.g., STK-end-user, STK-product-owner) -->

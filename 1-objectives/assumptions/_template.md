@@ -1,4 +1,4 @@
-# ASM-NNN: [Title]
+# ASM-[kebab-name]: [Title]
 
 **Category**: User | Environment | Technology | Business | Regulatory
 
@@ -20,4 +20,4 @@
 
 ## Related Artifacts
 
-- [GOAL-NNN](../goals/GOAL-NNN-name.md), [REQ-NNN](../requirements/REQ-NNN-name.md)
+- [GOAL-kebab-name](../goals/GOAL-kebab-name.md), [REQ-CLASS-kebab-name](../requirements/REQ-CLASS-kebab-name.md)

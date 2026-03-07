@@ -56,15 +56,15 @@ Each phase has:
 Several structural choices exist specifically to reduce token consumption:
 
 - **Hierarchical instructions** (`CLAUDE.md` → `CLAUDE.<phase>.md`): agents load only the global file and the relevant phase file, not all four phases at once.
-- **Two-file decision records**: the active record (`DEC-NNN.md`) contains only what an agent needs during normal work; the history (`DEC-NNN.history.md`) is loaded only when evaluating or changing a decision.
+- **Two-file decision records**: the active record (`DEC-kebab-name.md`) contains only what an agent needs during normal work; the history (`DEC-kebab-name.history.md`) is loaded only when evaluating or changing a decision.
 - **Phase-level indexes with trigger conditions**: each `CLAUDE.<phase>.md` lists which decisions apply and when, so agents can skip irrelevant ones without opening them.
 - **Hardcoded conventions over decision files**: routine patterns (like modular code structure) are written directly into phase instructions rather than spawning separate decision files.
 
 ### Two-File Decision Records
 
 Every significant decision produces two files:
-- `DEC-NNN.md` — the active record: what was decided and how to enforce it (optimized for AI agent consumption during normal work)
-- `DEC-NNN.history.md` — the audit trail: what alternatives were considered, who decided, and a changelog (read only when evaluating or changing the decision)
+- `DEC-kebab-name.md` — the active record: what was decided and how to enforce it (optimized for AI agent consumption during normal work)
+- `DEC-kebab-name.history.md` — the audit trail: what alternatives were considered, who decided, and a changelog (read only when evaluating or changing the decision)
 
 ### Human Involvement Taxonomy
 

@@ -1,12 +1,12 @@
-# DEC-NNN: [Title]
+# DEC-[kebab-name]: [Title]
 
-**Status**: Active | Deprecated | Superseded by DEC-XXX
+**Status**: Active | Deprecated | Superseded by DEC-other-name
 
 **Category**: Architecture | Convention | Process | Data
 
 **Scope**: system-wide | backend | frontend | infra | [codebase-name]
 
-**Source**: [REQ-NNN](../../1-objectives/requirements/REQ-NNN-*.md), [GOAL-NNN](../../1-objectives/goals/GOAL-NNN-*.md), [CON-NNN](../../1-objectives/constraints/CON-NNN-*.md), or n/a
+**Source**: [REQ-CLASS-kebab-name](../../1-objectives/requirements/REQ-CLASS-kebab-name.md), [GOAL-kebab-name](../../1-objectives/goals/GOAL-kebab-name.md), [CON-kebab-name](../../1-objectives/constraints/CON-kebab-name.md), or n/a
 
 **Last updated**: YYYY-MM-DD
 

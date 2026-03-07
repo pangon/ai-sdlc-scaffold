@@ -64,6 +64,27 @@ Draft --[human approves]--> Approved --[linked task Done]--> Implemented
 
 ---
 
+## Artifact Naming & Indexes
+
+**Naming**: all artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed by a descriptive kebab-case name. There are no numeric sequences. The descriptive name **is** the unique identifier (e.g., `DEC-use-postgres`, `GOAL-reduce-latency`, `REQ-F-search-by-name`). This avoids ID collisions when working on parallel branches.
+
+| Prefix | Artifact | Location |
+|--------|----------|----------|
+| `GOAL-` | Goals | `1-objectives/goals/` |
+| `US-` | User Stories | `1-objectives/user-stories/` |
+| `REQ-CLASS-` | Requirements | `1-objectives/requirements/` |
+| `ASM-` | Assumptions | `1-objectives/assumptions/` |
+| `CON-` | Constraints | `1-objectives/constraints/` |
+| `STK-` | Stakeholders | `1-objectives/stakeholders.md` (rows) |
+| `DEC-` | Decisions | `2-design/decisions/` |
+| `TASK-` | Tasks | `3-code/tasks.md` (rows) |
+
+**Requirement classes**: `REQ-F` Functional, `REQ-PERF` Performance, `REQ-SEC` Security, `REQ-REL` Reliability, `REQ-USA` Usability, `REQ-MNT` Maintainability, `REQ-PORT` Portability, `REQ-SCA` Scalability, `REQ-COMP` Compliance.
+
+**Index tables**: every index table (in `CLAUDE.<phase>.md` files and `tasks.md`) must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
+
+---
+
 ## Graduated Safeguards
 
 AI agents operate autonomously within development tasks. For project-level decisions, the scaffold defines three tiers:
@@ -82,10 +103,8 @@ When spotting a related issue, potential improvement, or ambiguous situation dur
 
 All project decisions live in `2-design/decisions/`. Each decision consists of two files:
 
-- **`DEC-NNN-short-name.md`** — the active record: context, decision, and enforcement rules. Read during normal task execution.
-- **`DEC-NNN-short-name.history.md`** — the trail: alternatives, reasoning, human involvement, changelog. Read only when evaluating or changing a decision.
-
-**Naming**: `NNN` is a three-digit sequential number; `short-name` is kebab-case.
+- **`DEC-kebab-name.md`** — the active record: context, decision, and enforcement rules. Read during normal task execution.
+- **`DEC-kebab-name.history.md`** — the trail: alternatives, reasoning, human involvement, changelog. Read only when evaluating or changing a decision.
 
 **Templates**: [`2-design/decisions/_template.md`](2-design/decisions/_template.md) and [`_template.history.md`](2-design/decisions/_template.history.md).
 
@@ -93,8 +112,8 @@ Phase-specific decision indexes (with trigger conditions) are in each `CLAUDE.<p
 
 ### Agent navigation rules
 
-- **Normal execution**: consult the decisions index in the current phase → read relevant `DEC-NNN.md` files → apply enforcement.
-- **Evaluating or changing a decision**: read `DEC-NNN.md`, then `DEC-NNN.history.md` → propose changes → update both files → append to changelog.
+- **Normal execution**: consult the decisions index in the current phase → follow the link in the File column to read the relevant decision file → apply enforcement.
+- **Evaluating or changing a decision**: read `DEC-kebab-name.md`, then `DEC-kebab-name.history.md` → propose changes → update both files → append to changelog.
 - **Never modify** `*.history.md` except to append to the changelog or add alternatives when proposing a supersession.
 
 ### Human involvement vocabulary
@@ -111,9 +130,10 @@ Phase-specific decision indexes (with trigger conditions) are in each `CLAUDE.<p
 
 When a significant decision, pattern, or constraint emerges:
 
-1. Create `DEC-NNN-short-name.md` from [`_template.md`](2-design/decisions/_template.md) and fill in all fields.
-2. Create `DEC-NNN-short-name.history.md` from [`_template.history.md`](2-design/decisions/_template.history.md) and fill in all fields.
-3. Add an entry to the decisions index of every phase whose trigger conditions are met.
+1. Choose a short descriptive kebab-case name that captures the decision (e.g., `use-postgres`, `error-response-format`).
+2. Create `DEC-kebab-name.md` from [`_template.md`](2-design/decisions/_template.md) and fill in all fields.
+3. Create `DEC-kebab-name.history.md` from [`_template.history.md`](2-design/decisions/_template.history.md) and fill in all fields.
+4. Add an entry (with a File column linking to the new file) to the decisions index of every phase whose trigger conditions are met.
 
 ### Deprecating or Superseding a Decision
 
@@ -121,8 +141,8 @@ A decision should be deprecated when no longer relevant, or superseded when a ne
 
 **Never deprecate or supersede silently.** Always surface the proposal to the user first.
 
-1. **Identify the candidate**: note the DEC-NNN ID and reason for retirement.
-2. **Read both files**: `DEC-NNN.md` and `DEC-NNN.history.md` to understand full context.
+1. **Identify the candidate**: note the decision ID (e.g., `DEC-use-postgres`) and reason for retirement.
+2. **Read both files**: `DEC-kebab-name.md` and `DEC-kebab-name.history.md` to understand full context.
 3. **Ask the user.** Present:
    - Why the decision is no longer valid or should be replaced
    - Whether existing code, infrastructure, or process still depends on it
@@ -131,14 +151,14 @@ A decision should be deprecated when no longer relevant, or superseded when a ne
 5. **Apply:**
 
    **If deprecating:**
-   - In `DEC-NNN.md`: change `**Status**` to `Deprecated`.
-   - In `DEC-NNN.history.md`: append a changelog entry with date, change, and involvement type.
+   - In the decision file: change `**Status**` to `Deprecated`.
+   - In the history file: append a changelog entry with date, change, and involvement type.
    - Remove the decision from every phase index.
 
    **If superseding:**
-   - Create the replacement decision (`DEC-MMM`) following the recording procedure.
-   - In old `DEC-NNN.md`: change `**Status**` to `Superseded by DEC-MMM`.
-   - In old `DEC-NNN.history.md`: append changelog entry.
+   - Create the replacement decision following the recording procedure.
+   - In the old decision file: change `**Status**` to `Superseded by DEC-new-name`.
+   - In the old history file: append changelog entry.
    - In every phase index: replace the old row with the new one.
 
 6. **Verify**: no phase index still references the retired decision as active.

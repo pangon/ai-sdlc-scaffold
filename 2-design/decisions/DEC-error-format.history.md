@@ -1,6 +1,6 @@
-# DEC-001: Trail
+# DEC-error-format: Trail
 
-> Companion to `DEC-001-error-format.md`.
+> Companion to `DEC-error-format.md`.
 > AI agents read this only when evaluating whether the decision is still
 > valid or when proposing a change or supersession.
 

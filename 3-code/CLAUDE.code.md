@@ -10,9 +10,9 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ## Decisions Relevant to This Phase
 
-| ID | Title | Trigger |
-|----|-------|---------|
-<!-- Add rows as decisions are recorded. -->
+| File | Title | Trigger |
+|------|-------|---------|
+<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](../2-design/decisions/DEC-kebab-name.md) -->
 
 ---
 
@@ -64,7 +64,7 @@ When invoking any command, apply active decisions from the index above whose tri
 - Use descriptive test names that explain the scenario
 
 ### Implementing Features
-1. Locate the task in [`tasks.md`](tasks.md); read every `REQ-NNN` listed in its `Req` column before writing code
+1. Locate the task in [`tasks.md`](tasks.md); read every requirement listed in its `Req` column (follow the links) before writing code
 2. Review relevant design docs in `2-design/`
 3. If the task touches infrastructure as code (Terraform, CloudFormation, Dockerfiles, CI/CD pipelines, Helm charts, etc.), also read [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md) and follow its instructions alongside these
 4. Update status to `In Progress` in `tasks.md`

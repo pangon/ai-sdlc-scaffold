@@ -43,7 +43,7 @@ Follow this progression — each step builds on the previous one:
 - Define the system's components and their responsibilities.
 - Choose the simplest architecture that satisfies all approved requirements.
 - Document component interactions using Mermaid diagrams.
-- Reference requirements by ID (e.g., `REQ-F001`) for traceability.
+- Reference requirements by ID (e.g., `REQ-F-search-by-name`) for traceability.
 - Ensure constraints from `1-objectives/constraints/` are respected.
 
 **b. Data Model** (`2-design/data-model.md`)
@@ -85,7 +85,7 @@ While designing, if a significant decision emerges (error handling patterns, dat
 
 ### Rules
 
-- Always reference requirements by ID (e.g., `REQ-F001`) for traceability.
+- Always reference requirements by ID (e.g., `REQ-F-search-by-name`) for traceability.
 - Follow the guidelines in `CLAUDE.design.md` for each document type.
 - Use Mermaid diagrams where they add clarity.
 - Default to the simplest design that satisfies all requirements.

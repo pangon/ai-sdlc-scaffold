@@ -13,15 +13,15 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 | [`architecture.md`](architecture.md) | System architecture overview and diagrams |
 | [`data-model.md`](data-model.md) | Data structures, schemas, and relationships |
 | [`api-design.md`](api-design.md) | API specifications and contracts |
-| [`decisions/`](decisions/) | Decision Records (DEC-NNN) |
+| [`decisions/`](decisions/) | Decision Records (`DEC-kebab-name`) |
 
 ---
 
 ## Decisions Relevant to This Phase
 
-| ID | Title | Trigger |
-|----|-------|---------|
-<!-- Add rows as decisions are recorded. -->
+| File | Title | Trigger |
+|------|-------|---------|
+<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](decisions/DEC-kebab-name.md) -->
 
 ---
 

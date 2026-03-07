@@ -48,18 +48,18 @@ git init && git add -A && git commit -m "Initial scaffold"
 ├── 1-objectives/                     # WHAT and WHY
 │   ├── CLAUDE.objectives.md          # Phase instructions and artifact indexes
 │   ├── stakeholders.md               # Stakeholder definitions
-│   ├── goals/                        # GOAL-NNN-name.md + _template.md
-│   ├── user-stories/                 # US-NNN-name.md + _template.md
-│   ├── requirements/                 # REQ-{PREFIX}NNN-name.md + _template.md
-│   ├── assumptions/                  # ASM-NNN-name.md + _template.md
-│   └── constraints/                  # CON-NNN-name.md + _template.md
+│   ├── goals/                        # GOAL-kebab-name.md + _template.md
+│   ├── user-stories/                 # US-kebab-name.md + _template.md
+│   ├── requirements/                 # REQ-CLASS-kebab-name.md + _template.md
+│   ├── assumptions/                  # ASM-kebab-name.md + _template.md
+│   └── constraints/                  # CON-kebab-name.md + _template.md
 │
 ├── 2-design/                         # HOW
 │   ├── CLAUDE.design.md              # Phase instructions and decisions index
 │   ├── architecture.md               # System architecture overview
 │   ├── data-model.md                 # Data structures and schemas
 │   ├── api-design.md                 # API specifications
-│   └── decisions/                    # DEC-NNN-name.md + DEC-NNN-name.history.md
+│   └── decisions/                    # DEC-kebab-name.md + DEC-kebab-name.history.md
 │       └── _template.md / _template.history.md
 │
 ├── 3-code/                           # BUILD
@@ -91,8 +91,8 @@ git init && git add -A && git commit -m "Initial scaffold"
 ## Key Concepts
 
 - **Phase-based development**: each phase has a directory and a `CLAUDE.<phase>.md` file that extends the root `CLAUDE.md`. Phase gates define minimum preconditions before advancing.
-- **Traceability**: every artifact references others by ID (`GOAL-001`, `REQ-F001`, `DEC-001`), creating a chain from business need to running code.
-- **Two-file decisions**: active record (`DEC-NNN.md`) for enforcement, history file (`DEC-NNN.history.md`) for audit trail. Indexed per phase with trigger conditions.
+- **Traceability**: every artifact references others by descriptive ID (`GOAL-reduce-latency`, `REQ-F-search-by-name`, `DEC-use-postgres`), creating a chain from business need to running code. Index tables link directly to artifact files for easy navigation.
+- **Two-file decisions**: active record (`DEC-kebab-name.md`) for enforcement, history file (`DEC-kebab-name.history.md`) for audit trail. Indexed per phase with trigger conditions.
 - **Context-window efficiency**: hierarchical instructions, phase-level indexes, and the active/history split minimize how many tokens an agent needs to load.
 
 ## Customization
@@ -126,14 +126,14 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 | Skill | Purpose |
 |-------|---------|
 | `/design` | Draft or update architecture, data model, or API design documents based on approved requirements. Define components, tech-stack, and environments. References requirements by ID for traceability. |
-| `/decide` | Record, review, deprecate, or supersede design decisions. Creates both `DEC-NNN.md` and `DEC-NNN.history.md`, updates all phase indexes. |
+| `/decide` | Record, review, deprecate, or supersede design decisions. Creates both `DEC-kebab-name.md` and `DEC-kebab-name.history.md`, updates all phase indexes. |
 
 ### Code Phase
 
 | Skill | Purpose |
 |-------|---------|
 | `/plan-tasks` | Generate development tasks from approved requirements and design. Populates `tasks.md` with IDs, priorities, requirement links, and an execution plan. |
-| `/implement` | Execute the next task (or a specified `TASK-NNN`) following the full procedure: read requirements, check decisions, implement with tests, handle design gaps, update status. |
+| `/implement` | Execute the next task (or a specified `TASK-kebab-name`) following the full procedure: read requirements, check decisions, implement with tests, handle design gaps, update status. |
 | `/fix` | Structured bug-fix workflow: write failing test, fix, check for same pattern elsewhere, ask before fixing other occurrences. |
 
 ### Deploy Phase
@@ -167,7 +167,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 /phase-gate deploy   ← verify gate
 /deploy              ← generate deployment artifacts
 /status              ← anytime: full project overview
-/trace REQ-F001      ← anytime: follow dependency chains
+/trace REQ-F-search-by-name  ← anytime: follow dependency chains
 ```
 
 ## License

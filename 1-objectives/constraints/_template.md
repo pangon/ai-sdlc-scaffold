@@ -1,10 +1,10 @@
-# CON-NNN: [Title]
+# CON-[kebab-name]: [Title]
 
 **Category**: Technical | Business | Operational
 
 **Status**: Active | Lifted
 
-**Source stakeholder**: [STK-NNN](../stakeholders.md)
+**Source stakeholder**: [STK-kebab-name](../stakeholders.md)
 
 ## Description
 

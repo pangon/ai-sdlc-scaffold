@@ -23,7 +23,8 @@
 
 ## Task Table
 
-<!-- Req column: REQ-NNN IDs this task implements (comma-separated), or "-" if none. -->
+<!-- Req column: links to requirements this task implements (comma-separated), or "-" if none. -->
+<!-- Example Req entry: [REQ-F-search-by-name](../1-objectives/requirements/REQ-F-search-by-name.md) -->
 <!-- Updated column: date of the last status change (YYYY-MM-DD). -->
 
 ### Setup & Infrastructure
@@ -43,8 +44,8 @@ Defines the order in which tasks should be executed. Group tasks into blocks; co
 
 ### Block 1: [Name]
 
-1. TASK-NNN
-2. TASK-NNN
+1. TASK-kebab-name
+2. TASK-kebab-name
 
 <!-- Add more blocks as needed: ### Block 2, ### Block 3, ... -->
 
@@ -52,7 +53,7 @@ Defines the order in which tasks should be executed. Group tasks into blocks; co
 
 ## How to Update
 
-- **Create**: assign next `TASK-NNN` ID, fill `Req` column, set `Todo`.
+- **Create**: choose a descriptive `TASK-kebab-name` ID, fill `Req` column with links to requirement files, set `Todo`.
 - **Start**: change to `In Progress`, set `Updated` to today, read all linked requirements first.
 - **Complete**: change to `Done`, set `Updated` to today.
 - **Block**: change to `Blocked`, set `Updated`, add note explaining the blocker.

@@ -1,4 +1,4 @@
-# REQ-[PREFIX]NNN: [Title]
+# REQ-[CLASS]-[kebab-name]: [Title]
 
 **Type**: Functional | Performance | Security | Reliability | Usability | Maintainability | Portability | Scalability | Compliance
 
@@ -6,9 +6,9 @@
 
 **Priority**: Must-have | Should-have | Could-have | Won't-have
 
-**Source**: [US-NNN](../user-stories/US-NNN-name.md) or [GOAL-NNN](../goals/GOAL-NNN-name.md)
+**Source**: [US-kebab-name](../user-stories/US-kebab-name.md) or [GOAL-kebab-name](../goals/GOAL-kebab-name.md)
 
-**Source stakeholder**: [STK-NNN](../stakeholders.md)
+**Source stakeholder**: [STK-kebab-name](../stakeholders.md)
 
 ## Description
 
@@ -22,10 +22,10 @@
 
 ## Related Constraints
 
-- [CON-NNN](../constraints/CON-NNN-name.md) — [brief explanation of the relationship]
+- [CON-kebab-name](../constraints/CON-kebab-name.md) — [brief explanation of the relationship]
 
 ## Related Assumptions
 
-- [ASM-NNN](../assumptions/ASM-NNN-name.md) — [brief explanation of the relationship]
+- [ASM-kebab-name](../assumptions/ASM-kebab-name.md) — [brief explanation of the relationship]
 
 -->

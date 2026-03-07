@@ -1,4 +1,4 @@
-# US-NNN: [Title]
+# US-[kebab-name]: [Title]
 
 **As a** [stakeholder role], **I want** [capability], **so that** [benefit].
 
@@ -6,9 +6,9 @@
 
 **Priority**: Must-have | Should-have | Could-have | Won't-have
 
-**Source stakeholder**: [STK-NNN](../stakeholders.md)
+**Source stakeholder**: [STK-kebab-name](../stakeholders.md)
 
-**Related goal**: [GOAL-NNN](../goals/GOAL-NNN-name.md)
+**Related goal**: [GOAL-kebab-name](../goals/GOAL-kebab-name.md)
 
 ## Acceptance Criteria
 
@@ -16,4 +16,4 @@
 
 ## Derived Requirements
 
-- [REQ-NNN](../requirements/REQ-NNN-name.md)
+- [REQ-CLASS-kebab-name](../requirements/REQ-CLASS-kebab-name.md)

@@ -1,4 +1,4 @@
-# DEC-001: Error Response Format
+# DEC-error-format: Error Response Format
 
 **Status**: Active
 **Category**: Convention

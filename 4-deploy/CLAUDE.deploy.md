@@ -10,10 +10,10 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 
 ## Decisions Relevant to This Phase
 
-<!-- Add rows as decisions are recorded. -->
+<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](../2-design/decisions/DEC-kebab-name.md) -->
 
-| ID | Title | Trigger |
-|----|-------|---------|
+| File | Title | Trigger |
+|------|-------|---------|
 
 ---
 

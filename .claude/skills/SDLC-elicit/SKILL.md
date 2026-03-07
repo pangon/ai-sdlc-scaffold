@@ -18,12 +18,12 @@ You are running an interactive elicitation session for the Objectives phase of a
 
 Follow the prescribed order from `CLAUDE.objectives.md`:
 
-1. **Stakeholders** — ask the user who uses, funds, operates, or is affected by the system. Update `1-objectives/stakeholders.md` with new entries (STK-NNN).
-2. **Goals** — decompose vague ideas into concrete, measurable outcomes. Create `GOAL-NNN-<name>.md` from `1-objectives/goals/_template.md`.
-3. **Assumptions** — surface beliefs early. Create `ASM-NNN-<name>.md` from `1-objectives/assumptions/_template.md`.
-4. **Constraints** — document hard limits. Create `CON-NNN-<name>.md` from `1-objectives/constraints/_template.md`.
-5. **User Stories** — capabilities from the stakeholder perspective. Create `US-NNN-<name>.md` from `1-objectives/user-stories/_template.md`.
-6. **Requirements** — formal, testable, derived from user stories or goals. Create `REQ-<PREFIX>NNN-<name>.md` from `1-objectives/requirements/_template.md`.
+1. **Stakeholders** — ask the user who uses, funds, operates, or is affected by the system. Update `1-objectives/stakeholders.md` with new entries (`STK-kebab-name`).
+2. **Goals** — decompose vague ideas into concrete, measurable outcomes. Create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
+3. **Assumptions** — surface beliefs early. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md`.
+4. **Constraints** — document hard limits. Create `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`.
+5. **User Stories** — capabilities from the stakeholder perspective. Create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
+6. **Requirements** — formal, testable, derived from user stories or goals. Create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
 
 You do not have to cover all artifact types in a single session. Work through whatever the user wants to discuss. If starting from scratch, begin with stakeholders.
 
@@ -73,10 +73,10 @@ This skill can be used to review and modify any artifact in `1-objectives/`:
 
 - All new artifacts start with `Status: Draft`. Never auto-approve — only a human can move to `Approved`.
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
-- Assign the next sequential ID for each artifact type (check existing files to determine the next number).
+- Choose a short descriptive kebab-case name for each new artifact (check existing files to avoid duplicates). The name **is** the ID — there are no numeric sequences.
 - Every artifact must have proper traceability links (Source stakeholder, Related goal, etc.).
-- Follow the ID prefix conventions for requirements: `REQ-F` (Functional), `REQ-PERF` (Performance), `REQ-SEC` (Security), etc.
-- Use kebab-case for file names: `GOAL-001-user-authentication.md`.
+- Follow the requirement class conventions: `REQ-F` (Functional), `REQ-PERF` (Performance), `REQ-SEC` (Security), etc.
+- Use kebab-case for file names: `GOAL-user-authentication.md`, `REQ-F-login-with-email.md`.
 - When creating files, fill in all template fields — do not leave placeholder brackets.
 
 ### Session End

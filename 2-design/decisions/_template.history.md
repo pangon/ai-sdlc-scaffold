@@ -1,6 +1,6 @@
-# DEC-NNN: Trail
+# DEC-[kebab-name]: Trail
 
-> Companion to `DEC-NNN-[name].md`.
+> Companion to `DEC-[kebab-name].md`.
 > AI agents read this only when evaluating whether the decision is still
 > valid or when proposing a change or supersession.
 
