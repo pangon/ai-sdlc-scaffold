@@ -1,7 +1,3 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with this repository.
-
 ## Language Policy
 
 **All AI outputs must be in English**, regardless of the language used in user prompts. This applies to code, comments, documentation, configuration files, commit messages, and response text.
@@ -66,7 +62,7 @@ Draft --[human approves]--> Approved --[linked task Done]--> Implemented
 
 ## Artifact Naming & Indexes
 
-**Naming**: all artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed by a descriptive kebab-case name. There are no numeric sequences. The descriptive name **is** the unique identifier (e.g., `DEC-use-postgres`, `GOAL-reduce-latency`, `REQ-F-search-by-name`). This avoids ID collisions when working on parallel branches.
+**Naming**: all artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed by a descriptive kebab-case name. The descriptive name **is** the unique identifier (e.g., `DEC-use-postgres`, `REQ-F-search-by-name`). There are no numeric sequences, to avoid ID collisions when working on parallel branches.
 
 | Prefix | Location |
 |--------|----------|
@@ -78,8 +74,6 @@ Draft --[human approves]--> Approved --[linked task Done]--> Implemented
 | `STK-` | `1-objectives/stakeholders.md` (rows) |
 | `DEC-` | `2-design/decisions/` |
 | `TASK-` | `3-code/tasks.md` (rows) |
-
-Each phase's `CLAUDE.<phase>.md` describes artifact purpose, guidance, and sub-types (e.g., requirement classes).
 
 **Index tables**: every index table (in `CLAUDE.<phase>.md` files and `tasks.md`) must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
 
@@ -106,7 +100,7 @@ All project decisions live in `2-design/decisions/`. Each decision consists of t
 - **`DEC-kebab-name.md`** — the active record: context, decision, and enforcement rules. Read during normal task execution.
 - **`DEC-kebab-name.history.md`** — the trail: alternatives, reasoning, human involvement, changelog. Read only when evaluating or changing a decision.
 
-**Templates**: [`2-design/decisions/_template.md`](2-design/decisions/_template.md) and [`_template.history.md`](2-design/decisions/_template.history.md).
+**Templates**: [`_template.md`](2-design/decisions/_template.md) and [`_template.history.md`](2-design/decisions/_template.history.md).
 
 Phase-specific decision indexes (with trigger conditions) are in each `CLAUDE.<phase>.md`. A decision may appear in multiple phase indexes.
 
@@ -121,8 +115,6 @@ Phase-specific decision indexes (with trigger conditions) are in each `CLAUDE.<p
 | Value | Meaning |
 |-------|---------|
 | `human-decided` | Human made the decision; AI had no significant role |
-| `human-argued` | Human proposed and argued the rationale explicitly |
-| `collaborative` | Human and AI jointly reasoned through options |
 | `ai-proposed/human-approved` | AI proposed; human explicitly approved |
 | `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
 
