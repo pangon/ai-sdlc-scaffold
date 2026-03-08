@@ -86,65 +86,24 @@ When spotting a related issue, potential improvement, or ambiguous situation dur
 
 ## Decisions
 
-All project decisions live in `2-design/decisions/`. Each decision consists of two files:
+Decisions live in `2-design/decisions/`. Each decision has two files:
 
-- **`DEC-kebab-name.md`** — the active record: context, decision, and enforcement rules. Read during normal task execution.
-- **`DEC-kebab-name.history.md`** — the trail: alternatives, reasoning, human involvement, changelog. Read only when evaluating or changing a decision.
+- **`DEC-kebab-name.md`** — the active record (context, decision, enforcement). Read during normal task execution.
+- **`DEC-kebab-name.history.md`** — the trail (alternatives, reasoning, changelog). Read only when evaluating or changing a decision.
 
-**Templates**: [`_template.md`](2-design/decisions/_template.md) and [`_template.history.md`](2-design/decisions/_template.history.md).
+Each `CLAUDE.<phase>.md` contains a decisions index with trigger conditions. A decision may appear in multiple phase indexes.
 
-Phase-specific decision indexes (with trigger conditions) are in each `CLAUDE.<phase>.md`. A decision may appear in multiple phase indexes.
+### How to use decisions during tasks
 
-### Agent navigation rules
+1. Consult the decisions index in the current phase's `CLAUDE.<phase>.md`.
+2. Follow the File column link to read the relevant `DEC-*.md` file.
+3. Apply its enforcement rules.
 
-- **Normal execution**: consult the decisions index in the current phase → follow the link in the File column to read the relevant decision file → apply enforcement.
-- **Evaluating or changing a decision**: read `DEC-kebab-name.md`, then `DEC-kebab-name.history.md` → propose changes → update both files → append to changelog.
-- **Never modify** `*.history.md` except to append to the changelog or add alternatives when proposing a supersession.
+Do **not** modify `*.history.md` except to append to the changelog.
 
-### Human involvement vocabulary
+### Recording, deprecating, or superseding decisions
 
-| Value | Meaning |
-|-------|---------|
-| `human-decided` | Human made the decision; AI had no significant role |
-| `ai-proposed/human-approved` | AI proposed; human explicitly approved |
-| `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
-
-### When Recording Decisions
-
-When a significant decision, pattern, or constraint emerges:
-
-1. Choose a short descriptive kebab-case name that captures the decision (e.g., `use-postgres`, `error-response-format`).
-2. Create `DEC-kebab-name.md` from [`_template.md`](2-design/decisions/_template.md) and fill in all fields.
-3. Create `DEC-kebab-name.history.md` from [`_template.history.md`](2-design/decisions/_template.history.md) and fill in all fields.
-4. Add an entry (with a File column linking to the new file) to the decisions index of every phase whose trigger conditions are met.
-
-### Deprecating or Superseding a Decision
-
-A decision should be deprecated when no longer relevant, or superseded when a new decision replaces it.
-
-**Never deprecate or supersede silently.** Always surface the proposal to the user first.
-
-1. **Identify the candidate**: note the decision ID (e.g., `DEC-use-postgres`) and reason for retirement.
-2. **Read both files**: `DEC-kebab-name.md` and `DEC-kebab-name.history.md` to understand full context.
-3. **Ask the user.** Present:
-   - Why the decision is no longer valid or should be replaced
-   - Whether existing code, infrastructure, or process still depends on it
-   - The proposed action: deprecate (retire) or supersede (replace with new decision)
-4. **Wait for explicit approval** before modifying any file.
-5. **Apply:**
-
-   **If deprecating:**
-   - In the decision file: change `**Status**` to `Deprecated`.
-   - In the history file: append a changelog entry with date, change, and involvement type.
-   - Remove the decision from every phase index.
-
-   **If superseding:**
-   - Create the replacement decision following the recording procedure.
-   - In the old decision file: change `**Status**` to `Superseded by DEC-new-name`.
-   - In the old history file: append changelog entry.
-   - In every phase index: replace the old row with the new one.
-
-6. **Verify**: no phase index still references the retired decision as active.
+When a significant decision, pattern, or constraint emerges, record it as a new decision. For the recording procedure, as well as deprecation and supersession, see [`2-design/decisions/PROCEDURES.md`](2-design/decisions/PROCEDURES.md).
 
 ---
 

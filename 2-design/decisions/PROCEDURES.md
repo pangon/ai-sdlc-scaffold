@@ -1,0 +1,54 @@
+# Decision Procedures
+
+Read this file only when you need to **record**, **deprecate**, or **supersede** a decision. For normal task execution, follow the navigation rules in [CLAUDE.md](../../CLAUDE.md).
+
+---
+
+## Recording a New Decision
+
+When a significant decision, pattern, or constraint emerges:
+
+1. Choose a short descriptive kebab-case name that captures the decision (e.g., `use-postgres`, `error-response-format`).
+2. Create `DEC-kebab-name.md` from [`_template.md`](_template.md) and fill in all fields.
+3. Create `DEC-kebab-name.history.md` from [`_template.history.md`](_template.history.md) and fill in all fields.
+4. Add an entry (with a File column linking to the new file) to the decisions index of every phase whose trigger conditions are met.
+
+### Human involvement vocabulary
+
+Use these values in the `*.history.md` file:
+
+| Value | Meaning |
+|-------|---------|
+| `human-decided` | Human made the decision; AI had no significant role |
+| `ai-proposed/human-approved` | AI proposed; human explicitly approved |
+| `ai-proposed/auto-accepted` | AI proposed and recorded without explicit human approval |
+
+---
+
+## Deprecating or Superseding a Decision
+
+A decision should be deprecated when no longer relevant, or superseded when a new decision replaces it.
+
+**Never deprecate or supersede silently.** Always surface the proposal to the user first.
+
+1. **Identify the candidate**: note the decision ID (e.g., `DEC-use-postgres`) and reason for retirement.
+2. **Read both files**: `DEC-kebab-name.md` and `DEC-kebab-name.history.md` to understand full context.
+3. **Ask the user.** Present:
+   - Why the decision is no longer valid or should be replaced
+   - Whether existing code, infrastructure, or process still depends on it
+   - The proposed action: deprecate (retire) or supersede (replace with new decision)
+4. **Wait for explicit approval** before modifying any file.
+5. **Apply:**
+
+   **If deprecating:**
+   - In the decision file: change `**Status**` to `Deprecated`.
+   - In the history file: append a changelog entry with date, change, and involvement type.
+   - Remove the decision from every phase index.
+
+   **If superseding:**
+   - Create the replacement decision following the recording procedure above.
+   - In the old decision file: change `**Status**` to `Superseded by DEC-new-name`.
+   - In the old history file: append changelog entry.
+   - In every phase index: replace the old row with the new one.
+
+6. **Verify**: no phase index still references the retired decision as active.
