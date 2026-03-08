@@ -1,12 +1,10 @@
-# CLAUDE.objectives.md
-
 Phase-specific instructions for the **Objectives** phase. Extends [../CLAUDE.md](../CLAUDE.md).
 
 ## Purpose
 
 This phase defines **what** we're building and **why**. Focus on clarity, measurability, and alignment with stakeholder needs.
 
-## Artifacts
+## Phase artifacts
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
@@ -20,21 +18,6 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 Each directory holds individual files (one per item) plus a `_template.md`. When a new entry is elicited, create the file from the template and add a row to the appropriate index below.
 
 **Index sync rule**: the index tables below duplicate key metadata from individual files. The individual file is the source of truth. When you modify an artifact, update its index row in the same operation.
-
-### Status lifecycle
-
-All artifacts with a Status field (user stories, requirements, assumptions) follow this lifecycle:
-
-```
-Draft --[human approves]--> Approved --[linked task Done]--> Implemented
-  \                            \
-   +--[human decides]---------> Deprecated
-```
-
-**Transition rules:**
-- **Draft → Approved**: only a human can approve (after stakeholder review)
-- **Approved → Implemented**: the agent marks this when all linked tasks reach Done
-- **Any → Deprecated**: only a human can deprecate; the agent proposes and waits for approval
 
 ### Artifact flow
 
@@ -63,16 +46,20 @@ Stakeholders → Goals ────┤
 **Stakeholders**: ask who uses, funds, operates, or is affected by the system. Record influence level honestly — it drives conflict resolution. Add entries to [`stakeholders.md`](stakeholders.md).
 
 **Goals**: decompose vague ideas into concrete, measurable outcomes. Use MoSCoW priority consistently.
+Status lifecycle: `Draft → Approved → Achieved → Deprecated`. Only a human can approve or deprecate. The agent marks `Achieved` when all success criteria are met (linked requirements implemented).
 
 **User Stories**: use "As a [role], I want [capability], so that [benefit]." The role must be an existing stakeholder ID. Acceptance criteria at the story level are high-level; detailed criteria live in requirements.
+Status lifecycle: `Draft → Approved → Implemented → Deprecated`. Only a human can approve or deprecate. The agent marks `Implemented` when all linked requirements reach `Implemented`.
 
-**Requirements**: use clear, testable language (not "should be fast" — use "response time < 200ms at p95"). Choose the correct requirement class. Set `Status: Draft` when first created; only a human marks `Approved`.
-
-**Requirement classes**: `REQ-F` Functional, `REQ-PERF` Performance, `REQ-SEC` Security, `REQ-REL` Reliability, `REQ-USA` Usability, `REQ-MNT` Maintainability, `REQ-PORT` Portability, `REQ-SCA` Scalability, `REQ-COMP` Compliance.
+**Requirements**: use clear, testable language (not "should be fast" — use "response time < 200ms at p95"). Choose the correct requirement class.
+Requirement classes: `REQ-F` Functional, `REQ-PERF` Performance, `REQ-SEC` Security, `REQ-REL` Reliability, `REQ-USA` Usability, `REQ-MNT` Maintainability, `REQ-PORT` Portability, `REQ-SCA` Scalability, `REQ-COMP` Compliance.
+Status lifecycle: `Draft → Approved → Implemented → Deprecated`. Only a human can approve or deprecate. The agent marks `Implemented` when all linked tasks reach Done.
 
 **Assumptions**: always record the risk level (what happens if wrong?) and a verification plan when possible.
+Status lifecycle: `Unverified → Verified | Invalidated`. The agent marks `Verified` when the verification plan confirms the assumption. Only a human can mark `Invalidated` (triggers impact analysis on dependent artifacts).
 
 **Constraints**: consider technical (platforms, dependencies), business (budget, timeline, team size), and operational (hosting, compliance) categories.
+Status lifecycle: `Active → Lifted`. Only a human can lift a constraint.
 
 ### Conflict resolution
 
@@ -98,7 +85,7 @@ When an assumption is found to be wrong or no longer holds:
 
 ### Artifact deprecation
 
-When an artifact (user story, requirement, assumption, constraint) is no longer relevant:
+When an artifact (goal, user story, requirement) is no longer relevant:
 
 1. Propose deprecation to the user with rationale and downstream impact.
 2. Wait for explicit approval.
@@ -109,16 +96,16 @@ When an artifact (user story, requirement, assumption, constraint) is no longer 
 
 ## Linking to Other Phases
 
-- Goals, user stories, and requirements are referenced in design documents (`2-design/`)
+- Goals, user stories, constraints, assumptions, and requirements are referenced in design documents (`2-design/`)
+- Requirements determine the development tasks in `3-code/tasks.md`; each task references the requirements it fulfills
 - Acceptance criteria inform test cases (`3-code/`)
-- Constraints and assumptions influence infrastructure decisions (`4-deploy/`)
 
 ---
 
 ## Goals Index
 
-| File | Priority | Summary |
-|------|----------|---------|
+| File | Priority | Status | Summary |
+|------|----------|--------|---------|
 <!-- Add rows as goals are created. File column: [GOAL-kebab-name](goals/GOAL-kebab-name.md) -->
 
 ---

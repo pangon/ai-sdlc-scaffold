@@ -1,5 +1,3 @@
-# CLAUDE.code.md
-
 Phase-specific instructions for the **Code** phase. Extends [../CLAUDE.md](../CLAUDE.md).
 
 ## Purpose

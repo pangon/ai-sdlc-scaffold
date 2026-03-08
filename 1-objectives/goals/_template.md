@@ -2,6 +2,8 @@
 
 **Description**: [What we want to achieve and why it matters]
 
+**Status**: Draft | Approved | Achieved | Deprecated
+
 **Priority**: Must-have | Should-have | Could-have | Won't-have
 
 **Source stakeholder**: [STK-kebab-name](../stakeholders.md)

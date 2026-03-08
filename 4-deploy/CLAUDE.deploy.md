@@ -1,5 +1,3 @@
-# CLAUDE.deploy.md
-
 Phase-specific instructions for the **Deploy** phase. Extends [../CLAUDE.md](../CLAUDE.md).
 
 ## Purpose
