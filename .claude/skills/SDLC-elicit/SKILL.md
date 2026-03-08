@@ -119,8 +119,43 @@ Present the findings grouped by severity level (Critical first, then Important, 
 - When the user asks for suggestions or is unsure what to do next, use the Proactive Suggestions guidelines above to offer relevant options.
 - Surface potential conflicts between requirements immediately — follow the conflict resolution procedure in `CLAUDE.objectives.md`.
 
+### Current State Tracking
+
+Whenever the skill applies user-approved changes (creating, modifying, or deleting artifacts), update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
+
+1. **Artifact types being elicited** — list which artifact types have been worked on in the Objectives phase (e.g., "Stakeholders defined; Goals and Assumptions drafted"). Update this incrementally as new types are touched.
+2. **Gap analysis status** — every time artifacts are created or modified, set the gap analysis status to **pending** (e.g., "Gap analysis: pending"). When a gap analysis is performed, annotate the result summary (number of findings by severity). The status must remain **in progress** until every finding has been either resolved or explicitly dismissed by the user. Only mark it as **done** (with the date) once all findings are resolved or dismissed. This ensures that any session producing changes always signals the need for a fresh gap analysis, and that no gaps are silently ignored.
+
+Example Current State after elicitation work:
+
+```
+### Current State
+
+The project is in the **Objectives phase**. Stakeholders defined; Goals and User Stories drafted.
+Gap analysis: pending.
+```
+
+Example after a gap analysis is run but findings remain open:
+
+```
+### Current State
+
+The project is in the **Objectives phase**. Stakeholders defined; Goals and User Stories drafted.
+Gap analysis: in progress (2026-03-08) — 1 critical, 2 important, 1 minor finding. 2 resolved, 2 remaining.
+```
+
+Example after all findings are resolved or dismissed:
+
+```
+### Current State
+
+The project is in the **Objectives phase**. Stakeholders defined; Goals and User Stories drafted.
+Gap analysis: done (2026-03-08) — 3 findings resolved, 1 dismissed.
+```
+
 ### Rules
 
+- **Current State synchronization**: whenever artifacts are created, modified, or deleted, update `### Current State` in `CLAUDE.md` as described in the Current State Tracking section above. This update must happen in the same operation as the artifact change.
 - **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-objectives/CLAUDE.objectives.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row.
 - All new artifacts start with `Status: Draft`. Never auto-approve — only a human can move to `Approved`.
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
