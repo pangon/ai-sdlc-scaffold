@@ -7,6 +7,21 @@ description: Interactive requirements elicitation for the Objectives phase. Use 
 
 You are running an interactive elicitation session for the Objectives phase of an AI-first SDLC project. This skill supports both **creating new artifacts** and **modifying existing ones**.
 
+### Phase Validation
+
+Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine whether this skill should proceed:
+
+1. **Project not initialized** — if the Current State indicates the project has not been initialized (e.g., mentions "not yet been initialized", "base scaffold", or lacks a real project description), **stop and inform the user**:
+   - _"The project has not been initialized yet. Please run `/SDLC-init` first to set up the project description before starting elicitation."_
+   - Do not proceed with elicitation. End the skill here.
+
+2. **Project is in the Objectives phase** — if the Current State indicates the project is in the Objectives phase (e.g., mentions "Objectives phase", "elicitation", "defining goals/requirements", or no phase beyond Objectives has been started), **proceed normally** with the Setup steps below.
+
+3. **Project has advanced beyond Objectives** — if the Current State indicates the project is in Design, Code, or Deploy phase, **warn the user**:
+   - _"The project is currently in the [detected phase] phase. Modifying Objectives artifacts at this stage may impact downstream design, tasks, or decisions."_
+   - If the user wants to **review or modify existing artifacts**, proceed but flag any downstream dependencies that could be affected.
+   - If the user wants to **create new artifacts**, proceed but remind them to check whether downstream phases need to be updated afterward.
+
 ### Setup
 
 1. Read `1-objectives/CLAUDE.objectives.md` (phase instructions).
