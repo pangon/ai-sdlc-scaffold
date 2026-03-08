@@ -27,6 +27,16 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 1. Read `1-objectives/CLAUDE.objectives.md` (phase instructions and existing artifact indexes).
 2. Read `1-objectives/stakeholders.md` to understand existing stakeholders.
 
+### Artifact Traceability Chain
+
+Objectives artifacts form a strict traceability chain. Each level must fully decompose into the next:
+
+1. **Stakeholder → Goals** — every stakeholder must have at least one associated goal. A stakeholder with no goals has no defined value proposition in the project.
+2. **Goal → User Stories** — every goal must have at least one associated user story. The set of user stories linked to a goal must be **collectively sufficient** to realize that goal — if all those user stories were implemented, the goal would be met.
+3. **User Story → Requirements** — every user story must have at least one associated requirement. The set of requirements linked to a user story must be **collectively sufficient** to realize that user story — if all those requirements were satisfied, the user story would be complete.
+
+These relationships are **completeness constraints**, not just traceability links.
+
 ### Elicitation Order (New Artifacts)
 
 Follow the prescribed order from `CLAUDE.objectives.md`:
@@ -92,7 +102,8 @@ Summarize the assessment before the detailed gap list: state whether the current
 Check for:
 
 - **Missing traceability** — goals without user stories, user stories without requirements, requirements without a source goal or story.
-- **Uncovered stakeholders** — stakeholders with no goals or user stories addressing their needs.
+- **Insufficient decomposition** — a goal whose linked user stories would not fully realize it if all were implemented, or a user story whose linked requirements would not fully satisfy it if all were met.
+- **Uncovered stakeholders** — stakeholders with no goals addressing their needs.
 - **Orphaned artifacts** — requirements or assumptions that reference deleted or renamed artifacts.
 - **Missing non-functional coverage** — functional requirements without corresponding performance, security, or usability requirements where appropriate.
 - **Unverified assumptions** — assumptions with no verification plan.
@@ -104,7 +115,7 @@ Classify each finding into one of three severity levels:
 
 | Severity | Criteria | Examples |
 |----------|----------|----------|
-| **Critical** | Blocks phase gate advancement or leaves a core project objective unaddressed. Must be resolved before moving to Design. | Missing goal for a key part of the project objective; approved requirement referencing a deleted artifact; stakeholder with no goals at all |
+| **Critical** | Blocks phase gate advancement or leaves a core project objective unaddressed. Must be resolved before moving to Design. | Missing goal for a key part of the project objective; approved requirement referencing a deleted artifact; stakeholder with no goals at all; goal whose user stories are insufficient to realize it |
 | **Important** | Weakens traceability or coverage but does not block progress. Should be resolved before moving to Design. | User story without requirements; functional requirement missing non-functional counterpart; assumption without verification plan |
 | **Minor** | Cosmetic or low-impact gaps that can be addressed later without risk. | Constraint not yet linked to a requirement; minor traceability link missing between related but non-dependent artifacts |
 
@@ -125,33 +136,6 @@ Whenever the skill applies user-approved changes (creating, modifying, or deleti
 
 1. **Artifact types being elicited** — list which artifact types have been worked on in the Objectives phase (e.g., "Stakeholders defined; Goals and Assumptions drafted"). Update this incrementally as new types are touched.
 2. **Gap analysis status** — every time artifacts are created or modified, set the gap analysis status to **pending** (e.g., "Gap analysis: pending"). When a gap analysis is performed, annotate the result summary (number of findings by severity). The status must remain **in progress** until every finding has been either resolved or explicitly dismissed by the user. Only mark it as **done** (with the date) once all findings are resolved or dismissed. This ensures that any session producing changes always signals the need for a fresh gap analysis, and that no gaps are silently ignored.
-
-Example Current State after elicitation work:
-
-```
-### Current State
-
-The project is in the **Objectives phase**. Stakeholders defined; Goals and User Stories drafted.
-Gap analysis: pending.
-```
-
-Example after a gap analysis is run but findings remain open:
-
-```
-### Current State
-
-The project is in the **Objectives phase**. Stakeholders defined; Goals and User Stories drafted.
-Gap analysis: in progress (2026-03-08) — 1 critical, 2 important, 1 minor finding. 2 resolved, 2 remaining.
-```
-
-Example after all findings are resolved or dismissed:
-
-```
-### Current State
-
-The project is in the **Objectives phase**. Stakeholders defined; Goals and User Stories drafted.
-Gap analysis: done (2026-03-08) — 3 findings resolved, 1 dismissed.
-```
 
 ### Rules
 
