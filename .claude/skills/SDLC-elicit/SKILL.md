@@ -29,13 +29,13 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 ### Artifact Traceability Chain
 
-Objectives artifacts form a strict traceability chain. Each level must fully decompose into the next:
+Objectives artifacts form a traceability chain. Each level should decompose into the next:
 
-1. **Stakeholder → Goals** — every stakeholder must have at least one associated goal. A stakeholder with no goals has no defined value proposition in the project.
-2. **Goal → User Stories** — every goal must have at least one associated user story. The set of user stories linked to a goal must be **collectively sufficient** to realize that goal — if all those user stories were implemented, the goal would be met.
-3. **User Story → Requirements** — every user story must have at least one associated requirement. The set of requirements linked to a user story must be **collectively sufficient** to realize that user story — if all those requirements were satisfied, the user story would be complete.
+1. **Stakeholder → Goals** — every stakeholder should have at least one associated goal. A stakeholder with no goals has no defined value proposition in the project.
+2. **Goal → User Stories** — every goal should have at least one associated user story. Review the linked user stories against the goal's success criteria and flag coverage gaps.
+3. **User Story → Requirements** — every user story should have at least one associated requirement. Review the linked requirements against the story's acceptance criteria and flag obvious coverage gaps.
 
-These relationships are **completeness constraints**, not just traceability links.
+These relationships are **traceability links with a coverage review heuristic**: check that linked artifacts appear to address the parent's success/acceptance criteria, and surface gaps for the user to evaluate. Completeness is a judgment call that requires domain expertise — the agent flags potential gaps, the human decides whether coverage is adequate.
 
 ### Elicitation Order (New Artifacts)
 
@@ -102,7 +102,7 @@ Summarize the assessment before the detailed gap list: state whether the current
 Check for:
 
 - **Missing traceability** — goals without user stories, user stories without requirements, requirements without a source goal or story.
-- **Insufficient decomposition** — a goal whose linked user stories would not fully realize it if all were implemented, or a user story whose linked requirements would not fully satisfy it if all were met.
+- **Potential coverage gaps** — a goal whose linked user stories do not appear to address all its success criteria, or a user story whose linked requirements do not appear to cover all its acceptance criteria. Flag these as potential gaps for the user to evaluate.
 - **Uncovered stakeholders** — stakeholders with no goals addressing their needs.
 - **Orphaned artifacts** — requirements or assumptions that reference deleted or renamed artifacts.
 - **Missing non-functional coverage** — functional requirements without corresponding performance, security, or usability requirements where appropriate.
@@ -115,7 +115,7 @@ Classify each finding into one of three severity levels:
 
 | Severity | Criteria | Examples |
 |----------|----------|----------|
-| **Critical** | Blocks phase gate advancement or leaves a core project objective unaddressed. Must be resolved before moving to Design. | Missing goal for a key part of the project objective; approved requirement referencing a deleted artifact; stakeholder with no goals at all; goal whose user stories are insufficient to realize it |
+| **Critical** | Blocks phase gate advancement or leaves a core project objective unaddressed. Must be resolved before moving to Design. | Missing goal for a key part of the project objective; approved requirement referencing a deleted artifact; stakeholder with no goals at all; goal whose user stories appear insufficient to realize it |
 | **Important** | Weakens traceability or coverage but does not block progress. Should be resolved before moving to Design. | User story without requirements; functional requirement missing non-functional counterpart; assumption without verification plan |
 | **Minor** | Cosmetic or low-impact gaps that can be addressed later without risk. | Constraint not yet linked to a requirement; minor traceability link missing between related but non-dependent artifacts |
 
