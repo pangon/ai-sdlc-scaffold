@@ -75,7 +75,7 @@ When drafting a requirement to propose to the user, check it against these crite
 - **Unambiguous** — there should be only one reasonable interpretation. Flag terms that different stakeholders could read differently (e.g., "large file", "real-time", "most users").
 - **Consistent** — the requirement must not conflict with any existing requirement or constraint. Check against the current artifact set and flag contradictions.
 - **Feasible** — if known constraints make the requirement unrealistic, flag the tension (e.g., a latency target that conflicts with a mandated third-party API).
-- **Traceable** — the requirement must link to a source user story or goal. This is already enforced by the template, but verify the link exists and is valid.
+- **Traceable** — the requirement must link to a source user story or goal.
 
 Do not announce a "validation step" — apply these criteria silently while drafting. If any criterion fails, include an inline note in the proposal (e.g., _"Note: 'handle large files' is ambiguous — consider specifying a size threshold."_). The user can refine, accept as-is, or dismiss the note.
 
@@ -97,7 +97,7 @@ This skill can be used to review and modify any artifact in `1-objectives/`:
 - If the user confirms, apply the content changes **and** set `Status: Draft` in the same operation.
 - If the modification also affects downstream artifacts (e.g., a requirement change that impacts design or tasks), flag those dependencies to the user.
 
-**Exception**: metadata-only changes that do not alter the artifact's substance (e.g., fixing a typo in a link, correcting formatting) do not trigger a status downgrade. When in doubt, ask the user.
+**Exception**: changes that do not alter the artifact's substance (e.g., fixing a typo in a link, correcting formatting) do not trigger a status downgrade. When in doubt, ask the user.
 
 ### Gap Analysis
 
@@ -132,14 +132,14 @@ Classify each finding into one of three severity levels:
 | Severity | Criteria | Examples |
 |----------|----------|----------|
 | **Critical** | Blocks phase gate advancement or leaves a core project objective unaddressed. Must be resolved before moving to Design. | Missing goal for a key part of the project objective; approved requirement referencing a deleted artifact; stakeholder with no goals at all; goal whose user stories appear insufficient to realize it |
-| **Important** | Weakens traceability or coverage but does not block progress. Should be resolved before moving to Design. | User story without requirements; functional requirement missing non-functional counterpart; assumption without verification plan |
-| **Minor** | Cosmetic or low-impact gaps that can be addressed later without risk. | Constraint not yet linked to a requirement; minor traceability link missing between related but non-dependent artifacts |
+| **Important** | Weakens traceability or coverage but does not block progress. Should be resolved before moving to Design. | Constraint not yet linked to a requirement; user story without requirements; functional requirement missing non-functional counterpart |
+| **Minor** | Cosmetic or low-impact gaps that can be addressed later without risk. | Minor traceability link missing between related but non-dependent artifacts; assumption without verification plan |
 
 Present the findings grouped by severity level (Critical first, then Important, then Minor). Within each severity group, list findings by gap type. For each gap, suggest a concrete action (e.g., "create a user story for stakeholder X", "add a performance requirement for REQ-F-search"). Let the user decide which gaps to address and in what order.
 
 ### Interaction Style
 
-- Ask one question at a time. Wait for the user's answer before proceeding.
+- Ask one topic at a time — closely related questions may be grouped together (e.g., "Who is the primary user, and what is their technical proficiency?"), but avoid mixing unrelated topics in a single turn. Wait for the user's answer before moving to the next topic.
 - After gathering enough information, propose the content and ask for confirmation before creating the file. **Multiple artifacts of the same category may be proposed together** in a single batch (e.g., three goals at once, two assumptions at once). Present each artifact clearly so the user can approve, modify, or decline them individually.
 - When the user confirms, create the file(s) from the appropriate template.
 - **After completing an approved action or after the user declines a proposal, briefly summarize what was done, then ask the user how they want to proceed.** Do not jump directly into suggesting new artifacts.
