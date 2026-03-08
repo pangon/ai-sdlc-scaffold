@@ -39,16 +39,20 @@ These relationships are **traceability links with a coverage review heuristic**:
 
 ### Elicitation Order (New Artifacts)
 
-Follow the prescribed order from `CLAUDE.objectives.md`:
+Elicitation is iterative — artifacts of different types often emerge together during a conversation (e.g., an assumption surfaces while discussing a user story, a constraint becomes apparent while defining a goal). Follow the user's natural train of thought rather than forcing a strict sequence.
+
+That said, there is a **recommended starting sequence** for greenfield projects, because later artifacts depend on earlier ones:
 
 1. **Stakeholders** — ask the user who uses, funds, operates, or is affected by the system. Update `1-objectives/stakeholders.md` with new entries (`STK-kebab-name`).
 2. **Goals** — decompose vague ideas into concrete, measurable outcomes. Create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
-3. **Assumptions** — surface beliefs early. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md`.
-4. **Constraints** — document hard limits. Create `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`.
-5. **User Stories** — capabilities from the stakeholder perspective. Create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
-6. **Requirements** — formal, testable, derived from user stories or goals. Create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
+3. **User Stories** — capabilities from the stakeholder perspective. Create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
+4. **Requirements** — formal, testable, derived from user stories or goals. Create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
 
-You do not have to cover all artifact types in a single session. Work through whatever the user wants to discuss. If starting from scratch, begin with stakeholders.
+**Assumptions** and **Constraints** have no fixed position — capture them whenever they surface during discussion. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md` and `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`.
+
+The only hard prerequisite: **at least one stakeholder must exist before creating goals, user stories, or requirements**, since these artifacts require a source stakeholder link.
+
+You do not have to cover all artifact types in a single session. Work through whatever the user wants to discuss.
 
 ### Proactive Suggestions
 
