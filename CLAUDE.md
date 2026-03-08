@@ -43,39 +43,30 @@ Before creating artifacts in the next phase, check these minimum preconditions. 
 
 ---
 
-## Artifact Status Lifecycle
+## Artifacts
 
-All artifacts with a Status field (user stories, requirements, assumptions) follow this lifecycle:
+All project knowledge — goals, requirements, assumptions, constraints, design decisions, tasks — is captured as structured markdown files alongside the source code. This gives AI agents the full context that human developers would normally carry in their heads or scattered across external tools, and creates a traceability chain from business goals to deployed code.
 
-```
-Draft --[human approves]--> Approved --[linked task Done]--> Implemented
-  \                            \
-   +--[human decides]---------> Deprecated
-```
+### Types and locations
 
-**Transition rules:**
-- **Draft → Approved**: only a human can approve (after stakeholder review)
-- **Approved → Implemented**: the agent marks this when all linked tasks reach Done
-- **Any → Deprecated**: only a human can deprecate; the agent proposes and waits for approval
+| Prefix | Artifact | Location |
+|--------|----------|----------|
+| `GOAL` | Goals | `1-objectives/goals/` |
+| `US` | User Stories | `1-objectives/user-stories/` |
+| `REQ-CLASS` | Requirements | `1-objectives/requirements/` |
+| `ASM` | Assumptions | `1-objectives/assumptions/` |
+| `CON` | Constraints | `1-objectives/constraints/` |
+| `STK` | Stakeholders | `1-objectives/stakeholders.md` (rows) |
+| `DEC` | Decisions | `2-design/decisions/` |
+| `TASK` | Tasks | `3-code/tasks.md` (rows) |
 
----
+### Naming
 
-## Artifact Naming & Indexes
+All artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed by a descriptive kebab-case name. The descriptive name **is** the unique identifier (e.g., `DEC-use-postgres`, `REQ-F-search-by-name`). There are no numeric sequences, to avoid ID collisions when working on parallel branches.
 
-**Naming**: all artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed by a descriptive kebab-case name. The descriptive name **is** the unique identifier (e.g., `DEC-use-postgres`, `REQ-F-search-by-name`). There are no numeric sequences, to avoid ID collisions when working on parallel branches.
+### Phase indexes
 
-| Prefix | Location |
-|--------|----------|
-| `GOAL-` | `1-objectives/goals/` |
-| `US-` | `1-objectives/user-stories/` |
-| `REQ-CLASS-` | `1-objectives/requirements/` |
-| `ASM-` | `1-objectives/assumptions/` |
-| `CON-` | `1-objectives/constraints/` |
-| `STK-` | `1-objectives/stakeholders.md` (rows) |
-| `DEC-` | `2-design/decisions/` |
-| `TASK-` | `3-code/tasks.md` (rows) |
-
-**Index tables**: every index table (in `CLAUDE.<phase>.md` files and `tasks.md`) must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
+Every `CLAUDE.<phase>.md` file (and `tasks.md`) contains index tables listing the artifacts in that phase. Each index must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
 
 ---
 

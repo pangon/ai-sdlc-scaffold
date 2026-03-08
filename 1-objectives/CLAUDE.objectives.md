@@ -21,6 +21,21 @@ Each directory holds individual files (one per item) plus a `_template.md`. When
 
 **Index sync rule**: the index tables below duplicate key metadata from individual files. The individual file is the source of truth. When you modify an artifact, update its index row in the same operation.
 
+### Status lifecycle
+
+All artifacts with a Status field (user stories, requirements, assumptions) follow this lifecycle:
+
+```
+Draft --[human approves]--> Approved --[linked task Done]--> Implemented
+  \                            \
+   +--[human decides]---------> Deprecated
+```
+
+**Transition rules:**
+- **Draft → Approved**: only a human can approve (after stakeholder review)
+- **Approved → Implemented**: the agent marks this when all linked tasks reach Done
+- **Any → Deprecated**: only a human can deprecate; the agent proposes and waits for approval
+
 ### Artifact flow
 
 ```
