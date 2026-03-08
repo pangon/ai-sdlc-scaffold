@@ -139,7 +139,9 @@ Present the findings grouped by severity level (Critical first, then Important, 
 Whenever the skill applies user-approved changes (creating, modifying, or deleting artifacts), update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
 
 1. **Artifact types being elicited** — list which artifact types have been worked on in the Objectives phase (e.g., "Stakeholders defined; Goals and Assumptions drafted"). Update this incrementally as new types are touched.
-2. **Gap analysis status** — every time artifacts are created or modified, set the gap analysis status to **pending** (e.g., "Gap analysis: pending"). When a gap analysis is performed, annotate the result summary (number of findings by severity). The status must remain **in progress** until every finding has been either resolved or explicitly dismissed by the user. Only mark it as **done** (with the date) once all findings are resolved or dismissed. This ensures that any session producing changes always signals the need for a fresh gap analysis, and that no gaps are silently ignored.
+2. **Last gap analysis** — if a gap analysis has been performed, record the date and a one-line result summary (e.g., "Gap analysis (2026-03-08): 2 Critical, 1 Important, 0 Minor"). Update this only when a gap analysis is actually run, not on every artifact change.
+
+Gap analysis can be run at any time during elicitation — it is useful as a mid-session checkpoint to identify blind spots early. However, a gap analysis is **required before phase gate transition** (Objectives → Design). If artifacts have been created or modified since the last recorded gap analysis, append "(stale — artifacts changed since)" to the gap analysis line in Current State and remind the user that a fresh analysis is needed before advancing.
 
 ### Rules
 
