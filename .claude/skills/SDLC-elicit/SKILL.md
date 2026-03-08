@@ -67,6 +67,18 @@ The agent should actively suggest artifacts based on context:
 
 Present suggestions as options the user can accept, modify, or decline. Do not create suggested artifacts without explicit user confirmation.
 
+### Requirement Quality Check
+
+When drafting a requirement to propose to the user, check it against these criteria before presenting it:
+
+- **Verifiable** — every acceptance criterion must be measurable or testable. Flag vague language (e.g., "fast", "user-friendly", "secure") and suggest a concrete threshold or test condition.
+- **Unambiguous** — there should be only one reasonable interpretation. Flag terms that different stakeholders could read differently (e.g., "large file", "real-time", "most users").
+- **Consistent** — the requirement must not conflict with any existing requirement or constraint. Check against the current artifact set and flag contradictions.
+- **Feasible** — if known constraints make the requirement unrealistic, flag the tension (e.g., a latency target that conflicts with a mandated third-party API).
+- **Traceable** — the requirement must link to a source user story or goal. This is already enforced by the template, but verify the link exists and is valid.
+
+Do not announce a "validation step" — apply these criteria silently while drafting. If any criterion fails, include an inline note in the proposal (e.g., _"Note: 'handle large files' is ambiguous — consider specifying a size threshold."_). The user can refine, accept as-is, or dismiss the note.
+
 ### Modifying Existing Artifacts
 
 This skill can be used to review and modify any artifact in `1-objectives/`:
