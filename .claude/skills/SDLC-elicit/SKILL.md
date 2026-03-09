@@ -34,6 +34,7 @@ Objectives artifacts form a traceability chain. Each level should decompose into
 1. **Stakeholder → Goals** — every stakeholder should have at least one associated goal. A stakeholder with no goals has no defined value proposition in the project.
 2. **Goal → User Stories** — every goal should have at least one associated user story. Review the linked user stories against the goal's success criteria and flag coverage gaps.
 3. **User Story → Requirements** — every user story should have at least one associated requirement. Review the linked requirements against the story's acceptance criteria and flag obvious coverage gaps.
+4. **Constraint → Requirements** — constraints may also generate requirements directly (e.g., a compliance constraint produces a compliance requirement, a technology constraint produces a compatibility requirement). When a constraint implies a verifiable obligation, derive a requirement from it and link both.
 
 These relationships are **traceability links with a coverage review heuristic**: check that linked artifacts appear to address the parent's success/acceptance criteria, and surface gaps for the user to evaluate. Completeness is a judgment call that requires domain expertise — the agent flags potential gaps, the human decides whether coverage is adequate.
 
@@ -60,7 +61,7 @@ You do not have to cover all artifact types in a single session. Work through wh
 The agent should actively suggest artifacts based on context:
 
 - **After identifying a stakeholder**: prompt for known constraints (business, technical, operational) before suggesting goals.
-- **After creating a constraint**: flag any existing goals or user stories that may conflict with or be limited by the new constraint. Suggest adjustments if needed.
+- **After creating a constraint**: flag any existing goals or user stories that may conflict with or be limited by the new constraint. Suggest adjustments if needed. If the constraint implies a verifiable obligation, suggest deriving a requirement from it.
 - **After creating a goal**: suggest assumptions that underpin it, additional constraints that may limit it, and user stories that would realize it.
 - **After creating a user story**: suggest requirements that formalize the acceptance criteria, and assumptions about user behavior or technical feasibility.
 - **After creating an assumption**: suggest a verification plan and flag any existing artifacts that depend on it.
@@ -77,7 +78,7 @@ When drafting a requirement to propose to the user, check it against these crite
 - **Unambiguous** — there should be only one reasonable interpretation. Flag terms that different stakeholders could read differently (e.g., "large file", "real-time", "most users").
 - **Consistent** — the requirement must not conflict with any existing requirement or constraint. Check against the current artifact set and flag contradictions.
 - **Feasible** — if known constraints make the requirement unrealistic, flag the tension (e.g., a latency target that conflicts with a mandated third-party API).
-- **Traceable** — the requirement must link to a source user story or goal.
+- **Traceable** — the requirement must link to a source user story, goal, or constraint.
 
 Do not announce a "validation step" — apply these criteria silently while drafting. If any criterion fails, include an inline note in the proposal (e.g., _"Note: 'handle large files' is ambiguous — consider specifying a size threshold."_). The user can refine, accept as-is, or dismiss the note.
 
@@ -119,7 +120,7 @@ Summarize the assessment before the detailed gap list: state whether the current
 
 Check for:
 
-- **Missing traceability** — goals without user stories, user stories without requirements, requirements without a source goal or story.
+- **Missing traceability** — goals without user stories, user stories without requirements, constraints that imply obligations but have no derived requirements, requirements without a source goal, story, or constraint.
 - **Potential coverage gaps** — a goal whose linked user stories do not appear to address all its success criteria, or a user story whose linked requirements do not appear to cover all its acceptance criteria. Flag these as potential gaps for the user to evaluate.
 - **Uncovered stakeholders** — stakeholders with no goals addressing their needs.
 - **Orphaned artifacts** — requirements or assumptions that reference deleted or renamed artifacts.

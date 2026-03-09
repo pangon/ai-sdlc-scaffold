@@ -6,7 +6,7 @@
 
 **Priority**: Must-have | Should-have | Could-have | Won't-have
 
-**Source**: [US-kebab-name](../user-stories/US-kebab-name.md) or [GOAL-kebab-name](../goals/GOAL-kebab-name.md)
+**Source**: [US-kebab-name](../user-stories/US-kebab-name.md) or [GOAL-kebab-name](../goals/GOAL-kebab-name.md) or [CON-kebab-name](../constraints/CON-kebab-name.md)
 
 **Source stakeholder**: [STK-kebab-name](../stakeholders.md)
 
