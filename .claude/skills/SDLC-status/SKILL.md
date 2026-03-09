@@ -9,17 +9,16 @@ You are generating a comprehensive status report for the entire SDLC project.
 
 ### Setup
 
-1. Read `CLAUDE.md` (root instructions).
-2. Read all four phase instruction files:
+1. Read all four phase instruction files:
    - `1-objectives/CLAUDE.objectives.md`
    - `2-design/CLAUDE.design.md`
    - `3-code/CLAUDE.code.md`
    - `4-deploy/CLAUDE.deploy.md`
-3. Read `1-objectives/stakeholders.md`.
-4. Read `3-code/tasks.md`.
-5. Scan all artifact indexes in the phase files.
-6. List files in `2-design/decisions/` to count decisions (exclude templates).
-7. List files in `4-deploy/infrastructure/`, `4-deploy/scripts/`, `4-deploy/runbooks/` to count deployment artifacts.
+2. Read `1-objectives/stakeholders.md`.
+3. Read `3-code/tasks.md`.
+4. Scan all artifact indexes in the phase files.
+5. List files in `2-design/decisions/` to count decisions (exclude templates).
+6. List files in `4-deploy/infrastructure/`, `4-deploy/scripts/`, `4-deploy/runbooks/` to count deployment artifacts.
 
 ### Report Structure
 
@@ -59,10 +58,7 @@ You are generating a comprehensive status report for the entire SDLC project.
 - Runbooks: count
 
 #### Phase Gates
-For each transition, state whether preconditions are met:
-- [ ] Objectives to Design: at least one goal Approved; at least one requirement Approved; stakeholders defined
-- [ ] Design to Code: `architecture.md` has content; at least one requirement has a corresponding task
-- [ ] Code to Deploy: at least one task Done
+For each transition, state whether preconditions are met.
 
 #### Suggestions
 Based on the current state, suggest the most impactful next actions (e.g., "Approve draft requirements to unblock Design phase", "Create tasks for approved requirements").
