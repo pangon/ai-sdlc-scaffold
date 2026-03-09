@@ -22,17 +22,19 @@ For a deeper discussion of the rationale, design choices, and traceability model
 ```bash
 npx degit pangon/ai-sdlc-scaffold my-project
 cd my-project
+rm -f CONTRIBUTING.md CONTRIBUTORS.md LICENSE NOTICE RATIONALE.md README.md
 git init && git add -A && git commit -m "Initial scaffold"
 ```
 
-[`degit`](https://github.com/Rich-Harris/degit) copies the repository contents without carrying over git history, giving you a clean starting point. It requires Node.js but does not install any dependency in your project.
+[`degit`](https://github.com/Rich-Harris/degit) copies the repository contents without carrying over git history, giving you a clean starting point. It requires Node.js but does not install any dependency in your project. The `rm` step removes repo-specific files that are not part of the scaffold.
 
 ### Option B — Manual copy
 
 1. Download or clone this repository.
 2. Copy all files and directories (including hidden ones like `.claude/`) into your new project folder.
 3. Remove the `.git/` directory to start with a fresh history.
-4. Initialize a new repository: `git init && git add -A && git commit -m "Initial scaffold"`.
+4. Remove repo-specific files: `rm -f CONTRIBUTING.md CONTRIBUTORS.md LICENSE NOTICE RATIONALE.md README.md`.
+5. Initialize a new repository: `git init && git add -A && git commit -m "Initial scaffold"`.
 
 ### Then
 
