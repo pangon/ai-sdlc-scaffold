@@ -161,6 +161,7 @@ Gap analysis can be run at any time during elicitation — it is useful as a mid
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
 - Choose a short descriptive kebab-case name for each new artifact (check existing files to avoid duplicates). The name **is** the ID — there are no numeric sequences.
 - Every artifact must have proper traceability links (Source stakeholder, Related goal, etc.).
+- **Bidirectional link maintenance**: when creating or modifying an artifact that references another artifact in its `Source` field (e.g., a requirement citing a goal or constraint), update the referenced artifact's `Related Artifacts` section to include a back-link in the same operation. For goals, add direct-source requirements to the `Requirements:` line; for constraints, add derived requirements to an `## Impact` or `## Related Artifacts` section. This prevents stale `_none yet_` placeholders from accumulating.
 - Follow the requirement class conventions: `REQ-F` (Functional), `REQ-PERF` (Performance), `REQ-SEC` (Security), etc.
 - Use kebab-case for file names: `GOAL-user-authentication.md`, `REQ-F-login-with-email.md`.
 - When creating files, fill in all template fields — do not leave placeholder brackets.
