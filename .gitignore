@@ -21,3 +21,5 @@ Thumbs.db
 # __pycache__/
 # target/
 # build/
+
+TODO.*
