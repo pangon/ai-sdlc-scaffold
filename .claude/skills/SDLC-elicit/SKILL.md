@@ -9,18 +9,13 @@ You are running an interactive elicitation session for the Objectives phase of a
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine whether this skill should proceed:
+Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
 
-1. **Project not initialized** — if the Current State indicates the project has not been initialized (e.g., mentions "not yet been initialized", "base scaffold", or lacks a real project description), **stop and inform the user**:
-   - _"The project has not been initialized yet. Please run `/SDLC-init` first to set up the project description before starting elicitation."_
-   - Do not proceed with elicitation. End the skill here.
+1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Objectives phase** — if the Current State indicates the project is in the Objectives phase (e.g., mentions "Objectives phase", "elicitation", "defining goals/requirements", or no phase beyond Objectives has been started), **proceed normally** with the Setup steps below.
+2. **Project is in the Objectives phase** — the Current State indicates the project is in the Objectives phase (e.g., mentions "Objectives phase", "elicitation", "defining goals/requirements", or no phase beyond Objectives has been started), **proceed normally** with the Setup steps below.
 
-3. **Project has advanced beyond Objectives** — if the Current State indicates the project is in Design, Code, or Deploy phase, **warn the user**:
-   - _"The project is currently in the [detected phase] phase. Modifying Objectives artifacts at this stage may impact downstream design, tasks, or decisions."_
-   - If the user wants to **review or modify existing artifacts**, proceed but flag any downstream dependencies that could be affected.
-   - If the user wants to **create new artifacts**, proceed but remind them to check whether downstream phases need to be updated afterward.
+3. **Project has advanced beyond Objectives** — the Current State indicates the project is in Design, Code, or Deploy phase. **Warn** that modifying Objectives artifacts may impact downstream design, tasks, or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
 
 ### Setup
 
