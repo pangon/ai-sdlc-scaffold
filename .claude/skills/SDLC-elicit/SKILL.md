@@ -44,11 +44,12 @@ Elicitation is iterative — artifacts of different types often emerge together 
 That said, there is a **recommended starting sequence** for greenfield projects, because later artifacts depend on earlier ones:
 
 1. **Stakeholders** — update `1-objectives/stakeholders.md` with new entries (`STK-kebab-name`).
-2. **Goals** — create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
-3. **User Stories** — create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
-4. **Requirements** — create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
+2. **Constraints** — create `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`. Constraints — especially **business** constraints (budget, timeline, team size) and **operational** constraints (hosting, compliance) — should be captured early because they shape which goals are realistic, which user stories are in scope, and how requirements are specified. Proactively ask the user about known constraints across all categories (technical, business, operational) before moving to goals.
+3. **Goals** — create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
+4. **User Stories** — create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
+5. **Requirements** — create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
 
-**Assumptions** and **Constraints** have no fixed position — capture them whenever they surface during discussion. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md` and `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`.
+**Assumptions** have no fixed position — capture them whenever they surface during discussion. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md`. Additional **Constraints** may also emerge later — capture them immediately and review whether existing goals or user stories need to be adjusted.
 
 The only hard prerequisite: **at least one stakeholder must exist before creating goals, user stories, or requirements**, since these artifacts require a source stakeholder link.
 
@@ -58,12 +59,13 @@ You do not have to cover all artifact types in a single session. Work through wh
 
 The agent should actively suggest artifacts based on context:
 
-- **After identifying a stakeholder**: suggest goals that align with their interests.
-- **After creating a goal**: suggest assumptions that underpin it, constraints that limit it, and user stories that would realize it.
+- **After identifying a stakeholder**: prompt for known constraints (business, technical, operational) before suggesting goals.
+- **After creating a constraint**: flag any existing goals or user stories that may conflict with or be limited by the new constraint. Suggest adjustments if needed.
+- **After creating a goal**: suggest assumptions that underpin it, additional constraints that may limit it, and user stories that would realize it.
 - **After creating a user story**: suggest requirements that formalize the acceptance criteria, and assumptions about user behavior or technical feasibility.
 - **After creating an assumption**: suggest a verification plan and flag any existing artifacts that depend on it.
 - **After creating a requirement**: suggest related requirements (e.g., a performance requirement to complement a functional one), and constraints that could affect implementation.
-- **When reviewing existing artifacts**: suggest gaps — missing traceability links, uncovered stakeholder needs, requirements without corresponding user stories, etc.
+- **When reviewing existing artifacts**: suggest gaps — missing traceability links, uncovered stakeholder needs, requirements without corresponding user stories, constraints not reflected in requirements, etc.
 
 Present suggestions as options the user can accept, modify, or decline. Do not create suggested artifacts without explicit user confirmation.
 
