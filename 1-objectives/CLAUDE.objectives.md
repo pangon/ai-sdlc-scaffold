@@ -8,38 +8,16 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
-| Stakeholders | [`stakeholders.md`](stakeholders.md) | Roles with interests and influence (`STK-kebab-name`) |
-| Goals | [`goals/`](goals/) | High-level outcomes (`GOAL-kebab-name`) |
-| User Stories | [`user-stories/`](user-stories/) | User-facing capabilities (`US-kebab-name`) |
-| Requirements | [`requirements/`](requirements/) | Testable system requirements (`REQ-CLASS-kebab-name`) |
-| Assumptions | [`assumptions/`](assumptions/) | Beliefs taken as true but not verified (`ASM-kebab-name`) |
-| Constraints | [`constraints/`](constraints/) | Hard limits on design and implementation (`CON-kebab-name`) |
-
-Each directory holds individual files (one per item) plus a `_template.md`. When a new entry is elicited, create the file from the template and add a row to the appropriate index below.
-
-**Index sync rule**: the index tables below duplicate key metadata from individual files. The individual file is the source of truth. When you modify an artifact, update its index row in the same operation.
-
-### Artifact flow
-
-```
-                         ┌── Assumptions
-Stakeholders → Goals ────┤
-                         ├── Constraints
-                         └── User Stories → Requirements → Design (phase 2)
-```
+| Stakeholders | [`stakeholders.md`](stakeholders.md) | Roles with interests and influence |
+| Goals | [`goals/`](goals/) | High-level outcomes |
+| User Stories | [`user-stories/`](user-stories/) | User-facing capabilities |
+| Requirements | [`requirements/`](requirements/) | Testable system requirements |
+| Assumptions | [`assumptions/`](assumptions/) | Beliefs taken as true but not verified |
+| Constraints | [`constraints/`](constraints/) | Hard limits on design and implementation |
 
 ---
 
 ## AI Guidelines
-
-### Elicitation order
-
-1. **Stakeholders** — identify all roles before writing anything else
-2. **Goals** — high-level outcomes, one per stakeholder concern
-3. **Assumptions** — surface beliefs early, while cheap to challenge
-4. **Constraints** — document hard limits before they surprise you in design
-5. **User Stories** — capabilities from the stakeholder perspective
-6. **Requirements** — formal, testable, derived from user stories or goals
 
 ### Per-artifact guidance
 

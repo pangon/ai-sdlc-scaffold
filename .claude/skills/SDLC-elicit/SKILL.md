@@ -43,10 +43,10 @@ Elicitation is iterative — artifacts of different types often emerge together 
 
 That said, there is a **recommended starting sequence** for greenfield projects, because later artifacts depend on earlier ones:
 
-1. **Stakeholders** — ask the user who uses, funds, operates, or is affected by the system. Update `1-objectives/stakeholders.md` with new entries (`STK-kebab-name`).
-2. **Goals** — decompose vague ideas into concrete, measurable outcomes. Create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
-3. **User Stories** — capabilities from the stakeholder perspective. Create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
-4. **Requirements** — formal, testable, derived from user stories or goals. Create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
+1. **Stakeholders** — update `1-objectives/stakeholders.md` with new entries (`STK-kebab-name`).
+2. **Goals** — create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
+3. **User Stories** — create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
+4. **Requirements** — create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
 
 **Assumptions** and **Constraints** have no fixed position — capture them whenever they surface during discussion. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md` and `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`.
 
