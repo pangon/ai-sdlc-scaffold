@@ -51,4 +51,8 @@ A decision should be deprecated when no longer relevant, or superseded when a ne
    - In the old history file: append changelog entry.
    - In every phase index: replace the old row with the new one.
 
-6. **Verify**: no phase index still references the retired decision as active.
+6. **Check design documents for impact**: search `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md` for references to the retired decision.
+   - If references are found, list the affected sections and give a brief assessment of the likely impact.
+   - If you are already operating within the `/SDLC-design` skill, proceed with proposing the design updates.
+   - Otherwise, do **not** modify design documents here — design changes require the full context of the `/SDLC-design` skill. Recommend the user run `/SDLC-design` to apply the necessary updates.
+7. **Verify**: no phase index still references the retired decision as active.

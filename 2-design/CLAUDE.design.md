@@ -23,40 +23,6 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 
 ---
 
-## AI Guidelines
-
-### Architecture
-- Default to the simplest design that satisfies all requirements; add complexity only when justified
-- Document component responsibilities and interactions
-- Use Mermaid diagrams where helpful
-- Reference requirements from `1-objectives/`
-
-### Data Modeling
-- Define clear schemas with types and constraints
-- Document relationships between entities
-- Consider data lifecycle (creation, updates, deletion)
-
-### API Design
-- Follow REST conventions or document deviations
-- Define request/response formats clearly
-- Document error handling and status codes
-- Consider versioning strategy
-
-### Diagrams
-
-Use Mermaid syntax:
-
-```mermaid
-graph TD
-    A[Component A] --> B[Component B]
-    B --> C[Component C]
-```
-
-### Recording Decisions
-When a significant decision is made during this phase, follow the procedure in [CLAUDE.md — Decisions](../CLAUDE.md#when-recording-decisions).
-
----
-
 ## Linking to Other Phases
 
 - Reference requirements from `1-objectives/` to justify design choices
