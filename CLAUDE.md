@@ -31,6 +31,13 @@ Each phase directory contains a `CLAUDE.<phase>.md` file. When working in a phas
 | **Code** | `3-code/` | Build it |
 | **Deploy** | `4-deploy/` | Ship and operate it |
 
+### Cross-Skill Artifact Procedures
+
+Any modification to phase artifacts — whether performed inside a skill, during a free-prompt conversation, or as a side effect of any other task — must follow the authoritative procedures for that phase:
+
+- **Objectives artifacts** (`1-objectives/`): follow the procedures in [`.claude/skills/SDLC-elicit/SKILL.md`](.claude/skills/SDLC-elicit/SKILL.md) — including traceability rules, status downgrade on modification, index synchronization, bidirectional link maintenance, and Current State tracking.
+- **Design artifacts** (`2-design/`): follow the procedures in [`.claude/skills/SDLC-design/SKILL.md`](.claude/skills/SDLC-design/SKILL.md) — including downstream effect checks, decision recording triggers, requirement coverage verification, and Current State tracking.
+
 ### Phase Gates
 
 Before creating artifacts in the next phase, check these minimum preconditions. Gates are advisory — warn the user if not met, but proceed if they confirm.
