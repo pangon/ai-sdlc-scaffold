@@ -11,7 +11,12 @@ When a significant decision, pattern, or constraint emerges:
 1. Choose a short descriptive kebab-case name that captures the decision (e.g., `use-postgres`, `error-response-format`).
 2. Create `DEC-kebab-name.md` from [`_template.md`](_template.md) and fill in all fields.
 3. Create `DEC-kebab-name.history.md` from [`_template.history.md`](_template.history.md) and fill in all fields.
-4. Add an entry (with a File column linking to the new file) to the decisions index of every phase whose trigger conditions are met.
+4. Add an entry (with a File column linking to the new file) to the decisions index of **every** phase whose trigger conditions are met. The decision template defines trigger conditions per phase (Design, Code, Deploy). Check each phase and add the decision to all matching indexes:
+   - `2-design/CLAUDE.design.md` — if the decision has a "Design phase" trigger
+   - `3-code/CLAUDE.code.md` — if the decision has a "Code phase" trigger
+   - `4-deploy/CLAUDE.deploy.md` — if the decision has a "Deploy phase" trigger
+
+   Do **not** limit the entry to only the current working phase.
 
 ### Human involvement vocabulary
 
