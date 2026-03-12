@@ -132,6 +132,10 @@ Replace the placeholder content in the `## Components` section with an entry for
 
 Keep the section concise — it is a navigation aid, not a design document.
 
+#### 4. Next Step Guidance
+
+After the component structure is created and `CLAUDE.code.md` is updated, inform the user that the next step is **implementation planning** via `/SDLC-implementation-plan`. This skill reads the design artifacts and component definitions to produce a phased sequence of short development tasks in `3-code/tasks.md`, each phase ending with a deployable or testable system.
+
 ### Interaction Style
 
 - Present all identified components at once (they are closely related) — do not ask one at a time.

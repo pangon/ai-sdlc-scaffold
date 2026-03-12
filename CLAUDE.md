@@ -8,7 +8,7 @@
 
 <!-- Replace this section with a description of your project. -->
 
-This repository uses a structured, AI-first development lifecycle. All project knowledge — objectives, design, decisions, tasks — lives alongside the source code. See [README.md](README.md) for the full directory layout.
+This repository uses a structured, AI-first development lifecycle. All project knowledge — objectives, design, decisions, tasks — lives alongside the source code.
 
 ### Current State
 
@@ -37,6 +37,7 @@ Any modification to phase artifacts — whether performed inside a skill, during
 
 - **Objectives artifacts** (`1-objectives/`): follow the procedures in [`.claude/skills/SDLC-elicit/SKILL.md`](.claude/skills/SDLC-elicit/SKILL.md) — including traceability rules, status downgrade on modification, index synchronization, bidirectional link maintenance, and Current State tracking.
 - **Design artifacts** (`2-design/`): follow the procedures in [`.claude/skills/SDLC-design/SKILL.md`](.claude/skills/SDLC-design/SKILL.md) — including downstream effect checks, decision recording triggers, requirement coverage verification, and Current State tracking.
+- **Code phase task artifacts** (`3-code/tasks.md`): follow the procedures in [`.claude/skills/SDLC-implementation-plan/SKILL.md`](.claude/skills/SDLC-implementation-plan/SKILL.md) — including phased task grouping, traceability links, incremental deployability, and Current State tracking.
 
 ### Phase Gates
 
@@ -46,7 +47,8 @@ Before creating artifacts in the next phase, check these minimum preconditions. 
 |------------|---------------|
 | Objectives → Design | Stakeholders defined; at least one goal Approved; at least one requirement Approved; gap analysis recorded in Current State and fresh (not stale, no Critical gaps) |
 | Design → Code | All design documents drafted (`architecture.md`, `data-model.md`, `api-design.md`); completeness assessment recorded in Current State and fresh (not stale, no Critical findings); components identified (per-component directories in `3-code/`) |
-| Code → Deploy | At least one task Done |
+
+There is no gate between Code and Deploy. Deploy activities (deployments, runbooks, infrastructure setup) can happen at any time during the Code phase.
 
 ---
 
@@ -73,7 +75,7 @@ All artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed 
 
 ### Phase indexes
 
-Every `CLAUDE.<phase>.md` file (and `tasks.md`) contains index tables listing the artifacts in that phase. Each index must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
+Every `CLAUDE.<phase>.md` file contains index tables listing the artifacts in that phase. Each index must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
 
 ---
 
@@ -102,7 +104,7 @@ Each `CLAUDE.<phase>.md` contains a decisions index with trigger conditions. A d
 
 ### How to use decisions during tasks
 
-1. Consult the decisions index in the current phase's `CLAUDE.<phase>.md`.
+1. Consult the decisions index in the current phase's `CLAUDE.<phase>.md`, or in a component-specific `CLAUDE.<component>.md` when working within a specific component.
 2. Follow the File column link to read the relevant `DEC-*.md` file.
 3. Apply its enforcement rules.
 

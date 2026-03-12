@@ -77,6 +77,8 @@ When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.
 
 All development tasks are tracked in [`tasks.md`](tasks.md).
 
+To create the initial implementation plan (phased tasks from design artifacts), run `/SDLC-implementation-plan`. This should be done after `/SDLC-decompose` and before starting any coding work.
+
 ---
 
 ## Linking to Other Phases
