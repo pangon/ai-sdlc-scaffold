@@ -44,8 +44,8 @@ Before creating artifacts in the next phase, check these minimum preconditions. 
 
 | Transition | Preconditions |
 |------------|---------------|
-| Objectives → Design | At least one goal Approved; at least one requirement Approved; stakeholders defined |
-| Design → Code | `architecture.md` has content; at least one requirement has a corresponding task in `tasks.md` |
+| Objectives → Design | Stakeholders defined; at least one goal Approved; at least one requirement Approved; gap analysis recorded in Current State and fresh (not stale, no Critical gaps) |
+| Design → Code | All design documents drafted (`architecture.md`, `data-model.md`, `api-design.md`); completeness assessment recorded in Current State and fresh (not stale, no Critical findings); components identified (per-component directories in `3-code/`) |
 | Code → Deploy | At least one task Done |
 
 ---

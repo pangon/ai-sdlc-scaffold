@@ -6,33 +6,9 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ---
 
-## Decisions Relevant to This Phase
+## Components
 
-| File | Title | Trigger |
-|------|-------|---------|
-<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](../2-design/decisions/DEC-kebab-name.md) -->
-
----
-
-## Component Guidelines
-
-<!-- Add an entry for each component/codebase. Copy the template block below. -->
-
-Each component must have a brief description here. Update it when architecture or responsibilities change. If a description drifts from the implementation, correct it before continuing work.
-
-```
-### <Component Name>
-
-<One or two sentences describing what this component does.>
-
-| Aspect | Details |
-|--------|---------|
-| Runtime / Language | |
-| Framework | |
-| Key responsibilities | |
-| Owned data / APIs | |
-| Testing approach | |
-```
+<!-- Add an entry for each component/codebase -->
 
 ---
 
@@ -40,7 +16,7 @@ Each component must have a brief description here. Update it when architecture o
 
 Scripts and commands for each component are documented in that component's own codebase (package.json, Makefile, README, or equivalent). Check there first.
 
-When invoking any command, apply active decisions from the index above whose trigger conditions match.
+When invoking any command, apply active decisions from the component's `CLAUDE.component.md` whose trigger conditions match.
 
 ---
 
@@ -67,7 +43,7 @@ When invoking any command, apply active decisions from the index above whose tri
 3. If the task touches infrastructure as code (Terraform, CloudFormation, Dockerfiles, CI/CD pipelines, Helm charts, etc.), also read [`4-deploy/CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md) and follow its instructions alongside these
 4. Update status to `In Progress` in `tasks.md`
 5. If you anticipate a significant divergence from the design, **stop and follow the [design gap procedure](#design-gaps)** before coding
-6. Check relevant decisions from the index above
+6. Check relevant decisions from the component's `CLAUDE.component.md`
 7. Implement with tests
 8. After implementing: evaluate whether any divergence from the design occurred and follow the design gap procedure if needed
 9. Update status to `Done` in `tasks.md`

@@ -19,7 +19,7 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
    - **(a)** At least one goal with `Status: Approved`
    - **(b)** At least one requirement with `Status: Approved`
-   - **(c)** Gap analysis recorded in the Current State and fresh (not stale, no Critical gaps)
+   - **(c)** Gap analysis recorded in the Current State, fresh (not stale), and with no Critical gaps
 
    Then respond based on the results:
 
@@ -146,6 +146,12 @@ Review design documents for significant technical choices that are not captured 
 | **Minor** | Low-impact gaps that can be addressed during implementation | Missing Mermaid diagram; design depends on unverified low risk assumption; minor traceability link missing |
 
 Present findings grouped by severity (Critical first). For each finding, suggest a concrete action. Let the user decide which to address and in what order.
+
+#### 7. Next Step Guidance
+
+After the completeness assessment is finalized and there are **no Critical findings**, inform the user that the next step is **component identification** via `/SDLC-decompose`. This skill analyzes the design artifacts to identify distinct software components and creates per-component directories.
+
+For complex projects, suggest running the assessment iteratively — addressing findings, updating the design, and re-assessing — until results converge (i.e., no new Critical or Important findings emerge between successive runs).
 
 ### Decision Triggers
 

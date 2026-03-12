@@ -13,7 +13,7 @@ When a significant decision, pattern, or constraint emerges:
 3. Create `DEC-kebab-name.history.md` from [`_template.history.md`](_template.history.md) and fill in all fields.
 4. Add an entry (with a File column linking to the new file) to the decisions index of **every** phase whose trigger conditions are met. The decision template defines trigger conditions per phase (Design, Code, Deploy). Check each phase and add the decision to all matching indexes:
    - `2-design/CLAUDE.design.md` — if the decision has a "Design phase" trigger
-   - `3-code/CLAUDE.code.md` — if the decision has a "Code phase" trigger
+   - **Code phase** — if the decision has a "Code phase" trigger, add it to the `## Relevant Decisions` table of each affected component's `3-code/<component>/CLAUDE.component.md`. Determine which components are affected by the decision's **Scope** field and trigger description. If no per-component directories exist yet (i.e., components have not been identified), skip the Code phase index entirely — the decision will be picked up when components are created.
    - `4-deploy/CLAUDE.deploy.md` — if the decision has a "Deploy phase" trigger
 
    Do **not** limit the entry to only the current working phase.
@@ -48,7 +48,7 @@ A decision should be deprecated when no longer relevant, or superseded when a ne
    **If deprecating:**
    - In the decision file: change `**Status**` to `Deprecated`.
    - In the history file: append a changelog entry with date, change, and involvement type.
-   - Remove the decision from every phase index.
+   - Remove the decision from every phase index (`2-design/CLAUDE.design.md`, affected `3-code/<component>/CLAUDE.component.md` files, `4-deploy/CLAUDE.deploy.md`).
 
    **If superseding:**
    - Create the replacement decision following the recording procedure above.
@@ -60,4 +60,4 @@ A decision should be deprecated when no longer relevant, or superseded when a ne
    - If references are found, list the affected sections and give a brief assessment of the likely impact.
    - If you are already operating within the `/SDLC-design` skill, proceed with proposing the design updates.
    - Otherwise, do **not** modify design documents here — design changes require the full context of the `/SDLC-design` skill. Recommend the user run `/SDLC-design` to apply the necessary updates.
-7. **Verify**: no phase index still references the retired decision as active.
+7. **Verify**: no phase index (`2-design/CLAUDE.design.md`, all `3-code/<component>/CLAUDE.component.md` files, `4-deploy/CLAUDE.deploy.md`) still references the retired decision as active.

@@ -135,6 +135,10 @@ Classify each finding into one of three severity levels:
 
 Present the findings grouped by severity level (Critical first, then Important, then Minor). Within each severity group, list findings by gap type. For each gap, suggest a concrete action (e.g., "create a user story for stakeholder X", "add a performance requirement for REQ-F-search"). Let the user decide which gaps to address and in what order.
 
+#### 4. Next Step
+
+After completing the gap analysis with no Critical findings remaining, inform the user that the Objectives phase is ready for phase gate transition and that the next step is to start the Design phase using the `/SDLC-design` skill.
+
 ### Interaction Style
 
 - Ask one topic at a time — closely related questions may be grouped together (e.g., "Who is the primary user, and what is their technical proficiency?"), but avoid mixing unrelated topics in a single turn. Wait for the user's answer before moving to the next topic.
