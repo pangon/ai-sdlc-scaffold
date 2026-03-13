@@ -6,9 +6,9 @@
 |--------|--------|
 | `Todo` | Not started |
 | `In Progress` | Currently being worked on |
-| `Blocked` | Waiting on a dependency or decision |
+| `Blocked` | Waiting on a dependency or decision (reason **must** be noted in the Notes column) |
 | `Done` | Completed |
-| `Cancelled` | No longer needed |
+| `Cancelled` | No longer needed (reason **must** be noted in the Notes column) |
 
 ## Priority Legend
 
@@ -18,15 +18,6 @@
 | `P1` | Implements a Must-have goal |
 | `P2` | Implements a Should-have goal |
 | `P3` | Implements a Could-have goal |
-
-## How to Update
-
-- When starting a task, set Status to `In Progress` and update the `Updated` column.
-- When finishing a task, set Status to `Done` and update the `Updated` column.
-- When a task is blocked, set Status to `Blocked`, note the blocker in `Notes`, and update the `Updated` column.
-- Do **not** reorder rows within a section — the Execution Plan defines execution order.
-- Do **not** change task IDs after creation.
-- When cancelling a task, set Status to `Cancelled`, note the reason in `Notes`, and update the `Updated` column.
 
 ---
 

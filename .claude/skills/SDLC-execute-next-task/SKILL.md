@@ -1,0 +1,189 @@
+---
+name: SDLC-execute-next-task
+description: Execute the next pending task from the implementation plan. Finds the first actionable task, checks decisions, implements with tests, handles design gaps, and updates task status. Use during the Code phase to make incremental progress.
+---
+
+## Instructions
+
+You are executing the next pending development task from the implementation plan. You will identify the task, review its requirements and applicable decisions, implement it (or decompose it if too large), and update the task tracker.
+
+### Phase Validation
+
+Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+
+1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+
+2. **Project is in the Objectives phase** — the Current State mentions "Objectives phase", lists objectives artifacts being drafted, or no phase beyond Objectives has been started. **Stop**, recommend `/SDLC-elicit` to continue refining objectives or `/SDLC-design` to start the design phase, and do not proceed.
+
+3. **Project is in the Design phase** — **Stop**, recommend completing design with `/SDLC-design`, then `/SDLC-decompose` and `/SDLC-implementation-plan` to create the task list, and do not proceed.
+
+4. **Project is in the Code phase but has no tasks** — `3-code/tasks.md` has no task entries (only template/legend). **Stop**, recommend `/SDLC-implementation-plan` to create the task list, and do not proceed.
+
+5. **Project is in the Code phase with tasks** — this is the expected state. Proceed with Task Selection.
+
+### Task Selection
+
+1. **Read code phase instructions**: Open `3-code/CLAUDE.code.md`.
+
+2. **Read the task list**: Open `3-code/tasks.md`.
+
+3. **Read the Execution Plan**: Look at the Execution Plan section to understand phase ordering. Phases are executed sequentially — complete all tasks in a phase before moving to the next.
+
+4. **Check for interrupted tasks**: Scan the Task Table for any task with status `In Progress`. If one is found, **stop** — that task was likely interrupted in a previous session. Inform the user which task is in progress and ask how they want to proceed (resume, reset to Todo, or cancel it) before continuing. Do not select a different task.
+
+5. **Find the current phase**: Identify the earliest phase that still has tasks with a status other than `Done` or `Cancelled`. If no such phase exists:
+   - If any tasks across all phases have status `Blocked`, **stop** and inform the user that the implementation plan is complete except for blocked tasks. List the blocked tasks and their blockers. Do not proceed.
+   - If no tasks are blocked either, **stop** and inform the user that the entire implementation plan has been completed. Do not proceed.
+
+6. **Unblock eligible tasks**: Scan the current phase for tasks with status `Blocked`. For each blocked task:
+   - Read the `Notes` column to understand why it was blocked.
+   - Check the status of the tasks it depends on (from the `Dependencies` column).
+   - If the blocking condition described in `Notes` no longer applies and all dependencies are `Done`, update its status to `Todo` and set `Updated` to today's date.
+
+7. **Find the next task**: Within the current phase, find the first task (in the listed order) that has status `Todo` in the Task Table.
+
+8. **Validate dependencies**: Check that all tasks listed in the selected task's `Dependencies` column are marked as `Done`.
+   - If any dependency is **not** `Done`, **stop** — inform the user that this task has unmet dependencies and should likely be marked as `Blocked`. List the unmet dependencies and ask the user how they want to proceed (mark it as Blocked, skip it, force-start it, execute one of the blocking tasks first, or revise the implementation plan). If the user chooses to mark the task as `Blocked`, record the blocking reason in the `Notes` column (e.g., "Blocked: waiting on TASK-xyz which is still Todo").
+   - If all dependencies are `Done`, select this task for execution and proceed to Task Preparation.
+
+### Task Preparation
+
+Before writing any code, gather all necessary context:
+
+#### 1. Read Requirements
+
+Read every requirement listed in the task's `Req` column (follow the links in the Task Table). Understand what the task must deliver, including acceptance criteria.
+
+#### 2. Review Design Documents
+
+Read relevant design documents in `2-design/` — at minimum the ones that cover the area being implemented (architecture, data model, API design). Understand the intended design for this task.
+
+#### 3. Check Applicable Decisions
+
+Read the `CLAUDE.component.md` file for the component this task belongs to (determined by which Task Table section it appears in). Review the `## Relevant Decisions` table:
+- Scan the table and identify any decisions whose trigger conditions match the current task.
+- Read the full decision file(s) for applicable decisions (follow the File column links).
+- These decisions **must** be applied during implementation.
+
+Additionally, if the task involves multiple components, also read the `CLAUDE.component.md` file for each involved component and review their `## Relevant Decisions` tables — decisions from all involved components must be considered and applied. For tasks in the `Setup & Infrastructure` or `Deploy & Operations` sections, also check the decisions indexes in `2-design/CLAUDE.design.md` and `4-deploy/CLAUDE.deploy.md` respectively.
+
+#### 4. Confirm Understanding
+
+After completing steps 1–3, assess whether you have a clear and reasonably certain understanding of what the task requires you to implement. If, despite having read the requirements, design documents, and applicable decisions, the task's scope, expected behavior, or implementation approach remains ambiguous — **stop and ask the user** for confirmation or additional information before proceeding. Do not guess or assume intent when genuine uncertainty exists.
+
+#### 5. Evaluate Task Complexity
+
+Assess whether the task is too large to complete in one session. A task is "too large" if it would require:
+- Multiple distinct components that could be done separately
+- Complex logic that should be tested incrementally
+- More code than can be reasonably reviewed at once
+
+### Execution
+
+Follow one of two paths based on complexity assessment:
+
+#### Path A: Task is Manageable — Execute
+
+1. **Update status**: Set the task's Status to `In Progress` and update the `Updated` column with today's date in `tasks.md`.
+
+2. **Check for design gaps before coding**: If you anticipate a significant divergence from the design documents, **stop and follow the Design Gap procedure** (below) before writing implementation code.
+
+3. **Implement**:
+   - Write clear, self-documenting code following language/framework conventions and established best practices (e.g., SOLID principles, DRY, separation of concerns, meaningful naming, proper error handling, security best practices).
+   - Prefer splitting code across multiple files over keeping a single large file, when compatible with language/framework conventions.
+   - Keep functions small and focused.
+   - Add comments only where logic isn't self-evident — do not add redundant or obvious comments.
+   - Use strict type checking where available.
+   - Apply all relevant decisions identified in Task Preparation step 3.
+
+4. **Write tests**:
+   - **Acceptance criteria coverage**: for each requirement linked in the task's `Req` column, review its acceptance criteria. Write tests that verify every acceptance criterion that is enabled by this task's implementation.
+   - **Test organization**: follow the testing best practices and conventions of the project's tech stack (directory structure, naming, test runner configuration, fixtures, etc.).
+   - **Unit tests**: write unit tests for new functionality — use descriptive test names that explain the scenario being tested.
+   - **Integration tests**: if the task involves communication between different components, or between different modules within the same component, write integration tests in addition to unit tests.
+   - **Bug fix tests**: when fixing a bug: (a) write a failing test that reproduces the bug before making any fix, (b) fix the bug and verify the test passes, (c) search the same component's codebase for the same bug pattern elsewhere — if found, **ask the user** whether to fix those occurrences too.
+
+5. **Run tests and verify**:
+   - Run the full test suite (or at minimum, all tests related to the current task and its component).
+   - **All tests must pass** before the task can be considered complete.
+   - If tests fail, analyze the failure, fix the issue, and re-run.
+   - If after **3 consecutive fix-and-rerun iterations** tests still fail, **stop** — explain to the user what is failing, what you have tried, and ask how they want to proceed (continue debugging, adjust the approach, simplify the tests, or skip and mark the task as blocked).
+
+6. **Check for design gaps after coding**: After implementing, evaluate whether any divergence from the design occurred and follow the Design Gap procedure if needed.
+
+7. **Evaluate new decisions**: After completing the task, assess whether a new implementation pattern or convention emerged that should be documented:
+   - Did you make a non-obvious implementation choice that future tasks should replicate?
+   - Did you establish a pattern (error handling, UI interaction, data flow, naming) that should be consistent across the codebase?
+   - If yes: record a new decision.
+   - If no new decision is needed, skip this step.
+
+8. **Update status**: Set the task's Status to `Done` and update the `Updated` column with today's date in `tasks.md`.
+
+9. **Do NOT commit automatically** — leave changes for user review.
+
+#### Path B: Task is Too Large — Decompose
+
+1. **Do NOT execute the task.**
+2. **Break it down** into smaller subtasks, each representing a focused unit of work.
+3. **Insert the subtasks** into the Task Table in the appropriate component section, with:
+   - **ID**: use the parent task ID with a descriptive suffix (e.g., `TASK-model-service-list`, `TASK-model-service-download`).
+   - **Priority**: inherit from parent task.
+   - **Status**: `Todo`.
+   - **Req**: distribute the parent's requirement links to the relevant subtasks.
+   - **Dependencies**: set correctly (subtasks may depend on each other or on the same dependencies as the parent).
+   - **Updated**: today's date.
+   - **Notes**: reference the parent task (e.g., "Split from TASK-model-service").
+4. **Update the Execution Plan** to replace the parent task with the subtasks in the same phase, preserving the correct execution order.
+5. **Set the parent task's status** to `Cancelled` with a note explaining the decomposition (e.g., "Decomposed into TASK-model-service-list, TASK-model-service-download, TASK-model-service-load").
+6. **Explain** to the user what subtasks were created and why.
+
+### Design Gap Procedure
+
+A design gap is any divergence between design documents and what implementation requires. When updating design artifacts as part of this procedure, follow the procedures and instructions in `.claude/skills/SDLC-design/SKILL.md` — in particular the **Modifying Existing Design Documents** section (downstream effect checks, present changes, wait for confirmation), **Decision Triggers** (record new decisions when design choices are approved), **Current State Tracking** (update `CLAUDE.md`), and the cross-skill artifact procedures defined in `CLAUDE.md`.
+
+**Minor divergence** (field renamed, type made more specific, optional field added): update the relevant `2-design/` file following the SDLC-design modification procedures, continue.
+
+**Significant divergence** (new endpoint/entity, invalid architectural assumption, requirement that cannot be implemented as designed):
+
+1. **Stop** — do not write implementation code.
+2. **Surface** the gap: what the design says, what implementation needs, why they differ.
+3. **Present options**: update design first, simplify to stay within design, or accept and record deviation as a decision.
+4. **Wait for explicit approval** before proceeding.
+5. **Act**: update `2-design/` or `1-objectives/` as needed following the SDLC-design procedures (including downstream effect checks, decision recording, and Current State tracking), then implement.
+
+### Current State Tracking
+
+Whenever the skill completes a task (status set to `Done`) or decomposes a task, update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
+
+1. **Task progress** — note overall progress (e.g., "Implementation progress: 5/42 tasks done, currently in Phase 2"). Update this after every task completion or decomposition.
+2. **Design gap resolutions** — if the Design Gap Procedure was triggered and resulted in design document updates or new decisions, reflect those changes in the Current State (following the same conventions as the SDLC-design skill's Current State Tracking: update design document status, decision count, and mark completeness assessment as stale if applicable).
+
+If a task execution only changes task status (no design impact), update only the task progress line. Do not rewrite the entire Current State section — update incrementally.
+
+### Interaction Style
+
+- After selecting the next task, briefly state which task was selected, its requirements, and applicable decisions before starting implementation. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 4).
+- During implementation, work autonomously — do not ask for confirmation at every step. The stop-and-ask points are explicitly defined in the instructions (interrupted tasks, unmet dependencies, design gaps, ambiguity).
+- **After completing a task (executed or decomposed), report the outcome and ask the user how they want to proceed** — e.g., review changes, commit, or stop. Do not automatically start the next task.
+- When a design gap is found, present it clearly with context, options, and trade-offs. Do not minimize the gap or push toward a specific resolution.
+- When decomposing a task, explain the rationale for the split and how the subtasks relate to each other.
+
+### Rules
+
+- **Read-before-write**: always read existing files before proposing changes.
+- **Requirements first**: read every linked requirement before writing code. Do not implement from memory or assumption.
+- **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.component.md` must be followed. If a decision conflicts with the task, surface it to the user — do not silently ignore it.
+- **Task list integrity**: never reorder the task list within a phase in `tasks.md`, and never rename pre-existing task IDs.
+- **No auto-commit**: leave all changes for user review. Do not commit or push.
+- **Traceability**: if the implementation reveals that a requirement is missing or incorrect, surface it to the user and recommend `/SDLC-elicit` to address it.
+- **Deploy awareness**: if the task touches infrastructure as code (Terraform, Dockerfiles, CI/CD pipelines, deployment scripts, etc.), also read `4-deploy/CLAUDE.deploy.md`, review its decisions index, and follow its instructions alongside these.
+
+### Output
+
+At the end, report:
+- Which task was identified as next
+- Whether it was executed or decomposed
+- What was accomplished or what subtasks were created
+- Which decisions were applied (if any)
+- Whether a design gap was found and how it was resolved (if any)
+- Whether a new decision was proposed (if any)
