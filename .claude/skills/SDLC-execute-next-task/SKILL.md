@@ -120,6 +120,7 @@ Follow one of two paths based on complexity assessment:
 2. **Check for design gaps before coding**: If you anticipate a significant divergence from the design documents (not from the task description — see the distinction in "Task Descriptions Are Indicative"), **stop and follow the Design Gap procedure** (below) before writing implementation code.
 
 3. **Implement**:
+   - Respect the component isolation rules in `3-code/CLAUDE.code.md`.
    - Write clear, self-documenting code following language/framework conventions and established best practices (e.g., SOLID principles, DRY, separation of concerns, meaningful naming, proper error handling, security best practices).
    - Prefer splitting code across multiple files over keeping a single large file, when compatible with language/framework conventions.
    - Keep functions small and focused.
