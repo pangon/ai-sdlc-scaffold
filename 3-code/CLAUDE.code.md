@@ -12,6 +12,15 @@ This phase contains the **implementation**. Focus on clean, tested, maintainable
 
 ---
 
+## Component Isolation
+
+All source code, configuration, and assets for a component **must reside within that component's directory**. Specifically:
+
+- **No code outside component directories** — never place source files, configuration files, or build artifacts in `3-code/` itself or anywhere else outside the owning component's directory.
+- **Do not rename or move component directories** — the directory names listed above are fixed; renaming or relocating them breaks cross-phase references and tooling assumptions.
+
+---
+
 ## Build Commands
 
 Scripts and commands for each component are documented in that component's own codebase (package.json, Makefile, README, or equivalent). Check there first.

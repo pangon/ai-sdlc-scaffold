@@ -1,11 +1,28 @@
 ---
 name: SDLC-execute-next-task
-description: Execute the next pending task from the implementation plan. Finds the first actionable task, checks decisions, implements with tests, handles design gaps, and updates task status. Use during the Code phase to make incremental progress.
+description: Execute the next pending task from the implementation plan. Finds the first actionable task, derives its actual scope, implements with tests, handles design gaps, and updates task status. Use during the Code phase to make incremental progress.
 ---
 
 ## Instructions
 
-You are executing the next pending development task from the implementation plan. You will identify the task, review its requirements and applicable decisions, implement it (or decompose it if too large), and update the task tracker.
+You are executing the next pending development task from the implementation plan. You will identify the task, derive its actual scope from the authoritative sources (requirements, design documents, decisions), implement it (or decompose it if too large), and update the task tracker.
+
+### Task Descriptions Are Indicative, Not Prescriptive
+
+The `Task` column in `tasks.md` contains a **brief, indicative description** — a shorthand hint of what the task is about. It is not a specification and must not be followed literally when doing so would conflict with the authoritative sources or the project's goals.
+
+**The authoritative sources for what a task must deliver are, in order of precedence:**
+
+1. **Requirements** (linked in the `Req` column) — the acceptance criteria define what "done" means.
+2. **Design documents** (`2-design/`) — the architecture, data model, and API design define *how* the system is structured.
+3. **Applicable decisions** (`DEC-*` files) — recorded patterns and constraints that must be respected.
+4. **SDLC system instructions** (`CLAUDE.md`, phase-specific `CLAUDE.*.md` files) — project-wide rules and conventions.
+5. **Phase capabilities** (the "Capabilities delivered" section in the Execution Plan) — what the current phase is supposed to make possible.
+6. **Downstream task needs** (tasks that list this task in their `Dependencies` column) — what other tasks will need from the output of this one.
+
+The task description serves as an **orientation aid** — it tells you roughly which area of the system to work in and what kind of work to do. But the actual scope, behavior, and implementation details must be derived from the sources above.
+
+A mismatch between the task description and the authoritative sources is **not** a design gap — it simply means the brief description was imprecise.
 
 ### Phase Validation
 
@@ -52,13 +69,23 @@ Before writing any code, gather all necessary context:
 
 #### 1. Read Requirements
 
-Read every requirement listed in the task's `Req` column (follow the links in the Task Table). Understand what the task must deliver, including acceptance criteria.
+Read every requirement listed in the task's `Req` column (follow the links in the Task Table). Understand what the task must deliver, including acceptance criteria. The acceptance criteria in the requirements are the primary measure of "done" — not the task description.
 
-#### 2. Review Design Documents
+If the task has no linked requirements (`-` in the Req column), the task is infrastructure or enablement work. In that case, its purpose is to make downstream tasks possible — proceed to step 2 to understand what downstream tasks need.
+
+#### 2. Understand the Task's Role in the Plan
+
+Go beyond the task description to understand the task's **actual purpose** in the development plan:
+
+- **Read the phase's "Capabilities delivered"** section in the Execution Plan. Understand what capability this task contributes to.
+- **Identify downstream tasks** — scan the Task Table for tasks that list this task in their `Dependencies` column. Read their descriptions and linked requirements to understand what they will need from this task's output (data structures, interfaces, endpoints, modules, etc.).
+- **Synthesize the intent**: combining the linked requirements, the phase capabilities, and downstream needs, form a clear understanding of what this task must produce. This synthesized intent takes precedence over the literal task description.
+
+#### 3. Review Design Documents
 
 Read relevant design documents in `2-design/` — at minimum the ones that cover the area being implemented (architecture, data model, API design). Understand the intended design for this task.
 
-#### 3. Check Applicable Decisions
+#### 4. Check Applicable Decisions
 
 Read the `CLAUDE.component.md` file for the component this task belongs to (determined by which Task Table section it appears in). Review the `## Relevant Decisions` table:
 - Scan the table and identify any decisions whose trigger conditions match the current task.
@@ -67,11 +94,15 @@ Read the `CLAUDE.component.md` file for the component this task belongs to (dete
 
 Additionally, if the task involves multiple components, also read the `CLAUDE.component.md` file for each involved component and review their `## Relevant Decisions` tables — decisions from all involved components must be considered and applied. For tasks in the `Setup & Infrastructure` or `Deploy & Operations` sections, also check the decisions indexes in `2-design/CLAUDE.design.md` and `4-deploy/CLAUDE.deploy.md` respectively.
 
-#### 4. Confirm Understanding
+#### 5. Confirm Understanding
 
-After completing steps 1–3, assess whether you have a clear and reasonably certain understanding of what the task requires you to implement. If, despite having read the requirements, design documents, and applicable decisions, the task's scope, expected behavior, or implementation approach remains ambiguous — **stop and ask the user** for confirmation or additional information before proceeding. Do not guess or assume intent when genuine uncertainty exists.
+After completing steps 1–4, you should have a clear picture of what this task must deliver, derived from the authoritative sources — not just from the task description. Assess whether you have a clear and reasonably certain understanding of the work required.
 
-#### 5. Evaluate Task Complexity
+If, despite having read the requirements, design documents, applicable decisions, and downstream task needs, the task's scope, expected behavior, or implementation approach remains ambiguous — **stop and ask the user** for confirmation or additional information before proceeding. Do not guess or assume intent when genuine uncertainty exists.
+
+If your synthesized understanding of what the task requires diverges significantly from its brief description, **briefly note this to the user** (e.g., "The task description says X, but the requirements and design indicate the actual scope is Y — proceeding with Y"). This is informational, not a blocker — proceed unless you need user input on genuine ambiguity.
+
+#### 6. Evaluate Task Complexity
 
 Assess whether the task is too large to complete in one session. A task is "too large" if it would require:
 - Multiple distinct components that could be done separately
@@ -86,7 +117,7 @@ Follow one of two paths based on complexity assessment:
 
 1. **Update status**: Set the task's Status to `In Progress` and update the `Updated` column with today's date in `tasks.md`.
 
-2. **Check for design gaps before coding**: If you anticipate a significant divergence from the design documents, **stop and follow the Design Gap procedure** (below) before writing implementation code.
+2. **Check for design gaps before coding**: If you anticipate a significant divergence from the design documents (not from the task description — see the distinction in "Task Descriptions Are Indicative"), **stop and follow the Design Gap procedure** (below) before writing implementation code.
 
 3. **Implement**:
    - Write clear, self-documenting code following language/framework conventions and established best practices (e.g., SOLID principles, DRY, separation of concerns, meaningful naming, proper error handling, security best practices).
@@ -94,7 +125,7 @@ Follow one of two paths based on complexity assessment:
    - Keep functions small and focused.
    - Add comments only where logic isn't self-evident — do not add redundant or obvious comments.
    - Use strict type checking where available.
-   - Apply all relevant decisions identified in Task Preparation step 3.
+   - Apply all relevant decisions identified in Task Preparation step 4.
 
 4. **Write tests**:
    - **Acceptance criteria coverage**: for each requirement linked in the task's `Req` column, review its acceptance criteria. Write tests that verify every acceptance criterion that is enabled by this task's implementation.
@@ -109,7 +140,7 @@ Follow one of two paths based on complexity assessment:
    - If tests fail, analyze the failure, fix the issue, and re-run.
    - If after **3 consecutive fix-and-rerun iterations** tests still fail, **stop** — explain to the user what is failing, what you have tried, and ask how they want to proceed (continue debugging, adjust the approach, simplify the tests, or skip and mark the task as blocked).
 
-6. **Check for design gaps after coding**: After implementing, evaluate whether any divergence from the design occurred and follow the Design Gap procedure if needed.
+6. **Check for design gaps after coding**: After implementing, evaluate whether any divergence from the design documents occurred and follow the Design Gap procedure if needed.
 
 7. **Evaluate new decisions**: After completing the task, assess whether a new implementation pattern or convention emerged that should be documented:
    - Did you make a non-obvious implementation choice that future tasks should replicate?
@@ -139,7 +170,7 @@ Follow one of two paths based on complexity assessment:
 
 ### Design Gap Procedure
 
-A design gap is any divergence between design documents and what implementation requires. When updating design artifacts as part of this procedure, follow the procedures and instructions in `.claude/skills/SDLC-design/SKILL.md` — in particular the **Modifying Existing Design Documents** section (downstream effect checks, present changes, wait for confirmation), **Decision Triggers** (record new decisions when design choices are approved), **Current State Tracking** (update `CLAUDE.md`), and the cross-skill artifact procedures defined in `CLAUDE.md`.
+A design gap is a divergence between **design documents** and what implementation requires. When updating design artifacts as part of this procedure, follow the procedures and instructions in `.claude/skills/SDLC-design/SKILL.md` — in particular the **Modifying Existing Design Documents** section (downstream effect checks, present changes, wait for confirmation), **Decision Triggers** (record new decisions when design choices are approved), **Current State Tracking** (update `CLAUDE.md`), and the cross-skill artifact procedures defined in `CLAUDE.md`.
 
 **Minor divergence** (field renamed, type made more specific, optional field added): update the relevant `2-design/` file following the SDLC-design modification procedures, continue.
 
@@ -162,7 +193,7 @@ If a task execution only changes task status (no design impact), update only the
 
 ### Interaction Style
 
-- After selecting the next task, briefly state which task was selected, its requirements, and applicable decisions before starting implementation. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 4).
+- After selecting the next task, briefly state which task was selected, its linked requirements, and applicable decisions. If your synthesized understanding of the task's scope differs from its brief description, note the actual scope you will implement. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 5).
 - During implementation, work autonomously — do not ask for confirmation at every step. The stop-and-ask points are explicitly defined in the instructions (interrupted tasks, unmet dependencies, design gaps, ambiguity).
 - **After completing a task (executed or decomposed), report the outcome and ask the user how they want to proceed** — e.g., review changes, commit, or stop. Do not automatically start the next task.
 - When a design gap is found, present it clearly with context, options, and trade-offs. Do not minimize the gap or push toward a specific resolution.
@@ -183,7 +214,8 @@ If a task execution only changes task status (no design impact), update only the
 At the end, report:
 - Which task was identified as next
 - Whether it was executed or decomposed
-- What was accomplished or what subtasks were created
+- What was accomplished (describing actual scope delivered, which may differ from the task description)
+- Which requirements were satisfied and which acceptance criteria were covered
 - Which decisions were applied (if any)
 - Whether a design gap was found and how it was resolved (if any)
 - Whether a new decision was proposed (if any)
