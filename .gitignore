@@ -15,11 +15,17 @@ Thumbs.db
 .env.*
 !.env.example
 
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Test
+.pytest_cache/
+
 # Build outputs (uncomment what applies to your stack)
 # node_modules/
 # dist/
-# __pycache__/
 # target/
 # build/
-
-TODO.*
