@@ -94,15 +94,35 @@ Read the `CLAUDE.component.md` file for the component this task belongs to (dete
 
 Additionally, if the task involves multiple components, also read the `CLAUDE.component.md` file for each involved component and review their `## Relevant Decisions` tables — decisions from all involved components must be considered and applied. For tasks in the `Setup & Infrastructure` or `Deploy & Operations` sections, also check the decisions indexes in `2-design/CLAUDE.design.md` and `4-deploy/CLAUDE.deploy.md` respectively.
 
-#### 5. Confirm Understanding
+#### 5. Check for Constraint Tensions
 
-After completing steps 1–4, you should have a clear picture of what this task must deliver, derived from the authoritative sources — not just from the task description. Assess whether you have a clear and reasonably certain understanding of the work required.
+After gathering all context (requirements, design documents, decisions, phase instructions), actively look for **tensions between authoritative sources**. A tension exists when two or more sources that the agent must follow pull in incompatible directions — satisfying one fully would require violating or bending another.
+
+Common tension patterns:
+- **Architectural decisions vs. component isolation rules** — e.g., a decision requiring shared state across components while isolation rules prohibit cross-component coupling.
+- **Cross-cutting decisions vs. per-component conventions** — e.g., a system-wide decision that conflicts with a component-specific pattern.
+- **Requirements vs. constraints** — e.g., a functional requirement that is difficult to satisfy within a declared constraint.
+- **Design document assumptions vs. phase instructions** — e.g., a design that assumes a project structure incompatible with the code phase conventions.
+
+**If a tension is found, stop and surface it to the user before implementing.** Present:
+1. **The conflicting sources** — cite both by name and quote the relevant rules.
+2. **Why they conflict** — explain the specific scenario where following one source requires bending the other.
+3. **Options** — propose at least two resolution paths (e.g., adjust one source, record a scoped exception as a decision, restructure the approach).
+4. **Wait for the user's decision** before proceeding.
+
+A tension is **not** the same as a design gap (divergence between design and implementation needs). Tensions are contradictions *within* the set of authoritative sources. They are an "always ask" tier situation — the agent must never resolve them silently, because choosing one source over another is a project-level decision that belongs to the user.
+
+If no tensions are found, proceed to step 6.
+
+#### 6. Confirm Understanding
+
+After completing steps 1–5, you should have a clear picture of what this task must deliver, derived from the authoritative sources — not just from the task description. Assess whether you have a clear and reasonably certain understanding of the work required.
 
 If, despite having read the requirements, design documents, applicable decisions, and downstream task needs, the task's scope, expected behavior, or implementation approach remains ambiguous — **stop and ask the user** for confirmation or additional information before proceeding. Do not guess or assume intent when genuine uncertainty exists.
 
 If your synthesized understanding of what the task requires diverges significantly from its brief description, **briefly note this to the user** (e.g., "The task description says X, but the requirements and design indicate the actual scope is Y — proceeding with Y"). This is informational, not a blocker — proceed unless you need user input on genuine ambiguity.
 
-#### 6. Evaluate Task Complexity
+#### 7. Evaluate Task Complexity
 
 Assess whether the task is too large to complete in one session. A task is "too large" if it would require:
 - Multiple distinct components that could be done separately
@@ -218,5 +238,6 @@ At the end, report:
 - What was accomplished (describing actual scope delivered, which may differ from the task description)
 - Which requirements were satisfied and which acceptance criteria were covered
 - Which decisions were applied (if any)
+- Whether a constraint tension was found between authoritative sources and how it was resolved (if any)
 - Whether a design gap was found and how it was resolved (if any)
 - Whether a new decision was proposed (if any)
