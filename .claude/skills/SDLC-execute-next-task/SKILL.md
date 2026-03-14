@@ -259,6 +259,7 @@ If a task execution only changes task status (no design impact), update only the
 - **No auto-commit**: leave all changes for user review. Do not commit or push.
 - **Traceability**: if the implementation reveals that a requirement is missing or incorrect, surface it to the user and recommend `/SDLC-elicit` to address it.
 - **Deploy awareness**: if the task touches infrastructure as code (Terraform, Dockerfiles, CI/CD pipelines, deployment scripts, etc.), also read `4-deploy/CLAUDE.deploy.md`, review its decisions index, and follow its instructions alongside these.
+- **External tool and library dependencies**: when a task requires tools or libraries that are not available in the current environment (system packages like ffmpeg, database engines, runtime tools, etc.), **always notify the user before attempting to install them**. If the user approves and installation fails (e.g., no sudo access, missing package manager), provide the user with clear instructions on how to install the dependency themselves and **wait for the user to confirm** that installation is complete before proceeding. Never silently install system-level dependencies or work around their absence without user awareness.
 
 ### Output
 
