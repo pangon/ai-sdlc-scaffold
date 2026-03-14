@@ -272,3 +272,4 @@ At the end, report:
 - Whether a constraint tension was found between authoritative sources and how it was resolved (if any)
 - Whether a design gap was found and how it was resolved (if any)
 - Whether a new decision was proposed (if any)
+- **Pre-existing issues observed** — if during implementation or testing you encountered problems in code **outside** this task's scope (e.g., type errors, linting warnings, test failures, deprecation warnings in pre-existing files), list them prominently under a dedicated heading (e.g., `### Pre-existing issues observed`). For each issue, state: (1) which file(s) and what the problem is, (2) why it was not fixed, and (3) a recommendation for when to address it (e.g., a dedicated cleanup task, the next task that touches those files, or immediately).
