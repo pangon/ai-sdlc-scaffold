@@ -114,15 +114,45 @@ A tension is **not** the same as a design gap (divergence between design and imp
 
 If no tensions are found, proceed to step 6.
 
-#### 6. Confirm Understanding
+#### 6. Evaluate Development Environment Needs
 
-After completing steps 1–5, you should have a clear picture of what this task must deliver, derived from the authoritative sources — not just from the task description. Assess whether you have a clear and reasonably certain understanding of the work required.
+Assess whether this task requires **development environment setup or interaction** — runtime isolation, version management, package installation, build tooling, test infrastructure, or similar concerns.
+
+**When this step applies:**
+- The task creates or modifies project scaffolding (package manifests, lockfiles, build configuration)
+- The task installs, upgrades, or removes dependencies
+- The task sets up or configures test infrastructure (test runners, coverage tools, assertion libraries, fixtures)
+- The task runs build commands, test runners, linters, or other tooling
+- The component's tech stack has well-known environment isolation conventions (e.g., Python virtual environments, Node version managers, Ruby gemsets, Rust toolchains)
+
+**When this step does NOT apply:**
+- The task only edits source code without running any commands
+- The environment is already established and documented (e.g., a prior task created and documented the venv, and its activation path is recorded in a decision or component instructions)
+
+**If it applies, check in order:**
+
+1. **Look for an existing environment convention** — check the decisions already identified in step 4 for any that define environment setup conventions (e.g., a `DEC-python-venv` or `DEC-node-version-manager`). If no applicable decision exists, fall back to checking the component's `README`, `Makefile`, or equivalent files in the component directory for documented conventions. If a convention is found by either route (e.g., "use `.venv` in the component directory", "use `nvm` with `.nvmrc`"), follow it.
+
+2. **If no convention exists and this task establishes one** — identify the ecosystem's standard practices for the tech stack across all relevant areas:
+   - **Runtime isolation**: e.g., Python → virtual environment; Node.js → version manager + lockfile; Rust → `rustup` toolchain; Go → module-aware mode.
+   - **Test infrastructure**: e.g., Python → pytest + configuration in `pyproject.toml`; Node.js → Vitest/Jest + config; Rust → built-in `cargo test`; Go → built-in `go test`.
+   **Stop and present the choice to the user** before proceeding:
+   - State which environment practices you intend to adopt and why they are standard for the stack.
+   - Propose specifics (tool, location, configuration files).
+   - Wait for confirmation.
+   - After confirmation, record the convention as a decision (`DEC-*`) so future tasks follow it automatically (step 1 above).
+
+3. **If an environment exists but the task modifies it** (e.g., adding dependencies, changing runtime version) — ensure commands run *within* the established environment (e.g., activate the venv before `pip install`, use the project's Node version before `npm install`).
+
+#### 7. Confirm Understanding
+
+After completing steps 1–6, you should have a clear picture of what this task must deliver, derived from the authoritative sources — not just from the task description. Assess whether you have a clear and reasonably certain understanding of the work required.
 
 If, despite having read the requirements, design documents, applicable decisions, and downstream task needs, the task's scope, expected behavior, or implementation approach remains ambiguous — **stop and ask the user** for confirmation or additional information before proceeding. Do not guess or assume intent when genuine uncertainty exists.
 
 If your synthesized understanding of what the task requires diverges significantly from its brief description, **briefly note this to the user** (e.g., "The task description says X, but the requirements and design indicate the actual scope is Y — proceeding with Y"). This is informational, not a blocker — proceed unless you need user input on genuine ambiguity.
 
-#### 7. Evaluate Task Complexity
+#### 8. Evaluate Task Complexity
 
 Assess whether the task is too large to complete in one session. A task is "too large" if it would require:
 - Multiple distinct components that could be done separately
@@ -214,7 +244,7 @@ If a task execution only changes task status (no design impact), update only the
 
 ### Interaction Style
 
-- After selecting the next task, briefly state which task was selected, its linked requirements, and applicable decisions. If your synthesized understanding of the task's scope differs from its brief description, note the actual scope you will implement. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 5).
+- After selecting the next task, briefly state which task was selected, its linked requirements, and applicable decisions. If your synthesized understanding of the task's scope differs from its brief description, note the actual scope you will implement. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 7).
 - During implementation, work autonomously — do not ask for confirmation at every step. The stop-and-ask points are explicitly defined in the instructions (interrupted tasks, unmet dependencies, design gaps, ambiguity).
 - **After completing a task (executed or decomposed), report the outcome and ask the user how they want to proceed** — e.g., review changes, commit, or stop. Do not automatically start the next task.
 - When a design gap is found, present it clearly with context, options, and trade-offs. Do not minimize the gap or push toward a specific resolution.
