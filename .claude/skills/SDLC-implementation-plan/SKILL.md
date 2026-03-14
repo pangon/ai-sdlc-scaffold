@@ -117,6 +117,15 @@ Cross-cutting infrastructure (scaffolding, build tooling, database schema, deplo
 
 If `4-deploy/` expectations exist, include infrastructure-as-code tasks (Terraform modules, SAM templates, Dockerfiles, deployment scripts) and operational runbook tasks at appropriate phases — not all at the end. A basic deployment mechanism should be available relatively early so the system can be tested in a realistic environment.
 
+#### Principle 7: Manual Testing Readiness
+
+Every phase must end with a **manual testing readiness task** (`TASK-phase-N-manual-testing`) that ensures a human can verify the delivered capabilities without reading source code. The task should:
+
+1. **Create or update a deploy runbook** in `4-deploy/runbooks/` with startup instructions and step-by-step manual test scenarios for the phase's new capabilities. Update existing runbooks rather than creating duplicates.
+2. **Document build/run/test commands** in the README (or equivalent existing doc) of every component modified in this phase or previous phases (e.g., `3-code/<component>/README.md`). Create or update convenience scripts where useful; for single-command operations, documenting the command is sufficient.
+
+The Component column must list all components involved in the current phase and previous phases. Place these tasks in the `### Deploy & Operations` task table section, dependent on the phase's last functional task, with `-` in the Req column. List them last in the Execution Plan for their phase.
+
 ### Workflow
 
 #### 1. Present the Implementation Plan
@@ -138,6 +147,7 @@ Present the complete plan to the user in this format:
 |---|---------|------|-----------|-----|
 | 1 | TASK-kebab-name | Short description | backend | REQ-F-* |
 | 2 | TASK-kebab-name | Short description | frontend | REQ-F-* |
+| 3 | TASK-phase-1-manual-testing | Create/update runbook and scripts for manual testing of phase capabilities | backend, frontend | - |
 
 ### Phase 2: [Name]
 ...
