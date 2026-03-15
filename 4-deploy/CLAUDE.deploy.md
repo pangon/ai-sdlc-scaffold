@@ -8,10 +8,9 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 
 ## Decisions Relevant to This Phase
 
-<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](../2-design/decisions/DEC-kebab-name.md) -->
-
 | File | Title | Trigger |
 |------|-------|---------|
+<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](../2-design/decisions/DEC-kebab-name.md) -->
 
 ---
 
@@ -28,11 +27,9 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 
 ### Deployment Scripts
 
-1. Check the decisions index above before composing tooling commands.
-2. Make every script idempotent.
-3. Exit on failure, log the failed step, emit a clear error message.
-4. Log every significant action with a timestamp.
-5. Provide a rollback path or document why one is not possible.
+1. Make every script idempotent.
+2. Exit on failure, log the failed step, emit a clear error message.
+3. Provide a rollback path or document why one is not possible.
 
 ### Runbooks
 
@@ -44,18 +41,6 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 
 ### Common Decision Triggers
 When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.md#when-recording-decisions). Common triggers: secret management, environment promotion rules, rollback procedures, IaC tooling, CI/CD conventions.
-
----
-
-## Environment Configuration
-
-<!-- Fill in environment-specific details. -->
-
-| Environment | Purpose | Notes |
-|-------------|---------|-------|
-| Development | Local development | - |
-| Staging | Pre-production testing | - |
-| Production | Live system | - |
 
 ---
 
