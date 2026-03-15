@@ -1,18 +1,18 @@
-# Project Rationale: AI SDLC Scaffold
+# Project Rationale
 
-## What This Project Is
+## What Is *AI SDLC Scaffold*
 
-**AI SDLC Scaffold** is a repository template for AI-first software development. It provides a folder structure, file templates, and AI agent instructions that encode a complete software development lifecycle (SDLC) where all project knowledge lives inside the repository itself.
+A repository template for **AI-first software development** with [Claude Code](https://claude.ai/code). It provides a folder structure, file templates, and AI agent instructions that encode a complete software development lifecycle (SDLC) where all project knowledge lives inside the repository itself.
 
 It is not a tool, a library, or an application. It is a **starting scaffold** — you clone or copy it, then fill it in as your real project takes shape.
 
-### Core Principles
+## Core Principles
 
-1. **AI-first development model.** The scaffold is designed for a scenario where AI agents do the development work and a human supervises at a high level. The human defines objectives, reviews important decisions, and steers direction — but does not write code. Some structural choices are deliberately optimized for agent consumption over human ergonomics.
+1. **AI-first development model.** The scaffold is designed for a scenario where AI agents do the development work and a human supervises at a high level. The human steers direction, reviews important decisions, and defines objectives — assisted by agents that facilitate the process, surface gaps, and flag inconsistencies. The human does not write code. Some structural choices are deliberately optimized for agent consumption over human ergonomics.
 
 2. **Everything-in-repo.** Every artifact that explains the software — goals, requirements, assumptions, constraints, design decisions, task tracking — lives alongside the source code, version-controlled and always accessible. This gives agents the full context that human developers would normally carry in their heads or scattered across external tools.
 
-3. **Context-window efficiency.** The scaffold is structured to minimize how many tokens an AI agent must load to do its job. This drives several design choices: hierarchical instruction files, separation of decision history from active records, phase-level indexes with trigger conditions, and hardcoded conventions in phase instructions (e.g. modular programming).
+3. **Context-window efficiency.** The scaffold is structured to minimize how many tokens an AI agent must load to do its job. This drives several design choices: hierarchical instruction files, separation of decision history from active records, phase-level indexes with trigger conditions.
 
 4. **Decision capture, not decision suppression.** AI agents are increasingly capable autonomous decision-makers. Rather than preventing them from deciding, the scaffold ensures decisions are *recorded in the repository* — not lost in reasoning tokens. This enables human review, consistency enforcement, and documentation. The system distinguishes decisions that require human approval from those an agent can auto-accept, and this boundary is expected to shift as agent capabilities advance.
 
@@ -29,7 +29,15 @@ In most software projects, the "why" behind the code is scattered across wikis, 
 
 The scaffold makes the full project rationale — from business goals to deployment procedures — available as structured markdown files that agents can navigate efficiently.
 
-**For AI agents**, the `CLAUDE.md` / `CLAUDE.<phase>.md` hierarchy provides layered instructions: global rules at the root, phase-specific guidance in each directory, and indexes that let agents decide which files to open and which to skip — all to keep context consumption minimal.
+The scaffold's AI guidance is split into three complementary layers:
+
+**Instruction files** (`CLAUDE.md`, `CLAUDE.<phase>.md`) provide *context*. They describe the structure of the repository and its artifacts, maintain indexes for efficient navigation, and define safeguards and invariants that apply regardless of what task the agent is currently performing. They answer the question "what is here".
+
+**Skills** (`.claude/skills/SDLC-*/`) provide *operational procedures*. Each skill encodes the step-by-step "how" for a specific SDLC activity — eliciting requirements, drafting design documents, decomposing components, planning implementation, executing tasks, reporting status. Skills are loaded on demand when the agent performs that activity, keeping the always-loaded instruction files lean.
+
+**Project artifacts** are the structured markdown files that skills produce and maintain over the course of the project: stakeholders, goals, constraints, assumptions, user stories, requirements, decisions, architecture, data model, API design, tasks, and runbooks. These are the project-specific knowledge that accumulates as work progresses — the actual content that the instruction files index and the skills know how to use and manipulate. Together, they form the repository's memory of every choice made and why.
+
+This three-layer separation matters for context-window efficiency. Instruction files are loaded automatically and must stay small. Skills can be large and detailed because they are loaded only when invoked. Artifacts grow with the project but are accessed selectively through indexes. Cross-cutting rules (like traceability maintenance or status downgrade on modification) live in the always-visible instruction layer, so they are enforced even when the agent is operating outside a skill.
 
 **For humans**, the same files create a self-documenting project where every decision is traceable from business goal to deployed code. The traceability chain is useful for human review even though the primary audience is agents.
 
@@ -41,7 +49,7 @@ The project is divided into four sequential phases, each in its own directory:
 |---|---|
 | **1-objectives** | Capture *what* to build and *why*: stakeholders, goals, user stories, requirements, assumptions, constraints |
 | **2-design** | Define *how* to build it: architecture, data model, API design, and formal decision records |
-| **3-code** | Build it: source code, tests, and a task tracker linked to requirements |
+| **3-code** | Build it: starts with component decomposition and implementation planning, then source code, tests, and a task tracker linked to requirements |
 | **4-deploy** | Ship and operate it: infrastructure-as-code, deployment scripts, runbooks |
 
 Each phase has:
@@ -58,7 +66,6 @@ Several structural choices exist specifically to reduce token consumption:
 - **Hierarchical instructions** (`CLAUDE.md` → `CLAUDE.<phase>.md`): agents load only the global file and the relevant phase file, not all four phases at once.
 - **Two-file decision records**: the active record (`DEC-kebab-name.md`) contains only what an agent needs during normal work; the history (`DEC-kebab-name.history.md`) is loaded only when evaluating or changing a decision.
 - **Phase-level indexes with trigger conditions**: each `CLAUDE.<phase>.md` lists which decisions apply and when, so agents can skip irrelevant ones without opening them.
-- **Hardcoded conventions over decision files**: routine patterns (like modular code structure) are written directly into phase instructions rather than spawning separate decision files.
 
 ### Two-File Decision Records
 
@@ -105,13 +112,12 @@ All artifacts with a Status field follow a defined lifecycle with explicit trans
 
 ## What the Scaffold Provides Out of the Box
 
-- Complete folder structure for all four phases
-- File templates for every artifact type (goals, user stories, requirements, assumptions, constraints, decisions)
-- One technology-agnostic example decision (error response format) to illustrate the pattern
-- A task tracker linked to requirements
-- A layered AI instruction system (`CLAUDE.md` → `CLAUDE.<phase>.md`)
+- A layered AI instruction system (`CLAUDE.md` → `CLAUDE.<phase>.md`) with phase-level indexes and cross-skill artifact procedures
+- Automation skills for each SDLC activity: project initialization, requirements elicitation, design drafting, component decomposition, implementation planning, task execution, status reporting
 - Decision management procedures (creation, deprecation, supersession)
+- Complete folder structure for all four phases
+- File templates for every artifact type (goals, user stories, requirements, assumptions, constraints, decisions, runbooks)
 - Phase gates and artifact status lifecycle
-- Stakeholder definitions separated from agent instructions for clean editing
+- A task tracker linked to requirements
 - Stub files for all referenced design documents (architecture, data model, API design)
 - A `.gitignore` with technology-agnostic defaults
