@@ -48,14 +48,14 @@ A conflict exists when two or more requirements cannot both be satisfied as stat
 1. **Identify**: note conflicting requirement IDs, source stakeholders, influence levels, and why they are incompatible.
 2. **Ask the user**: present what makes them incompatible, stakeholders and influence levels, two or more resolution options, and a recommended option if one is clearly better.
 3. **Wait for explicit approval** before modifying any file.
-4. **Apply**: update affected requirement files and index rows. Update dependent user stories or goals if affected. Record a design decision if the resolution imposes a recurring constraint.
+4. **Apply**: update affected requirement files and index rows. Update dependent user stories or goals if affected. Record a decision if the resolution imposes a recurring constraint.
 5. **Verify**: no artifacts remain in a conflicting state after resolution.
 
 ### Assumption invalidation
 
 When an assumption is found to be wrong or no longer holds:
 
-1. **Identify impact**: list all artifacts (requirements, user stories, design decisions) that depend on the invalidated assumption.
+1. **Identify impact**: list all artifacts (requirements, user stories, decisions) that depend on the invalidated assumption.
 2. **Ask the user**: present the invalidated assumption, the affected artifacts, and proposed adjustments or alternatives.
 3. **Wait for explicit approval** before modifying any file.
 4. **Apply**: change the assumption's Status to `Invalidated`. Update or flag all dependent artifacts as directed.
@@ -69,6 +69,14 @@ When an artifact (goal, user story, requirement) is no longer relevant:
 2. Wait for explicit approval.
 3. Change Status to `Deprecated` in the artifact file. Update its index row.
 4. Check for dependent artifacts — flag any that reference the deprecated item.
+
+---
+
+## Decisions Relevant to This Phase
+
+| File | Title | Trigger |
+|------|-------|---------|
+<!-- Add rows as decisions are recorded. File column: [DEC-kebab-name](../decisions/DEC-kebab-name.md) -->
 
 ---
 

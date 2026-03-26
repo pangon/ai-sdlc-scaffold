@@ -47,8 +47,8 @@ git init && git add -A && git commit -m "Initial scaffold"
 ├── CLAUDE.md                         # Root AI instructions (start here)
 ├── RATIONALE.md                      # Core principles and design rationale
 │
-├── 1-spec/                     # WHAT and WHY
-│   ├── CLAUDE.spec.md          # Phase instructions and artifact indexes
+├── 1-spec/                           # WHAT and WHY
+│   ├── CLAUDE.spec.md                # Phase instructions, decisions index, artifact indexes
 │   ├── stakeholders.md               # Stakeholder definitions
 │   ├── goals/                        # GOAL-kebab-name.md + _template.md
 │   ├── user-stories/                 # US-kebab-name.md + _template.md
@@ -60,8 +60,7 @@ git init && git add -A && git commit -m "Initial scaffold"
 │   ├── CLAUDE.design.md              # Phase instructions and decisions index
 │   ├── architecture.md               # System architecture overview
 │   ├── data-model.md                 # Data structures and schemas
-│   ├── api-design.md                 # API specifications
-│   └── decisions/                    # DEC-kebab-name.md + DEC-kebab-name.history.md
+│   └── api-design.md                 # API specifications
 │
 ├── 3-code/                           # BUILD
 │   ├── CLAUDE.code.md                # Phase instructions, decisions index, component guidelines
@@ -70,8 +69,10 @@ git init && git add -A && git commit -m "Initial scaffold"
 │       └── CLAUDE.<component>.md     # Component description, decisions index, addressed requirements
 │
 ├── 4-deploy/                         # SHIP
-│   ├── CLAUDE.deploy.md              # Phase instructions
+│   ├── CLAUDE.deploy.md              # Phase instructions, decisions index
 │   └── runbooks/                     # Operational procedures + _template.md
+│
+├── decisions/                        # DEC-kebab-name.md + DEC-kebab-name.history.md
 │
 └── .claude/skills/                   # Claude Code skills (automation layer)
     ├── SDLC-init/SKILL.md            # guided project initialization

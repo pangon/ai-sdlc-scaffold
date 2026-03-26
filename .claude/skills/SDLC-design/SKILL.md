@@ -109,7 +109,7 @@ This verification applies to whatever document(s) are being drafted in the curre
 This skill can be used to revise design documents or propagate decision changes. When modifying existing content:
 
 1. **Read the document** before proposing any changes.
-2. **Check downstream effects** — identify tasks in `3-code/tasks.md` and decisions in `2-design/decisions/` that reference or depend on the content being changed. Report these to the user before proceeding.
+2. **Check downstream effects** — identify tasks in `3-code/tasks.md` and decisions in `decisions/` that reference or depend on the content being changed. Report these to the user before proceeding.
 3. **Present the proposed changes** clearly (what will change, why, and which downstream artifacts are affected).
 4. **Wait for user confirmation** before applying changes.
 
@@ -155,7 +155,7 @@ For complex projects, suggest running the assessment iteratively — addressing 
 
 ### Decision Triggers
 
-Decisions must be captured whenever the user shapes the design — not only when a technical pattern emerges. Follow the recording, deprecation, and supersession procedures in [`2-design/decisions/PROCEDURES.md`](../../../2-design/decisions/PROCEDURES.md).
+Decisions must be captured whenever the user shapes the design — not only when a technical pattern emerges. Follow the recording, deprecation, and supersession procedures in [`decisions/PROCEDURES.md`](../../../decisions/PROCEDURES.md).
 
 **When to create a new decision:**
 - A significant technical pattern emerges (error handling, data flow, security, naming conventions, etc.).

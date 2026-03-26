@@ -40,7 +40,7 @@ Read the following files — all are required context for planning:
 2. **Requirements** — read every `REQ-*.md` file in `1-spec/requirements/`. Note their type (Functional, Performance, Security, etc.), priority, and linked goals/stories.
 3. **Constraints** — read every `CON-*.md` file in `1-spec/constraints/`.
 4. **Design documents** — read `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md`.
-5. **Decisions** — read every `DEC-*.md` file in `2-design/decisions/` (active records only, not `.history.md`).
+5. **Decisions** — read every `DEC-*.md` file in `decisions/` (active records only, not `.history.md`).
 6. **Code phase instructions** — read `3-code/CLAUDE.code.md`.
 7. **Components** — read every `CLAUDE.component.md` in `3-code/*/`.
 8. **Deploy phase instructions** — read `4-deploy/CLAUDE.deploy.md`.

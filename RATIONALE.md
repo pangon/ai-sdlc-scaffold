@@ -10,7 +10,7 @@ It is not a tool, a library, or an application. It is a **starting scaffold** �
 
 1. **AI-first development model.** The scaffold is designed for a scenario where AI agents do the development work and a human supervises at a high level. The human steers direction, reviews important decisions, and defines specification — assisted by agents that facilitate the process, surface gaps, and flag inconsistencies. The human does not write code. Some structural choices are deliberately optimized for agent consumption over human ergonomics.
 
-2. **Everything-in-repo.** Every artifact that explains the software — goals, requirements, assumptions, constraints, design decisions, task tracking — lives alongside the source code, version-controlled and always accessible. This gives agents the full context that human developers would normally carry in their heads or scattered across external tools.
+2. **Everything-in-repo.** Every artifact that explains the software — goals, requirements, assumptions, constraints, design, decisions, task tracking — lives alongside the source code, version-controlled and always accessible. This gives agents the full context that human developers would normally carry in their heads or scattered across external tools.
 
 3. **Context-window efficiency.** The scaffold is structured to minimize how many tokens an AI agent must load to do its job. This drives several design choices: hierarchical instruction files, separation of decision history from active records, phase-level indexes with trigger conditions.
 
@@ -84,7 +84,7 @@ Each decision records *how* it was made, on a spectrum from `human-decided` to `
 
 Artifacts link to each other explicitly:
 ```
-Stakeholders → Goals → User Stories → Requirements → Decisions → Tasks → Code → Tests
+Stakeholders → Goals → User Stories → Requirements → Design → Tasks → Code → Tests
 ```
 
 Artifacts carry `Source` and/or `Source stakeholder` fields where applicable, linking each item back to its origin in the chain. Indexes in the phase instruction files provide navigable summaries.

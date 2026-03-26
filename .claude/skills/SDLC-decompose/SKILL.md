@@ -38,7 +38,7 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 4. Read `2-design/data-model.md` — understand which components own which data.
 5. Read `3-code/CLAUDE.code.md` — understand the current state of the Components section.
 6. List existing directories under `3-code/` to avoid overwriting existing structure.
-7. Read all the decisions in `2-design/decisions/`.
+7. Read all the decisions in `decisions/`.
 
 ### Component Identification
 
@@ -113,7 +113,7 @@ The `CLAUDE.component.md` file should contain:
 
 | File | Title | Trigger |
 |------|-------|---------|
-| [DEC-*](../../2-design/decisions/DEC-*.md) | ... | ... |
+| [DEC-*](../../decisions/DEC-*.md) | ... | ... |
 ```
 
 Do **not** move or restructure existing files in `2-design/`. The shared design documents (`architecture.md`, `data-model.md`, `api-design.md`) remain in their phase directory. Component directories in `3-code/` supplement them with component-specific focus.

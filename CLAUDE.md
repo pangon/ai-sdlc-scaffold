@@ -21,7 +21,7 @@ The project is just the base scaffold, and has not yet been inizialized. The rep
 Each phase directory contains a `CLAUDE.<phase>.md` file. When working in a phase:
 
 1. Read the phase-specific instructions — they extend (not override) this file
-2. Consult the decisions index in that phase file before starting work
+2. Consult the decisions index in that phase file before starting work (for the Code phase, decisions indexes are in each component's `CLAUDE.component.md`, not in `CLAUDE.code.md`)
 3. Work within the appropriate phase structure
 
 | Phase | Directory | Focus |
@@ -54,7 +54,7 @@ There is no gate between Code and Deploy. Deploy activities (deployments, runboo
 
 ## Artifacts
 
-All project knowledge — goals, requirements, assumptions, constraints, design decisions, tasks — is captured as structured markdown files alongside the source code. This gives AI agents the full context that human developers would normally carry in their heads or scattered across external tools, and creates a traceability chain from business goals to deployed code.
+All project knowledge is captured as structured markdown files alongside the source code. This gives AI agents the full context that human developers would normally carry in their heads or scattered across external tools, and creates a traceability chain from business goals to deployed code.
 
 ### Types and locations
 
@@ -66,8 +66,8 @@ All project knowledge — goals, requirements, assumptions, constraints, design 
 | `ASM` | Assumptions | `1-spec/assumptions/` |
 | `CON` | Constraints | `1-spec/constraints/` |
 | `STK` | Stakeholders | `1-spec/stakeholders.md` (rows) |
-| `DEC` | Decisions | `2-design/decisions/` |
 | `TASK` | Tasks | `3-code/tasks.md` (rows) |
+| `DEC` | Decisions | `decisions/` |
 
 ### Naming
 
@@ -95,7 +95,7 @@ When spotting a related issue, potential improvement, or ambiguous situation dur
 
 ## Decisions
 
-Decisions live in `2-design/decisions/`. Each decision has two files:
+Decisions live in `decisions/`. Each decision has two files:
 
 - **`DEC-kebab-name.md`** — the active record (context, decision, enforcement). Read during normal task execution.
 - **`DEC-kebab-name.history.md`** — the trail (alternatives, reasoning, changelog). Read only when evaluating or changing a decision.
@@ -112,7 +112,7 @@ Do **not** modify `*.history.md` except to append to the changelog.
 
 ### Recording, deprecating, or superseding decisions
 
-When a significant decision, pattern, or constraint emerges, record it as a new decision. For the recording procedure, as well as deprecation and supersession, see [`2-design/decisions/PROCEDURES.md`](2-design/decisions/PROCEDURES.md).
+When a significant decision, pattern, or constraint emerges, record it as a new decision. For the recording procedure, as well as deprecation and supersession, see [`decisions/PROCEDURES.md`](decisions/PROCEDURES.md).
 
 ---
 

@@ -18,7 +18,7 @@ You are generating a comprehensive status report for the entire SDLC project.
 3. Read `1-spec/stakeholders.md`.
 4. Read `3-code/tasks.md` (if it exists and has content).
 5. Scan all artifact indexes in the phase files — follow File column links only when needed to resolve ambiguous statuses.
-6. List files in `2-design/decisions/` to count decisions (exclude `PROCEDURES.md`, templates, and `.history.md` files; read `.history.md` only when the corresponding active record shows Deprecated or Superseded status).
+6. List files in `decisions/` to count decisions (exclude `PROCEDURES.md`, templates, and `.history.md` files; read `.history.md` only when the corresponding active record shows Deprecated or Superseded status).
 7. List component directories in `3-code/` (directories containing `CLAUDE.component.md`).
 8. List files in `4-deploy/infrastructure/`, `4-deploy/scripts/`, `4-deploy/runbooks/` to count deployment artifacts (exclude templates).
 

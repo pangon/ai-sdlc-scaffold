@@ -21,6 +21,8 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 1. Read `1-spec/CLAUDE.spec.md` (phase instructions and existing artifact indexes).
 2. Read `1-spec/stakeholders.md` to understand existing stakeholders.
+2. Read any decisions whose trigger conditions apply.
+3. Check the `## Decisions Relevant to This Phase` index in `1-spec/CLAUDE.spec.md`. Read any decisions whose trigger conditions apply, and apply its enforcement rules throughout the elicitation session.
 
 ### Artifact Traceability Chain
 
@@ -83,7 +85,7 @@ This skill can be used to review and modify any artifact in `1-spec/`:
 
 1. **Read the artifact** before proposing any changes.
 2. **Present the proposed changes** clearly (what will change and why).
-3. **Check downstream effects** — identify any artifacts in later phases (design decisions, tasks, etc.) that reference or depend on this artifact, and report them to the user before proceeding.
+3. **Check downstream effects** — identify any artifacts in later phases (design, tasks, etc.) that reference or depend on this artifact, and report them to the user before proceeding.
 4. **Wait for user confirmation** before applying changes.
 
 #### Status Downgrade on Modification
@@ -121,7 +123,7 @@ Check for:
 - **Orphaned artifacts** — requirements or assumptions that reference deleted or renamed artifacts.
 - **Missing non-functional coverage** — functional requirements without corresponding performance, security, or usability requirements where appropriate.
 - **Unverified assumptions** — assumptions with no verification plan.
-- **Constraint coverage** — constraints that are not reflected in any requirement or design decision.
+- **Constraint coverage** — constraints that are not reflected in any requirement or design.
 
 #### 3. Severity Classification
 
