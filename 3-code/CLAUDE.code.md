@@ -41,5 +41,5 @@ To create the initial implementation plan (phased tasks from design artifacts), 
 ## Linking to Other Phases
 
 - Implementation follows designs in `2-design/`
-- Tests verify requirements from `1-objectives/`
+- Tests verify requirements from `1-spec/`
 - Infrastructure code goes in `4-deploy/`; when a coding task modifies IaC, the deploy phase instructions ([`CLAUDE.deploy.md`](../4-deploy/CLAUDE.deploy.md)) apply as well

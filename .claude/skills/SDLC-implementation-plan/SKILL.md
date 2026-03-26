@@ -15,7 +15,7 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Objectives phase** — the Current State mentions "Objectives phase", lists objectives artifacts being drafted, or no phase beyond Objectives has been started. **Stop**, recommend `/SDLC-elicit` to continue refining objectives or `/SDLC-design` to start the design phase, and do not proceed.
+2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specifications or `/SDLC-design` to start the design phase, and do not proceed.
 
 3. **Project is in the Design phase without components identified** — **Stop**, recommend `/SDLC-decompose` first, and do not proceed.
 
@@ -36,9 +36,9 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 Read the following files — all are required context for planning:
 
-1. **Goals** — read every `GOAL-*.md` file in `1-objectives/goals/`. Extract each goal's title, priority, status, and **Success Criteria** checkboxes. Only consider goals with `Status: Approved`.
-2. **Requirements** — read every `REQ-*.md` file in `1-objectives/requirements/`. Note their type (Functional, Performance, Security, etc.), priority, and linked goals/stories.
-3. **Constraints** — read every `CON-*.md` file in `1-objectives/constraints/`.
+1. **Goals** — read every `GOAL-*.md` file in `1-spec/goals/`. Extract each goal's title, priority, status, and **Success Criteria** checkboxes. Only consider goals with `Status: Approved`.
+2. **Requirements** — read every `REQ-*.md` file in `1-spec/requirements/`. Note their type (Functional, Performance, Security, etc.), priority, and linked goals/stories.
+3. **Constraints** — read every `CON-*.md` file in `1-spec/constraints/`.
 4. **Design documents** — read `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md`.
 5. **Decisions** — read every `DEC-*.md` file in `2-design/decisions/` (active records only, not `.history.md`).
 6. **Code phase instructions** — read `3-code/CLAUDE.code.md`.
@@ -182,7 +182,7 @@ For each task, create a row:
 - **Task**: short description (imperative form)
 - **Priority**: derive from the goal priority (Must-have goal → P1, Should-have → P2, infrastructure/cross-cutting → P0 or P1 based on criticality)
 - **Status**: `Todo`
-- **Req**: link(s) to requirement file(s) this task implements, or `-` for infrastructure tasks. Example: `[REQ-F-search-by-name](../1-objectives/requirements/REQ-F-search-by-name.md)`
+- **Req**: link(s) to requirement file(s) this task implements, or `-` for infrastructure tasks. Example: `[REQ-F-search-by-name](../1-spec/requirements/REQ-F-search-by-name.md)`
 - **Dependencies**: `TASK-*` IDs this task depends on, or `-`
 - **Updated**: today's date (YYYY-MM-DD)
 - **Notes**: empty or brief clarification

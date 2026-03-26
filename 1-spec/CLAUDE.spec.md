@@ -1,4 +1,4 @@
-Phase-specific instructions for the **Objectives** phase. Extends [../CLAUDE.md](../CLAUDE.md).
+Phase-specific instructions for the **Specification** phase. Extends [../CLAUDE.md](../CLAUDE.md).
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 ---
 name: SDLC-design
-description: Draft or update design documents based on approved objectives. Use when translating requirements into technical specifications. Covers architecture, data model, API design, and design completeness assessment.
+description: Draft or update design documents based on approved specification. Use when translating requirements into technical specifications. Covers architecture, data model, API design, and design completeness assessment.
 ---
 
 ## Instructions
@@ -13,9 +13,9 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Objectives phase** — the Current State mentions "Objectives phase", lists objectives artifacts being drafted, or no phase beyond Objectives has been started.
+2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started.
 
-   Read the index tables in `1-objectives/CLAUDE.objectives.md` and evaluate the Objectives → Design phase gate preconditions:
+   Read the index tables in `1-spec/CLAUDE.spec.md` and evaluate the Spec → Design phase gate preconditions:
 
    - **(a)** At least one goal with `Status: Approved`
    - **(b)** At least one requirement with `Status: Approved`
@@ -49,9 +49,9 @@ Before doing anything else, determine what already exists:
 - Read `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md` to understand what design work has been done.
 - Summarize the current design state to the user: which documents exist, which are empty or incomplete, and what the logical next step is.
 
-#### 2. Load Objectives Artifacts
+#### 2. Load Specification Artifacts
 
-Read **only the index tables** in `1-objectives/CLAUDE.objectives.md` — do **not** open individual artifact files yet. Use the summary column in each index to determine relevance:
+Read **only the index tables** in `1-spec/CLAUDE.spec.md` — do **not** open individual artifact files yet. Use the summary column in each index to determine relevance:
 
 - **Requirements Index** — identify which requirements apply to the current design work.
 - **Goals Index** — identify which goals the design must satisfy.
@@ -90,7 +90,7 @@ The user does not have to complete all three documents in a single session. If t
 Before presenting the draft, cross-reference the design against approved requirements **and** constraints:
 
 - For each approved requirement, confirm it is satisfiable by the proposed design.
-- For each constraint in `1-objectives/constraints/`, confirm the design does not violate it. If a design choice is in tension with a constraint, surface the conflict and explain the trade-off.
+- For each constraint in `1-spec/constraints/`, confirm the design does not violate it. If a design choice is in tension with a constraint, surface the conflict and explain the trade-off.
 - For each assumption the design depends on, check its verification status. If unverified, note it as a design risk.
 - List any requirement that is not yet covered and explain why (e.g., depends on a document not yet drafted, requires a decision from the user).
 - If a Must-have requirement is not covered or a constraint is violated, the design is incomplete — address it before proceeding, or explicitly flag it as a gap that needs resolution.
@@ -196,7 +196,7 @@ Present suggestions as options the user can accept, modify, or decline. Do not a
 
 Whenever the skill applies user-approved changes (creating or updating design documents, recording decisions), update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
 
-1. **Phase transition** — if this is the first design work in the project (transitioning from Objectives to Design), **rewrite** the Current State section: replace the Objectives-phase information (artifact counts, statuses, gap analysis details, etc.) with a fresh Design-phase summary.
+1. **Phase transition** — if this is the first design work in the project (transitioning from Specification to Design), **rewrite** the Current State section: replace the Specification-phase information (artifact counts, statuses, gap analysis details, etc.) with a fresh Design-phase summary.
 2. **Design documents status** — list which design documents have content and which are still empty or incomplete (e.g., "Architecture drafted; data model and API design pending"). Update this incrementally as documents are created or modified.
 3. **Decisions recorded** — note the count of decisions created (e.g., "3 decisions recorded"). Update this when new decisions are recorded.
 4. **Last completeness assessment** — if a completeness assessment has been performed, record the date and a one-line result summary (e.g., "Completeness assessment (2026-03-10): 0 Critical, 1 Important, 2 Minor"). Update this only when an assessment is actually run, not on every design change. If design documents or decisions have been modified since the last recorded assessment, append "(stale — design changed since)" and remind the user that a fresh assessment is needed before advancing to Code.

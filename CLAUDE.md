@@ -8,11 +8,11 @@
 
 <!-- Replace this section with a description of your project. -->
 
-This repository uses a structured, AI-first development lifecycle. All project knowledge — objectives, design, decisions, tasks — lives alongside the source code.
+This repository uses a structured, AI-first development lifecycle. All project knowledge — specification, design, decisions, tasks — lives alongside the source code.
 
 ### Current State
 
-The project is just the base scaffold, and has not yet been inizialized. The repository contains the AI SDLC framework (phase directories, templates, automation skills) ready to be populated starting from the Objectives phase, after the inizialization has been done.
+The project is just the base scaffold, and has not yet been inizialized. The repository contains the AI SDLC framework (phase directories, templates, automation skills) ready to be populated starting from the Specification phase, after the inizialization has been done.
 
 ---
 
@@ -26,7 +26,7 @@ Each phase directory contains a `CLAUDE.<phase>.md` file. When working in a phas
 
 | Phase | Directory | Focus |
 |-------|-----------|-------|
-| **Objectives** | `1-objectives/` | Define what to build and why |
+| **Specification** | `1-spec/` | Define what to build and why |
 | **Design** | `2-design/` | Define how to build it |
 | **Code** | `3-code/` | Build it |
 | **Deploy** | `4-deploy/` | Ship and operate it |
@@ -35,7 +35,7 @@ Each phase directory contains a `CLAUDE.<phase>.md` file. When working in a phas
 
 Any modification to phase artifacts — whether performed inside a skill, during a free-prompt conversation, or as a side effect of any other task — must follow the authoritative procedures for that phase:
 
-- **Objectives artifacts** (`1-objectives/`): follow the procedures in [`.claude/skills/SDLC-elicit/SKILL.md`](.claude/skills/SDLC-elicit/SKILL.md) — including traceability rules, status downgrade on modification, index synchronization, bidirectional link maintenance, and Current State tracking.
+- **Specification artifacts** (`1-spec/`): follow the procedures in [`.claude/skills/SDLC-elicit/SKILL.md`](.claude/skills/SDLC-elicit/SKILL.md) — including traceability rules, status downgrade on modification, index synchronization, bidirectional link maintenance, and Current State tracking.
 - **Design artifacts** (`2-design/`): follow the procedures in [`.claude/skills/SDLC-design/SKILL.md`](.claude/skills/SDLC-design/SKILL.md) — including downstream effect checks, decision recording triggers, requirement coverage verification, and Current State tracking.
 - **Code phase task artifacts** (`3-code/tasks.md`): follow the procedures in [`.claude/skills/SDLC-implementation-plan/SKILL.md`](.claude/skills/SDLC-implementation-plan/SKILL.md) — including phased task grouping, traceability links, incremental deployability, and Current State tracking.
 
@@ -45,7 +45,7 @@ Before creating artifacts in the next phase, check these minimum preconditions. 
 
 | Transition | Preconditions |
 |------------|---------------|
-| Objectives → Design | Stakeholders defined; at least one goal Approved; at least one requirement Approved; gap analysis recorded in Current State and fresh (not stale, no Critical gaps) |
+| Spec → Design | Stakeholders defined; at least one goal Approved; at least one requirement Approved; gap analysis recorded in Current State and fresh (not stale, no Critical gaps) |
 | Design → Code | All design documents drafted (`architecture.md`, `data-model.md`, `api-design.md`); completeness assessment recorded in Current State and fresh (not stale, no Critical findings); components identified (per-component directories in `3-code/`) |
 
 There is no gate between Code and Deploy. Deploy activities (deployments, runbooks, infrastructure setup) can happen at any time during the Code phase.
@@ -60,12 +60,12 @@ All project knowledge — goals, requirements, assumptions, constraints, design 
 
 | Prefix | Artifact | Location |
 |--------|----------|----------|
-| `GOAL` | Goals | `1-objectives/goals/` |
-| `US` | User Stories | `1-objectives/user-stories/` |
-| `REQ-CLASS` | Requirements | `1-objectives/requirements/` |
-| `ASM` | Assumptions | `1-objectives/assumptions/` |
-| `CON` | Constraints | `1-objectives/constraints/` |
-| `STK` | Stakeholders | `1-objectives/stakeholders.md` (rows) |
+| `GOAL` | Goals | `1-spec/goals/` |
+| `US` | User Stories | `1-spec/user-stories/` |
+| `REQ-CLASS` | Requirements | `1-spec/requirements/` |
+| `ASM` | Assumptions | `1-spec/assumptions/` |
+| `CON` | Constraints | `1-spec/constraints/` |
+| `STK` | Stakeholders | `1-spec/stakeholders.md` (rows) |
 | `DEC` | Decisions | `2-design/decisions/` |
 | `TASK` | Tasks | `3-code/tasks.md` (rows) |
 

@@ -13,7 +13,7 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Objectives phase** — the Current State mentions "Objectives phase", lists objectives artifacts being drafted, or no phase beyond Objectives has been started. **Stop**, recommend `/SDLC-elicit` to continue refining objectives or `/SDLC-design` to start the design phase, and do not proceed.
+2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
 
 3. **Project is in the Design phase** — the Current State indicates the project is in the Design phase (e.g., mentions "Design phase", "architecture", "design documents being worked on", or no phase beyond Design has been started).
 
@@ -107,7 +107,7 @@ The `CLAUDE.component.md` file should contain:
 
 | File | Type | Priority | Summary |
 |------|------|----------|---------|
-| [REQ-*](../../1-objectives/requirements/REQ-*.md) | ... | ... | ... |
+| [REQ-*](../../1-spec/requirements/REQ-*.md) | ... | ... | ... |
 
 ## Relevant Decisions
 

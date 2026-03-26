@@ -48,4 +48,4 @@ When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.
 
 - Infrastructure design comes from `2-design/`
 - Deploys build artifacts from `3-code/`
-- Operational requirements come from `1-objectives/`
+- Operational requirements come from `1-spec/`

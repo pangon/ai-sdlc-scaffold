@@ -11,11 +11,11 @@ You are generating a comprehensive status report for the entire SDLC project.
 
 1. Read root instructions: `CLAUDE.md` — extract Project Overview and Current State.
 2. Read all four phase instruction files:
-   - `1-objectives/CLAUDE.objectives.md`
+   - `1-spec/CLAUDE.spec.md`
    - `2-design/CLAUDE.design.md`
    - `3-code/CLAUDE.code.md`
    - `4-deploy/CLAUDE.deploy.md`
-3. Read `1-objectives/stakeholders.md`.
+3. Read `1-spec/stakeholders.md`.
 4. Read `3-code/tasks.md` (if it exists and has content).
 5. Scan all artifact indexes in the phase files — follow File column links only when needed to resolve ambiguous statuses.
 6. List files in `2-design/decisions/` to count decisions (exclude `PROCEDURES.md`, templates, and `.history.md` files; read `.history.md` only when the corresponding active record shows Deprecated or Superseded status).
@@ -41,7 +41,7 @@ Present the report as a single markdown document with these sections.
 
 ---
 
-#### Phase 1: Objectives
+#### Phase 1: Specification
 
 **Stakeholders**: N defined (list names and influence levels in a compact line)
 
@@ -69,7 +69,7 @@ If requirements exist, add a **breakdown by class** (only classes that have at l
 | REQ-SEC | | | | |
 | ... | | | | |
 
-**Gap Analysis**: report the last recorded gap analysis from the Objectives Current State — date, severity counts, and whether it is **fresh** or **stale** (stale = artifacts modified since last analysis). If no gap analysis has been recorded, state "Not performed".
+**Gap Analysis**: report the last recorded gap analysis from the Specification Current State — date, severity counts, and whether it is **fresh** or **stale** (stale = artifacts modified since last analysis). If no gap analysis has been recorded, state "Not performed".
 
 ---
 
@@ -141,7 +141,7 @@ Report counts only. If all checks pass, state "No traceability issues detected".
 
 #### Phase Gates
 
-**Objectives → Design**:
+**Spec → Design**:
 | Precondition | Status |
 |--------------|--------|
 | Stakeholders defined | ✅ / ❌ |
@@ -167,8 +167,8 @@ Use ✅ when met, ❌ when not met, ⚠️ when partially met or stale.
 Based on the current state, suggest **up to 5** concrete next actions ordered by impact. Tailor suggestions to the project's actual phase:
 
 - If not initialized → recommend `/SDLC-init`
-- If in Objectives → recommend elicitation actions, gap analysis, approvals
-- If at Objectives → Design gate → recommend resolving gate blockers
+- If in Specification → recommend elicitation actions, gap analysis, approvals
+- If at Specification → Design gate → recommend resolving gate blockers
 - If in Design → recommend completing documents, recording decisions, running completeness assessment
 - If at Design → Code gate → recommend resolving gate blockers, running `/SDLC-decompose`
 - If in Code → recommend next task execution, resolving blocked tasks, addressing traceability gaps
@@ -181,5 +181,5 @@ Each suggestion should reference the specific skill or action (e.g., "Run `/SDLC
 - **Read-only operation** — do not modify any files.
 - **Concise** — summary numbers and compact tables, not full artifact listings. The goal is a dashboard, not a dump.
 - **No phase is alarming if empty** — the project may simply not be at that phase yet. State it neutrally.
-- **Skip empty sections gracefully** — if a phase has no artifacts, show a single line (e.g., "No objectives artifacts yet") instead of empty tables.
+- **Skip empty sections gracefully** — if a phase has no artifacts, show a single line (e.g., "No specification artifacts yet") instead of empty tables.
 - **Assessment freshness matters** — always report whether gap analysis and completeness assessments are fresh or stale, as this directly impacts phase gate readiness.

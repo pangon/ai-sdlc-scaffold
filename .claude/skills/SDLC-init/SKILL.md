@@ -12,7 +12,7 @@ You are guiding the user through the initial setup of a new project based on the
 1. **Read** the current `## Project Overview` section in `CLAUDE.md`. If it already contains a real description (not just placeholder text), show it to the user and ask whether they want to replace or refine it.
 2. **Ask** the user to describe their project: what it does and what problem it solves. As an alternative, offer to auto-generate a summary from the repository name. Do not ask for technology stack or architectural details — those belong in later phases.
 3. **Write** a concise project description optimized for AI agent consumption. Replace the **entire** `## Project Overview` section content (everything between the `## Project Overview` heading and the `### Current State` subheading), not just the placeholder comment.
-4. **Update `### Current State`** if present — set it to reflect the actual project status (e.g., "The project has been initialized. The next step is to populate the Objectives phase.").
+4. **Update `### Current State`** if present — set it to reflect the actual project status (e.g., "The project has been initialized. The next step is to populate the Specification phase.").
 5. **Confirm** — show the user the final text that was written.
 
 ### Rules

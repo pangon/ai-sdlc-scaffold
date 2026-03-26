@@ -25,6 +25,6 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 
 ## Linking to Other Phases
 
-- Reference requirements from `1-objectives/` to justify design choices
+- Reference requirements from `1-spec/` to justify design choices
 - Design documents guide implementation in `3-code/`
 - Infrastructure design informs deployment in `4-deploy/`

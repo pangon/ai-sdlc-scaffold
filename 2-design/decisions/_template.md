@@ -6,7 +6,7 @@
 
 **Scope**: system-wide | backend | frontend | infra | [codebase-name]
 
-**Source**: [REQ-CLASS-kebab-name](../../1-objectives/requirements/REQ-CLASS-kebab-name.md), [GOAL-kebab-name](../../1-objectives/goals/GOAL-kebab-name.md), [CON-kebab-name](../../1-objectives/constraints/CON-kebab-name.md), or n/a
+**Source**: [REQ-CLASS-kebab-name](../../1-spec/requirements/REQ-CLASS-kebab-name.md), [GOAL-kebab-name](../../1-spec/goals/GOAL-kebab-name.md), [CON-kebab-name](../../1-spec/constraints/CON-kebab-name.md), or n/a
 
 **Last updated**: YYYY-MM-DD
 

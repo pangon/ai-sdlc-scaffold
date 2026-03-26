@@ -8,7 +8,7 @@ It is not a tool, a library, or an application. It is a **starting scaffold** �
 
 ## Core Principles
 
-1. **AI-first development model.** The scaffold is designed for a scenario where AI agents do the development work and a human supervises at a high level. The human steers direction, reviews important decisions, and defines objectives — assisted by agents that facilitate the process, surface gaps, and flag inconsistencies. The human does not write code. Some structural choices are deliberately optimized for agent consumption over human ergonomics.
+1. **AI-first development model.** The scaffold is designed for a scenario where AI agents do the development work and a human supervises at a high level. The human steers direction, reviews important decisions, and defines specification — assisted by agents that facilitate the process, surface gaps, and flag inconsistencies. The human does not write code. Some structural choices are deliberately optimized for agent consumption over human ergonomics.
 
 2. **Everything-in-repo.** Every artifact that explains the software — goals, requirements, assumptions, constraints, design decisions, task tracking — lives alongside the source code, version-controlled and always accessible. This gives agents the full context that human developers would normally carry in their heads or scattered across external tools.
 
@@ -47,7 +47,7 @@ The project is divided into four sequential phases, each in its own directory:
 
 | Phase | Purpose |
 |---|---|
-| **1-objectives** | Capture *what* to build and *why*: stakeholders, goals, user stories, requirements, assumptions, constraints |
+| **1-spec** | Capture *what* to build and *why*: stakeholders, goals, user stories, requirements, assumptions, constraints |
 | **2-design** | Define *how* to build it: architecture, data model, API design, and formal decision records |
 | **3-code** | Build it: starts with component decomposition and implementation planning, then source code, tests, and a task tracker linked to requirements |
 | **4-deploy** | Ship and operate it: infrastructure-as-code, deployment scripts, runbooks |

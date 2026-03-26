@@ -30,7 +30,7 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Objectives phase** — the Current State mentions "Objectives phase", lists objectives artifacts being drafted, or no phase beyond Objectives has been started. **Stop**, recommend `/SDLC-elicit` to continue refining objectives or `/SDLC-design` to start the design phase, and do not proceed.
+2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
 
 3. **Project is in the Design phase** — **Stop**, recommend completing design with `/SDLC-design`, then `/SDLC-decompose` and `/SDLC-implementation-plan` to create the task list, and do not proceed.
 
@@ -231,7 +231,7 @@ A design gap is a divergence between **design documents** and what implementatio
 2. **Surface** the gap: what the design says, what implementation needs, why they differ.
 3. **Present options**: update design first, simplify to stay within design, or accept and record deviation as a decision.
 4. **Wait for explicit approval** before proceeding.
-5. **Act**: update `2-design/` or `1-objectives/` as needed following the SDLC-design procedures (including downstream effect checks, decision recording, and Current State tracking), then implement.
+5. **Act**: update `2-design/` or `1-spec/` as needed following the SDLC-design procedures (including downstream effect checks, decision recording, and Current State tracking), then implement.
 
 ### Current State Tracking
 

@@ -1,13 +1,13 @@
 # AI SDLC Scaffold
 
-A repository template for **AI-first software development** with [Claude Code](https://claude.ai/code) that organizes the entire software development lifecycle (SDLC) into four phases — Objectives, Design, Code, Deploy — each with folder structure, artifacts, and agent instructions that encode what to check, when to check it, and what to do, so that all project knowledge lives inside the repository and a human can supervise at a high level.
+A repository template for **AI-first software development** with [Claude Code](https://claude.ai/code) that organizes the entire software development lifecycle (SDLC) into four phases — Specification, Design, Code, Deploy — each with folder structure, artifacts, and agent instructions that encode what to check, when to check it, and what to do, so that all project knowledge lives inside the repository and a human can supervise at a high level.
 
 It is not a tool, a library, or an application. It is a **starting scaffold** — you clone or copy it, then fill it in as your real project takes shape.
 
 The scaffold is built on four core principles:
 
-1. **AI-first development model** — designed for AI agents doing the work while a human supervises, defines objectives, and steers direction.
-2. **Everything-in-repo** — objectives, requirements, architecture, decisions, and task tracking all live alongside the source code, versioned and always accessible to agents without external tools.
+1. **AI-first development model** — designed for AI agents doing the work while a human supervises, defines specification, and steers direction.
+2. **Everything-in-repo** — specification, requirements, architecture, decisions, and task tracking all live alongside the source code, versioned and always accessible to agents without external tools.
 3. **Context-window efficiency** — hierarchical instructions, two-file decision records, and phase-level indexes minimize how many tokens an agent must load.
 4. **Decision capture, not suppression** — agents decide autonomously within established patterns; all decisions are recorded in the repository for human review and consistency.
 
@@ -37,7 +37,7 @@ git init && git add -A && git commit -m "Initial scaffold"
 ### Then
 
 1. **Run `/SDLC-init`** in Claude Code: the initialization skill sets up the project description in `CLAUDE.md` so agents have the right context from the start.
-2. **Work through the phases** (Objectives → Design → Code → Deploy) using the built-in [skills](#skills) — type `/` followed by a skill name to automate each step, from requirements gathering to deployment. Alternatively, you can use custom prompts: the `CLAUDE.<phase>.md` hierarchy provides all the context the agent needs to operate correctly in each phase.
+2. **Work through the phases** (Specification → Design → Code → Deploy) using the built-in [skills](#skills) — type `/` followed by a skill name to automate each step, from requirements gathering to deployment. Alternatively, you can use custom prompts: the `CLAUDE.<phase>.md` hierarchy provides all the context the agent needs to operate correctly in each phase.
 
 > **Manual edits are strongly discouraged.** All changes to artifacts and code should go through an AI agent whose behavior is governed by the instruction files, existing artifacts, and ideally a skill. This ensures that procedures are followed, decisions are recorded, and the system stays consistent.
 
@@ -47,8 +47,8 @@ git init && git add -A && git commit -m "Initial scaffold"
 ├── CLAUDE.md                         # Root AI instructions (start here)
 ├── RATIONALE.md                      # Core principles and design rationale
 │
-├── 1-objectives/                     # WHAT and WHY
-│   ├── CLAUDE.objectives.md          # Phase instructions and artifact indexes
+├── 1-spec/                     # WHAT and WHY
+│   ├── CLAUDE.spec.md          # Phase instructions and artifact indexes
 │   ├── stakeholders.md               # Stakeholder definitions
 │   ├── goals/                        # GOAL-kebab-name.md + _template.md
 │   ├── user-stories/                 # US-kebab-name.md + _template.md
@@ -96,7 +96,7 @@ git init && git add -A && git commit -m "Initial scaffold"
 The scaffold starts empty. Project-specific artifacts are created progressively as you work through each phase — not all at once.
 
 - **At project start** (`/SDLC-init`): set the project description in `CLAUDE.md` so agents have the right context from the start.
-- **During the Objectives phase** (`/SDLC-elicit`): define stakeholders, goals, constraints, assumptions, user stories, and requirements.
+- **During the Specification phase** (`/SDLC-elicit`): define stakeholders, goals, constraints, assumptions, user stories, and requirements.
 - **During the Design phase** (`/SDLC-design`): draft architecture, data model, API design. Decisions are recorded as they emerge during design work.
 - **At the start of the Code phase** (`/SDLC-decompose`, `/SDLC-implementation-plan`): identify components (creating per-component directories under `3-code/`), then generate the task backlog.
 - **During the Code phase** (`/SDLC-execute-next-task`, `/SDLC-fix`): implement tasks one at a time (each call picks the next pending task, writes code and tests, and updates the task status), or apply bug fixes and ad-hoc changes as they arise.
@@ -109,7 +109,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 |-------|---------|
 | `/SDLC-init` | Guided project initialization — sets the project description in `CLAUDE.md` so agents have the right context from the start. |
 
-### Objectives Phase
+### Specification Phase
 
 | Skill | Purpose |
 |-------|---------|

@@ -1,11 +1,11 @@
 ---
 name: SDLC-elicit
-description: Interactive requirements elicitation for the Objectives phase. Use when defining, reviewing, or modifying stakeholders, goals, user stories, requirements, assumptions, or constraints. Also performs gap analysis on existing artifacts.
+description: Interactive requirements elicitation for the Specification phase. Use when defining, reviewing, or modifying stakeholders, goals, user stories, requirements, assumptions, or constraints. Also performs gap analysis on existing artifacts.
 ---
 
 ## Instructions
 
-You are running an interactive elicitation session for the Objectives phase of an AI-first SDLC project. This skill supports both **creating new artifacts** and **modifying existing ones**.
+You are running an interactive elicitation session for the Specification phase of an AI-first SDLC project. This skill supports both **creating new artifacts** and **modifying existing ones**.
 
 ### Phase Validation
 
@@ -13,18 +13,18 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Objectives phase** — the Current State indicates the project is in the Objectives phase (e.g., mentions "Objectives phase", "elicitation", "defining goals/requirements", or no phase beyond Objectives has been started), **proceed normally** with the Setup steps below.
+2. **Project is in the Specification phase** — the Current State indicates the project is in the Specification phase (e.g., mentions "Specification phase", "elicitation", "defining goals/requirements", or no phase beyond Specification has been started), **proceed normally** with the Setup steps below.
 
-3. **Project has advanced beyond Objectives** — the Current State indicates the project is in Design, Code, or Deploy phase. **Warn** that modifying Objectives artifacts may impact downstream design, tasks, or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
+3. **Project has advanced beyond Specification** — the Current State indicates the project is in Design, Code, or Deploy phase. **Warn** that modifying Specification artifacts may impact downstream design, tasks, or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
 
 ### Setup
 
-1. Read `1-objectives/CLAUDE.objectives.md` (phase instructions and existing artifact indexes).
-2. Read `1-objectives/stakeholders.md` to understand existing stakeholders.
+1. Read `1-spec/CLAUDE.spec.md` (phase instructions and existing artifact indexes).
+2. Read `1-spec/stakeholders.md` to understand existing stakeholders.
 
 ### Artifact Traceability Chain
 
-Objectives artifacts form a traceability chain. Each level should decompose into the next:
+Specification artifacts form a traceability chain. Each level should decompose into the next:
 
 1. **Stakeholder → Goals** — every stakeholder should have at least one associated goal. A stakeholder with no goals has no defined value proposition in the project.
 2. **Goal → User Stories** — every goal should have at least one associated user story. Review the linked user stories against the goal's success criteria and flag coverage gaps.
@@ -39,13 +39,13 @@ Elicitation is iterative — artifacts of different types often emerge together 
 
 That said, there is a **recommended starting sequence** for greenfield projects, because later artifacts depend on earlier ones:
 
-1. **Stakeholders** — update `1-objectives/stakeholders.md` with new entries (`STK-kebab-name`).
-2. **Constraints** — create `CON-<kebab-name>.md` from `1-objectives/constraints/_template.md`. Constraints — especially **business** constraints (budget, timeline, team size) and **operational** constraints (hosting, compliance) — should be captured early because they shape which goals are realistic, which user stories are in scope, and how requirements are specified. Proactively ask the user about known constraints across all categories (technical, business, operational) before moving to goals.
-3. **Goals** — create `GOAL-<kebab-name>.md` from `1-objectives/goals/_template.md`.
-4. **User Stories** — create `US-<kebab-name>.md` from `1-objectives/user-stories/_template.md`.
-5. **Requirements** — create `REQ-<CLASS>-<kebab-name>.md` from `1-objectives/requirements/_template.md`.
+1. **Stakeholders** — update `1-spec/stakeholders.md` with new entries (`STK-kebab-name`).
+2. **Constraints** — create `CON-<kebab-name>.md` from `1-spec/constraints/_template.md`. Constraints — especially **business** constraints (budget, timeline, team size) and **operational** constraints (hosting, compliance) — should be captured early because they shape which goals are realistic, which user stories are in scope, and how requirements are specified. Proactively ask the user about known constraints across all categories (technical, business, operational) before moving to goals.
+3. **Goals** — create `GOAL-<kebab-name>.md` from `1-spec/goals/_template.md`.
+4. **User Stories** — create `US-<kebab-name>.md` from `1-spec/user-stories/_template.md`.
+5. **Requirements** — create `REQ-<CLASS>-<kebab-name>.md` from `1-spec/requirements/_template.md`.
 
-**Assumptions** have no fixed position — capture them whenever they surface during discussion. Create `ASM-<kebab-name>.md` from `1-objectives/assumptions/_template.md`. Additional **Constraints** may also emerge later — capture them immediately and review whether existing goals or user stories need to be adjusted.
+**Assumptions** have no fixed position — capture them whenever they surface during discussion. Create `ASM-<kebab-name>.md` from `1-spec/assumptions/_template.md`. Additional **Constraints** may also emerge later — capture them immediately and review whether existing goals or user stories need to be adjusted.
 
 The only hard prerequisite: **at least one stakeholder must exist before creating goals, user stories, or requirements**, since these artifacts require a source stakeholder link.
 
@@ -79,7 +79,7 @@ Do not announce a "validation step" — apply these criteria silently while draf
 
 ### Modifying Existing Artifacts
 
-This skill can be used to review and modify any artifact in `1-objectives/`:
+This skill can be used to review and modify any artifact in `1-spec/`:
 
 1. **Read the artifact** before proposing any changes.
 2. **Present the proposed changes** clearly (what will change and why).
@@ -99,7 +99,7 @@ This skill can be used to review and modify any artifact in `1-objectives/`:
 
 ### Gap Analysis
 
-This skill can analyze the current set of Objectives artifacts to identify gaps and inconsistencies. When the user asks for a gap analysis (or when reviewing artifacts suggests one):
+This skill can analyze the current set of Specification artifacts to identify gaps and inconsistencies. When the user asks for a gap analysis (or when reviewing artifacts suggests one):
 
 #### 1. Goal Coverage Assessment
 
@@ -137,7 +137,7 @@ Present the findings grouped by severity level (Critical first, then Important, 
 
 #### 4. Next Step
 
-After completing the gap analysis with no Critical findings remaining, inform the user that the Objectives phase is ready for phase gate transition and that the next step is to start the Design phase using the `/SDLC-design` skill.
+After completing the gap analysis with no Critical findings remaining, inform the user that the Specification phase is ready for phase gate transition and that the next step is to start the Design phase using the `/SDLC-design` skill.
 
 ### Interaction Style
 
@@ -146,21 +146,21 @@ After completing the gap analysis with no Critical findings remaining, inform th
 - When the user confirms, create the file(s) from the appropriate template.
 - **After completing an approved action or after the user declines a proposal, briefly summarize what was done, then ask the user how they want to proceed.** Do not jump directly into suggesting new artifacts.
 - When the user asks for suggestions or is unsure what to do next, use the Proactive Suggestions guidelines above to offer relevant options.
-- Surface potential conflicts between requirements immediately — follow the conflict resolution procedure in `CLAUDE.objectives.md`.
+- Surface potential conflicts between requirements immediately — follow the conflict resolution procedure in `CLAUDE.spec.md`.
 
 ### Current State Tracking
 
 Whenever the skill applies user-approved changes (creating, modifying, or deleting artifacts), update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
 
-1. **Artifact types being elicited** — list which artifact types have been worked on in the Objectives phase (e.g., "Stakeholders defined; Goals and Assumptions drafted"). Update this incrementally as new types are touched.
+1. **Artifact types being elicited** — list which artifact types have been worked on in the Specification phase (e.g., "Stakeholders defined; Goals and Assumptions drafted"). Update this incrementally as new types are touched.
 2. **Last gap analysis** — if a gap analysis has been performed, record the date and a one-line result summary (e.g., "Gap analysis (2026-03-08): 2 Critical, 1 Important, 0 Minor"). Update this only when a gap analysis is actually run, not on every artifact change.
 
-Gap analysis can be run at any time during elicitation — it is useful as a mid-session checkpoint to identify blind spots early. However, a gap analysis is **required before phase gate transition** (Objectives → Design). If artifacts have been created or modified since the last recorded gap analysis, append "(stale — artifacts changed since)" to the gap analysis line in Current State and remind the user that a fresh analysis is needed before advancing.
+Gap analysis can be run at any time during elicitation — it is useful as a mid-session checkpoint to identify blind spots early. However, a gap analysis is **required before phase gate transition** (Spec → Design). If artifacts have been created or modified since the last recorded gap analysis, append "(stale — artifacts changed since)" to the gap analysis line in Current State and remind the user that a fresh analysis is needed before advancing.
 
 ### Rules
 
 - **Current State synchronization**: whenever artifacts are created, modified, or deleted, update `### Current State` in `CLAUDE.md` as described in the Current State Tracking section above. This update must happen in the same operation as the artifact change.
-- **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-objectives/CLAUDE.objectives.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row.
+- **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-spec/CLAUDE.spec.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row.
 - All new artifacts start with `Status: Draft`. Never auto-approve — only a human can move to `Approved`.
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
 - Choose a short descriptive kebab-case name for each new artifact (check existing files to avoid duplicates). The name **is** the ID — there are no numeric sequences.
