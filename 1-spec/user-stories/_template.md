@@ -1,6 +1,6 @@
 # US-[kebab-name]: [Title]
 
-**As a** [stakeholder role], **I want** [capability], **so that** [benefit].
+**As a** [role name, not STK-id], **I want** [capability], **so that** [benefit].
 
 **Status**: Draft | Approved | Implemented | Deprecated
 
