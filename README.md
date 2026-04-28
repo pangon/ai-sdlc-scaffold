@@ -65,6 +65,7 @@ git init && git add -A && git commit -m "Initial scaffold"
 ├── 3-code/                           # BUILD
 │   ├── CLAUDE.code.md                # Phase instructions, decisions index, component guidelines
 │   ├── tasks.md                      # Development task tracker
+│   ├── implementation-log/           # Per-task and per-fix logs (TASK-*.md, FIX-*.md) + templates
 │   └── <component>/                  # Per-component directories (created by /SDLC-decompose)
 │       └── CLAUDE.<component>.md     # Component description, decisions index, addressed requirements
 │
@@ -80,7 +81,7 @@ git init && git add -A && git commit -m "Initial scaffold"
     ├── SDLC-design/SKILL.md          # design documents
     ├── SDLC-decompose/SKILL.md       # component identification
     ├── SDLC-implementation-plan/SKILL.md  # task generation
-    ├── SDLC-execute-next-task/SKILL.md    # task execution
+    ├── SDLC-execute-task/SKILL.md         # task execution
     ├── SDLC-fix/SKILL.md             # bug fixes and ad-hoc changes
     └── SDLC-status/SKILL.md          # /SDLC-status — project dashboard
 ```
@@ -100,7 +101,7 @@ The scaffold starts empty. Project-specific artifacts are created progressively 
 - **During the Specification phase** (`/SDLC-elicit`): define stakeholders, goals, constraints, assumptions, user stories, and requirements.
 - **During the Design phase** (`/SDLC-design`): draft architecture, data model, API design. Decisions are recorded as they emerge during design work.
 - **At the start of the Code phase** (`/SDLC-decompose`, `/SDLC-implementation-plan`): identify components (creating per-component directories under `3-code/`), then generate the task backlog.
-- **During the Code phase** (`/SDLC-execute-next-task`, `/SDLC-fix`): implement tasks one at a time (each call picks the next pending task, writes code and tests, and updates the task status), or apply bug fixes and ad-hoc changes as they arise.
+- **During the Code phase** (`/SDLC-execute-task`, `/SDLC-fix`): implement tasks one at a time (each call selects the next pending task by default, or uses any context you provide to pick a specific one, then writes code and tests and updates the task status), or apply bug fixes and ad-hoc changes as they arise.
 
 Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude Code to invoke them. Each skill reads the root `CLAUDE.md` and the relevant phase instructions before acting.
 
@@ -128,7 +129,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 | Skill | Purpose |
 |-------|---------|
 | `/SDLC-implementation-plan` | Create a phased implementation plan from design artifacts. Populates `tasks.md` with short tasks grouped into incremental development phases, each ending with a deployable/testable system. |
-| `/SDLC-execute-next-task` | Execute the next pending task from the implementation plan. Finds the first actionable task, implements with tests, handles design gaps, and updates task status. |
+| `/SDLC-execute-task` | Execute a development task from the implementation plan. Selects the next pending task when invoked bare, or uses user-provided context to identify the task otherwise. Implements with tests, handles design gaps, and updates task status. |
 | `/SDLC-fix` | Apply a user-reported fix, bug correction, or ad-hoc change. Gathers context interactively, identifies affected components, checks design artifacts and decisions, implements with tests, and handles design gaps. |
 
 ### Cross-Phase
@@ -146,7 +147,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 /SDLC-design                ← draft architecture, data model, API design
 /SDLC-decompose             ← identify components, create directories
 /SDLC-implementation-plan   ← generate task backlog
-/SDLC-execute-next-task     ← execute tasks one by one
+/SDLC-execute-task          ← execute tasks one by one
 /SDLC-fix                   ← apply bug fixes or ad-hoc changes
 /SDLC-status                ← anytime: full project overview
 ```
