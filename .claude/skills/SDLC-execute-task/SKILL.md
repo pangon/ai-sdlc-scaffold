@@ -1,11 +1,20 @@
 ---
-name: SDLC-execute-next-task
-description: Execute the next pending task from the implementation plan. Finds the first actionable task, derives its actual scope, implements with tests, handles design gaps, and updates task status. Use during the Code phase to make incremental progress.
+name: SDLC-execute-task
+description: Execute a development task from the implementation plan. Selects the next pending task when invoked bare, or uses user-provided context to identify the task otherwise. Derives actual scope from specification/design/decisions, implements with tests, handles design gaps, and updates task status. Use during the Code phase.
 ---
 
 ## Instructions
 
-You are executing the next pending development task from the implementation plan. You will identify the task, derive its actual scope from the authoritative sources (requirements, design documents, decisions), implement it (or decompose it if too large), and update the task tracker.
+You are executing a development task from the implementation plan. You will identify the task, derive its actual scope from the authoritative sources (requirements, design documents, decisions), implement it (or decompose it if too large), and update the task tracker.
+
+### Invocation Modes
+
+This skill has two invocation modes, determined by whether the user provided context or instructions alongside the skill invocation:
+
+- **Bare invocation** — the skill was invoked with no additional context, arguments, or instructions (e.g., just `/SDLC-execute-task` on its own). In this mode, the skill automatically selects the **next pending task** from the implementation plan following the rules in "Task Selection — Bare Invocation" below.
+- **Contextual invocation** — the skill was invoked together with context or instructions (a specific task ID, a natural-language description of which task to work on, scoping hints like "the auth task in phase 2", or any other directive narrowing the target). In this mode, the skill uses that context to identify which task to execute, following the rules in "Task Selection — Contextual Invocation" below. The user's context takes precedence: do **not** silently fall back to selecting the next task if the context is ambiguous — ask the user to clarify instead.
+
+Determine the mode before doing anything else, and follow the corresponding Task Selection branch.
 
 ### Task Descriptions Are Indicative, Not Prescriptive
 
@@ -38,7 +47,9 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
 
 5. **Project is in the Code phase with tasks** — this is the expected state. Proceed with Task Selection.
 
-### Task Selection
+### Task Selection — Bare Invocation
+
+Use this branch only when the skill was invoked with no additional user context (see "Invocation Modes" above).
 
 1. **Read code phase instructions**: Open `3-code/CLAUDE.code.md`.
 
@@ -63,9 +74,46 @@ Before doing anything else, read the `### Current State` subsection under `## Pr
    - If any dependency is **not** `Done`, **stop** — inform the user that this task has unmet dependencies and should likely be marked as `Blocked`. List the unmet dependencies and ask the user how they want to proceed (mark it as Blocked, skip it, force-start it, execute one of the blocking tasks first, or revise the implementation plan). If the user chooses to mark the task as `Blocked`, record the blocking reason in the `Notes` column (e.g., "Blocked: waiting on TASK-xyz which is still Todo").
    - If all dependencies are `Done`, select this task for execution and proceed to Task Preparation.
 
+### Task Selection — Contextual Invocation
+
+Use this branch only when the skill was invoked with user-provided context (see "Invocation Modes" above).
+
+1. **Read code phase instructions**: Open `3-code/CLAUDE.code.md`.
+
+2. **Read the task list**: Open `3-code/tasks.md`.
+
+3. **Resolve the user's context to a single task**:
+   - If the user gave an exact task ID (e.g., `TASK-foo-bar`), look it up in the Task Table.
+   - Otherwise, match the user's description against task IDs, task descriptions, phases, and components in the Task Table.
+   - If exactly one task matches, select it.
+   - If multiple tasks plausibly match, or no task matches, **stop** and ask the user to disambiguate. List the candidates (or the closest matches) with their IDs, phases, and descriptions. Do **not** fall back to the next task automatically — the user's intent must be honored.
+
+4. **Check for interrupted tasks**: If any task in the Task Table has status `In Progress` and it is **not** the one the user just selected, inform the user that another task is mid-flight and ask whether to continue with the user-selected task anyway, switch to finishing the in-progress task, or cancel. Proceed according to the user's answer.
+
+5. **Check the selected task's status**:
+   - `Done` or `Cancelled`: **stop** and inform the user — the task is not actionable. Ask whether they want to reopen it (e.g., reset to `Todo`) or pick a different one.
+   - `In Progress`: treat this as resuming an interrupted task — proceed to Task Preparation.
+   - `Blocked`: read the `Notes` column and check the task's `Dependencies`. Surface the reason to the user and ask whether to force-start it, unblock (if the blocker is no longer valid — then set status to `Todo`), or pick a different task.
+   - `Todo`: proceed to step 6.
+
+6. **Validate dependencies**: Check that all tasks listed in the selected task's `Dependencies` column are marked as `Done`.
+   - If any dependency is **not** `Done`, surface this to the user and ask how to proceed (force-start, execute a blocking task first, pick a different task, or revise the plan). Do not auto-mark as `Blocked` — the user explicitly asked for this task, so require their decision.
+   - If all dependencies are `Done`, select this task for execution and proceed to Task Preparation.
+
+7. **Respect additional user scoping**: if the user's context included instructions that narrow or adjust the work within the task (e.g., "do only the migration part", "skip the tests for now", "use library X"), carry those instructions forward into Task Preparation and Execution — they override the default behaviors where they conflict (but they do **not** override authoritative sources; if the user's instruction conflicts with a requirement, design document, or decision, treat it as a tension per Task Preparation step 5).
+
 ### Task Preparation
 
-Before writing any code, gather all necessary context:
+Before writing any code, gather all necessary context.
+
+**Resume branch.** If an implementation log already exists at `3-code/implementation-log/<task-id>.md` (a prior skill run worked on this task), Task Preparation is grounded in that log:
+
+- Read the log in full **before** starting the steps below. Pay particular attention to `[Q&A]` entries (questions the user already answered — do not ask them again), `[RECONSIDER]` entries (earlier plan changes that shape the current approach), and every `[CONCLUSION]` entry present (prior outcomes, open items, and any reason the task was reopened).
+- Treat the log's `## Understanding` section as the **authoritative synthesized scope** for this task. Do **not** re-derive it, and do **not** edit it — even if the original synthesis now feels incomplete. If your reading of the sources produces a different understanding, capture the delta as a `[RECONSIDER]` entry later in the Execution log; never overwrite the original Understanding.
+- Still execute all of steps 1–8 below, but informed by the log. In particular, for steps 1–3: ensure every artifact directly referenced in the log (linked requirements, design documents, decisions, downstream tasks, plus anything cited inside `[Q&A]` / `[RECONSIDER]` / `[CONCLUSION]` entries) is re-read and understood, even if it was not originally listed in the Understanding section. Use these steps to verify and supplement the existing Understanding, not to replace it.
+- For steps 4–8 (applicable decisions, constraint tensions, dev-env needs, confirm understanding, complexity), also run them against the **current** state of the project, since decisions, constraints, or the environment may have drifted since the prior run.
+
+**Fresh branch.** If no log file exists, run all of steps 1–8 below to derive the Understanding from scratch; it will be written into the log during Implementation Log setup.
 
 #### 1. Read Requirements
 
@@ -159,9 +207,64 @@ Assess whether the task is too large to complete in one session. A task is "too 
 - Complex logic that should be tested incrementally
 - More code than can be reasonably reviewed at once
 
+### Implementation Log
+
+Every task execution must produce a durable log of the non-trivial operations and evaluations made during the run. The log is the paper trail a future reviewer or agent reads to understand what was done and why. The log is **append-only**: once the Understanding section has been populated and an entry has been written to the Execution log, they are never edited or removed — new entries are only appended.
+
+#### Location and naming
+
+- Logs live under `3-code/implementation-log/`.
+- One file per task. File name is the task ID plus `.md` (e.g., `3-code/implementation-log/TASK-model-service-list.md`).
+- The template is `3-code/implementation-log/_template.md`. Always start a new log file from this template — never from scratch.
+
+#### Log file setup
+
+Before entering the Execution section, do the following in order:
+
+1. **Check whether the log file exists** at `3-code/implementation-log/<task-id>.md`.
+
+2. **If the file does NOT exist:**
+   - Copy `_template.md` to `<task-id>.md`.
+   - Fill the header metadata: task ID + link and today's date as `Started`. The header has no other mutable fields — task status lives in `tasks.md`, and the final outcome will be captured as a `[CONCLUSION]` entry appended at the end.
+
+3. **If the file DOES exist:**
+   - The task's status in `tasks.md` **must** be `In Progress` — a pre-existing log implies a prior skill run on the same task (either interrupted, or concluded and now reopened). If the status is anything else (`Todo`, `Done`, `Cancelled`, `Blocked`), **stop** and surface the inconsistency to the user. Likely causes: a previous run crashed before updating status, the log file was created manually, the task was reset without cleaning up the log, or a stale log was left in place. Ask how to proceed (resume by setting the status to `In Progress`, archive/delete the log and restart from template, or investigate further). Do not proceed until the user resolves the inconsistency.
+   - If the status is `In Progress`, the log should have already been read in full during Task Preparation's Resume branch (including its `## Understanding` section and its `[Q&A]`, `[RECONSIDER]`, and `[CONCLUSION]` entries). Append a `[RESUMED]` entry to the `## Execution log` section noting today's date and a brief indication of what triggered the resumption, then continue. Do not modify the pre-existing header, Understanding, or any earlier entry.
+
+4. **Populate the Understanding section** (only on the fresh branch — skip this step when resuming a pre-existing log): fill the `## Understanding` section of the log with the synthesized scope derived during Task Preparation. Include hyperlinks to every referenced artifact — linked requirements, relevant design documents, applicable decisions, and downstream tasks. If the synthesized scope diverges from the brief description in `tasks.md`, note the divergence explicitly. Once filled, this section is immutable for the lifetime of the task — if new understanding emerges later, record it as a `[RECONSIDER]` or `[NOTE]` entry in the Execution log instead.
+
+Only after the log file is in place and the Understanding section has been populated may you proceed to the Execution section.
+
+#### What to log during Execution
+
+The goal is to preserve the **important operations** and the **important evaluations** the skill made, not to transcribe everything. Append entries to the `## Execution log` section as the work progresses — not only at the end — so that, if the run is interrupted, the log still reflects what happened up to that point. Never edit or delete an existing entry; if a previous entry turns out to be wrong or superseded, append a new `[RECONSIDER]` or `[NOTE]` entry that references and corrects it.
+
+**Log:**
+
+- **Every file write, create, or delete** as a `[WRITE]` entry — include the path and a one-line summary of what changed and why. Do not paste full diffs.
+- **Every question asked to the user** as a `[Q&A]` entry — include both the question and the user's answer (verbatim or faithfully paraphrased).
+- **Every reconsideration or mid-flight change of plan** as a `[RECONSIDER]` entry — what shifted and why.
+- **Every problem detected** as a `[PROBLEM]` entry, and the corresponding fix as a `[FIX]` entry referencing it.
+- **Every design gap** surfaced via the Design Gap Procedure as a `[DESIGN-GAP]` entry — include the resolution (design-document update, new decision, deviation accepted, etc.).
+- **Every tension between authoritative sources** surfaced to the user as a `[TENSION]` entry — include the resolution.
+- **Test-run outcomes worth preserving** (failures with root cause, debug iterations, the final green run) as `[TEST]` entries.
+- **Any other important observation or evaluation** as a `[NOTE]` entry.
+
+**Do not log:**
+
+- Routine file reads (requirements, design docs, decisions — these are implicit context).
+- Routine tool invocations that carry no decision weight.
+- Verbatim long tool output — summarize instead.
+
+#### Finalizing the log
+
+When the skill finishes — Path A success (task `Done`), Path B decomposition, or stopping with `Blocked` / `Cancelled` — append a `[CONCLUSION]` entry as the last entry of the Execution log. Its body must state the final status and summarize: files created/modified, tests added/updated, requirements and acceptance criteria satisfied, new or updated decisions, design-document updates, and any pre-existing issues observed.
+
+A log may accumulate multiple `[CONCLUSION]` entries across its lifetime: if a task that already has a `[CONCLUSION]` is reopened (for instance, the user sets its status back to `In Progress` and re-invokes the skill), the resumed run appends a fresh `[RESUMED]` entry and, when it finishes, a new `[CONCLUSION]` entry. Prior `[CONCLUSION]` entries are never edited or removed — the latest one reflects the current state, the earlier ones remain as historical record.
+
 ### Execution
 
-Follow one of two paths based on complexity assessment:
+Follow one of two paths based on complexity assessment. Throughout both paths, maintain the implementation log according to the rules in the "Implementation Log" section above — append entries as work progresses, not only at the end.
 
 #### Path A: Task is Manageable — Execute
 
@@ -244,7 +347,8 @@ If a task execution only changes task status (no design impact), update only the
 
 ### Interaction Style
 
-- After selecting the next task, briefly state which task was selected, its linked requirements, and applicable decisions. If your synthesized understanding of the task's scope differs from its brief description, note the actual scope you will implement. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 7).
+- After completing Task Preparation and before creating the log, briefly state which task was selected, its linked requirements, and applicable decisions. If your synthesized understanding of the task's scope differs from its brief description, note the actual scope you will implement. Do not ask for permission to begin unless genuine ambiguity exists (see Task Preparation step 7).
+- **The implementation log is the gate into Execution, not a closing artifact.** After the briefing and before any Execution-path action — flipping the task's status to `In Progress`, writing product files, running tests, editing `tasks.md` or `CLAUDE.md`, proposing new decisions — create `3-code/implementation-log/<task-id>.md` from the template and populate its `## Understanding` section in full, reusing the synthesis you just briefed. Then enter Execution, appending entries (`[WRITE]` / `[Q&A]` / `[RECONSIDER]` / `[PROBLEM]` / `[FIX]` / `[DESIGN-GAP]` / `[TENSION]` / `[TEST]` / `[NOTE]`) as work progresses — never batched at the end — and close with a `[CONCLUSION]`. Full rules live in the "Implementation Log" section above.
 - During implementation, work autonomously — do not ask for confirmation at every step. The stop-and-ask points are explicitly defined in the instructions (interrupted tasks, unmet dependencies, design gaps, ambiguity).
 - **After completing a task (executed or decomposed), report the outcome and ask the user how they want to proceed** — e.g., review changes, commit, or stop. Do not automatically start the next task.
 - When a design gap is found, present it clearly with context, options, and trade-offs. Do not minimize the gap or push toward a specific resolution.
@@ -254,6 +358,7 @@ If a task execution only changes task status (no design impact), update only the
 
 - **Read-before-write**: always read existing files before proposing changes.
 - **Requirements first**: read every linked requirement before writing code. Do not implement from memory or assumption.
+- **Log is mandatory and append-only**: the per-task implementation log under `3-code/implementation-log/<task-id>.md` must exist and contain the Understanding section before the Execution section starts, and new entries (`[WRITE]` / `[Q&A]` / `[RECONSIDER]` / `[PROBLEM]` / `[FIX]` / `[DESIGN-GAP]` / `[TENSION]` / `[TEST]` / `[NOTE]`) must be appended as work progresses. Existing content is never edited or removed — corrections are appended as new entries. Each run of the skill terminates by appending a `[CONCLUSION]` entry; a reopened task will therefore accumulate multiple `[RESUMED]` / `[CONCLUSION]` pairs over time. A pre-existing log file with a task status other than `In Progress` is an inconsistency that must be surfaced to the user before continuing.
 - **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.component.md` must be followed. If a decision conflicts with the task, surface it to the user — do not silently ignore it.
 - **Task list integrity**: never reorder the task list within a phase in `tasks.md`, and never rename pre-existing task IDs.
 - **No auto-commit**: leave all changes for user review. Do not commit or push.

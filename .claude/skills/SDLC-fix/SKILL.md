@@ -40,11 +40,29 @@ Gather enough context from the user to understand the problem and determine the 
 
 **Do not proceed until you have a clear understanding of the problem and the affected area(s).** If the user's description is vague, ask follow-up questions. It is better to ask one or two clarifying questions than to implement the wrong fix.
 
-Once you have sufficient context, summarize your understanding back to the user in a brief statement (e.g., "I understand the issue is X, affecting component Y, and the fix should Z. Proceeding.") and wait for confirmation before moving to Context Gathering.
+Once you have sufficient context, summarize your understanding back to the user in a brief statement (e.g., "I understand the issue is X, affecting component Y, and the fix should Z. Proceeding.") and wait for confirmation.
+
+#### Assigning the fix identifier
+
+After the user confirms the understanding, derive a descriptive kebab-case slug from the elicited problem and form the fix ID as `FIX-<kebab-slug>` (e.g., `FIX-asset-list-pagination-off-by-one`). The fix ID is the permanent handle for this work and the filename of its implementation log. Follow the `PREFIX-kebab-name` artifact-naming convention from [`CLAUDE.md`](../../../CLAUDE.md). Propose the ID to the user, accept any adjustment they request, then check whether `3-code/implementation-log/<FIX-ID>.md` already exists:
+
+- **No existing log** — this is a fresh fix. Proceed to Context Gathering on the fresh branch.
+- **Existing log** — surface it to the user. Ask whether (a) this invocation **resumes** the prior fix (the new information supplements the existing record — proceed on the Resume branch), or (b) it is a **distinct** fix that happens to share a slug (in which case agree on a disambiguated slug with the user before proceeding). Do not proceed until the user answers.
+
+If, during the initial elicitation, the user explicitly signalled that this is a continuation of a prior fix (e.g., by naming a FIX-ID or referencing a past attempt), use that ID here instead of deriving a new slug, and go straight to the existing-log branch above.
 
 ### Context Gathering
 
-Before writing any code, gather all necessary context:
+Before writing any code, gather all necessary context.
+
+**Resume branch.** If an implementation log already exists at `3-code/implementation-log/<FIX-ID>.md` and the user confirmed during Issue Elicitation that this invocation resumes that fix, Context Gathering is grounded in that log:
+
+- Read the log in full **before** starting the steps below. Pay particular attention to `[Q&A]` entries (questions the user already answered — do not ask them again), `[RECONSIDER]` entries (earlier plan changes that shape the current approach), and every `[CONCLUSION]` entry present (prior outcomes, open items, and any reason the fix was reopened).
+- Treat the log's `## Understanding` section as the **authoritative synthesized scope** for this fix. Do **not** re-derive it, and do **not** edit it — even if the original synthesis now feels incomplete. If your reading of the sources produces a different understanding, capture the delta as a `[RECONSIDER]` entry later in the Execution log; never overwrite the original Understanding.
+- Still execute all of steps 1–8 below, but informed by the log. In particular, for steps 1–5: ensure every artifact directly referenced in the log (linked requirements, design documents, decisions, plus anything cited inside `[Q&A]` / `[RECONSIDER]` / `[CONCLUSION]` entries) is re-read and understood, even if it was not originally listed in the Understanding section. Use these steps to verify and supplement the existing Understanding, not to replace it.
+- For steps 6–8 (constraint tensions, dev-env needs, confirm approach), also run them against the **current** state of the project, since decisions, constraints, or the environment may have drifted since the prior run.
+
+**Fresh branch.** If no log file exists, run all of steps 1–8 below to derive the Understanding from scratch; it will be written into the log during Implementation Log setup.
 
 #### 1. Identify Affected Components
 
@@ -139,7 +157,64 @@ After gathering context, briefly describe your planned approach to the user:
 
 Wait for confirmation before proceeding to implementation, **unless** the fix is straightforward and low-risk (e.g., a clear typo fix, an obvious off-by-one error). Use your judgment — when in doubt, ask to user.
 
+### Implementation Log
+
+Every fix execution must produce a durable log of the non-trivial operations and evaluations made during the run. The log is the paper trail a future reviewer or agent reads to understand what was done and why. The log is **append-only**: once the Understanding section has been populated and an entry has been written to the Execution log, they are never edited or removed — new entries are only appended.
+
+#### Location and naming
+
+- Logs live under `3-code/implementation-log/`, shared with the task logs produced by `SDLC-execute-task`. The `FIX-` prefix distinguishes fix logs from task logs.
+- One file per fix. File name is the fix ID plus `.md` (e.g., `3-code/implementation-log/FIX-asset-list-pagination-off-by-one.md`).
+- The template is `3-code/implementation-log/_fix_template.md`. Always start a new log file from this template — never from scratch, and never from the task log template (`_template.md`).
+
+#### Log file setup
+
+Before entering the Execution section, do the following in order:
+
+1. **Check whether the log file exists** at `3-code/implementation-log/<FIX-ID>.md`.
+
+2. **If the file does NOT exist (fresh fix):**
+   - Copy `_fix_template.md` to `<FIX-ID>.md`.
+   - Fill the header metadata: fix ID and today's date as `Started`. The header has no other mutable fields — the final outcome will be captured as a `[CONCLUSION]` entry appended at the end.
+
+3. **If the file DOES exist (resumption of a prior fix):**
+   - The user must already have confirmed this is a resumption during the "Assigning the fix identifier" subsection of Issue Elicitation. If the file exists but the user indicated this is a distinct fix that happened to share a slug, the slug should already have been disambiguated — no pre-existing log file should be in play. If one still is, **stop** and surface the inconsistency to the user before proceeding.
+   - If the user confirmed resumption, the log should have already been read in full during Context Gathering's Resume branch (including its `## Understanding` section and its `[Q&A]`, `[RECONSIDER]`, and `[CONCLUSION]` entries). Append a `[RESUMED]` entry to the `## Execution log` section noting today's date and a brief indication of what triggered the resumption, then continue. Do not modify the pre-existing header, Understanding, or any earlier entry.
+
+4. **Populate the Understanding section** (only on the fresh branch — skip this step when resuming a pre-existing log): fill the `## Understanding` section of the log with the elicited problem, scope boundaries, affected components and files, linked requirements (if any), relevant design artifacts, applicable decisions, and planned approach derived during Context Gathering. Include hyperlinks to every referenced artifact. Once filled, this section is immutable for the lifetime of the fix — if new understanding emerges later, record it as a `[RECONSIDER]` or `[NOTE]` entry in the Execution log instead.
+
+Only after the log file is in place and the Understanding section has been populated may you proceed to the Execution section.
+
+#### What to log during Execution
+
+The goal is to preserve the **important operations** and the **important evaluations** the skill made, not to transcribe everything. Append entries to the `## Execution log` section as the work progresses — not only at the end — so that, if the run is interrupted, the log still reflects what happened up to that point. Never edit or delete an existing entry; if a previous entry turns out to be wrong or superseded, append a new `[RECONSIDER]` or `[NOTE]` entry that references and corrects it.
+
+**Log:**
+
+- **Every file write, create, or delete** as a `[WRITE]` entry — include the path and a one-line summary of what changed and why. Do not paste full diffs.
+- **Every question asked to the user** as a `[Q&A]` entry — include both the question and the user's answer (verbatim or faithfully paraphrased).
+- **Every reconsideration or mid-flight change of plan** as a `[RECONSIDER]` entry — what shifted and why.
+- **Every problem detected** as a `[PROBLEM]` entry, and the corresponding intra-run correction as a `[FIX]` entry referencing it. (The `[FIX]` tag marks in-flight corrections during the skill run — it is distinct from the SDLC-fix skill itself, which is the outer context of the whole log.)
+- **Every design gap** surfaced via the Design Gap Procedure as a `[DESIGN-GAP]` entry — include the resolution (design-document update, new decision, deviation accepted, etc.).
+- **Every tension between authoritative sources** surfaced to the user as a `[TENSION]` entry — include the resolution.
+- **Test-run outcomes worth preserving** (failures with root cause, debug iterations, the final green run) as `[TEST]` entries.
+- **Any other important observation or evaluation** as a `[NOTE]` entry.
+
+**Do not log:**
+
+- Routine file reads (requirements, design docs, decisions — these are implicit context).
+- Routine tool invocations that carry no decision weight.
+- Verbatim long tool output — summarize instead.
+
+#### Finalizing the log
+
+When the skill finishes — whether the fix was completed or the run was stopped — append a `[CONCLUSION]` entry as the last entry of the Execution log. Its body must state the final outcome and summarize: files created/modified, tests added/updated, requirements and acceptance criteria satisfied (if any), new or updated decisions, design-document updates, task-plan impacts noted, and any pre-existing issues observed.
+
+A log may accumulate multiple `[CONCLUSION]` entries across its lifetime: if a fix that already has a `[CONCLUSION]` is reopened (for instance, the user returns later to extend it or address a regression), the resumed run appends a fresh `[RESUMED]` entry and, when it finishes, a new `[CONCLUSION]` entry. Prior `[CONCLUSION]` entries are never edited or removed — the latest one reflects the current state, the earlier ones remain as historical record.
+
 ### Execution
+
+Throughout the steps below, maintain the implementation log according to the rules in the "Implementation Log" section above — append entries as work progresses, not only at the end.
 
 #### 1. Check for Design Gaps Before Coding
 
@@ -203,6 +278,8 @@ A design gap is a divergence between **design documents** and what implementatio
 ### Interaction Style
 
 - **Be conversational during elicitation** — the first part of this skill is a dialogue. Ask clear, focused questions. Don't overwhelm the user with all questions at once; adapt based on what they've already told you.
+- After Context Gathering and before entering the Execution section, briefly state the elicited problem, the affected surface, the applicable decisions, and the planned approach. Do not ask for permission to begin unless genuine ambiguity remains (see Context Gathering step 8).
+- **The implementation log is the gate into Execution, not a closing artifact.** After Context Gathering and before any Execution-path action — writing product files, running tests, editing design documents or `CLAUDE.md`, proposing new decisions — create `3-code/implementation-log/<FIX-ID>.md` from `_fix_template.md` and populate its `## Understanding` section in full, reusing the synthesis you just briefed. Then enter Execution, appending entries (`[WRITE]` / `[Q&A]` / `[RECONSIDER]` / `[PROBLEM]` / `[FIX]` / `[DESIGN-GAP]` / `[TENSION]` / `[TEST]` / `[NOTE]`) as work progresses — never batched at the end — and close with a `[CONCLUSION]`. Full rules live in the "Implementation Log" section above.
 - During implementation, work autonomously — do not ask for confirmation at every step. The stop-and-ask points are explicitly defined in the instructions (elicitation, approach confirmation, design gaps, tension resolution, bug pattern occurrences).
 - **After completing the fix, report the outcome and ask the user how they want to proceed** — e.g., review changes, commit, run additional tests.
 - When a design gap is found, present it clearly with context, options, and trade-offs. Do not minimize the gap or push toward a specific resolution.
@@ -211,6 +288,7 @@ A design gap is a divergence between **design documents** and what implementatio
 
 - **Read-before-write**: always read existing files before proposing changes.
 - **Elicit before implementing**: never start coding before understanding the problem. If the user's initial description is insufficient, ask for clarification.
+- **Log is mandatory and append-only**: the per-fix implementation log under `3-code/implementation-log/<FIX-ID>.md` must exist and contain the Understanding section before the Execution section starts, and new entries (`[WRITE]` / `[Q&A]` / `[RECONSIDER]` / `[PROBLEM]` / `[FIX]` / `[DESIGN-GAP]` / `[TENSION]` / `[TEST]` / `[NOTE]`) must be appended as work progresses. Existing content is never edited or removed — corrections are appended as new entries. Each run of the skill terminates by appending a `[CONCLUSION]` entry; a reopened fix will therefore accumulate multiple `[RESUMED]` / `[CONCLUSION]` pairs over time.
 - **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.component.md` must be followed. If a decision conflicts with the fix, surface it to the user — do not silently ignore it.
 - **Minimal changes**: change only what is necessary to address the reported issue. Do not add unrelated improvements or refactor surrounding code unless explicitly requested.
 - **No auto-commit**: leave all changes for user review. Do not commit or push.
@@ -222,6 +300,7 @@ A design gap is a divergence between **design documents** and what implementatio
 ### Output
 
 At the end, report:
+- **Fix ID and log path** — the `FIX-<slug>` identifier assigned to this run and the path to its implementation log (`3-code/implementation-log/<FIX-ID>.md`)
 - **Issue summary** — brief restatement of the problem that was fixed
 - **What was done** — description of the changes made
 - **Files modified** — list of files that were created or modified
