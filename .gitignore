@@ -10,6 +10,10 @@ Thumbs.db
 .vscode/
 *.code-workspace
 
+# Claude Code — per-developer local settings (matched at any depth);
+# project-shared .claude/settings.json and .claude/skills/ stay tracked.
+**/.claude/settings.local.json
+
 # Environment and secrets
 .env
 .env.*
