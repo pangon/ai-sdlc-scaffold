@@ -99,7 +99,7 @@ Define each phase with:
 
 #### Principle 3: Short Tasks
 
-Each task should represent a **small, focused unit of work** — ideally completable by human developers in a single coding session. Guidelines:
+Each task should represent a **small, focused unit of work** — ideally completable by a single developer in one coding session. Guidelines:
 - A task implements one feature, one endpoint, one component, or one piece of infrastructure
 - If a task description contains "and" connecting two distinct pieces of work, split it
 - Prefer many small tasks over few large ones
@@ -119,7 +119,7 @@ If `4-deploy/` expectations exist, include infrastructure-as-code tasks (Terrafo
 
 #### Principle 7: Manual Testing Readiness
 
-Every phase must end with a **manual testing readiness task** (`TASK-phase-N-manual-testing`) that ensures a human can verify the delivered capabilities without reading source code. The task should:
+Every phase must end with a **manual testing readiness task** (`TASK-phase-N-manual-testing`) that ensures a tester can verify the delivered capabilities without reading source code. The task should:
 
 1. **Create or update a deploy runbook** in `4-deploy/runbooks/` with startup instructions and step-by-step manual test scenarios for the phase's new capabilities. Update existing runbooks rather than creating duplicates.
 2. **Document build/run/test commands** in the README (or equivalent existing doc) of every component modified in this phase or previous phases (e.g., `3-code/<component>/README.md`). Create or update convenience scripts where useful; for single-command operations, documenting the command is sufficient.

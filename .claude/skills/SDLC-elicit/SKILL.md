@@ -33,7 +33,7 @@ Specification artifacts form a traceability chain. Each level should decompose i
 3. **User Story → Requirements** — every user story should have at least one associated requirement. Review the linked requirements against the story's acceptance criteria and flag obvious coverage gaps.
 4. **Constraint → Requirements** — constraints may also generate requirements directly (e.g., a compliance constraint produces a compliance requirement, a technology constraint produces a compatibility requirement). When a constraint implies a verifiable obligation, derive a requirement from it and link both.
 
-These relationships are **traceability links with a coverage review heuristic**: check that linked artifacts appear to address the parent's success/acceptance criteria, and surface gaps for the user to evaluate. Completeness is a judgment call that requires domain expertise — the agent flags potential gaps, the human decides whether coverage is adequate.
+These relationships are **traceability links with a coverage review heuristic**: check that linked artifacts appear to address the parent's success/acceptance criteria, and surface gaps for the user to evaluate. Completeness is a judgment call that requires domain expertise — the agent flags potential gaps, the user decides whether coverage is adequate.
 
 ### Elicitation Order (New Artifacts)
 
@@ -163,7 +163,7 @@ Gap analysis can be run at any time during elicitation — it is useful as a mid
 
 - **Current State synchronization**: whenever artifacts are created, modified, or deleted, update `### Current State` in `CLAUDE.md` as described in the Current State Tracking section above. This update must happen in the same operation as the artifact change.
 - **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-spec/CLAUDE.spec.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row.
-- All new artifacts start with `Status: Draft`. Never auto-approve — only a human can move to `Approved`.
+- All new artifacts start with `Status: Draft`. Never auto-approve — only the user can move an artifact to `Approved`.
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
 - Choose a short descriptive kebab-case name for each new artifact (check existing files to avoid duplicates). The name **is** the ID — there are no numeric sequences.
 - Every artifact must have proper traceability links (Source stakeholder, Related goal, etc.).
