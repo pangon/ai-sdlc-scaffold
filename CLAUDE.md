@@ -72,6 +72,7 @@ All project knowledge is captured as structured markdown files alongside the sou
 | `STK` | Stakeholders | `1-spec/stakeholders.md` (rows) |
 | `TASK` | Tasks | `3-code/tasks.md` (rows) |
 | `DEC` | Decisions | `decisions/` |
+| — | Orchestration Logs | `orchestration-log/` — per-run logs (timestamp-named) from the optional agent system |
 
 ### Naming
 
@@ -80,6 +81,12 @@ All artifact IDs use the pattern `PREFIX-kebab-name` — a type prefix followed 
 ### Phase indexes
 
 Every `CLAUDE.<phase>.md` file contains index tables listing the artifacts in that phase. Each index must include a **File column** with a relative link to the artifact file, so that AI agents can discover the file name and human reviewers can navigate easily.
+
+---
+
+## Automated Development (Optional)
+
+An optional multi-agent system under [`.claude/agents/`](.claude/agents/) can run a task end-to-end autonomously: an **orchestrator** coordinates a **developer** (runs `/SDLC-execute-task` in a per-run git worktree) and a read-only **reviewer**, then commits, opens a PR, and merges — logging each run in [`orchestration-log/`](orchestration-log/). It requires Claude Code's experimental agent-teams feature (enabled in [`.claude/settings.json`](.claude/settings.json)) and is **entirely optional**: the SDLC skills work the same when invoked directly.
 
 ---
 
