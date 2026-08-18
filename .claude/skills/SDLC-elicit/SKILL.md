@@ -90,12 +90,13 @@ This skill can be used to review and modify any artifact in `1-spec/`:
 
 #### Status Downgrade on Modification
 
-**When an artifact with `Status: Approved` is modified, its status must revert to `Draft`.**
+**When an artifact with `Status: Approved` or `Status: Implemented` is modified, its status must revert to `Draft`.**
 
-- **Always warn the user before applying the change.** Clearly state: _"This artifact is currently Approved. Modifying it will reset its status to Draft, requiring re-approval."_
+- **Always warn the user before applying the change.** Clearly state: _"This artifact is currently <status>. Modifying it will reset its status to Draft, requiring re-approval."_ For an `Implemented` artifact, also warn that the existing implementation may no longer satisfy the modified artifact.
 - Wait for the user to confirm they want to proceed.
 - If the user confirms, apply the content changes **and** set `Status: Draft` in the same operation.
 - If the modification also affects downstream artifacts (e.g., a requirement change that impacts design or tasks), flag those dependencies to the user.
+- If the artifact was `Implemented`, also revert to `Approved` any user story that was `Implemented` only by virtue of it, and flag any goal marked `Achieved` on its basis for re-evaluation (reverse of the status propagation in `/SDLC-execute-task`).
 
 **Exception**: changes that do not alter the artifact's substance (e.g., fixing a typo in a link, correcting formatting) do not trigger a status downgrade. When in doubt, ask the user.
 

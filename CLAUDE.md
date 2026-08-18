@@ -45,7 +45,7 @@ The `### Current State` subsection above is the machine-readable project status 
 Maintenance rules — they apply to **every** artifact change, whether performed inside a skill or not:
 
 1. **Same-operation update**: update the affected lines in the same operation as the artifact change they reflect.
-2. **Staleness** (active-form assessment lines only): changes to Specification artifacts flip `**Gap analysis**:` to `stale (artifacts changed since)`; changes to design documents or decisions flip `**Completeness assessment**:` to `stale (design changed since)`, and Specification changes flip it too (`stale (spec changed since)`). Exception: a change that only corrects listed open issues updates the list instead.
+2. **Staleness** (active-form assessment lines only): changes to Specification artifacts flip `**Gap analysis**:` to `stale (artifacts changed since)`; changes to design documents or decisions flip `**Completeness assessment**:` to `stale (design changed since)`, and Specification changes flip it too (`stale (spec changed since)`). Exception: a change that only corrects listed open issues updates the list instead, and status-only lifecycle advancements (e.g., `Approved → Implemented`) do not flip the marker.
 3. **Phase transitions**: `**Phase**:` changes only when a phase gate is crossed (see Phase Gates); the crossed gate's assessment line switches to its passed form.
 
 ---
@@ -71,7 +71,8 @@ Any modification to phase artifacts — whether performed inside a skill, during
 
 - **Specification artifacts** (`1-spec/`): follow the procedures in [`.claude/skills/SDLC-elicit/SKILL.md`](.claude/skills/SDLC-elicit/SKILL.md) — including traceability rules, status downgrade on modification, index synchronization, bidirectional link maintenance, and Current State tracking.
 - **Design artifacts** (`2-design/`): follow the procedures in [`.claude/skills/SDLC-design/SKILL.md`](.claude/skills/SDLC-design/SKILL.md) — including downstream effect checks, decision recording triggers, requirement coverage verification, and Current State tracking.
-- **Code phase task artifacts** (`3-code/tasks.md`): follow the procedures in [`.claude/skills/SDLC-implementation-plan/SKILL.md`](.claude/skills/SDLC-implementation-plan/SKILL.md) — including phased task grouping, traceability links, incremental deployability, and Current State tracking.
+- **Code phase task artifacts** (`3-code/tasks.md`): for creating or re-planning tasks, follow the procedures in [`.claude/skills/SDLC-implementation-plan/SKILL.md`](.claude/skills/SDLC-implementation-plan/SKILL.md) — including phased task grouping, traceability links, and incremental deployability. For task status transitions, follow [`.claude/skills/SDLC-execute-task/SKILL.md`](.claude/skills/SDLC-execute-task/SKILL.md) — including task list integrity, status propagation to Specification artifacts, and Current State tracking.
+- **Component source code** (`3-code/<component-name>/`): follow the procedures in [`.claude/skills/SDLC-fix/SKILL.md`](.claude/skills/SDLC-fix/SKILL.md) — or [`.claude/skills/SDLC-execute-task/SKILL.md`](.claude/skills/SDLC-execute-task/SKILL.md) when the change executes a planned task — including decisions application, tests, design-gap handling, and implementation logging.
 
 ### Phase Gates
 

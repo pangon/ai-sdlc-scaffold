@@ -91,7 +91,7 @@ Use this branch only when the skill was invoked with user-provided context (see 
 4. **Check for interrupted tasks**: If any task in the Task Table has status `In Progress` and it is **not** the one the user just selected, inform the user that another task is mid-flight and ask whether to continue with the user-selected task anyway, switch to finishing the in-progress task, or cancel. Proceed according to the user's answer.
 
 5. **Check the selected task's status**:
-   - `Done` or `Cancelled`: **stop** and inform the user — the task is not actionable. Ask whether they want to reopen it (e.g., reset to `Todo`) or pick a different one.
+   - `Done` or `Cancelled`: **stop** and inform the user — the task is not actionable. Ask whether they want to reopen it (e.g., reset to `Todo`) or pick a different one. If the user reopens a `Done` task, reverse any statuses propagated at its completion (Path A step 9): linked requirements with `Status: Implemented` revert to `Approved`, user stories that were `Implemented` only by virtue of those requirements revert to `Approved`, and goals previously marked `Achieved` on their basis are flagged to the user for re-evaluation. Update artifact files and index rows in the same operation.
    - `In Progress`: treat this as resuming an interrupted task — proceed to Task Preparation.
    - `Blocked`: read the `Notes` column and check the task's `Dependencies`. Surface the reason to the user and ask whether to force-start it, unblock (if the blocker is no longer valid — then set status to `Todo`), or pick a different task.
    - `Todo`: proceed to step 6.
@@ -304,7 +304,15 @@ Follow one of two paths based on complexity assessment. Throughout both paths, m
 
 8. **Update status**: Set the task's Status to `Done` and update the `Updated` column with today's date in `tasks.md`.
 
-9. **Do NOT commit automatically** — leave changes for user review.
+9. **Propagate artifact statuses**: completing a task can complete upstream Specification artifacts. Check and apply, following the lifecycles in `1-spec/CLAUDE.spec.md`:
+
+   1. **Requirements** — for each requirement linked in this task's `Req` column: scan the whole Task Table for tasks linking the same requirement. If the requirement has `Status: Approved` and all its linked tasks are `Done` (ignoring `Cancelled` ones — but at least one must be `Done`: a requirement whose linked tasks were all cancelled has not been implemented), set its Status to `Implemented`.
+   2. **User stories** — for each user story whose derived requirements include a requirement flipped in the previous step: if the story has `Status: Approved` and all its derived requirements are `Implemented`, set its Status to `Implemented`.
+   3. **Goals** — for each goal all of whose linked requirements (directly or via its user stories) are now `Implemented`: review its Success Criteria and **propose** `Achieved` to the user, stating which criteria appear satisfied and which need real-world verification. Set `Achieved` (ticking the criteria checkboxes) only after the user confirms — an unconfirmed goal simply stays `Approved`.
+
+   For every status change: update the artifact file and its index row in `1-spec/CLAUDE.spec.md` in the same operation, and record the propagation in the implementation log (`[WRITE]` entries). A lifecycle advancement is a status-only change: it does **not** trigger the status-downgrade rule and does not flip assessment staleness (Current State Protocol rule 2).
+
+10. **Do NOT commit automatically** — leave changes for user review.
 
 #### Path B: Task is Too Large — Decompose
 
@@ -373,6 +381,7 @@ At the end, report:
 - Whether it was executed or decomposed
 - What was accomplished (describing actual scope delivered, which may differ from the task description)
 - Which requirements were satisfied and which acceptance criteria were covered
+- Which upstream artifacts changed status by propagation (requirements/user stories marked `Implemented`, goals proposed as `Achieved`), if any
 - Which decisions were applied (if any)
 - Whether a constraint tension was found between authoritative sources and how it was resolved (if any)
 - Whether a design gap was found and how it was resolved (if any)
