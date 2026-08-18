@@ -100,7 +100,9 @@ If no existing requirement maps to the issue, that's fine — not every fix trac
 
 #### 6. Check for Constraint Tensions
 
-After gathering all context (user description of the iussue, requirements, design documents, decisions, phase instructions), actively look for **tensions between authoritative sources**. A tension exists when two or more sources that the agent must follow pull in incompatible directions — satisfying one fully would require violating or bending another.
+First, load the active constraints: read the Constraints Index in `1-spec/CLAUDE.spec.md` and open any constraint whose summary is plausibly relevant to this fix (technology, performance, security, compliance, hosting, timeline, …) — tensions cannot be detected against constraints that were never read.
+
+Then, with all context gathered (user description of the issue, requirements, design documents, decisions, constraints, phase instructions), actively look for **tensions between authoritative sources**. A tension exists when two or more sources that the agent must follow pull in incompatible directions — satisfying one fully would require violating or bending another.
 
 Common tension patterns:
 - **Architectural decisions vs. component isolation rules** — e.g., a decision requiring shared state across components while isolation rules prohibit cross-component coupling.

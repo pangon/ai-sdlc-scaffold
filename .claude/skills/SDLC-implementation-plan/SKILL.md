@@ -36,7 +36,7 @@ Before doing anything else, read the `**Phase**:` field of the `### Current Stat
 Read the following files — all are required context for planning:
 
 1. **Goals** — read every `GOAL-*.md` file in `1-spec/goals/`. Extract each goal's title, priority, status, and **Success Criteria** checkboxes. Only consider goals with `Status: Approved`.
-2. **Requirements** — read every `REQ-*.md` file in `1-spec/requirements/`. Note their type (Functional, Performance, Security, etc.), priority, and linked goals/stories.
+2. **Requirements** — read every `REQ-*.md` file in `1-spec/requirements/`. Note their type (Functional, Performance, Security, etc.), status, priority, and linked goals/stories. Planning targets requirements with `Status: Approved`; `Deprecated` ones are excluded, and `Implemented` ones need no new tasks unless the user asks. **If any requirement is still `Draft`, stop and surface the list to the user before any analysis**: recommend approving them first (reviewing them via `/SDLC-elicit`), and offer the alternative of overriding the check and planning with the Draft requirements included. Proceed only after the user chooses.
 3. **Constraints** — read every `CON-*.md` file in `1-spec/constraints/`.
 4. **Design documents** — read `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md`.
 5. **Decisions** — read every `DEC-*.md` file in `decisions/` (active records only, not `.history.md`).
@@ -162,7 +162,7 @@ After the plan, provide a **summary table**:
 | 2 | ... | N | GOAL-c |
 | ... | ... | ... | ... |
 
-And a **coverage check**: list each approved goal and confirm which phase(s) address its Success Criteria. Flag any Success Criteria not covered by any task.
+And a **coverage check**: list each approved goal and confirm which phase(s) address its Success Criteria. Flag any Success Criteria not covered by any task. If Draft requirements were included by user override, list them separately (marked "Draft at planning time") and note that their tasks may need revision once they are approved.
 
 **Wait for user approval** before proceeding. The user may reorder phases, split or merge them, add or remove tasks, or change priorities.
 
@@ -221,7 +221,8 @@ After writing tasks, update the `### Current State` subsection in `CLAUDE.md` fo
 - **Read-before-write**: always read existing files before proposing changes.
 - **Do not create source code**: this skill creates the plan only. Actual implementation happens when tasks are executed.
 - **Do not modify design documents**: if a design gap is discovered during planning, surface it to the user and recommend running `/SDLC-design` to address it.
-- **Do not modify objective artifacts**: if a requirement gap is discovered, surface it and recommend `/SDLC-elicit`.
+- **Do not modify specification artifacts**: if a requirement gap is discovered, surface it and recommend `/SDLC-elicit`.
+- **Draft requirements need an explicit decision**: never silently include or exclude non-Approved requirements — surface them during Setup and follow the user's choice (approve first, or plan with them included).
 - **Preserve existing content**: when updating `tasks.md`, preserve the Status Legend, Priority Legend, and How to Update sections. Replace only the Task Table sections and Execution Plan section.
 - **User approval required**: present the full plan and wait for explicit approval before writing to `tasks.md`.
 - **Task ID uniqueness**: every `TASK-*` ID must be unique. Use descriptive kebab-case names, not numbers.
