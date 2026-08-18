@@ -67,6 +67,18 @@ Several structural choices exist specifically to reduce token consumption:
 - **Two-file decision records**: the active record (`DEC-kebab-name.md`) contains only what an agent needs during normal work; the history (`DEC-kebab-name.history.md`) is loaded only when evaluating or changing a decision.
 - **Phase-level indexes with trigger conditions**: each `CLAUDE.<phase>.md` lists which decisions apply and when, so agents can skip irrelevant ones without opening them.
 
+### English as the Working Language
+
+All AI outputs — responses, reasoning, code, comments, documentation, configuration, commit messages — are produced in English regardless of the language used in prompts (the Language Policy in `CLAUDE.md`). Three motivations:
+
+1. **Model performance.** LLMs are pretrained predominantly on English and measurably perform best in it. For smaller and earlier-generation models the gap is broad: [self-translating input to English consistently beats direct non-English inference](https://aclanthology.org/2024.naacl-short.46/), and mechanistic analysis shows that the internal "concept space" of English-dominated models [lies closest to English](https://arxiv.org/abs/2402.10588). On frontier models the knowledge gap for high-resource languages has nearly closed, but the reasoning gap persists: [English chain-of-thought outperforms target-language reasoning, with the gap widening on long multi-step tasks and not closing with model scale](https://arxiv.org/abs/2508.14828), and [rewarding language consistency in reasoning traces has a measured accuracy cost](https://arxiv.org/abs/2501.12948). An English-only pipeline avoids fighting the models' dominant language exactly where it matters most: reasoning and code.
+
+2. **Context-window efficiency.** Mainstream tokenizers spend more tokens on non-English text for the same content (e.g., [roughly 25% overhead for Italian with general-purpose tokenizers](https://arxiv.org/abs/2504.17025)). Scaffold artifacts — indexes, decisions, instructions — are re-read into context on every session, so keeping them in English directly reduces recurring token cost, in line with the context-window efficiency principle.
+
+3. **Uniformity of the produced material.** A single language across artifacts, code, and commit history keeps the repository consistently searchable (English keywords match code identifiers and ecosystem terminology), avoids mid-document language switches — where output quality degrades most — and future-proofs the pipeline for smaller or local models, whose English advantage is far larger than that of frontier models.
+
+Trade-off explicitly accepted: for final conversational responses, frontier models answering in a high-resource language lose little measurable quality — on that surface the policy is primarily about standardization rather than capability.
+
 ### Two-File Decision Records
 
 Every significant decision produces two files:
