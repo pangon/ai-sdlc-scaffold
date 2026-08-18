@@ -113,7 +113,7 @@ This is not a philosophical rejection of AI autonomy; it is a pragmatic safeguar
 
 ### Phase Gates
 
-Advisory checklists define minimum preconditions for advancing between phases (e.g., at least one goal and one requirement must be Approved before Design begins). Gates are not blocking — the agent warns the user if preconditions are unmet, but proceeds if the user confirms.
+Advisory checklists define minimum preconditions for advancing between phases (e.g., at least one requirement must be Approved before Design begins). Gates are not blocking — the agent warns the user if preconditions are unmet, but proceeds if the user confirms.
 
 ### Artifact Status Lifecycle
 

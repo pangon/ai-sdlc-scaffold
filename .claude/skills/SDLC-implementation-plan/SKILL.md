@@ -11,26 +11,25 @@ The plan populates `3-code/tasks.md` with tasks and an Execution Plan that group
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+Before doing anything else, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`. Then follow the matching case below:
 
-1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+1. **`Not initialized`** — **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specifications or `/SDLC-design` to start the design phase, and do not proceed.
+2. **`Specification`** — **Stop**, recommend `/SDLC-elicit` to continue refining specifications or `/SDLC-design` to start the design phase, and do not proceed.
 
-3. **Project is in the Design phase without components identified** — **Stop**, recommend `/SDLC-decompose` first, and do not proceed.
+3. **`Design`** — components have not been identified yet. **Stop**, recommend `/SDLC-decompose` first, and do not proceed.
 
-4. **Project is in the Code phase with components identified but no tasks yet** — this is the expected entry point. Evaluate prerequisites:
+4. **`Code` with no tasks yet** (`3-code/tasks.md` contains only the template) — this is the expected entry point. Evaluate prerequisites:
 
-   - **(a)** All design documents have content — `architecture.md`, `data-model.md`, and `api-design.md` are drafted
-   - **(b)** Components are identified — per-component directories exist in `3-code/`
-   - **(c)** `3-code/tasks.md` has no tasks yet (only the template)
+   - **(a)** All design documents have content and components are identified — re-verify the two corresponding Design → Code preconditions via the "How to verify" column of the Phase Gates table in `CLAUDE.md` (the gate was already crossed, but the state may have drifted)
+   - **(b)** `3-code/tasks.md` has no tasks yet (only the template)
 
    Then:
-   - **If (a) or (b) not met** — **Stop**, explain what is missing.
-   - **If (c) is not met** (tasks already exist) — **Warn** that running this skill will replace existing task entries and the Execution Plan. Proceed only on explicit user confirmation.
+   - **If (a) is not met** — **Stop**, explain what is missing.
+   - **If (b) is not met** (tasks already exist) — **Warn** that running this skill will replace existing task entries and the Execution Plan. Proceed only on explicit user confirmation.
    - **If all met** — proceed with Setup.
 
-5. **Project has tasks already in progress or done** — **Warn** strongly that re-planning may invalidate in-progress work. Proceed only on explicit user confirmation.
+5. **`Code` with tasks already in progress or done** — **Warn** strongly that re-planning may invalidate in-progress work. Proceed only on explicit user confirmation.
 
 ### Setup
 
@@ -205,12 +204,10 @@ For each task, create a row:
 
 #### 3. Update Current State
 
-After writing tasks, update the `### Current State` subsection in `CLAUDE.md` to record that the implementation plan has been created. Include:
-- Number of phases
-- Total number of tasks
-- Date of plan creation
+After writing tasks, update the `### Current State` subsection in `CLAUDE.md` following the Current State Protocol defined there:
 
-Example addition: "Implementation plan created (2026-03-12): N phases, M tasks covering all approved goals."
+- Add (or update) the `**Implementation plan**:` line, e.g., `**Implementation plan**: created 2026-03-12 — N phases, M tasks`.
+- Add (or reset) the `**Task progress**:` line, e.g., `**Task progress**: 0/M tasks done — currently in Phase 1 (<name>)`.
 
 ### Interaction Style
 

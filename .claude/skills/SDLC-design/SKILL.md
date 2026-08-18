@@ -9,27 +9,21 @@ You are working in the Design phase, creating or updating architecture, data mod
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+Before doing anything else, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`. Then follow the matching case below:
 
-1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+1. **`Not initialized`** — **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started.
+2. **`Specification`** — design work would cross the Spec → Design phase gate. Evaluate all three Spec → Design preconditions from the Phase Gates table in `CLAUDE.md` (using its "How to verify" column), then respond based on the results:
 
-   Read the index tables in `1-spec/CLAUDE.spec.md` and evaluate the Spec → Design phase gate preconditions:
+   - **If any artifact precondition is not met** (stakeholders defined, at least one requirement Approved) — elicitation is incomplete. **Stop**, list what is missing, recommend `/SDLC-elicit`, and do not proceed.
+   - **If the artifact preconditions are met but the gap-analysis precondition is not** (no gap analysis, stale, or open Critical issues) — **strongly recommend** running a gap analysis via `/SDLC-elicit` before design. Proceed only if the user explicitly accepts the gaps.
+   - **If all preconditions are met** — inform the user of any remaining Important/Minor gaps (non-blocking) and **ask the user to confirm the advancement to the Design phase** (phase gate advancement is an "always ask" action). Proceed with Setup only after confirmation.
 
-   - **(a)** At least one goal with `Status: Approved`
-   - **(b)** At least one requirement with `Status: Approved`
-   - **(c)** Gap analysis recorded in the Current State, fresh (not stale), and with no Critical gaps
+   In every proceed case, the `**Phase**:` field is set to `Design` when the first user-approved design change is applied (see Current State Tracking) — not at validation time.
 
-   Then respond based on the results:
+3. **`Design`** — **proceed normally** with the Setup steps below.
 
-   - **If (a) or (b) are not met** — elicitation is incomplete. **Stop**, list what is missing, recommend `/SDLC-elicit`, and do not proceed.
-   - **If (a) and (b) are met but (c) is not met** (no gap analysis, stale, or Critical gaps) — **strongly recommend** running a gap analysis via `/SDLC-elicit` before design. Proceed only on explicit user confirmation.
-   - **If all preconditions are met** — inform the user of any remaining Important/Minor gaps (non-blocking) and proceed with Setup.
-
-3. **Project is in the Design phase** — the Current State indicates the project is in the Design phase (e.g., mentions "Design phase", "architecture", "design documents being worked on", or no phase beyond Design has been started), **proceed normally** with the Setup steps below.
-
-4. **Project has advanced beyond Design** — the Current State indicates the project is in Code or Deploy phase. **Warn** that modifying Design artifacts may impact downstream tasks or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
+4. **`Code`** — the project has advanced beyond Design. **Warn** that modifying Design artifacts may impact downstream tasks or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
 
 ### Setup
 
@@ -194,12 +188,11 @@ Present suggestions as options the user can accept, modify, or decline. Do not a
 
 ### Current State Tracking
 
-Whenever the skill applies user-approved changes (creating or updating design documents, recording decisions), update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
+Whenever the skill applies user-approved changes (creating or updating design documents, recording decisions), update the `### Current State` subsection in `CLAUDE.md` following the Current State Protocol defined there:
 
-1. **Phase transition** — if this is the first design work in the project (transitioning from Specification to Design), **rewrite** the Current State section: replace the Specification-phase information (artifact counts, statuses, gap analysis details, etc.) with a fresh Design-phase summary.
-2. **Design documents status** — list which design documents have content and which are still empty or incomplete (e.g., "Architecture drafted; data model and API design pending"). Update this incrementally as documents are created or modified.
-3. **Decisions recorded** — note the count of decisions created (e.g., "3 decisions recorded"). Update this when new decisions are recorded.
-4. **Last completeness assessment** — if a completeness assessment has been performed, record the date and a one-line result summary (e.g., "Completeness assessment (2026-03-10): 0 Critical, 1 Important, 2 Minor"). Update this only when an assessment is actually run, not on every design change. If design documents or decisions have been modified since the last recorded assessment, append "(stale — design changed since)" and remind the user that a fresh assessment is needed before advancing to Code.
+1. **Phase transition** — when the first user-approved design change is applied (transitioning from Specification to Design, advancement already confirmed by the user during Phase Validation): set `**Phase**: Design`, rewrite `**Summary**:` as a fresh Design-phase summary, and convert `**Gap analysis**:` to its passed form, recording how the gate was passed (protocol rule 3).
+2. **`**Design documents**:` line** — list which design documents have content and which are still empty or incomplete (e.g., `**Design documents**: architecture drafted; data model and API design pending`). Update it incrementally as documents are created or modified.
+3. **`**Completeness assessment**:` line** — when an assessment is run, (over)write the line in active form (see Assessment lines in the Current State Protocol), with today's date and the compact list of open findings (e.g., `**Completeness assessment**: 2026-03-10 — fresh — open: Important: storage choice not recorded as DEC; Minor: architecture diagram missing`, or `… — fresh — no issues` when the run found none). When an applied change directly corrects a listed finding, remove it from the list in the same operation; when the last one is removed, set the tail to `all issues resolved`. When design documents or decisions change beyond correcting listed findings, flip the marker to `stale (design changed since)` (protocol rule 2) and remind the user that a fresh assessment is needed before advancing to Code.
 
 ### Rules
 

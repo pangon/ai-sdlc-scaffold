@@ -19,6 +19,8 @@ When a significant decision, pattern, or constraint emerges:
 
    Do **not** limit the entry to only the current working phase.
 
+5. If the `**Completeness assessment**:` line in `### Current State` in `CLAUDE.md` is in active form, flip its marker to `stale (design changed since)` (Current State Protocol rule 2).
+
 ### Human involvement vocabulary
 
 Use these values in the `*.history.md` file:
@@ -56,6 +58,8 @@ A decision should be deprecated when no longer relevant, or superseded when a ne
    - In the old decision file: change `**Status**` to `Superseded by DEC-new-name`.
    - In the old history file: append changelog entry.
    - In every phase index: replace the old row with the new one.
+
+   **In both cases:** if the `**Completeness assessment**:` line in `### Current State` in `CLAUDE.md` is in active form, flip its marker to `stale (design changed since)` (Current State Protocol rule 2).
 
 6. **Check design documents for impact**: search `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md` for references to the retired decision.
    - If references are found, list the affected sections and give a brief assessment of the likely impact.

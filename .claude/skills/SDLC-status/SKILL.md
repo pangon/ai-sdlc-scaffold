@@ -24,8 +24,8 @@ You are generating a comprehensive status report for the entire SDLC project.
 
 ### Phase Validation
 
-Before generating the report, determine project state:
-- If `CLAUDE.md` Project Overview still contains placeholder text → report project as **Not Initialized** and recommend `/SDLC-init`.
+Before generating the report, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`:
+- If it is `Not initialized` (or the Project Overview still contains placeholder text) → report the project as **Not Initialized** and recommend `/SDLC-init`.
 - Otherwise → proceed with full report.
 
 ### Report Structure
@@ -69,7 +69,7 @@ If requirements exist, add a **breakdown by class** (only classes that have at l
 | REQ-SEC | | | | |
 | ... | | | | |
 
-**Gap Analysis**: report the last recorded gap analysis from the Specification Current State — date, severity counts, and whether it is **fresh** or **stale** (stale = artifacts modified since last analysis). If no gap analysis has been recorded, state "Not performed".
+**Gap Analysis**: report the `**Gap analysis**:` line from Current State — in active form: date, `fresh`/`stale` marker, and the open issues; in passed form: date and how the gate was passed. If the line is absent, state "Not performed".
 
 ---
 
@@ -87,7 +87,7 @@ Determine status: **empty** if file contains only headings/placeholders; **compl
 
 **Decisions**: N active, N deprecated, N superseded
 
-**Completeness Assessment**: report the last recorded assessment from the Design Current State — date, severity counts, and whether it is **fresh** or **stale**. If no assessment has been recorded, state "Not performed".
+**Completeness Assessment**: report the `**Completeness assessment**:` line from Current State — in active form: date, `fresh`/`stale` marker, and the open findings; in passed form: date and how the gate was passed. If the line is absent, state "Not performed".
 
 ---
 
@@ -145,9 +145,8 @@ Report counts only. If all checks pass, state "No traceability issues detected".
 | Precondition | Status |
 |--------------|--------|
 | Stakeholders defined | ✅ / ❌ |
-| At least one goal Approved | ✅ / ❌ |
 | At least one requirement Approved | ✅ / ❌ |
-| Gap analysis recorded, fresh, no Critical gaps | ✅ / ❌ / ⚠️ stale |
+| Gap analysis fresh, no open Critical issues | ✅ / ❌ / ⚠️ stale |
 
 **Design → Code**:
 | Precondition | Status |
@@ -155,10 +154,10 @@ Report counts only. If all checks pass, state "No traceability issues detected".
 | Architecture drafted | ✅ / ❌ |
 | Data Model drafted | ✅ / ❌ |
 | API Design drafted | ✅ / ❌ |
-| Completeness assessment recorded, fresh, no Critical findings | ✅ / ❌ / ⚠️ stale |
+| Completeness assessment fresh, no open Critical findings | ✅ / ❌ / ⚠️ stale |
 | Components identified (per-component directories in `3-code/`) | ✅ / ❌ |
 
-Use ✅ when met, ❌ when not met, ⚠️ when partially met or stale.
+Use ✅ when met, ❌ when not met, ⚠️ when partially met or stale. A gate already crossed (assessment line in passed form) is ✅ — report its passed mode.
 
 ---
 

@@ -16,7 +16,37 @@ This repository uses a structured, AI-first development lifecycle. All project k
 
 ### Current State
 
-The project is just the base scaffold, and has not yet been inizialized. The repository contains the AI SDLC framework (phase directories, templates, automation skills) ready to be populated starting from the Specification phase, after the inizialization has been done.
+**Phase**: Not initialized
+
+**Summary**: Base scaffold, not yet initialized. The repository contains the AI SDLC framework (phase directories, templates, automation skills), ready to be populated starting from the Specification phase after initialization (`/SDLC-init`).
+
+---
+
+## Current State Protocol
+
+The `### Current State` subsection above is the machine-readable project status shared by all skills. Its structure:
+
+- **`**Phase**:`** — mandatory first line. One of: `Not initialized`, `Specification`, `Design`, `Code`. Every skill validates its applicability against this field before acting.
+- **`**Summary**:`** — mandatory. One or two sentences of free text describing where the project stands.
+- **Standardized status lines** — each optional, appearing at most once, added when its activity first occurs, then updated in place; never removed:
+
+| Line | Format | Primary maintainer |
+|------|--------|--------------------|
+| `**Spec artifacts**:` | artifact types worked on so far | SDLC-elicit |
+| `**Gap analysis**:` | active or passed form — see Assessment lines below | SDLC-elicit |
+| `**Design documents**:` | drafting status per document | SDLC-design |
+| `**Completeness assessment**:` | active or passed form — see Assessment lines below | SDLC-design |
+| `**Components**:` | comma-separated component names | SDLC-decompose |
+| `**Implementation plan**:` | `created YYYY-MM-DD — N phases, M tasks` | SDLC-implementation-plan |
+| `**Task progress**:` | `D/M tasks done — currently in Phase N (name)` | SDLC-execute-task |
+
+**Assessment lines** — `**Gap analysis**:` and `**Completeness assessment**:` record the run date, a `fresh`/`stale (reason)` marker, and the compact list of open issues: `YYYY-MM-DD — fresh — open: <Severity>: <short summary>; …` (or `— no issues` when the run found none). An issue is removed from the list when a change corrects it; when the last one goes, the tail becomes `all issues resolved`. A new run overwrites the whole line. When the corresponding phase gate is passed, the issue list is removed, keeping the date and how the gate was passed: `passed: no issues`, `passed: all issues resolved`, or `passed: user accepted remaining issues (<counts by severity>)` — `not performed — passed: user accepted to proceed` if no run was recorded. A line with a `fresh`/`stale` marker is in **active form**; after the gate it is in **passed form**.
+
+Maintenance rules — they apply to **every** artifact change, whether performed inside a skill or not:
+
+1. **Same-operation update**: update the affected lines in the same operation as the artifact change they reflect.
+2. **Staleness** (active-form assessment lines only): changes to Specification artifacts flip `**Gap analysis**:` to `stale (artifacts changed since)`; changes to design documents or decisions flip `**Completeness assessment**:` to `stale (design changed since)`, and Specification changes flip it too (`stale (spec changed since)`). Exception: a change that only corrects listed open issues updates the list instead.
+3. **Phase transitions**: `**Phase**:` changes only when a phase gate is crossed (see Phase Gates); the crossed gate's assessment line switches to its passed form.
 
 ---
 
@@ -45,12 +75,18 @@ Any modification to phase artifacts — whether performed inside a skill, during
 
 ### Phase Gates
 
-Before creating artifacts in the next phase, check these minimum preconditions. Gates are advisory — warn the user if not met, but proceed if they confirm.
+Before creating artifacts in the next phase, check these minimum preconditions. **This table is the single source of truth for gate preconditions** — skills evaluate it directly and must not define their own variants.
 
-| Transition | Preconditions |
-|------------|---------------|
-| Spec → Design | Stakeholders defined; at least one goal Approved; at least one requirement Approved; gap analysis recorded in Current State and fresh (not stale, no Critical gaps) |
-| Design → Code | All design documents drafted (`architecture.md`, `data-model.md`, `api-design.md`); completeness assessment recorded in Current State and fresh (not stale, no Critical findings); components identified (per-component directories in `3-code/`) |
+| Transition | Precondition | How to verify |
+|------------|--------------|---------------|
+| Spec → Design | Stakeholders defined | At least one real (non-placeholder) row in `1-spec/stakeholders.md` |
+| Spec → Design | At least one requirement Approved | Requirements index in `1-spec/CLAUDE.spec.md` |
+| Spec → Design | Gap analysis fresh, no Critical gaps | `**Gap analysis**:` line in Current State: present in active form, `fresh`, no open Critical issues |
+| Design → Code | All design documents drafted | `architecture.md`, `data-model.md`, `api-design.md` all have real content |
+| Design → Code | Completeness assessment fresh, no Critical findings | `**Completeness assessment**:` line in Current State: present in active form, `fresh`, no open Critical findings |
+| Design → Code | Components identified | Per-component directories (each with a `CLAUDE.md`) in `3-code/` |
+
+**Crossing a gate always requires explicit user confirmation** — phase gate advancement is an "always ask" action (see Graduated Safeguards). When all preconditions are met, ask the user to confirm the advancement; when some are not, list them and proceed only if the user explicitly accepts the gaps. The crossing is recorded by updating `**Phase**:` in Current State: `/SDLC-design` sets `Design` when the first user-approved design change is applied; `/SDLC-decompose` sets `Code` when the component directories are created (which also satisfies the "components identified" precondition).
 
 There is no gate between Code and Deploy. Deploy activities (deployments, runbooks, infrastructure setup) can happen at any time during the Code phase.
 

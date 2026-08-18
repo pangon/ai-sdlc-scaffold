@@ -9,13 +9,13 @@ You are running an interactive elicitation session for the Specification phase o
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+Before doing anything else, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`. Then follow the matching case below:
 
-1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+1. **`Not initialized`** — **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Specification phase** — the Current State indicates the project is in the Specification phase (e.g., mentions "Specification phase", "elicitation", "defining goals/requirements", or no phase beyond Specification has been started), **proceed normally** with the Setup steps below.
+2. **`Specification`** — **proceed normally** with the Setup steps below.
 
-3. **Project has advanced beyond Specification** — the Current State indicates the project is in Design, Code, or Deploy phase. **Warn** that modifying Specification artifacts may impact downstream design, tasks, or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
+3. **`Design` or `Code`** — the project has advanced beyond Specification. **Warn** that modifying Specification artifacts may impact downstream design, tasks, or deployed code. If the user confirms, proceed but flag downstream dependencies that could be affected.
 
 ### Setup
 
@@ -152,12 +152,13 @@ After completing the gap analysis with no Critical findings remaining, inform th
 
 ### Current State Tracking
 
-Whenever the skill applies user-approved changes (creating, modifying, or deleting artifacts), update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
+Whenever the skill applies user-approved changes (creating, modifying, or deleting artifacts), update the `### Current State` subsection in `CLAUDE.md` following the Current State Protocol defined there:
 
-1. **Artifact types being elicited** — list which artifact types have been worked on in the Specification phase (e.g., "Stakeholders defined; Goals and Assumptions drafted"). Update this incrementally as new types are touched.
-2. **Last gap analysis** — if a gap analysis has been performed, record the date and a one-line result summary (e.g., "Gap analysis (2026-03-08): 2 Critical, 1 Important, 0 Minor"). Update this only when a gap analysis is actually run, not on every artifact change.
+1. **`**Spec artifacts**:` line** — list which artifact types have been worked on in the Specification phase (e.g., `**Spec artifacts**: Stakeholders defined; Goals and Assumptions drafted`). Update it incrementally as new types are touched.
+2. **`**Gap analysis**:` line** — when a gap analysis is run, (over)write the line in active form (see Assessment lines in the Current State Protocol), with today's date and the compact list of open issues (e.g., `**Gap analysis**: 2026-03-08 — fresh — open: Critical: GOAL-reporting has no user stories; Important: CON-gdpr has no derived requirement`, or `… — fresh — no issues` when the run found none).
+3. **Open-issue upkeep and staleness** — when an applied change directly corrects a listed issue, remove that issue from the list in the same operation; when the last one is removed, set the tail to `all issues resolved`. When a change goes beyond correcting listed issues, flip the marker to `stale (artifacts changed since)` (protocol rule 2) and remind the user that a fresh analysis is needed before advancing. If the project has already advanced beyond Specification and the `**Completeness assessment**:` line is in active form, flip it to `stale (spec changed since)` as well.
 
-Gap analysis can be run at any time during elicitation — it is useful as a mid-session checkpoint to identify blind spots early. However, a gap analysis is **required before phase gate transition** (Spec → Design). If artifacts have been created or modified since the last recorded gap analysis, append "(stale — artifacts changed since)" to the gap analysis line in Current State and remind the user that a fresh analysis is needed before advancing.
+Gap analysis can be run at any time during elicitation — it is useful as a mid-session checkpoint to identify blind spots early. However, a fresh gap analysis is **required before phase gate transition** (Spec → Design).
 
 ### Rules
 

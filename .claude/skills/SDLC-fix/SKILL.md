@@ -9,15 +9,15 @@ You are applying a user-reported fix, bug correction, or modification to the cod
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+Before doing anything else, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`. Then follow the matching case below:
 
-1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+1. **`Not initialized`** — **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
+2. **`Specification`** — **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
 
-3. **Project is in the Design phase** — **Stop**, recommend completing design with `/SDLC-design`, then `/SDLC-decompose` and `/SDLC-implementation-plan` to create the task list, and do not proceed.
+3. **`Design`** — **Stop**, recommend completing design with `/SDLC-design`, then `/SDLC-decompose` and `/SDLC-implementation-plan` to create the task list, and do not proceed.
 
-4. **Project is in the Code phase or later** — this is the expected state. Proceed with Issue Elicitation.
+4. **`Code`** — this is the expected state. Proceed with Issue Elicitation.
 
 ### Issue Elicitation
 

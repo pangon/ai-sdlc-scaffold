@@ -35,17 +35,17 @@ A mismatch between the task description and the authoritative sources is **not**
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+Before doing anything else, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`. Then follow the matching case below:
 
-1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+1. **`Not initialized`** — **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
+2. **`Specification`** — **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
 
-3. **Project is in the Design phase** — **Stop**, recommend completing design with `/SDLC-design`, then `/SDLC-decompose` and `/SDLC-implementation-plan` to create the task list, and do not proceed.
+3. **`Design`** — **Stop**, recommend completing design with `/SDLC-design`, then `/SDLC-decompose` and `/SDLC-implementation-plan` to create the task list, and do not proceed.
 
-4. **Project is in the Code phase but has no tasks** — `3-code/tasks.md` has no task entries (only template/legend). **Stop**, recommend `/SDLC-implementation-plan` to create the task list, and do not proceed.
+4. **`Code` but no tasks** — `3-code/tasks.md` has no task entries (only template/legend). **Stop**, recommend `/SDLC-implementation-plan` to create the task list, and do not proceed.
 
-5. **Project is in the Code phase with tasks** — this is the expected state. Proceed with Task Selection.
+5. **`Code` with tasks** — this is the expected state. Proceed with Task Selection.
 
 ### Task Selection — Bare Invocation
 
@@ -338,12 +338,12 @@ A design gap is a divergence between **design documents** and what implementatio
 
 ### Current State Tracking
 
-Whenever the skill completes a task (status set to `Done`) or decomposes a task, update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to reflect:
+Whenever the skill completes a task (status set to `Done`) or decomposes a task, update the `### Current State` subsection in `CLAUDE.md` following the Current State Protocol defined there:
 
-1. **Task progress** — note overall progress (e.g., "Implementation progress: 5/42 tasks done, currently in Phase 2"). Update this after every task completion or decomposition.
-2. **Design gap resolutions** — if the Design Gap Procedure was triggered and resulted in design document updates or new decisions, reflect those changes in the Current State (following the same conventions as the SDLC-design skill's Current State Tracking: update design document status, decision count, and mark completeness assessment as stale if applicable).
+1. **`**Task progress**:` line** — update it after every task completion or decomposition (e.g., `**Task progress**: 5/42 tasks done — currently in Phase 2 (Core Data Pipeline)`).
+2. **Design gap resolutions** — if the Design Gap Procedure was triggered and resulted in design document updates or new decisions, also update the `**Design documents**:` line, and, if the `**Completeness assessment**:` line is in active form, flip it to `stale (design changed since)` per protocol rule 2.
 
-If a task execution only changes task status (no design impact), update only the task progress line. Do not rewrite the entire Current State section — update incrementally.
+If a task execution only changes task status (no design impact), update only the `**Task progress**:` line. Do not rewrite the entire Current State section — update incrementally.
 
 ### Interaction Style
 

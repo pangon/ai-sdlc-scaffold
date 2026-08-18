@@ -9,26 +9,21 @@ You are working at the Design → Code transition, analyzing design artifacts to
 
 ### Phase Validation
 
-Before doing anything else, read the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` and determine which phase the project is in. Then follow the matching case below:
+Before doing anything else, read the `**Phase**:` field of the `### Current State` subsection in `CLAUDE.md`. Then follow the matching case below:
 
-1. **Project not initialized** — the Current State lacks a real project description (e.g., mentions "not yet been initialized" or "base scaffold"). **Stop**, recommend `/SDLC-init`, and do not proceed.
+1. **`Not initialized`** — **Stop**, recommend `/SDLC-init`, and do not proceed.
 
-2. **Project is in the Specification phase** — the Current State mentions "Specification phase", lists specification artifacts being drafted, or no phase beyond Specification has been started. **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
+2. **`Specification`** — **Stop**, recommend `/SDLC-elicit` to continue refining specification or `/SDLC-design` to start the design phase, and do not proceed.
 
-3. **Project is in the Design phase** — the Current State indicates the project is in the Design phase (e.g., mentions "Design phase", "architecture", "design documents being worked on", or no phase beyond Design has been started).
+3. **`Design`** — decomposition would cross the Design → Code phase gate. Evaluate the Design → Code preconditions from the Phase Gates table in `CLAUDE.md` (using its "How to verify" column), except "Components identified" — that precondition is what this skill establishes. Then respond based on the results:
 
-   Evaluate the Design → Code phase gate preconditions:
+   - **If the design documents are not all drafted** — design is incomplete. **Stop**, list which documents are missing or incomplete, recommend `/SDLC-design` to continue drafting, and do not proceed.
+   - **If the documents are drafted but the completeness-assessment precondition is not met** (no assessment, stale, or open Critical findings) — **strongly recommend** running a Completeness Assessment via `/SDLC-design` before decomposition. Proceed only if the user explicitly accepts the gaps.
+   - **If all evaluated preconditions are met** — inform the user of any remaining Important/Minor findings (non-blocking) and **ask the user to confirm the advancement to the Code phase** (phase gate advancement is an "always ask" action). Proceed with Setup only after confirmation.
 
-   - **(a)** All expected design documents have content — `architecture.md`, `data-model.md`, and `api-design.md` are drafted
-   - **(b)** Completeness Assessment recorded in the Current State, fresh (not stale), and with no Critical findings
+   In every proceed case, the `**Phase**:` field is set to `Code` when the component directories are created (see Current State Tracking) — not at validation time.
 
-   Then respond based on the results:
-
-   - **If (a) is not met** — design is incomplete. **Stop**, list which documents are missing or incomplete, and recommend `/SDLC-design` to continue drafting, and do not proceed.
-   - **If (a) is met but (b) is not met** (no assessment, stale, or Critical findings) — **strongly recommend** running a Completeness Assessment via `/SDLC-design` before decomposition. Proceed only on explicit user confirmation.
-   - **If all preconditions are met** — inform the user of any remaining Important/Minor findings (non-blocking) and proceed with Setup.
-
-4. **Project has advanced beyond Design** — the Current State indicates the project is in Code or Deploy phase. **Warn** that reorganizing components can heavily impact downstream tasks and existing code (task assignments, directory structure, imports, build configuration, and deployment pipelines may all need updating). If the user confirms, proceed but flag downstream dependencies that could be affected.
+4. **`Code`** — components may already exist. **Warn** that reorganizing components can heavily impact downstream tasks and existing code (task assignments, directory structure, imports, build configuration, and deployment pipelines may all need updating). If the user confirms, proceed but flag downstream dependencies that could be affected.
 
 ### Setup
 
@@ -146,7 +141,7 @@ After the component structure is created and `CLAUDE.code.md` is updated, inform
 
 ### Current State Tracking
 
-After applying approved changes, update the `### Current State` subsection under `## Project Overview` in `CLAUDE.md` to note the component decomposition (e.g., "3 components identified: backend, frontend, tts-engine; per-component directories created").
+After creating the approved component directories, update the `### Current State` subsection in `CLAUDE.md` following the Current State Protocol defined there: set `**Phase**: Code` (the advancement was confirmed by the user during Phase Validation), update `**Summary**:` to note the transition, convert the `**Completeness assessment**:` line to its passed form, recording how the gate was passed (protocol rule 3), and add the `**Components**:` line with the comma-separated component names (e.g., `**Components**: backend, frontend, tts-engine`).
 
 ### Rules
 
