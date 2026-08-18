@@ -25,7 +25,7 @@ The project is just the base scaffold, and has not yet been inizialized. The rep
 Each phase directory contains a `CLAUDE.<phase>.md` file. When working in a phase:
 
 1. Read the phase-specific instructions — they extend (not override) this file
-2. Consult the decisions index in that phase file before starting work (for the Code phase, decisions indexes are in each component's `CLAUDE.component.md`, not in `CLAUDE.code.md`)
+2. Consult the decisions index in that phase file before starting work (for the Code phase, decisions indexes are in each component's own `CLAUDE.md` file — `3-code/<component-name>/CLAUDE.md` — not in `CLAUDE.code.md`)
 3. Work within the appropriate phase structure
 
 | Phase | Directory | Focus |
@@ -108,7 +108,7 @@ Each `CLAUDE.<phase>.md` contains a decisions index with trigger conditions. A d
 
 ### How to use decisions during tasks
 
-1. Consult the decisions index in the current phase's `CLAUDE.<phase>.md`, or in a component-specific `CLAUDE.<component>.md` when working within a specific component.
+1. Consult the decisions index in the current phase's `CLAUDE.<phase>.md`, or in the component's `CLAUDE.md` (`3-code/<component-name>/CLAUDE.md`) when working within a specific component.
 2. Follow the File column link to read the relevant `DEC-*.md` file.
 3. Apply its enforcement rules.
 

@@ -26,7 +26,7 @@ All source code, configuration, and assets for a component **must reside within 
 
 Scripts and commands for each component are documented in that component's own codebase (package.json, Makefile, README, or equivalent). Check there first.
 
-When invoking any command, apply active decisions from the component's `CLAUDE.component.md` whose trigger conditions match.
+When invoking any command, apply active decisions from the component's `CLAUDE.md` whose trigger conditions match.
 
 ---
 

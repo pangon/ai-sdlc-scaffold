@@ -63,11 +63,11 @@ git init && git add -A && git commit -m "Initial scaffold"
 │   └── api-design.md                 # API specifications
 │
 ├── 3-code/                           # BUILD
-│   ├── CLAUDE.code.md                # Phase instructions, decisions index, component guidelines
+│   ├── CLAUDE.code.md                # Phase instructions and component guidelines
 │   ├── tasks.md                      # Development task tracker
 │   ├── implementation-log/           # Per-task and per-fix logs (TASK-*.md, FIX-*.md) + templates
 │   └── <component>/                  # Per-component directories (created by /SDLC-decompose)
-│       └── CLAUDE.<component>.md     # Component description, decisions index, addressed requirements
+│       └── CLAUDE.md                 # Component description, decisions index, addressed requirements (auto-loaded when working in the component)
 │
 ├── 4-deploy/                         # SHIP
 │   ├── CLAUDE.deploy.md              # Phase instructions, decisions index

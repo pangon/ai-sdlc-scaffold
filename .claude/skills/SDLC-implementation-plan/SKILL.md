@@ -42,7 +42,7 @@ Read the following files — all are required context for planning:
 4. **Design documents** — read `2-design/architecture.md`, `2-design/data-model.md`, and `2-design/api-design.md`.
 5. **Decisions** — read every `DEC-*.md` file in `decisions/` (active records only, not `.history.md`).
 6. **Code phase instructions** — read `3-code/CLAUDE.code.md`.
-7. **Components** — read every `CLAUDE.component.md` in `3-code/*/`.
+7. **Components** — read every component `CLAUDE.md` in `3-code/*/`.
 8. **Deploy phase instructions** — read `4-deploy/CLAUDE.deploy.md`.
 
 ### Analysis
@@ -51,7 +51,7 @@ Before constructing the plan, perform these analyses silently (do not output the
 
 #### 1. Requirement-to-Component Map
 
-For each requirement, identify which component(s) must implement it (from the component `CLAUDE.component.md` files). Requirements that span multiple components need tasks in each.
+For each requirement, identify which component(s) must implement it (from the component `CLAUDE.md` files). Requirements that span multiple components need tasks in each.
 
 #### 2. Dependency Graph
 

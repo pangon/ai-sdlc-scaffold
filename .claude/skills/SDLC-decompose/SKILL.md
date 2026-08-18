@@ -84,13 +84,15 @@ If any component boundary is ambiguous (e.g., a module could be part of a larger
 
 #### 2. Create Component Directories
 
-For each approved component, create a directory and a `CLAUDE.component.md` inside it:
+For each approved component, create a directory and a `CLAUDE.md` inside it:
 
 ```
-3-code/<component-name>/CLAUDE.component.md
+3-code/<component-name>/CLAUDE.md
 ```
 
-The `CLAUDE.component.md` file should contain:
+The file is named exactly `CLAUDE.md` so that Claude Code auto-loads it whenever it accesses files inside the component directory — the component's instructions and decisions index are then in effect even when work happens outside a skill. Do not use component-specific names (e.g., `CLAUDE.backend.md`): auto-loading and component discovery depend on the literal name.
+
+The component's `CLAUDE.md` file should contain:
 
 ```markdown
 # <Component Display Name>
@@ -150,6 +152,6 @@ After applying approved changes, update the `### Current State` subsection under
 
 - **Read-before-write**: always read existing files before proposing changes.
 - **Do not move existing files**: design documents remain at the `2-design/` top level.
-- **Only create skeleton directories**: the skill creates per-component directories with a `CLAUDE.component.md` in `3-code/`. Actual source code, build configuration, and test scaffolding are added during implementation.
+- **Only create skeleton directories**: the skill creates per-component directories, each with a `CLAUDE.md`, in `3-code/`. Actual source code, build configuration, and test scaffolding are added during implementation.
 - **Preserve existing content**: when updating `CLAUDE.code.md`, do not remove or modify content outside the sections this skill manages.
 - **User approval required**: present identified components and wait for explicit approval before writing any files.

@@ -135,12 +135,12 @@ Read relevant design documents in `2-design/` — at minimum the ones that cover
 
 #### 4. Check Applicable Decisions
 
-Read the `CLAUDE.component.md` file for the component this task belongs to (determined by which Task Table section it appears in). Review the `## Relevant Decisions` table:
+Read the `CLAUDE.md` file of the component this task belongs to (`3-code/<component-name>/CLAUDE.md`, determined by which Task Table section the task appears in). Review the `## Relevant Decisions` table:
 - Scan the table and identify any decisions whose trigger conditions match the current task.
 - Read the full decision file(s) for applicable decisions (follow the File column links).
 - These decisions **must** be applied during implementation.
 
-Additionally, if the task involves multiple components, also read the `CLAUDE.component.md` file for each involved component and review their `## Relevant Decisions` tables — decisions from all involved components must be considered and applied. For tasks in the `Setup & Infrastructure` or `Deploy & Operations` sections, also check the decisions indexes in `2-design/CLAUDE.design.md` and `4-deploy/CLAUDE.deploy.md` respectively.
+Additionally, if the task involves multiple components, also read the `CLAUDE.md` file of each involved component and review their `## Relevant Decisions` tables — decisions from all involved components must be considered and applied. For tasks in the `Setup & Infrastructure` or `Deploy & Operations` sections, also check the decisions indexes in `2-design/CLAUDE.design.md` and `4-deploy/CLAUDE.deploy.md` respectively.
 
 #### 5. Check for Constraint Tensions
 
@@ -359,7 +359,7 @@ If a task execution only changes task status (no design impact), update only the
 - **Read-before-write**: always read existing files before proposing changes.
 - **Requirements first**: read every linked requirement before writing code. Do not implement from memory or assumption.
 - **Log is mandatory and append-only**: the per-task implementation log under `3-code/implementation-log/<task-id>.md` must exist and contain the Understanding section before the Execution section starts, and new entries (`[WRITE]` / `[Q&A]` / `[RECONSIDER]` / `[PROBLEM]` / `[FIX]` / `[DESIGN-GAP]` / `[TENSION]` / `[TEST]` / `[NOTE]`) must be appended as work progresses. Existing content is never edited or removed — corrections are appended as new entries. Each run of the skill terminates by appending a `[CONCLUSION]` entry; a reopened task will therefore accumulate multiple `[RESUMED]` / `[CONCLUSION]` pairs over time. A pre-existing log file with a task status other than `In Progress` is an inconsistency that must be surfaced to the user before continuing.
-- **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.component.md` must be followed. If a decision conflicts with the task, surface it to the user — do not silently ignore it.
+- **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.md` must be followed. If a decision conflicts with the task, surface it to the user — do not silently ignore it.
 - **Task list integrity**: never reorder the task list within a phase in `tasks.md`, and never rename pre-existing task IDs.
 - **No auto-commit**: leave all changes for user review. Do not commit or push.
 - **Traceability**: if the implementation reveals that a requirement is missing or incorrect, surface it to the user and recommend `/SDLC-elicit` to address it.

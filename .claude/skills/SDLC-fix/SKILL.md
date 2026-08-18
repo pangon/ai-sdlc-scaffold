@@ -68,7 +68,7 @@ Before writing any code, gather all necessary context.
 
 Based on the elicited information, determine which component(s) are affected. For each affected component:
 
-- Read its `CLAUDE.component.md` file (e.g., `3-code/frontend/CLAUDE.component.md`, `3-code/backend/CLAUDE.component.md`).
+- Read its `CLAUDE.md` file (e.g., `3-code/frontend/CLAUDE.md`, `3-code/backend/CLAUDE.md`).
 - Note its technology stack, conventions, and directory structure.
 
 If the fix targets deploy/operations artifacts, also read `4-deploy/CLAUDE.deploy.md`.
@@ -85,7 +85,7 @@ Read relevant design documents in `2-design/` — at minimum the ones that cover
 
 #### 4. Check Applicable Decisions
 
-For each affected component, review the `## Relevant Decisions` table in its `CLAUDE.component.md`:
+For each affected component, review the `## Relevant Decisions` table in its `CLAUDE.md`:
 - Identify any decisions whose trigger conditions match the current fix.
 - Read the full decision file(s) for applicable decisions (follow the File column links).
 - These decisions **must** be applied during implementation.
@@ -289,7 +289,7 @@ A design gap is a divergence between **design documents** and what implementatio
 - **Read-before-write**: always read existing files before proposing changes.
 - **Elicit before implementing**: never start coding before understanding the problem. If the user's initial description is insufficient, ask for clarification.
 - **Log is mandatory and append-only**: the per-fix implementation log under `3-code/implementation-log/<FIX-ID>.md` must exist and contain the Understanding section before the Execution section starts, and new entries (`[WRITE]` / `[Q&A]` / `[RECONSIDER]` / `[PROBLEM]` / `[FIX]` / `[DESIGN-GAP]` / `[TENSION]` / `[TEST]` / `[NOTE]`) must be appended as work progresses. Existing content is never edited or removed — corrections are appended as new entries. Each run of the skill terminates by appending a `[CONCLUSION]` entry; a reopened fix will therefore accumulate multiple `[RESUMED]` / `[CONCLUSION]` pairs over time.
-- **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.component.md` must be followed. If a decision conflicts with the fix, surface it to the user — do not silently ignore it.
+- **Decisions are mandatory**: applicable decisions from the component's `CLAUDE.md` must be followed. If a decision conflicts with the fix, surface it to the user — do not silently ignore it.
 - **Minimal changes**: change only what is necessary to address the reported issue. Do not add unrelated improvements or refactor surrounding code unless explicitly requested.
 - **No auto-commit**: leave all changes for user review. Do not commit or push.
 - **Traceability**: if the fix reveals that a requirement is missing or incorrect, surface it to the user and recommend `/SDLC-elicit` to address it. If the fix reveals that a planned task in `tasks.md` is affected (e.g., the fix pre-empts part of a future task, or a task's assumptions are now invalid), note it in the output.
