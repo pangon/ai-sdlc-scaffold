@@ -4,6 +4,16 @@ Phase-specific instructions for the **Deploy** phase. Extends [../CLAUDE.md](../
 
 This phase handles **deployment and operations**. Focus on reliability, repeatability, and observability.
 
+## Phase Structure
+
+| Location | Content |
+|----------|---------|
+| [`infrastructure/`](infrastructure/) | Infrastructure as code (Terraform, SAM, Dockerfiles, Kubernetes manifests, …) |
+| [`scripts/`](scripts/) | Deployment and operational scripts |
+| [`runbooks/`](runbooks/) | Operational procedures, from [`runbooks/_template.md`](runbooks/_template.md) |
+
+There is no dedicated deploy skill: planned deploy work (IaC tasks, runbook tasks, manual-testing readiness tasks) is executed via `/SDLC-execute-task`, and ad-hoc deploy changes via `/SDLC-fix` — both apply these phase instructions alongside their own (their "Deploy awareness" rule points here).
+
 ---
 
 ## Decisions Relevant to This Phase
@@ -38,9 +48,10 @@ This phase handles **deployment and operations**. Focus on reliability, repeatab
 3. Link back to requirements where relevant (e.g., availability targets from REQ-REL).
 4. Cross-check procedures against actual scripts and infrastructure.
 5. Keep procedures short — move detailed background into a separate document if needed.
+6. Whenever a runbook is created, renamed, or changes purpose, update the Runbooks Index below in the same operation.
 
 ### Common Decision Triggers
-When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.md#when-recording-decisions). Common triggers: secret management, environment promotion rules, rollback procedures, IaC tooling, CI/CD conventions.
+When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.md#recording-deprecating-or-superseding-decisions). Common triggers: secret management, environment promotion rules, rollback procedures, IaC tooling, CI/CD conventions.
 
 ---
 
@@ -49,3 +60,11 @@ When a significant decision emerges, follow [CLAUDE.md — Decisions](../CLAUDE.
 - Infrastructure design comes from `2-design/`
 - Deploys build artifacts from `3-code/`
 - Operational requirements come from `1-spec/`
+
+---
+
+## Runbooks Index
+
+| File | Operation | Summary |
+|------|-----------|---------|
+<!-- Add rows as runbooks are created, in the same operation as the runbook change. File column: [runbook-name](runbooks/runbook-name.md) -->

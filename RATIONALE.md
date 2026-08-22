@@ -125,7 +125,7 @@ All artifacts with a Status field follow a defined lifecycle with explicit trans
 ## What the Scaffold Provides Out of the Box
 
 - A layered AI instruction system (`CLAUDE.md` → `CLAUDE.<phase>.md`) with phase-level indexes and cross-skill artifact procedures
-- Automation skills for each SDLC activity: project initialization, requirements elicitation, design drafting, component decomposition, implementation planning, task execution, bug fixing and ad-hoc changes, status reporting, and artifact consistency validation
+- Automation skills across the lifecycle: project initialization, requirements elicitation, design drafting, component decomposition, implementation planning, task execution, bug fixing and ad-hoc changes, status reporting, and artifact consistency validation (deploy work has no dedicated skill — it flows through task execution and fixes, governed by the deploy phase instructions)
 - Decision management procedures (creation, deprecation, supersession)
 - Complete folder structure for all four phases
 - File templates for every artifact type (goals, user stories, requirements, assumptions, constraints, decisions, runbooks)

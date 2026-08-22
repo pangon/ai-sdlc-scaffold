@@ -73,6 +73,7 @@ Any modification to phase artifacts — whether performed inside a skill, during
 - **Design artifacts** (`2-design/`): follow the procedures in [`.claude/skills/SDLC-design/SKILL.md`](.claude/skills/SDLC-design/SKILL.md) — including downstream effect checks, decision recording triggers, requirement coverage verification, and Current State tracking.
 - **Code phase task artifacts** (`3-code/tasks.md`): for creating or re-planning tasks, follow the procedures in [`.claude/skills/SDLC-implementation-plan/SKILL.md`](.claude/skills/SDLC-implementation-plan/SKILL.md) — including phased task grouping, traceability links, and incremental deployability. For task status transitions, follow [`.claude/skills/SDLC-execute-task/SKILL.md`](.claude/skills/SDLC-execute-task/SKILL.md) — including task list integrity, status propagation to Specification artifacts, and Current State tracking.
 - **Component source code** (`3-code/<component-name>/`): follow the procedures in [`.claude/skills/SDLC-fix/SKILL.md`](.claude/skills/SDLC-fix/SKILL.md) — or [`.claude/skills/SDLC-execute-task/SKILL.md`](.claude/skills/SDLC-execute-task/SKILL.md) when the change executes a planned task — including decisions application, tests, design-gap handling, and implementation logging.
+- **Deploy artifacts** (`4-deploy/`): follow the AI Guidelines and index rules in [`4-deploy/CLAUDE.deploy.md`](4-deploy/CLAUDE.deploy.md), through the same skill procedures as component source code (`SDLC-execute-task` for planned tasks, `SDLC-fix` for ad-hoc changes).
 
 ### Phase Gates
 

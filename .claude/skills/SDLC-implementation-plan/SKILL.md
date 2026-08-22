@@ -120,7 +120,7 @@ If `4-deploy/` expectations exist, include infrastructure-as-code tasks (Terrafo
 
 Every phase must end with a **manual testing readiness task** (`TASK-phase-N-manual-testing`) that ensures a tester can verify the delivered capabilities without reading source code. The task should:
 
-1. **Create or update a deploy runbook** in `4-deploy/runbooks/` with startup instructions and step-by-step manual test scenarios for the phase's new capabilities. Update existing runbooks rather than creating duplicates.
+1. **Create or update a deploy runbook** in `4-deploy/runbooks/` with startup instructions and step-by-step manual test scenarios for the phase's new capabilities. Update existing runbooks rather than creating duplicates, and keep the Runbooks Index in `4-deploy/CLAUDE.deploy.md` in sync.
 2. **Document build/run/test commands** in the README (or equivalent existing doc) of every component modified in this phase or previous phases (e.g., `3-code/<component>/README.md`). Create or update convenience scripts where useful; for single-command operations, documenting the command is sufficient.
 
 The Component column must list all components involved in the current phase and previous phases. Place these tasks in the `### Deploy & Operations` task table section, dependent on the phase's last functional task, with `-` in the Req column. List them last in the Execution Plan for their phase.

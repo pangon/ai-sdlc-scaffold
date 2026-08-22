@@ -70,7 +70,9 @@ git init && git add -A && git commit -m "Initial scaffold"
 │       └── CLAUDE.md                 # Component description, decisions index, addressed requirements (auto-loaded when working in the component)
 │
 ├── 4-deploy/                         # SHIP
-│   ├── CLAUDE.deploy.md              # Phase instructions, decisions index
+│   ├── CLAUDE.deploy.md              # Phase instructions, decisions index, runbooks index
+│   ├── infrastructure/               # Infrastructure as code
+│   ├── scripts/                      # Deployment and operational scripts
 │   └── runbooks/                     # Operational procedures + _template.md
 │
 ├── decisions/                        # DEC-kebab-name.md + DEC-kebab-name.history.md
