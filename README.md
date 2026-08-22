@@ -83,7 +83,8 @@ git init && git add -A && git commit -m "Initial scaffold"
     ├── SDLC-implementation-plan/SKILL.md  # task generation
     ├── SDLC-execute-task/SKILL.md         # task execution
     ├── SDLC-fix/SKILL.md             # bug fixes and ad-hoc changes
-    └── SDLC-status/SKILL.md          # /SDLC-status — project dashboard
+    ├── SDLC-status/SKILL.md          # project dashboard
+    └── SDLC-validate/SKILL.md        # artifact consistency validation
 ```
 
 ## Key Concepts
@@ -137,6 +138,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 | Skill | Purpose |
 |-------|---------|
 | `/SDLC-status` | Project-wide dashboard: artifact counts per phase, task progress, phase-gate readiness, traceability health, and assessment freshness. |
+| `/SDLC-validate` | Read-only consistency validation: index↔file synchronization, link resolution, status legality and coherence, ID uniqueness, traceability orphans, and Current State accuracy with git-verified assessment freshness. Reports findings with suggested corrections. |
 
 ### Typical Workflow
 
@@ -150,6 +152,7 @@ Claude skills automate each phase of the lifecycle. Type `/skill-name` in Claude
 /SDLC-execute-task          ← execute tasks one by one
 /SDLC-fix                   ← apply bug fixes or ad-hoc changes
 /SDLC-status                ← anytime: full project overview
+/SDLC-validate              ← anytime: artifact consistency validation
 ```
 
 ## License

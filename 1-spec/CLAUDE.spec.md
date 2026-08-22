@@ -90,25 +90,25 @@ When an artifact (goal, user story, requirement) is no longer relevant:
 
 ## Goals Index
 
-| File | Priority | Status | Summary |
-|------|----------|--------|---------|
-<!-- Add rows as goals are created. File column: [GOAL-kebab-name](goals/GOAL-kebab-name.md) -->
+| File | Stakeholder | Priority | Status | Summary |
+|------|-------------|----------|--------|---------|
+<!-- Add rows as goals are created. File column: [GOAL-kebab-name](goals/GOAL-kebab-name.md); Stakeholder column: the source stakeholder ID as plain text (STK-kebab-name) -->
 
 ---
 
 ## User Stories Index
 
-| File | Role | Priority | Status | Summary |
-|------|------|----------|--------|---------|
-<!-- Add rows as user stories are created. File column: [US-kebab-name](user-stories/US-kebab-name.md) -->
+| File | Role | Goal | Priority | Status | Summary |
+|------|------|------|----------|--------|---------|
+<!-- Add rows as user stories are created. File column: [US-kebab-name](user-stories/US-kebab-name.md); Goal column: the related goal ID as plain text (GOAL-kebab-name) -->
 
 ---
 
 ## Requirements Index
 
-| File | Type | Priority | Status | Summary |
-|------|------|----------|--------|---------|
-<!-- Add rows as requirements are created. File column: [REQ-CLASS-kebab-name](requirements/REQ-CLASS-kebab-name.md) -->
+| File | Type | Source | Priority | Status | Summary |
+|------|------|--------|----------|--------|---------|
+<!-- Add rows as requirements are created. File column: [REQ-CLASS-kebab-name](requirements/REQ-CLASS-kebab-name.md); Source column: the source artifact ID(s) as plain text (US-/GOAL-/CON-kebab-name, comma-separated) -->
 
 ---
 

@@ -164,7 +164,7 @@ Gap analysis can be run at any time during elicitation — it is useful as a mid
 ### Rules
 
 - **Current State synchronization**: whenever artifacts are created, modified, or deleted, update `### Current State` in `CLAUDE.md` as described in the Current State Tracking section above. This update must happen in the same operation as the artifact change.
-- **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-spec/CLAUDE.spec.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row.
+- **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-spec/CLAUDE.spec.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row. The link columns (Stakeholder for goals, Goal for user stories, Source for requirements) must always be filled — they are what the traceability scans read.
 - All new artifacts start with `Status: Draft`. Never auto-approve — only the user can move an artifact to `Approved`.
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
 - Choose a short descriptive kebab-case name for each new artifact (check existing files to avoid duplicates). The name **is** the ID — there are no numeric sequences.

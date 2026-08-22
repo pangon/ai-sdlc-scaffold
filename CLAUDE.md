@@ -91,6 +91,8 @@ Before creating artifacts in the next phase, check these minimum preconditions. 
 
 There is no gate between Code and Deploy. Deploy activities (deployments, runbooks, infrastructure setup) can happen at any time during the Code phase.
 
+The `/SDLC-validate` skill mechanically verifies these preconditions and the underlying artifact invariants (index synchronization, link resolution, status coherence, assessment freshness against git history).
+
 ---
 
 ## Artifacts

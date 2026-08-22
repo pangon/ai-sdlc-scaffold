@@ -127,15 +127,14 @@ Determine status: **empty** if file contains only headings/placeholders; **compl
 
 #### Traceability Health
 
-Perform a lightweight traceability scan (read index tables, not every file):
+Perform a lightweight traceability scan using the index link columns in `1-spec/CLAUDE.spec.md` and the Req column in `tasks.md` (read index tables, not every file):
 
-- **Orphaned goals**: goals not linked to any user story
-- **Orphaned user stories**: user stories not linked to any requirement
-- **Stakeholders without goals**: stakeholders with no associated goals
-- **Uncovered requirement classes**: requirement classes (of the 9 defined) with zero artifacts
+- **Orphaned goals**: goals not referenced in any user story's Goal column
+- **Orphaned user stories**: user stories not referenced in any requirement's Source column
+- **Stakeholders without goals**: stakeholders not referenced in any goal's Stakeholder column
 - **Requirements without tasks**: approved requirements not referenced in any task's Req column
 
-Report counts only. If all checks pass, state "No traceability issues detected".
+Report counts only. If all checks pass, state "No traceability issues detected". As an informational note (not an issue), list the requirement classes (of the 9 defined) with zero artifacts. For deep validation — link resolution, index↔file synchronization, status coherence, git-verified assessment freshness — recommend `/SDLC-validate`.
 
 ---
 
