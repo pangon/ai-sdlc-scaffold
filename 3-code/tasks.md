@@ -8,6 +8,7 @@
 | `In Progress` | Currently being worked on |
 | `Blocked` | Waiting on a dependency or decision (reason **must** be noted in the Notes column) |
 | `Done` | Completed |
+| `Decomposed` | Split into subtasks (subtask IDs **must** be noted in the Notes column) |
 | `Cancelled` | No longer needed (reason **must** be noted in the Notes column) |
 
 ## Priority Legend

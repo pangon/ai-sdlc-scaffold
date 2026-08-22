@@ -17,7 +17,7 @@ Before doing anything else, read the `**Phase**:` field of the `### Current Stat
 
 3. **`Design`** — decomposition would cross the Design → Code phase gate. Evaluate the Design → Code preconditions from the Phase Gates table in `CLAUDE.md` (using its "How to verify" column), except "Components identified" — that precondition is what this skill establishes. Then respond based on the results:
 
-   - **If the design documents are not all drafted** — design is incomplete. **Stop**, list which documents are missing or incomplete, recommend `/SDLC-design` to continue drafting, and do not proceed.
+   - **If the design documents are not all drafted or `N/A`** — design is incomplete. **Stop**, list which documents are missing or incomplete, recommend `/SDLC-design` to continue drafting, and do not proceed.
    - **If the documents are drafted but the completeness-assessment precondition is not met** (no assessment, stale, or open Critical findings) — **strongly recommend** running a Completeness Assessment via `/SDLC-design` before decomposition. Proceed only if the user explicitly accepts the gaps.
    - **If all evaluated preconditions are met** — inform the user of any remaining Important/Minor findings (non-blocking) and **ask the user to confirm the advancement to the Code phase** (phase gate advancement is an "always ask" action). Proceed with Setup only after confirmation.
 

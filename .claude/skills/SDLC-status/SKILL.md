@@ -79,11 +79,11 @@ If requirements exist, add a **breakdown by class** (only classes that have at l
 
 | Document | Status |
 |----------|--------|
-| Architecture (`architecture.md`) | empty / in-progress / complete |
-| Data Model (`data-model.md`) | empty / in-progress / complete |
-| API Design (`api-design.md`) | empty / in-progress / complete |
+| Architecture (`architecture.md`) | Stub / Draft / Approved / N/A |
+| Data Model (`data-model.md`) | Stub / Draft / Approved / N/A |
+| API Design (`api-design.md`) | Stub / Draft / Approved / N/A |
 
-Determine status: **empty** if file contains only headings/placeholders; **complete** if all major sections have substantive content; **in-progress** otherwise.
+Report each document's `**Status**:` field verbatim (including the approval date or N/A reason when present).
 
 **Decisions**: N active, N deprecated, N superseded
 
@@ -103,11 +103,12 @@ Determine status: **empty** if file contains only headings/placeholders; **compl
 | In Progress | |
 | Blocked | |
 | Done | |
+| Decomposed | |
 | Cancelled | |
 | **Total** | |
 
 **Execution Plan Progress** (if execution plan exists in `tasks.md`):
-- Current phase: the earliest phase with incomplete tasks (not all Done/Cancelled)
+- Current phase: the earliest phase with incomplete tasks (not all Done/Cancelled/Decomposed)
 - Phase progress: for each phase, show `Done/Total` count and phase name
 - Overall: `N/M tasks done (X%)`
 
@@ -150,9 +151,9 @@ Report counts only. If all checks pass, state "No traceability issues detected".
 **Design → Code**:
 | Precondition | Status |
 |--------------|--------|
-| Architecture drafted | ✅ / ❌ |
-| Data Model drafted | ✅ / ❌ |
-| API Design drafted | ✅ / ❌ |
+| Architecture drafted or N/A | ✅ / ❌ |
+| Data Model drafted or N/A | ✅ / ❌ |
+| API Design drafted or N/A | ✅ / ❌ |
 | Completeness assessment fresh, no open Critical findings | ✅ / ❌ / ⚠️ stale |
 | Components identified (per-component directories in `3-code/`) | ✅ / ❌ |
 

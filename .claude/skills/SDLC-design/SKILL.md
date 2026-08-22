@@ -97,6 +97,7 @@ This verification applies to whatever document(s) are being drafted in the curre
   - The coverage verification results (which requirements are addressed, which are not)
   - Design trade-offs made
 - **After user approval**, write the document.
+- **Maintain the document's `**Status**:` field** in the same operation: `Draft` while content is in progress; `Approved (YYYY-MM-DD)` only when the user explicitly approves the document as complete for its scope; `N/A (reason)` if the user declares the document not applicable to the project (an `N/A` document counts as complete for the Design → Code gate).
 
 ### Modifying Existing Design Documents
 
@@ -106,6 +107,7 @@ This skill can be used to revise design documents or propagate decision changes.
 2. **Check downstream effects** — identify tasks in `3-code/tasks.md` and decisions in `decisions/` that reference or depend on the content being changed. Report these to the user before proceeding.
 3. **Present the proposed changes** clearly (what will change, why, and which downstream artifacts are affected).
 4. **Wait for user confirmation** before applying changes.
+5. **Status downgrade**: if the document's `**Status**:` is `Approved`, warn that the modification reverts it to `Draft`, and apply the reversion in the same operation as the change.
 
 ### Design Completeness Assessment
 
@@ -113,7 +115,7 @@ This skill can assess the overall readiness of the design phase. When the user r
 
 #### 1. Document Completeness
 
-Check which design documents have content and which are empty or incomplete. For documents with content, assess whether they cover the scope implied by the architecture (e.g., if the architecture defines three components, does the API design define endpoints for all three?).
+Check each document's `**Status**:` field: `Stub` documents are missing; `N/A` documents count as complete (verify the recorded reason still holds); for `Draft` and `Approved` documents, assess whether they cover the scope implied by the architecture (e.g., if the architecture defines three components, does the API design define endpoints for all three?).
 
 #### 2. Requirement Coverage
 

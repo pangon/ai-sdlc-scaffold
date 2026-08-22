@@ -21,15 +21,15 @@ Before doing anything else, read the `**Phase**:` field of the `### Current Stat
 
 4. **`Code` with no tasks yet** (`3-code/tasks.md` contains only the template) — this is the expected entry point. Evaluate prerequisites:
 
-   - **(a)** All design documents have content and components are identified — re-verify the two corresponding Design → Code preconditions via the "How to verify" column of the Phase Gates table in `CLAUDE.md` (the gate was already crossed, but the state may have drifted)
+   - **(a)** All design documents are drafted or `N/A` and components are identified — re-verify the two corresponding Design → Code preconditions via the "How to verify" column of the Phase Gates table in `CLAUDE.md` (the gate was already crossed, but the state may have drifted)
    - **(b)** `3-code/tasks.md` has no tasks yet (only the template)
 
    Then:
    - **If (a) is not met** — **Stop**, explain what is missing.
-   - **If (b) is not met** (tasks already exist) — **Warn** that running this skill will replace existing task entries and the Execution Plan. Proceed only on explicit user confirmation.
+   - **If (b) is not met** (tasks already exist) — **Warn** that running this skill will replace the pending task entries (`Todo`/`Blocked`) and the current/future phases of the Execution Plan; completed work is preserved (see Re-planning in Workflow step 2). Proceed only on explicit user confirmation.
    - **If all met** — proceed with Setup.
 
-5. **`Code` with tasks already in progress or done** — **Warn** strongly that re-planning may invalidate in-progress work. Proceed only on explicit user confirmation.
+5. **`Code` with tasks already in progress or done** — **Warn** strongly that re-planning may invalidate in-progress work; completed tasks are preserved (see Re-planning in Workflow step 2). Proceed only on explicit user confirmation.
 
 ### Setup
 
@@ -202,6 +202,13 @@ For each task, create a row:
 ...
 ```
 
+**Re-planning** (tasks already existed) — preserve history:
+
+- Keep every task row with status `Done`, `Cancelled`, or `Decomposed` unchanged in its section; never rename pre-existing task IDs.
+- Replace only pending rows (`Todo`, `Blocked`) that the new plan supersedes.
+- If any task is `In Progress`, stop and ask the user how to handle it (complete it first, adopt it into the new plan, or cancel it) before writing.
+- In the Execution Plan, keep fully completed phases unchanged and rewrite only current and future phases. Where the new plan relies on work already done, reference the existing `Done` tasks instead of creating duplicates.
+
 #### 3. Update Current State
 
 After writing tasks, update the `### Current State` subsection in `CLAUDE.md` following the Current State Protocol defined there:
@@ -225,5 +232,6 @@ After writing tasks, update the `### Current State` subsection in `CLAUDE.md` fo
 - **Draft requirements need an explicit decision**: never silently include or exclude non-Approved requirements — surface them during Setup and follow the user's choice (approve first, or plan with them included).
 - **Preserve existing content**: when updating `tasks.md`, preserve the Status Legend, Priority Legend, and How to Update sections. Replace only the Task Table sections and Execution Plan section.
 - **User approval required**: present the full plan and wait for explicit approval before writing to `tasks.md`.
+- **Preserve history on re-planning**: never delete or rename task rows with status `Done`, `Cancelled`, or `Decomposed`; replace only pending rows (see Re-planning in Workflow step 2).
 - **Task ID uniqueness**: every `TASK-*` ID must be unique. Use descriptive kebab-case names, not numbers.
 - **Traceability**: every task implementing a requirement must link to it in the Req column. Tasks not linked to requirements (infrastructure, tooling) should use `-`.

@@ -12,6 +12,8 @@ This phase defines **how** we're building the system. Focus on architecture, dat
 | [`data-model.md`](data-model.md) | Data structures, schemas, and relationships |
 | [`api-design.md`](api-design.md) | API specifications and contracts |
 
+Each document carries a `**Status**:` field — `Stub` (placeholder) | `Draft` | `Approved (YYYY-MM-DD)` | `N/A (reason)` — maintained through the `/SDLC-design` procedures; modifying an `Approved` document reverts it to `Draft`.
+
 ---
 
 ## Decisions Relevant to This Phase

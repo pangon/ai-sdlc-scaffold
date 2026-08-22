@@ -59,7 +59,7 @@ Use this branch only when the skill was invoked with no additional user context 
 
 4. **Check for interrupted tasks**: Scan the Task Table for any task with status `In Progress`. If one is found, **stop** — that task was likely interrupted in a previous session. Inform the user which task is in progress and ask how they want to proceed (resume, reset to Todo, or cancel it) before continuing. Do not select a different task.
 
-5. **Find the current phase**: Identify the earliest phase that still has tasks with a status other than `Done` or `Cancelled`. If no such phase exists:
+5. **Find the current phase**: Identify the earliest phase that still has tasks with a status other than `Done`, `Cancelled`, or `Decomposed`. If no such phase exists:
    - If any tasks across all phases have status `Blocked`, **stop** and inform the user that the implementation plan is complete except for blocked tasks. List the blocked tasks and their blockers. Do not proceed.
    - If no tasks are blocked either, **stop** and inform the user that the entire implementation plan has been completed. Do not proceed.
 
@@ -91,7 +91,7 @@ Use this branch only when the skill was invoked with user-provided context (see 
 4. **Check for interrupted tasks**: If any task in the Task Table has status `In Progress` and it is **not** the one the user just selected, inform the user that another task is mid-flight and ask whether to continue with the user-selected task anyway, switch to finishing the in-progress task, or cancel. Proceed according to the user's answer.
 
 5. **Check the selected task's status**:
-   - `Done` or `Cancelled`: **stop** and inform the user — the task is not actionable. Ask whether they want to reopen it (e.g., reset to `Todo`) or pick a different one. If the user reopens a `Done` task, reverse any statuses propagated at its completion (Path A step 9): linked requirements with `Status: Implemented` revert to `Approved`, user stories that were `Implemented` only by virtue of those requirements revert to `Approved`, and goals previously marked `Achieved` on their basis are flagged to the user for re-evaluation. Update artifact files and index rows in the same operation.
+   - `Done`, `Cancelled`, or `Decomposed`: **stop** and inform the user — the task is not actionable. For `Done` or `Cancelled`, ask whether they want to reopen it (e.g., reset to `Todo`) or pick a different one; a `Decomposed` task is never reopened — work on its subtasks instead. If the user reopens a `Done` task, reverse any statuses propagated at its completion (Path A step 9): linked requirements with `Status: Implemented` revert to `Approved`, user stories that were `Implemented` only by virtue of those requirements revert to `Approved`, and goals previously marked `Achieved` on their basis are flagged to the user for re-evaluation. Update artifact files and index rows in the same operation.
    - `In Progress`: treat this as resuming an interrupted task — proceed to Task Preparation.
    - `Blocked`: read the `Notes` column and check the task's `Dependencies`. Surface the reason to the user and ask whether to force-start it, unblock (if the blocker is no longer valid — then set status to `Todo`), or pick a different task.
    - `Todo`: proceed to step 6.
@@ -186,7 +186,7 @@ Before entering the Execution section, do the following in order:
    - Fill the header metadata: task ID + link and today's date as `Started`. The header has no other mutable fields — task status lives in `tasks.md`, and the final outcome will be captured as a `[CONCLUSION]` entry appended at the end.
 
 3. **If the file DOES exist:**
-   - The task's status in `tasks.md` **must** be `In Progress` — a pre-existing log implies a prior skill run on the same task (either interrupted, or concluded and now reopened). If the status is anything else (`Todo`, `Done`, `Cancelled`, `Blocked`), **stop** and surface the inconsistency to the user. Likely causes: a previous run crashed before updating status, the log file was created manually, the task was reset without cleaning up the log, or a stale log was left in place. Ask how to proceed (resume by setting the status to `In Progress`, archive/delete the log and restart from template, or investigate further). Do not proceed until the user resolves the inconsistency.
+   - The task's status in `tasks.md` **must** be `In Progress` — a pre-existing log implies a prior skill run on the same task (either interrupted, or concluded and now reopened). If the status is anything else (`Todo`, `Done`, `Cancelled`, `Decomposed`, `Blocked`), **stop** and surface the inconsistency to the user. Likely causes: a previous run crashed before updating status, the log file was created manually, the task was reset without cleaning up the log, or a stale log was left in place. Ask how to proceed (resume by setting the status to `In Progress`, archive/delete the log and restart from template, or investigate further). Do not proceed until the user resolves the inconsistency.
    - If the status is `In Progress`, the log should have already been read in full during Task Preparation's Resume branch (including its `## Understanding` section and its `[Q&A]`, `[RECONSIDER]`, and `[CONCLUSION]` entries). Append a `[RESUMED]` entry to the `## Execution log` section noting today's date and a brief indication of what triggered the resumption, then continue. Do not modify the pre-existing header, Understanding, or any earlier entry.
 
 4. **Populate the Understanding section** (only on the fresh branch — skip this step when resuming a pre-existing log): fill the `## Understanding` section of the log with the synthesized scope derived during Task Preparation. Include hyperlinks to every referenced artifact — linked requirements, relevant design documents, applicable decisions, and downstream tasks. If the synthesized scope diverges from the brief description in `tasks.md`, note the divergence explicitly. Once filled, this section is immutable for the lifetime of the task — if new understanding emerges later, record it as a `[RECONSIDER]` or `[NOTE]` entry in the Execution log instead.
@@ -237,7 +237,7 @@ Follow one of two paths based on complexity assessment. Throughout both paths, m
 
 9. **Propagate artifact statuses**: completing a task can complete upstream Specification artifacts. Check and apply, following the lifecycles in `1-spec/CLAUDE.spec.md`:
 
-   1. **Requirements** — for each requirement linked in this task's `Req` column: scan the whole Task Table for tasks linking the same requirement. If the requirement has `Status: Approved` and all its linked tasks are `Done` (ignoring `Cancelled` ones — but at least one must be `Done`: a requirement whose linked tasks were all cancelled has not been implemented), set its Status to `Implemented`.
+   1. **Requirements** — for each requirement linked in this task's `Req` column: scan the whole Task Table for tasks linking the same requirement. If the requirement has `Status: Approved` and all its linked tasks are `Done` (ignoring `Cancelled` and `Decomposed` ones — but at least one must be `Done`: a requirement whose linked tasks were all cancelled or decomposed has not been implemented), set its Status to `Implemented`.
    2. **User stories** — for each user story whose derived requirements include a requirement flipped in the previous step: if the story has `Status: Approved` and all its derived requirements are `Implemented`, set its Status to `Implemented`.
    3. **Goals** — for each goal all of whose linked requirements (directly or via its user stories) are now `Implemented`: review its Success Criteria and **propose** `Achieved` to the user, stating which criteria appear satisfied and which need real-world verification. Set `Achieved` (ticking the criteria checkboxes) only after the user confirms — an unconfirmed goal simply stays `Approved`.
 
@@ -258,7 +258,7 @@ Follow one of two paths based on complexity assessment. Throughout both paths, m
    - **Updated**: today's date.
    - **Notes**: reference the parent task (e.g., "Split from TASK-model-service").
 4. **Update the Execution Plan** to replace the parent task with the subtasks in the same phase, preserving the correct execution order.
-5. **Set the parent task's status** to `Cancelled` with a note explaining the decomposition (e.g., "Decomposed into TASK-model-service-list, TASK-model-service-download, TASK-model-service-load").
+5. **Set the parent task's status** to `Decomposed` with a note listing the subtasks (e.g., "Decomposed into TASK-model-service-list, TASK-model-service-download, TASK-model-service-load").
 6. **Explain** to the user what subtasks were created and why.
 
 ### Design Gap Procedure

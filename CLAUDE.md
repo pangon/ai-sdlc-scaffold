@@ -84,7 +84,7 @@ Before creating artifacts in the next phase, check these minimum preconditions. 
 | Spec → Design | Stakeholders defined | At least one real (non-placeholder) row in `1-spec/stakeholders.md` |
 | Spec → Design | At least one requirement Approved | Requirements index in `1-spec/CLAUDE.spec.md` |
 | Spec → Design | Gap analysis fresh, no Critical gaps | `**Gap analysis**:` line in Current State: present in active form, `fresh`, no open Critical issues |
-| Design → Code | All design documents drafted | `architecture.md`, `data-model.md`, `api-design.md` all have real content |
+| Design → Code | All design documents drafted or N/A | `**Status**:` field of `architecture.md`, `data-model.md`, `api-design.md` is `Draft`, `Approved`, or `N/A` — not `Stub` |
 | Design → Code | Completeness assessment fresh, no Critical findings | `**Completeness assessment**:` line in Current State: present in active form, `fresh`, no open Critical findings |
 | Design → Code | Components identified | Per-component directories (each with a `CLAUDE.md`) in `3-code/` |
 
