@@ -113,7 +113,7 @@ After gathering context, briefly describe your planned approach to the user:
 - What the fix entails at a high level
 - Any concerns or risks you've identified
 
-Wait for confirmation before proceeding to implementation, **unless** the fix is straightforward and low-risk (e.g., a clear typo fix, an obvious off-by-one error). Use your judgment — when in doubt, ask to user.
+Wait for confirmation before proceeding to implementation, **unless** the fix is straightforward and low-risk (e.g., a clear typo fix, an obvious off-by-one error). Use your judgment — when in doubt, ask the user.
 
 ### Implementation Log
 

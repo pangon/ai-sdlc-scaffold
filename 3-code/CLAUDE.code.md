@@ -49,6 +49,12 @@ Each log captures the synthesized understanding of the task or fix followed by a
 
 ---
 
+## Testing Conventions
+
+Tests reference the requirement IDs they verify — in the test name, docstring, or a comment — so the requirement → test trace is greppable.
+
+---
+
 ## Linking to Other Phases
 
 - Implementation follows designs in `2-design/`

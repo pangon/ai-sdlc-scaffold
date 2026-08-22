@@ -24,7 +24,7 @@ rm -f CONTRIBUTING.md CONTRIBUTORS.md LICENSE NOTICE RATIONALE.md README.md
 git init && git add -A && git commit -m "Initial scaffold"
 ```
 
-[`degit`](https://github.com/Rich-Harris/degit) copies the repository contents without carrying over git history, giving you a clean starting point. It requires Node.js but does not install any dependency in your project. The `rm` step removes repo-specific files that are not part of the scaffold.
+[`degit`](https://github.com/Rich-Harris/degit) copies the repository contents without carrying over git history, giving you a clean starting point. It requires Node.js but does not install any dependency in your project. The `rm` step removes repo-specific files that are not part of the scaffold — removing `LICENSE` and `NOTICE` from your copy is explicitly permitted: the scaffold is a template, and projects generated from it may adopt any license. Optionally, record the scaffold commit you copied from in the initial commit message (e.g., `Initial scaffold (pangon/ai-sdlc-scaffold@<commit>)`) so you can later diff your copy against upstream improvements.
 
 ### Option B — Manual copy
 

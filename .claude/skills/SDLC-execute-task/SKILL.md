@@ -241,7 +241,7 @@ Follow one of two paths based on complexity assessment. Throughout both paths, m
    2. **User stories** — for each user story whose derived requirements include a requirement flipped in the previous step: if the story has `Status: Approved` and all its derived requirements are `Implemented`, set its Status to `Implemented`.
    3. **Goals** — for each goal all of whose linked requirements (directly or via its user stories) are now `Implemented`: review its Success Criteria and **propose** `Achieved` to the user, stating which criteria appear satisfied and which need real-world verification. Set `Achieved` (ticking the criteria checkboxes) only after the user confirms — an unconfirmed goal simply stays `Approved`.
 
-   For every status change: update the artifact file and its index row in `1-spec/CLAUDE.spec.md` in the same operation, and record the propagation in the implementation log (`[WRITE]` entries). A lifecycle advancement is a status-only change: it does **not** trigger the status-downgrade rule and does not flip assessment staleness (Current State Protocol rule 2).
+   For every status change: append the transition date to the new status value (e.g., `Implemented (YYYY-MM-DD)` — see the status-dates convention in `1-spec/CLAUDE.spec.md`), update the artifact file and its index row in `1-spec/CLAUDE.spec.md` in the same operation, and record the propagation in the implementation log (`[WRITE]` entries). A lifecycle advancement is a status-only change: it does **not** trigger the status-downgrade rule and does not flip assessment staleness (Current State Protocol rule 2).
 
 10. **Do NOT commit automatically** — leave changes for user review.
 

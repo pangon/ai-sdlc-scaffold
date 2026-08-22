@@ -21,8 +21,7 @@ Before doing anything else, read the `**Phase**:` field of the `### Current Stat
 
 1. Read `1-spec/CLAUDE.spec.md` (phase instructions and existing artifact indexes).
 2. Read `1-spec/stakeholders.md` to understand existing stakeholders.
-2. Read any decisions whose trigger conditions apply.
-3. Check the `## Decisions Relevant to This Phase` index in `1-spec/CLAUDE.spec.md`. Read any decisions whose trigger conditions apply, and apply its enforcement rules throughout the elicitation session.
+3. Check the `## Decisions Relevant to This Phase` index in `1-spec/CLAUDE.spec.md`: read any decisions whose trigger conditions apply, and apply their enforcement rules throughout the elicitation session.
 
 ### Artifact Traceability Chain
 
@@ -165,11 +164,11 @@ Gap analysis can be run at any time during elicitation — it is useful as a mid
 
 - **Current State synchronization**: whenever artifacts are created, modified, or deleted, update `### Current State` in `CLAUDE.md` as described in the Current State Tracking section above. This update must happen in the same operation as the artifact change.
 - **Index synchronization**: whenever an artifact file is created, modified, or deleted, update the corresponding index table in `1-spec/CLAUDE.spec.md` in the same operation. For new artifacts, add a row with all metadata columns (file link, status, priority, summary, etc.); for modifications, update the row to reflect the current metadata; for deletions, remove the row. The link columns (Stakeholder for goals, Goal for user stories, Source for requirements) must always be filled — they are what the traceability scans read.
-- All new artifacts start with `Status: Draft`. Never auto-approve — only the user can move an artifact to `Approved`.
+- All new artifacts start with `Status: Draft`. Never auto-approve — only the user can move an artifact to `Approved`; when they do, record the transition date (`Approved (YYYY-MM-DD)`).
 - Modified `Approved` artifacts revert to `Draft` (see Status Downgrade above).
 - Choose a short descriptive kebab-case name for each new artifact (check existing files to avoid duplicates). The name **is** the ID — there are no numeric sequences.
 - Every artifact must have proper traceability links (Source stakeholder, Related goal, etc.).
-- **Bidirectional link maintenance**: when creating or modifying an artifact that references another artifact in its `Source` field (e.g., a requirement citing a goal or constraint), update the referenced artifact's `Related Artifacts` section to include a back-link in the same operation. For goals, add direct-source requirements to the `Requirements:` line; for constraints, add derived requirements to an `## Impact` or `## Related Artifacts` section. This prevents stale `_none yet_` placeholders from accumulating.
+- **Bidirectional link maintenance**: when creating or modifying an artifact that references another artifact in its `Source` field (e.g., a requirement citing a goal or constraint), update the referenced artifact's `Related Artifacts` section to include a back-link in the same operation. For goals, add direct-source requirements to the `Requirements:` line; for constraints, add derived requirements to the `## Related Artifacts` section. This prevents stale `_none yet_` placeholders from accumulating.
 - Follow the requirement class conventions: `REQ-F` (Functional), `REQ-PERF` (Performance), `REQ-SEC` (Security), etc.
 - Use kebab-case for file names: `GOAL-user-authentication.md`, `REQ-F-login-with-email.md`.
 - When creating files, fill in all template fields — do not leave placeholder brackets.

@@ -17,3 +17,7 @@
 ## Impact
 
 [How this affects design and implementation]
+
+## Related Artifacts
+
+- Derived requirements: [REQ-CLASS-kebab-name](../requirements/REQ-CLASS-kebab-name.md)

@@ -19,6 +19,8 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 
 ## AI Guidelines
 
+**Status dates**: when an artifact's status changes, append the transition date to the new value — e.g., `Status: Approved (2026-08-19)`, `Status: Implemented (2026-09-02)`. Rules and gates that match on a status name ignore the date suffix.
+
 ### Per-artifact guidance
 
 **Stakeholders**: ask who uses, funds, operates, or is affected by the system. Record influence level honestly — it drives conflict resolution. Add entries to [`stakeholders.md`](stakeholders.md).
@@ -26,7 +28,7 @@ This phase defines **what** we're building and **why**. Focus on clarity, measur
 **Goals**: decompose vague ideas into concrete, measurable outcomes. Use MoSCoW priority consistently.
 Status lifecycle: `Draft → Approved → Achieved → Deprecated`. Only a human can approve or deprecate. When all linked requirements reach `Implemented`, the agent reviews the success criteria and proposes `Achieved` — set only after user confirmation (status-propagation step of `/SDLC-execute-task`).
 
-**User Stories**: use "As a [role], I want [capability], so that [benefit]." The role must be an existing stakeholder ID. Acceptance criteria at the story level are high-level; detailed criteria live in requirements.
+**User Stories**: use "As a [role], I want [capability], so that [benefit]." The role is a plain role name (not an STK id); it must be traceable to existing stakeholders via the `Source stakeholder` field (one or more STK ids), with no fixed cardinality in either direction. Acceptance criteria at the story level are high-level; detailed criteria live in requirements.
 Status lifecycle: `Draft → Approved → Implemented → Deprecated`. Only a human can approve or deprecate. The agent marks `Implemented` when all linked requirements reach `Implemented` (automated by the status-propagation step of `/SDLC-execute-task`).
 
 **Requirements**: use clear, testable language (not "should be fast" — use "response time < 200ms at p95"). Choose the correct requirement class.

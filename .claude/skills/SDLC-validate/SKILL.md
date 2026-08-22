@@ -39,7 +39,7 @@ Run every check whose subject exists; skip checks whose subject does not exist y
 
 #### 4. Status legality and coherence
 
-- Every Status value belongs to its artifact's lifecycle vocabulary (per `1-spec/CLAUDE.spec.md`, the decision template, and the `tasks.md` legends).
+- Every Status value belongs to its artifact's lifecycle vocabulary (per `1-spec/CLAUDE.spec.md`, the decision template, and the `tasks.md` legends). An optional transition-date suffix (`(YYYY-MM-DD)`) is legal and ignored when matching status names.
 - Requirement `Implemented` ⇔ all its linked tasks are `Done` (ignoring `Cancelled` and `Decomposed`, at least one `Done`). Both directions are findings: `Implemented` with pending tasks is an illegal state; `Approved` with all tasks `Done` is a missed propagation (see `/SDLC-execute-task`).
 - User story `Implemented` ⇒ all its derived requirements are `Implemented`. Goal `Achieved` ⇒ all its Success Criteria checkboxes are ticked.
 - Task `Blocked`, `Cancelled`, or `Decomposed` ⇒ Notes column non-empty (for `Decomposed`, listing the subtask IDs).
