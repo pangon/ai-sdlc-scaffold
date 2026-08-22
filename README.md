@@ -76,6 +76,7 @@ git init && git add -A && git commit -m "Initial scaffold"
 ├── decisions/                        # DEC-kebab-name.md + DEC-kebab-name.history.md
 │
 └── .claude/skills/                   # Claude Code skills (automation layer)
+    ├── shared/                       # procedures shared by multiple skills
     ├── SDLC-init/SKILL.md            # guided project initialization
     ├── SDLC-elicit/SKILL.md          # requirements elicitation
     ├── SDLC-design/SKILL.md          # design documents
